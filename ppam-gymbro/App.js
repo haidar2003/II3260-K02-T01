@@ -2,15 +2,15 @@
 
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import HomeScreen from './screens/homeScreen.js'
+import SplashScreen from './screens/splashScreen.js'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Ivan Aldy GG</Text>
-      <StatusBar style="auto" />
-    </View>
+      <HomeScreen/>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
