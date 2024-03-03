@@ -1,13 +1,12 @@
 // HOME SCREEN
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 
-export default function App() {
+export default function splashScreen() {
   return (
     <View style={styles.container}>
-      <Text>Ivan Aldy GG</Text>
-      <StatusBar style="auto" />
+      <Text> Halaman ini ntar diganti</Text>
     </View>
   );
 }
