@@ -1,9 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import React, {useEffect} from "react";
 
-export default function SplashScreen() {
+export default function SplashScreen(props) {
+  const nav = props.navigation
+  useEffect(() => {
+    const timeOutSplashScreen = setTimeout(() => { nav.navigate('Home')} , 5000)
+  },[])
   return (
+
     <View style={styles.layout}>
+
       <LogoText/>
 
       <View style={styles.logo}>
