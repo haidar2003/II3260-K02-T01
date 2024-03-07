@@ -5,18 +5,19 @@ import React, {useEffect} from "react";
 export default function SplashScreen(props) {
   const nav = props.navigation
   useEffect(() => {
-    const timeOutSplashScreen = setTimeout(() => { nav.navigate('Home')} , 5000)
+    const timeOutSplashScreen = setTimeout(() => { nav.navigate('Home')} , 10000)
   },[])
   return (
 
     <View style={styles.layout}>
-
-      <LogoText/>
-
       <View style={styles.logo}>
         <Image
-          source={require('../assets/Racist_Cat.webp')}
-          style={{width: 120, height: 120, borderRadius: 12}}
+          source={require('../assets/SPLASH_GYMBRO.png')}
+          style={{
+                     width: '100%',
+                     height: undefined,
+                     aspectRatio: "9/18.5",
+                 }}
         />
       </View>
       <StatusBar style="auto" />
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
   layout: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#f4dfb9',
+    backgroundColor: '#222222',
     alignItems: 'center',
     justifyContent: 'center',
   },
