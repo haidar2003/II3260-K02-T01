@@ -14,9 +14,7 @@ export default function SplashScreen(props) {
         <Image
           source={require('../assets/SPLASH_GYMBRO.png')}
           style={{
-                     width: '100%',
-                     height: undefined,
-                     aspectRatio: "9/18.5",
+                     flex:1, resizeMode: 'cover'
                  }}
         />
       </View>
