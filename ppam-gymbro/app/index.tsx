@@ -4,10 +4,11 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
 // import { Text, View } from 'react-native';
 import Entypo from '@expo/vector-icons/Entypo';
+import { Redirect } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 
 
 
@@ -21,7 +22,7 @@ export default function App() {
         await Font.loadAsync(Entypo.font);
         // Artificially delay for two seconds to simulate a slow loading
         // experience. Please remove this if you copy and paste the code!
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 4000));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -48,7 +49,7 @@ export default function App() {
     return null;
   }
   return (
-
+    <>
     <View style={styles.layout}>
       <View style={styles.logo}>
         <Image
@@ -60,6 +61,8 @@ export default function App() {
       </View>
       <StatusBar style="auto" />
     </View>
+     <Redirect href={"/main"} />
+     </>
   );
 }
 
