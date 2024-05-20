@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { Link } from "expo-router"
 
 export default function HomeScreen() {
   return (
@@ -7,7 +8,7 @@ export default function HomeScreen() {
 
       <Header username="Kean"/>
 
-      <Box text="Find Trainers"/>
+      <Link href="../auth/login"><Box text="Test Login Page"/></Link>
       <Box text="Current Trainers"/>
       <Box text="Workout Plan"/>
       <StatusBar style="auto" />
@@ -33,7 +34,7 @@ const Header = (props) => {
 
 const styles = StyleSheet.create({
   layout: {
-    flex: 1,
+    flex: 2,
     flexDirection: 'column',
     backgroundColor: '#f4dfb9',
     alignItems: 'center',
