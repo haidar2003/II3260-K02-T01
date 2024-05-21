@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   difficultyContainer: {
     flexDirection: 'row', // Arrange progress bar and text side-by-side
     alignItems: 'center', // Vertically align text and progress bar
-    marginVertical: 18,
+    marginVertical: 14,
     
   },
   circle: {
