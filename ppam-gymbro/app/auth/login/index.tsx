@@ -69,9 +69,12 @@ const styles = StyleSheet.create({
   layout: {
     flex: 1,
     flexDirection: 'row',
+    width: Dimensions.get("window").width, //for full screen
+    height: Dimensions.get("window").height, //for full screen
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent',
+    
   },
 
   scrollLayout:{
