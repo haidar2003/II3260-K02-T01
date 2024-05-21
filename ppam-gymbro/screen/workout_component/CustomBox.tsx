@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import ProgressCircle from "react-native-progress-circle"; // Import for Progress Bar
+import * as Progress from 'react-native-progress';
 
 
 interface CustomBoxProps {
@@ -9,7 +9,7 @@ interface CustomBoxProps {
   
   const CustomBox: React.FC<CustomBoxProps> = ({ difficulty }) => {
     return (
-      <View style={styles.container}>
+      <View style={styles.workoutContainer}>
         {/* Left Section with Circle */}
         <View style={styles.leftSection}>
           <View style={styles.circle} />
@@ -30,15 +30,8 @@ interface CustomBoxProps {
             <Text style={styles.textSmall}>Text 2</Text>
           </View>
           <View style={styles.progressContainer}>
-            <ProgressCircle
-              percent={30} // Adjust progress as needed
-              radius={30}
-              borderWidth={8}
-              color="#f00" // Progress bar color
-              shadowColor="#ddd"
-              bgColor="#fff"
-            />
-            <Text style={styles.textSmall}>{Math.round(30)}%{/* Display percentage value */}</Text>
+            <Progress.Bar progress={0.3} width={140} />
+            <Text style={styles.textSmall}>{Math.round(30)}%</Text>
           </View>
         </View>
       </View>
@@ -46,12 +39,13 @@ interface CustomBoxProps {
   };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'lightorange',
-    borderRadius: 24,
+  workoutContainer: {
+    backgroundColor: 'white',
+    borderRadius: 36,
     width: 320,
     height: 110,
     flexDirection: 'row',
+    alignItems: 'center'
   },
   leftSection: {
     flex: 1,
@@ -73,12 +67,15 @@ const styles = StyleSheet.create({
   difficultyContainer: {
     flexDirection: 'row', // Arrange progress bar and text side-by-side
     alignItems: 'center', // Vertically align text and progress bar
+    marginVertical: 18,
+    
   },
   circle: {
-    width: 40,
-    height: 40,
-    borderRadius: 20, // Half width/height for circle
-    backgroundColor: 'lightgray',
+    width: 62,
+    height: 62,
+    borderRadius: 36, // Half width/height for circle
+    backgroundColor: 'orange',
+    margin: 22,
   },
   progressContainer: {
     flexDirection: 'row', // Arrange progress bar and text side-by-side

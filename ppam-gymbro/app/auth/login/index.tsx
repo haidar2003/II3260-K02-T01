@@ -69,12 +69,12 @@ const styles = StyleSheet.create({
   layout: {
     flex: 1,
     flexDirection: 'row',
-    width: Dimensions.get("window").width, //for full screen
-    height: Dimensions.get("window").height, //for full screen
+    // width: Dimensions.get("window").width , //for full screen
+    // height: Dimensions.get("window").height * 0.98, //for full screen
     alignItems: 'center',
     justifyContent: 'center',
+    // backgroundColor: 'orange',
     backgroundColor: 'transparent',
-    
   },
 
   scrollLayout:{
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
 
   imageBackgroundContainer: {
     width: Dimensions.get("window").width, //for full screen
-    height: Dimensions.get("window").height //for full screen
+    // height: Dimensions.get("window").height //for full screen
   },
   fixed: {
     position: "absolute",
@@ -97,16 +97,18 @@ const styles = StyleSheet.create({
 
   imageBackground: {
     flex: 1,
-    height: "100%",
-    width: "100%",
+    // height: "100%",
+    // width: "100%",
     position: 'absolute',
+    resizeMode : "stretch"
   },
 
   LogoSpace: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 0
+    marginBottom: 0,
+    marginTop: 17
   },
 
   logo: {

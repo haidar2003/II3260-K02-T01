@@ -10,7 +10,7 @@ export default function HomeScreen() {
 
       <Link href="../auth/login"><Box text="Test Login Page"/></Link>
       <Box text="Current Trainers"/>
-      <Box text="Workout Plan"/>
+      <Link href="/main/test_page"><Box text="Workout Plan"/></Link>
       <StatusBar style="auto" />
     </View>
   );
