@@ -69,11 +69,10 @@ const styles = StyleSheet.create({
   layout: {
     flex: 1,
     flexDirection: 'row',
-    // width: Dimensions.get("window").width , //for full screen
-    // height: Dimensions.get("window").height * 0.98, //for full screen
+    width: Dimensions.get("window").width , //for full screen
+    height: Dimensions.get("window").height, //for full screen
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: 'orange',
     backgroundColor: 'transparent',
   },
 
@@ -84,13 +83,13 @@ const styles = StyleSheet.create({
   },
 
   imageBackgroundContainer: {
-    width: Dimensions.get("window").width, //for full screen
+    width: Dimensions.get("window").width * 1.08, //for full screen
     // height: Dimensions.get("window").height //for full screen
   },
   fixed: {
     position: "absolute",
     top: 0,
-    left: 0,
+    left: -8,
     right: 0,
     bottom: 0
   },
@@ -108,7 +107,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 0,
-    marginTop: 17
+    marginTop: 144
   },
 
   logo: {
