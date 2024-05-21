@@ -35,13 +35,13 @@ export default function login_1() {
               // value={text}
             />
 
-            <Text style={styles.subtext}>Forgot your<Link href="" style={styles.subtextBold}> password</Link>?</Text>
+            <Text style={styles.subtext}>Forgot your<Link href="./login/resetPassword_username_email" style={styles.subtextBold}> password</Link>?</Text>
           </View>
           
           {/* View yang isinya tombol log in */}
           <View style={styles.LowerThird}>
-            <Text style={styles.subtext}>Don't have an account? <Link href="" style={styles.subtextBold}>Register</Link></Text>
-            <WhiteButton text="Log In"></WhiteButton>
+            <Text style={styles.subtext}>Don't have an account? <Link href="././register/registerUsername" style={styles.subtextBold}>Register</Link></Text>
+            <Link href="" style={styles.WhiteButton}><Text style={styles.buttonText}>Log In</Text></Link>
           </View>
         
       </ScrollView> 
