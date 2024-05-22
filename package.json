@@ -1,6 +1,10 @@
 {
   "dependencies": {
-    "react-native-keyboard-aware-scroll-view": "^0.9.5"
+    "@react-native-community/checkbox": "^0.5.17",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
+    "react-native-paper": "^5.12.3",
+    "react-native-progress": "^5.0.1",
+    "react-native-vector-icons": "^10.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.2",
