@@ -11,6 +11,7 @@ export default function register_fullName() {
   const [termsAccepted, setTermsAccepted] = React.useState(false);
   const [date, setDate] = React.useState(new Date()); // Default Date Value of Today
   const [showDatePicker, setShowDatePicker] = React.useState(false);
+  const today = React.useState(new Date().getFullYear())
 
   const onChange = (event, selectedDate) => {
     if (selectedDate){
@@ -18,6 +19,9 @@ export default function register_fullName() {
     }
     setShowDatePicker(false)
   }
+
+  const [fullName, setFullName] = React.useState("")
+  const isButtonEnabled = fullName.length > 0
 
   return (
     <View style={styles.layout}>
@@ -33,7 +37,8 @@ export default function register_fullName() {
             <TextInput
               style={styles.InputBox}
               placeholder="Full Name"
-              // value={text}
+              value={fullName}
+              onChangeText={setFullName}
             />
 
             {/* Date of Birth Selector */}
@@ -67,7 +72,16 @@ export default function register_fullName() {
           {/* View yang isinya tombol log in */}
           <View style={styles.LowerThird}>
             <Text style={styles.subtext}>Already have an account? <Link href="../login/" style={styles.subtextBold}>Log In</Link></Text>
-            <Link href="../login" style={styles.WhiteButton}><Text style={styles.buttonText}>Register</Text></Link>
+            {
+              isButtonEnabled?(
+                <Link href="../login" style={styles.WhiteButton}><Text style={styles.buttonText}>Register</Text></Link>
+              ): (
+                <View style={styles.disabledWhiteButton}>
+                  <Text style={styles.disabledButtonText}>Register</Text>
+                </View>
+              )
+            }
+            
           </View>
         
       </ScrollView> 
@@ -222,14 +236,31 @@ const styles = StyleSheet.create({
     borderColor: "white",
     backgroundColor: "white",
     padding: 4,
+    paddingTop: 16,
+    fontSize: 21,
+    fontWeight: "bold",
+    color: "black",
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: "row",
     textAlign: "center",
-    fontSize: 21,
-    fontWeight: "bold"
   },
 
+  disabledWhiteButton: {
+    marginTop:4,
+    height: 65,
+    width: "80%",
+    borderWidth: 1,
+    borderRadius: 16,
+    borderColor: "white",
+    backgroundColor: "white",
+    padding: 4,
+    fontSize: 21,
+    fontWeight: "bold",
+    color: "black",
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: "center",
+  },
   WhiteButtonElevation:{
     elevation: 15,
     shadowColor: '#black',
@@ -239,6 +270,15 @@ const styles = StyleSheet.create({
     fontSize: 21,
     fontWeight: "bold",
     color: "black",
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+
+  disabledButtonText: {
+    fontSize: 21,
+    fontWeight: "bold",
+    color: "red",
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center"
@@ -278,5 +318,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginRight: 8,
   },
+
+  
 
 });

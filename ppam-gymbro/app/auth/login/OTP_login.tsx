@@ -19,6 +19,9 @@ export default function otp_login() {
     }
   };
 
+  // Function to check if all OTP boxes are filled
+  const allBoxesFilled = singleNumbers.every(number => number !== '');
+
   return (
     <View style={styles.layout}>
       <ScrollView contentContainerStyle={styles.scrollLayout}>
@@ -28,7 +31,7 @@ export default function otp_login() {
             <Text style={styles.title}>OTP</Text>
           </View>
           
-          {/* View yang isinya input username dan password */}
+          {/* View yang isinya input OTP */}
           <View style={styles.InputSpace}>
             {/* Render 5 TextInput components */}
             {singleNumbers.map((number, index) => (
@@ -46,14 +49,20 @@ export default function otp_login() {
           </View>
 
           <View style={styles.subspace}>
-            <Text style={styles.subtext}>check user@mail.com</Text>
+            <Text style={styles.subtext}>check your email for the OTP code</Text>
           </View>
           
           
           {/* View yang isinya tombol log in */}
           <View style={styles.LowerThird}>
-            <Text style={styles.subtext}>Don't have an account? <Link href="" style={styles.subtextBold}>Register</Link></Text>
-            <Link href="./changePassword" style={styles.WhiteButton}><Text style={styles.buttonText}>Continue</Text></Link>
+            
+            {allBoxesFilled ? (
+              <Link href="./changePassword" style={styles.WhiteButton}><Text style={styles.buttonText}>Continue</Text></Link>
+            ) : (
+              <View style={styles.disabledWhiteButton}>
+                <Text style={styles.disabledButtonText}>Continue</Text>
+              </View>
+            )}
           </View>
         
       </ScrollView> 
@@ -207,12 +216,30 @@ const styles = StyleSheet.create({
     borderColor: "white",
     backgroundColor: "white",
     padding: 4,
+    paddingTop: 16,
+    fontSize: 21,
+    fontWeight: "bold",
+    color: "black",
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: "row",
     textAlign: "center",
+  },
+
+  disabledWhiteButton: {
+    marginTop:4,
+    height: 65,
+    width: "80%",
+    borderWidth: 1,
+    borderRadius: 16,
+    borderColor: "white",
+    backgroundColor: "white",
+    padding: 4,
     fontSize: 21,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    color: "black",
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: "center",
   },
 
   WhiteButtonElevation:{
@@ -224,6 +251,15 @@ const styles = StyleSheet.create({
     fontSize: 21,
     fontWeight: "bold",
     color: "black",
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+
+  disabledButtonText: {
+    fontSize: 21,
+    fontWeight: "bold",
+    color: "red",
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center"

@@ -5,7 +5,10 @@ import { Image } from 'expo-image';
 
 
 export default function register_username() {
-  // const [text, onChangeText] = React.useState('');
+  const [username, setUsername] = React.useState("")
+  const [email, setEmail] = React.useState("")
+
+  const isButtonEnabled = username.length > 0 && email.length > 0
 
   return (
     <View style={styles.layout}>
@@ -16,27 +19,42 @@ export default function register_username() {
             <Text style={styles.title}>Workout Journey</Text>
           </View>
           
-          {/* View yang isinya input username dan password */}
+          {/* View yang isinya input username dan email*/}
           <View style={styles.InputSpace}>
+            {/* Displaying text if the input boxes are not filled */}
+            {isButtonEnabled ? (
+              <Text style={styles.subtextBold}></Text>
+            ) : (
+              <Text style={styles.subtextBold}>Please input your username and email</Text>
+            )}
             <TextInput
               style={styles.InputBox}
               placeholder="Username"
-              // value={text}
+              value={username}
+              onChangeText={setUsername}
             />
 
             <TextInput
               style={styles.InputBox}
               placeholder="Email"
-              // value={text}
+              value={email}
+              onChangeText={setEmail}
             />
 
           </View>
           
           {/* View yang isinya tombol log in */}
-          <View style={styles.LowerThird}>
-            <Text style={styles.subtext}>Already have an account? <Link href="../login/" style={styles.subtextBold}>Log In</Link></Text>
-            <Link href="./registerOTP" style={styles.WhiteButton}><Text style={styles.buttonText}>Continue</Text></Link>
-          </View>
+          <View style = {styles.LowerThird}>
+            {isButtonEnabled ? (
+                <Link href="./registerOTP" style={styles.WhiteButton}>
+                  <Text style={styles.buttonText}>Continue</Text>
+                </Link>
+              ) : (
+                <View style={styles.disabledWhiteButton}>
+                  <Text style={styles.disabledButtonText}>Continue</Text>
+                </View>
+              )}
+            </View>
         
       </ScrollView> 
 
@@ -176,12 +194,30 @@ const styles = StyleSheet.create({
     borderColor: "white",
     backgroundColor: "white",
     padding: 4,
+    paddingTop: 16,
+    fontSize: 21,
+    fontWeight: "bold",
+    color: "black",
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: "row",
     textAlign: "center",
+  },
+
+  disabledWhiteButton: {
+    marginTop:4,
+    height: 65,
+    width: "80%",
+    borderWidth: 1,
+    borderRadius: 16,
+    borderColor: "white",
+    backgroundColor: "white",
+    padding: 4,
     fontSize: 21,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    color: "black",
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: "center",
   },
 
   WhiteButtonElevation:{
@@ -193,6 +229,15 @@ const styles = StyleSheet.create({
     fontSize: 21,
     fontWeight: "bold",
     color: "black",
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+
+  disabledButtonText: {
+    fontSize: 21,
+    fontWeight: "bold",
+    color: "red",
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center"

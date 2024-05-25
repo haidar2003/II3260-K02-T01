@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform } from 'react-native';
 import { Link } from 'expo-router';
 import { Image } from 'expo-image';
 
+const password_states = {
+  EMPTY: "EMPTY",
+  NOT_MATCHING: "NOT_MATCHING",
+  MATCHING: "MATCHING"
+}
 
 export default function change_password() {
-  // const [text, onChangeText] = React.useState('');
+  const [password, setPassword] = React.useState("")
+  const [confirmPassword, setConfirmPassword] = React.useState("")
+  const [passwordState, setPasswordState] = React.useState(password_states.EMPTY)
+
+  // Password bisa kosong, tidak matching, atau matching
+  useEffect(() => {
+    if (!password || !confirmPassword){
+      setPasswordState(password_states.EMPTY)
+    } else if (password && confirmPassword && password != confirmPassword){
+      setPasswordState(password_states.NOT_MATCHING)
+    } else if (password && confirmPassword && password === confirmPassword){
+      setPasswordState(password_states.MATCHING)
+    }
+  })
 
   return (
     <View style={styles.layout}>
@@ -16,25 +34,52 @@ export default function change_password() {
             <Text style={styles.title}>Password</Text>
           </View>
           
-          {/* View yang isinya input username dan password */}
+          {/* View yang isinya input password dan reconfirm password */}
           <View style={styles.InputSpace}>
             <TextInput
               style={styles.InputBox}
               placeholder="Password"
-              // value={text}
+              secureTextEntry = {true}
+              value={password}
+              onChangeText={setPassword}
             />
 
             <TextInput
               style={styles.InputBox}
               placeholder="Confirm Password"
-              // value={text}
+              secureTextEntry = {true}
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
             />
 
           </View>
           
           {/* View yang isinya tombol log in */}
           <View style={styles.LowerThird}>
-            <Link href="./" style={styles.WhiteButton}><Text style={styles.buttonText}>Continue</Text></Link>
+            {/* Displaying text if the input boxes are not filled */}
+            {passwordState === password_states.EMPTY && <Text style={styles.subtextBold}>Please fill in and confirm your password.</Text>}
+            {passwordState === password_states.NOT_MATCHING && <Text style={styles.subtextBold}>Passwords do not match.</Text>}
+            {passwordState === password_states.MATCHING && <Text style={styles.subtextBold}></Text>}
+
+            {/* Allowing the user to use the button only if the input boxes are filled */}
+            {/* Displaying text if the input boxes are not filled */}
+            {passwordState === password_states.EMPTY && 
+              <View style={styles.disabledWhiteButton}>
+                <Text style={styles.disabledButtonText}>Continue</Text>
+              </View>
+            }
+
+            {passwordState === password_states.NOT_MATCHING && 
+              <View style={styles.disabledWhiteButton}>
+                <Text style={styles.disabledButtonText}>Continue</Text>
+              </View>
+            }
+            {passwordState === password_states.MATCHING && 
+              <Link href="" style={styles.WhiteButton}>
+                <Text style={styles.buttonText}>Continue</Text>
+              </Link>
+            }
+
           </View>
         
       </ScrollView> 
@@ -175,12 +220,30 @@ const styles = StyleSheet.create({
     borderColor: "white",
     backgroundColor: "white",
     padding: 4,
+    paddingTop: 16,
+    fontSize: 21,
+    fontWeight: "bold",
+    color: "black",
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: "row",
     textAlign: "center",
+  },
+
+  disabledWhiteButton: {
+    marginTop:4,
+    height: 65,
+    width: "80%",
+    borderWidth: 1,
+    borderRadius: 16,
+    borderColor: "white",
+    backgroundColor: "white",
+    padding: 4,
     fontSize: 21,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    color: "black",
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: "center",
   },
 
   WhiteButtonElevation:{
@@ -192,6 +255,15 @@ const styles = StyleSheet.create({
     fontSize: 21,
     fontWeight: "bold",
     color: "black",
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+
+  disabledButtonText: {
+    fontSize: 21,
+    fontWeight: "bold",
+    color: "red",
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center"
