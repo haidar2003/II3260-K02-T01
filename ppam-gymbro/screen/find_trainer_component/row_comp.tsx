@@ -20,7 +20,7 @@ export default function Row_Comp({ name, rating, price}) {
           {/* emang kosong */}
         </Text>
         <Text>
-          { price }/session
+         Rp { numberToRupiah(price) }/session
         </Text>
     </View>
   )
