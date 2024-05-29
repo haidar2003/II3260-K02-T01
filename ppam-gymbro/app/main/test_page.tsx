@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, Text, View, VirtualizedList , FlatList} from 'react-native';
 import { Link } from "expo-router"
+import ExcerciseProgress from '@/screen/workout_component/ExcerciseProgress';
 import CustomBox from "@/screen/workout_component/CustomBox";
 import Excercise from '@/screen/workout_component/Excercise';
 // import {RowComp} from '@/screen/find_trainer_component/row_comp';
@@ -24,17 +25,24 @@ export default function HomeScreen() {
     <View style = {styles.layout}>
     <ScrollView contentContainerStyle={styles.content_layout}>
       <View></View>
+      <ExcerciseProgress />
       <Excercise sets={4} reps={10} name='Push Up' isChecked={true} number={1}/>
       <Excercise sets={4} reps={10} name='Push Up' isChecked={false} number={1}/>
       <ExcerciseDay isCurrent={true} progress={3} day='1'/>
       <ExcerciseDay isCurrent={false} progress={90} day='1'/>
-      <ExcerciseDay isCurrent={true} progress={100} day='1'/>
+      <ExcerciseDay isCurrent={false} progress={100} day='1'/>
       {/* Custom box test */}
       {/* location = 'main-home */}
       <CustomBox difficulty='easy' location='main-home'/>
 
       {/* location = 'main-workout */}
       <CustomBox difficulty='easy' location='main-workout'/>
+
+      {/* location = 'trainer-menu */}
+      {/* isOver = False */}
+      <CustomBox difficulty='easy' location='trainer-menu' isOver={false}/>
+      {/* isOver = True */}
+      <CustomBox difficulty='easy' location='trainer-menu' isOver={true}/>
 
       {/* location = 'trainer-menu */}
       {/* isOver = False */}

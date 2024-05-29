@@ -31,7 +31,7 @@ interface ExcerciseDayProps {
             <Text style={{color: fontColor, fontWeight: fontStyle}} >Day {day}</Text>
             <View style={{flexDirection: 'row', justifyContent: 'flex-end', alignItems:'center'}}>
                 <View>
-                    <Progress.Bar progress={progress/100} width={140} color='#FF7D40'/>
+                    <Progress.Bar borderWidth={0} unfilledColor='#FDE4D3' progress={progress/100} width={140} color='#FF7D40'/>
                 </View>
                 { (progress === 100) ? (
                     <View style={styles.circle}>

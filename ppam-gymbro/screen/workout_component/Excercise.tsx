@@ -32,9 +32,9 @@ interface ExcerciseProps {
             </View>
             <TouchableOpacity onPress={handlePress} style={{ width: 20, height: 20, borderRadius: 4, justifyContent: 'center', alignItems: 'center' }}>
             {isSelected ? (
-                <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: 'orange' , backgroundColor: 'orange' }} />
+                <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: '#FF7D40' , backgroundColor: '#FF7D40' }} />
             ) : (
-                <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: 'orange' }} />
+                <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: '#FF7D40' }} />
             )}
             </TouchableOpacity>
         </View>  

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import * as Progress from 'react-native-progress';
 
 
@@ -16,7 +16,13 @@ interface CustomBoxProps {
     const [isAdding, setIsAdding] = useState(isAdded);
     
     // Style
-    let containerStyle;
+    let containerStyle, buttonColor;
+
+    if (isAdding) {
+      buttonColor = '#FF7D40'
+    } else {
+      buttonColor = '#FEFEFE'
+    }
 
     if (location) {
       if (location === 'main-home') {
@@ -91,9 +97,9 @@ interface CustomBoxProps {
             </View>) : 
             // Line 92
             (<View style={styles.progressContainer}> 
-              <Progress.Bar progress={0.3} width={140} color='orange'/>
+              <Progress.Bar borderWidth={0} unfilledColor='#FDE4D3' progress={0.3} width={140} color='#FF7D40'/>
               {(100 === 100) ? 
-              (<Text style={styles.textSmall}>{Math.round(30)}%</Text>) : 
+              (<Text style={{fontSize: 12, marginLeft: 18, marginBottom: 5 }}>{Math.round(30)}%</Text>) : 
               (<Text style={styles.textSmall}>Finished</Text>)}
             </View>) }
             {/* <View style={styles.progressContainer}>
@@ -114,23 +120,22 @@ interface CustomBoxProps {
           <View>
             {location === 'free-menu' && (
               <View style={styles.buttonsContainer}>
-                <Button
-                  title="Remove"
-                  color="orange"
-                />
-                <Button
-                  title="Continue"
-                  color="orange"
-                />
+                <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: '#FF7D40', height: 40, width: 135, borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
+                  <Text style={{color: '#FEFEFE', fontWeight: 'bold'}}>Remove</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: '#FF7D40', height: 40, width: 135, borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
+                  <Text style={{color: '#FEFEFE', fontWeight: 'bold'}}>Continue</Text>
+                </TouchableOpacity>
               </View>
             )}
             {location === 'free-menu-selection' && (
               <View style={styles.buttonsContainer}>
-                <Button title={isAdding ? 'Add' : 'Remove'} />
-                <Button
-                  title="See Details"
-                  color="orange"
-                />
+                <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: buttonColor, height: 40, width: 135, borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
+                  {isAdding ? (<Text style={{color: '#FEFEFE', fontWeight: 'bold'}}>Remove</Text>) : (<Text style={{color: '#FF7D40', fontWeight: 'bold'}}>Add</Text>)}
+                </TouchableOpacity>
+                <TouchableOpacity style={{ height: 40, width: 135, borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
+                  <Text style={{color: '#FF7D40', fontWeight: 'bold'}}>See Details</Text>
+                </TouchableOpacity>
               </View>
             )}
           </View>
@@ -141,8 +146,10 @@ interface CustomBoxProps {
 
 const styles = StyleSheet.create({
   mainHome: {
+    paddingTop: 15,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     width: 320,
     height: 185,
     borderRadius: 24,
@@ -150,8 +157,10 @@ const styles = StyleSheet.create({
 
   },
   mainWorkout: {
+    paddingTop: 15,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     width: 320,
     height: 110,
     borderRadius: 24,
@@ -159,8 +168,10 @@ const styles = StyleSheet.create({
 
   },
   trainerMenu: {
+    paddingTop: 15,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     width: 320,
     height: 110,
     borderRadius: 24,
@@ -168,17 +179,21 @@ const styles = StyleSheet.create({
 
   },
   trainerMenuOver: {
+    paddingTop: 15,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     width: 320,
     height: 110,
     borderRadius: 24,
-    backgroundColor: '#ECECEC'
+    backgroundColor: '#EEEEEE'
 
   },
   freeMenu: {
+    paddingTop: 15,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     width: 320,
     height: 110,
     borderRadius: 24,
@@ -186,8 +201,10 @@ const styles = StyleSheet.create({
 
   },
   freeMenuSelected: {
+    paddingTop: 15,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     width: 320,
     height: 170,
     borderRadius: 24,
@@ -195,19 +212,23 @@ const styles = StyleSheet.create({
 
   },
   freeMenuSelection: {
+    paddingTop: 15,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     width: 320,
     height: 110,
     borderRadius: 24,
-    borderWidth: 2,
-    borderColor: 'grey',
-    backgroundColor: 'white',
+    borderWidth: 2.5,
+    borderColor: '#E1E1E1',
+    backgroundColor: '#FEFEFE',
 
   },
   freeMenuSelectionAdded: {
+    paddingTop: 15,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     width: 320,
     height: 110,
     borderRadius: 24,
@@ -215,19 +236,23 @@ const styles = StyleSheet.create({
 
   },
   freeMenuSelectionSelected: {
+    paddingTop: 15,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     width: 320,
     height: 170,
     borderRadius: 24,
-    borderWidth: 2,
-    borderColor: 'grey',
-    backgroundColor: 'white',
+    borderWidth: 2.5,
+    borderColor: '#E1E1E1',
+    backgroundColor: '#FEFEFE',
 
   },
   freeMenuSelectionSelectedAdded: {
+    paddingTop: 15,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     width: 320,
     height: 170,
     borderRadius: 24,
@@ -238,18 +263,24 @@ const styles = StyleSheet.create({
   topContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    height: 80,
+    width: 280
   },
 
   continueWorkout: {
+    marginTop: 15,
     width: 280,
     height: 60,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#FEFEFE',
     borderRadius: 24,
   },
   
   buttonsContainer: {
+    marginTop: 15,
+    width: 280,
+    justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center'
   },
@@ -274,14 +305,14 @@ const styles = StyleSheet.create({
   difficultyContainer: {
     flexDirection: 'row', 
     alignItems: 'center', 
-    marginVertical: 10,
+    marginVertical: 8,
     
   },
   circle: {
     width: 62,
     height: 62,
     borderRadius: 36, 
-    backgroundColor: 'orange',
+    backgroundColor: '#FF7D40',
     margin: 22,
   },
   progressContainer: {
