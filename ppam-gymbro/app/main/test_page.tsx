@@ -2,7 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, Text, View, VirtualizedList , FlatList} from 'react-native';
 import { Link } from "expo-router"
 import CustomBox from "@/screen/workout_component/CustomBox";
-import {RowComp} from '@/screen/find_trainer_component/row_comp';
+import Excercise from '@/screen/workout_component/Excercise';
+// import {RowComp} from '@/screen/find_trainer_component/row_comp';
+import ExcerciseDay from '@/screen/workout_component/ExcerciseDay';
 
 const data = [
   {id : "1" , name : "Black Sheep", rating : 5 , pricee : 25500} ,
@@ -13,15 +15,20 @@ const data = [
   {id : "6" , name : "Pink Sheep", rating : 3 , pricee : 350000} 
 ]
 
-const renderItem = ({ item }) => (
-  <RowComp name={item.name} rating={item.rating} price={item.pricee} />
-);
+// const renderItem = ({ item }) => (
+//   <RowComp name={item.name} rating={item.rating} price={item.pricee} />
+// );
 
 export default function HomeScreen() {
   return (
     <View style = {styles.layout}>
     <ScrollView contentContainerStyle={styles.content_layout}>
       <View></View>
+      <Excercise sets={4} reps={10} name='Push Up' isChecked={true} number={1}/>
+      <Excercise sets={4} reps={10} name='Push Up' isChecked={false} number={1}/>
+      <ExcerciseDay isCurrent={true} progress={3} day='1'/>
+      <ExcerciseDay isCurrent={false} progress={90} day='1'/>
+      <ExcerciseDay isCurrent={true} progress={100} day='1'/>
       {/* Custom box test */}
       {/* location = 'main-home */}
       <CustomBox difficulty='easy' location='main-home'/>
@@ -53,7 +60,10 @@ export default function HomeScreen() {
       <CustomBox difficulty='easy' location='free-menu-selection' isSelected={true} isAdded={false}/>
       {/* isAdded = True */}
       <CustomBox difficulty='easy' location='free-menu-selection' isSelected={true} isAdded={true}/>
+      
       <View style={{flex : 0.5}}></View>
+
+
       
       
       {/* <FlatList data={data}
