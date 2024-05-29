@@ -10,9 +10,11 @@ export default function Find_Trainer() {
         <View>
           {/* Yang atas */}
           <View>  
-            <TextInput>
-              {/* Search Bar */}
-            </TextInput>
+            <View>  
+              <TextInput>
+                {/* Search Bar */}
+              </TextInput>
+            </View>
             <Image>
               {/* Icon Keranjang Belanja */}
             </Image>
@@ -31,4 +33,5 @@ const style = StyleSheet.create({
     padding : 5,
     paddingTop : 5
   }
+  
 })
