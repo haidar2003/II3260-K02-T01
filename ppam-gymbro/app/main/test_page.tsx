@@ -5,6 +5,7 @@ import ExcerciseProgress from '@/screen/workout_component/ExcerciseProgress';
 import CustomBox from "@/screen/workout_component/CustomBox";
 import Excercise from '@/screen/workout_component/Excercise';
 import HomeTrainer from '@/screen/home_component/HomeTrainer';
+import TrainingPlan from '@/screen/find_trainer_component/TrainingPlan';
 // import {RowComp} from '@/screen/find_trainer_component/row_comp';
 import ExcerciseDay from '@/screen/workout_component/ExcerciseDay';
 import TrainerSelect from '@/screen/select_trainer_component/TrainerSelect';
@@ -28,6 +29,8 @@ export default function HomeScreen() {
     <View style = {styles.layout}>
     <ScrollView contentContainerStyle={styles.content_layout}>
       <View></View>
+      <TrainingPlan type='Offline' price={130000}/>
+      <TrainingPlan type='Online' price={80000}/>
       <UserReview username='Rafi Haidar' rating={5} review='VEEEEEEEEEERYYY LOOONG TEXTTTTT :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3'/>
       <TrainerSelect isActive={true} isSelected={false} trainerName='Haidar' onlineSessions={2} offlineSessions={2}/>
       <TrainerSelect isActive={true} isSelected={true} trainerName='Haidar' onlineSessions={2} offlineSessions={2}/>
