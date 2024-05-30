@@ -5,11 +5,12 @@ import React from 'react';
 
 export default function Row_Comp({ name, rating, price}) {
   return (
-    <View>
+    <View >
         <Image 
-        style= {{width : 155, height : 155}} 
+        style= {{width : 155, height : 155, borderTopRightRadius : 20, borderTopLeftRadius : 20}} 
         source={require("@/assets/trainer_icon_placeholder.png")}/> 
         {/* Ganti ke URI */}
+        <View style = {{padding : 5, backgroundColor : "lightgrey", borderBottomLeftRadius : 20, borderBottomRightRadius : 20}}>
         <Text>
           { name }
         </Text>
@@ -22,6 +23,7 @@ export default function Row_Comp({ name, rating, price}) {
         <Text>
          Rp { numberToRupiah(price) }/session
         </Text>
+        </View>
     </View>
   )
 }
