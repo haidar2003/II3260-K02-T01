@@ -61,8 +61,8 @@ export default function App() {
       </View>
       <StatusBar style="auto" />
     </View>
-     {/* <Redirect href={"/main"} /> */}
-     <Redirect href={"/main/profile"} />
+     <Redirect href={"/main"} />
+     {/* <Redirect href={"/main/profile"} /> */}
      </>
   );
 }
