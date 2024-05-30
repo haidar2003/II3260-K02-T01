@@ -4,6 +4,7 @@ import { Link } from "expo-router"
 import ExcerciseProgress from '@/screen/workout_component/ExcerciseProgress';
 import CustomBox from "@/screen/workout_component/CustomBox";
 import Excercise from '@/screen/workout_component/Excercise';
+import HomeTrainer from '@/screen/home_component/HomeTrainer';
 // import {RowComp} from '@/screen/find_trainer_component/row_comp';
 import ExcerciseDay from '@/screen/workout_component/ExcerciseDay';
 
@@ -25,7 +26,9 @@ export default function HomeScreen() {
     <View style = {styles.layout}>
     <ScrollView contentContainerStyle={styles.content_layout}>
       <View></View>
+      
       <ExcerciseProgress />
+      <HomeTrainer trainerName='Rubah Kampus' sessions={3}/>
       <Excercise sets={4} reps={10} name='Push Up' isChecked={true} number={1}/>
       <Excercise sets={4} reps={10} name='Push Up' isChecked={false} number={1}/>
       <ExcerciseDay isCurrent={true} progress={3} day='1'/>

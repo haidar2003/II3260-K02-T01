@@ -10,9 +10,10 @@ interface CustomBoxProps {
     isOver?: boolean;
     isSelected?: boolean;
     isAdded?: boolean;
+    name?: string;
   }
   
-  const CustomBox: React.FC<CustomBoxProps> = ({ location, difficulty, isSelected, isOver, isAdded}) => {
+  const CustomBox: React.FC<CustomBoxProps> = ({ name, location, difficulty, isSelected, isOver, isAdded}) => {
     const [isAdding, setIsAdding] = useState(isAdded);
     
     // Style
@@ -78,7 +79,7 @@ interface CustomBoxProps {
     
           {/* Right Section with Text and Progress Bar */}
           <View style={styles.rightSection}>
-            <Text style={styles.text}>Title</Text>
+            <Text style={styles.text}>{name}</Text>
             <View style={styles.difficultyContainer}>
               {difficulty && ( 
                 <Text style={styles.textSmall}>
