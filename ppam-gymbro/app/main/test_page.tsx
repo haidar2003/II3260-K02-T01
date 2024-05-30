@@ -7,6 +7,7 @@ import Excercise from '@/screen/workout_component/Excercise';
 import HomeTrainer from '@/screen/home_component/HomeTrainer';
 // import {RowComp} from '@/screen/find_trainer_component/row_comp';
 import ExcerciseDay from '@/screen/workout_component/ExcerciseDay';
+import TrainerSelect from '@/screen/select_trainer_component/TrainerSelect';
 
 const data = [
   {id : "1" , name : "Black Sheep", rating : 5 , pricee : 25500} ,
@@ -26,8 +27,11 @@ export default function HomeScreen() {
     <View style = {styles.layout}>
     <ScrollView contentContainerStyle={styles.content_layout}>
       <View></View>
-      
-      <ExcerciseProgress />
+      <TrainerSelect isActive={true} isSelected={false} trainerName='Haidar' onlineSessions={2} offlineSessions={2}/>
+      <TrainerSelect isActive={true} isSelected={true} trainerName='Haidar' onlineSessions={2} offlineSessions={2}/>
+      <TrainerSelect isActive={false} isSelected={false} trainerName='Haidar' onlineSessions={2} offlineSessions={2} monthPassed={2}/>
+      <TrainerSelect isActive={false} isSelected={true} trainerName='Haidar' onlineSessions={0} offlineSessions={0} monthPassed={2}/>
+      <ExcerciseProgress duration={8} difficulty='Intermediate'/>
       <HomeTrainer trainerName='Rubah Kampus' sessions={3}/>
       <Excercise sets={4} reps={10} name='Push Up' isChecked={true} number={1}/>
       <Excercise sets={4} reps={10} name='Push Up' isChecked={false} number={1}/>

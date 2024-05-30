@@ -3,12 +3,12 @@ import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import * as Progress from 'react-native-progress';
 
 
-interface HomeTrainer {
+interface HomeTrainerProps {
     trainerName?: string,
     sessions?: number,
   }
   
-const HomeTrainer: React.FC<HomeTrainer> = ({ trainerName, sessions }) => {
+const HomeTrainer: React.FC<HomeTrainerProps> = ({ trainerName, sessions }) => {
     return (
       <View style={styles.containerStyle}>
         <View style={styles.topContainer}>
