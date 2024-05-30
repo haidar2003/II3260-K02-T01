@@ -10,6 +10,7 @@ import TrainingPlan from '@/screen/find_trainer_component/TrainingPlan';
 import ExcerciseDay from '@/screen/workout_component/ExcerciseDay';
 import TrainerSelect from '@/screen/select_trainer_component/TrainerSelect';
 import UserReview from '@/screen/find_trainer_component/UserReview';
+import ReserveTrainerPlan from '@/screen/find_trainer_component/ReserveTrainerPlan';
 
 const data = [
   {id : "1" , name : "Black Sheep", rating : 5 , pricee : 25500} ,
@@ -29,6 +30,9 @@ export default function HomeScreen() {
     <View style = {styles.layout}>
     <ScrollView contentContainerStyle={styles.content_layout}>
       <View></View>
+      <ReserveTrainerPlan isAdded={false} bundle={3} type='Online' unitPrice={80000} />
+      <ReserveTrainerPlan isAdded={true} bundle={5} type='Online' unitPrice={80000} />
+      <TrainingPlan type='Offline' price={130000}/>
       <TrainingPlan type='Offline' price={130000}/>
       <TrainingPlan type='Online' price={80000}/>
       <UserReview username='Rafi Haidar' rating={5} review='VEEEEEEEEEERYYY LOOONG TEXTTTTT :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3'/>
