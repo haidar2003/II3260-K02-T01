@@ -8,6 +8,7 @@ import HomeTrainer from '@/screen/home_component/HomeTrainer';
 // import {RowComp} from '@/screen/find_trainer_component/row_comp';
 import ExcerciseDay from '@/screen/workout_component/ExcerciseDay';
 import TrainerSelect from '@/screen/select_trainer_component/TrainerSelect';
+import UserReview from '@/screen/find_trainer_component/UserReview';
 
 const data = [
   {id : "1" , name : "Black Sheep", rating : 5 , pricee : 25500} ,
@@ -27,6 +28,7 @@ export default function HomeScreen() {
     <View style = {styles.layout}>
     <ScrollView contentContainerStyle={styles.content_layout}>
       <View></View>
+      <UserReview username='Rafi Haidar' rating={5} review='VEEEEEEEEEERYYY LOOONG TEXTTTTT :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3'/>
       <TrainerSelect isActive={true} isSelected={false} trainerName='Haidar' onlineSessions={2} offlineSessions={2}/>
       <TrainerSelect isActive={true} isSelected={true} trainerName='Haidar' onlineSessions={2} offlineSessions={2}/>
       <TrainerSelect isActive={false} isSelected={false} trainerName='Haidar' onlineSessions={2} offlineSessions={2} monthPassed={2}/>
