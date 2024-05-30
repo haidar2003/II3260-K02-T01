@@ -11,6 +11,7 @@ import ExcerciseDay from '@/screen/workout_component/ExcerciseDay';
 import TrainerSelect from '@/screen/select_trainer_component/TrainerSelect';
 import UserReview from '@/screen/find_trainer_component/UserReview';
 import ReserveTrainerPlan from '@/screen/find_trainer_component/ReserveTrainerPlan';
+import ReserveTrainerCart from '@/screen/find_trainer_component/ReserveTrainerCart';
 
 const data = [
   {id : "1" , name : "Black Sheep", rating : 5 , pricee : 25500} ,
@@ -30,6 +31,9 @@ export default function HomeScreen() {
     <View style = {styles.layout}>
     <ScrollView contentContainerStyle={styles.content_layout}>
       <View></View>
+      <ReserveTrainerCart onlineBundle={5} offlineBundle={5} offlineUnitPrice={30000} onlineUnitPrice={20000} trainerName='Haidar' />
+      <ReserveTrainerCart offlineBundle={5} offlineUnitPrice={30000} trainerName='Haidar' />
+      <ReserveTrainerCart onlineBundle={5} onlineUnitPrice={20000} trainerName='Haidar' />
       <ReserveTrainerPlan isAdded={false} bundle={3} type='Online' unitPrice={80000} />
       <ReserveTrainerPlan isAdded={true} bundle={5} type='Online' unitPrice={80000} />
       <TrainingPlan type='Offline' price={130000}/>
@@ -53,12 +57,6 @@ export default function HomeScreen() {
 
       {/* location = 'main-workout */}
       <CustomBox difficulty='easy' location='main-workout'/>
-
-      {/* location = 'trainer-menu */}
-      {/* isOver = False */}
-      <CustomBox difficulty='easy' location='trainer-menu' isOver={false}/>
-      {/* isOver = True */}
-      <CustomBox difficulty='easy' location='trainer-menu' isOver={true}/>
 
       {/* location = 'trainer-menu */}
       {/* isOver = False */}
