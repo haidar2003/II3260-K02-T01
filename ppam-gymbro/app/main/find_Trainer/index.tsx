@@ -1,26 +1,49 @@
-import { StyleSheet, Text, TextInput, View, Image, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList} from 'react-native';
+import { StyleSheet, Text, TextInput, View, Image, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import RowComp from '@/screen/find_trainer_component/row_comp';
 import Filter from '@/screen/find_trainer_component/Filter';
 import {numberToRupiah} from "@/utils/formatting"
-
+import {Tag, Tag_status} from "@/utils/tag"
 export default function Find_Trainer() {
-  const [minPrice , setMinPrice] = useState(0)
-  const [maxPrice , setMaxPrice] = useState(1000000)
-  const [tags, setTags] = useState([])
-  const [location, setLocation] = useState("")
-  const [online, setOnline ] = useState(true)
-  const [offline, setOffline] = useState(true)
-
-  const dataTags = [
-    { id: '1', title: 'Item 1' },
-    { id: '2', title: 'Item 2' },
-    { id: '3', title: 'Item 3' },
-    { id: '4', title: 'Item 4' },
-    { id: '5', title: 'Item 5' },
-    { id: '6', title: 'Item 6' },
-    { id: '7', title: 'Item 7' }
+  const referenceTags = [
+    {id : 1, name : "Calisthenic"},
+    {id : 2, name : "Yoga"},
+    {id : 3, name : "Running"},
+    {id : 4, name : "Jogging"},
+    {id : 5, name : "Swimming"},
+    {id : 6, name : "Upper Body"},
+    {id : 7, name : "Lower Body"},
+    {id : 8, name : "Full Body"},
+    {id : 9, name : "Weight Training"},
+    {id : 10, name : "Rucking"}
   ]
+  const dataTags:Tag_status[] = referenceTags.map(item => ({
+    ...item,
+    active:false
+  }))
+
+  const [minPrice, setMinPrice] = useState<number>(0);
+  const [maxPrice, setMaxPrice] = useState<number>(1000000);
+  const [tags, setTags] = useState<Tag_status[]>(dataTags); 
+  const [location, setLocation] = useState<string>("");
+  const [online, setOnline] = useState<boolean>(true);
+  const [offline, setOffline] = useState<boolean>(true);
+  const [stateScreen, setStateScreen] = useState<number>(0);
+  const [rating, setRating] = useState<number>(0);
+  
+  const toggleTags = (id : number) => {
+    setTags((prevItems) => {
+      return prevItems.map(item =>{
+        if (item.id === id) {
+          return {...item, active : !item.active}
+        }
+        return item
+      })
+    })
+  }
+
+
+
 
   const dataTrainer = [
     {id : "1" , name : "Black Sheep", rating : 5 , pricee : 25500} ,
@@ -38,11 +61,12 @@ export default function Find_Trainer() {
   );
   const renderTags = ({item}) => (
     <View style = {{flex : 3, backgroundColor : "#FFEAD9", borderRadius : 20, marginRight : 20, alignItems : "center",justifyContent : "center", padding : 5 }}>
-      <Text style = {{fontSize : 12}}> {item.title} </Text>
+      <Text style = {{fontSize : 12}}> {item.name} </Text>
     </View>
   )
   return (
     <View style={styles.layout}>
+      {/* <View style={{position : "absolute", top : 0, left : 0}}> */}
         <View style = {styles.topBar}>
           {/* Yang atas */}
           <View style = {{flex : 1}}></View>
@@ -61,30 +85,58 @@ export default function Find_Trainer() {
         <View style = {styles.filter_sort}>
           <View style = {{flex : 1, margin : 5, padding : 5, flexDirection : "row", alignItems : "center",justifyContent : "center" }}>
             <View style = {{flex : 3, backgroundColor : "#FFEAD9", borderRadius : 20, marginRight : 20, alignItems : "center",justifyContent : "center", padding : 5 }}>
-              <Text style={{fontFamily : "System"}}> Rp{numberToRupiah(minPrice)}-Rp{numberToRupiah(maxPrice)} </Text>
+              <Text style={{fontFamily : "System"}}> Rp{numberToRupiah(minPrice)} - Rp{numberToRupiah(maxPrice)} </Text>
             </View>
+            <Pressable onPress = {() => setStateScreen(1)}>
             <Image source={require("@/assets/filter.png")} style={{marginHorizontal : 5}}></Image>
+            </Pressable>
             <Image source={require("@/assets/sort.png")}  style={{marginHorizontal : 5}}></Image>
           </View>
           <FlatList 
             style = {{flex : 1}}
-            data={dataTags}
+            data={tags.filter(item => item.active)}
             horizontal = {true}
             renderItem={renderTags}
             keyExtractor={(item) => item.id}/>
         </View>
 
-        <View style = {{flex : 2, alignItems : "center", justifyContent : "center"}}>
+        <View style = {{flex : 2, alignItems : "center", justifyContent : "center", marginTop : 10}}>
           <FlatList data={dataTrainer}
           renderItem={renderTrainer}
           keyExtractor={item => item.id}
           numColumns={2}
           style = {{maxWidth : "95%"}} />
         </View>
-        
-        
+        {/* </View> */}
+        { stateScreen === 1 &&( 
+        <View style = {styles.grey}>
+          <TouchableOpacity onPress={ () => setStateScreen(0)} disabled = {false} style={{flex : 1}}>
+            <View style = {{flex : 1}}/>
+          </TouchableOpacity>
+        </View>)}
 
+        { stateScreen === 1 &&(
+        
+          <Filter         minPrice={minPrice}
+          maxPrice={maxPrice}
+          tags={tags}
+          location={location}
+          online={online}
+          offline={offline}
+          rating={rating}
+          setMinPrice={setMinPrice}
+          setMaxPrice={setMaxPrice}
+          setTags={setTags}
+          setLocation={setLocation}
+          setOnline={setOnline}
+          setOffline={setOffline}
+          setRating={setRating}
+          toggleTags={toggleTags}>
+      
+          </Filter>
+        )} 
     </View>
+
   )
 }
 
@@ -144,5 +196,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     color: 'white',
-  }
+  }, 
+  grey : {
+    backgroundColor : "grey", 
+    position : 'absolute', 
+    width: Dimensions.get("window").width , //for full screen
+    height: Dimensions.get("window").height, //for full screen
+    top : 0, 
+    left : 0,
+    opacity : 0.8,
+    zIndex : 1,
+    justifyContent : "flex-start"
+  } ,
+
 })
