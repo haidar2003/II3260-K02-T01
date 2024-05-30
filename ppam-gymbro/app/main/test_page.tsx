@@ -14,6 +14,7 @@ import ReserveTrainerPlan from '@/screen/find_trainer_component/ReserveTrainerPl
 import ReserveTrainerCart from '@/screen/find_trainer_component/ReserveTrainerCart';
 import ReserveTrainerCheckout from '@/screen/find_trainer_component/ReserveTrainerCheckout';
 import TrainerProfile from '@/screen/find_trainer_component/TrainerProfile';
+import Navbar from '@/screen/home_component/Navbar';
 
 const data = [
   {id : "1" , name : "Black Sheep", rating : 5 , pricee : 25500} ,
@@ -33,6 +34,11 @@ export default function HomeScreen() {
     <View style = {styles.layout}>
     <ScrollView contentContainerStyle={styles.content_layout}>
       <View></View>
+      <Navbar location='home'/>
+      <Navbar location='trainer-search'/>
+      <Navbar location='trainer-select'/>
+      <Navbar location='workout'/>
+      <Navbar location='chat'/>
       <TrainerProfile trainerName='Raditya Azka' trainerUsername='iyaq' trainerRating={4} trainerCity='Bandung'/>
       <ReserveTrainerCheckout onlineBundle={5} offlineBundle={5} offlineUnitPrice={30000} onlineUnitPrice={20000} trainerName='Haidar' />
       <ReserveTrainerCheckout offlineBundle={5} offlineUnitPrice={30000} trainerName='Haidar' />

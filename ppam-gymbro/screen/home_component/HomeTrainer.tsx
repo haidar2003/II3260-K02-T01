@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
-import * as Progress from 'react-native-progress';
+import { View, Text, StyleSheet, Button, TouchableOpacity, Dimensions } from 'react-native';
 
+const { width: screenWidth } = Dimensions.get('window');
 
 interface HomeTrainerProps {
     trainerName?: string,
