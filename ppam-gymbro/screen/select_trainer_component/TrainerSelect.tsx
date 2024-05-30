@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import * as Progress from 'react-native-progress';
-
+import { SearchTrainerElement } from '@/utils/searchTrainerElement';
 
 interface TrainerSelectProps {
+    id : string;
     isActive?: boolean;
     isSelected?: boolean;
     trainerName?: string;
     onlineSessions?: number;
     offlineSessions?: number;
     monthPassed?: number;
+    setSelected : (id: string) => void;
   }
   
-const TrainerSelect: React.FC<TrainerSelectProps> = ({ isSelected, isActive, trainerName, onlineSessions, offlineSessions, monthPassed }) => {
+const TrainerSelect: React.FC<TrainerSelectProps> = ({id, isSelected, isActive, trainerName, onlineSessions, offlineSessions, monthPassed, setSelected  }) => {
     let containerStyle, topContainerColor
     let roundingBottom = 12
     let fontColor = '#444444' 
@@ -56,6 +58,7 @@ const TrainerSelect: React.FC<TrainerSelectProps> = ({ isSelected, isActive, tra
 
     return (
       <View style={containerStyle}>
+        <TouchableOpacity onPress={() => {setSelected(id)}}>
         <View style={{backgroundColor: topContainerColor, width: 317, height: 66, paddingVertical: 10, paddingHorizontal: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 15, borderTopLeftRadius: 12,borderTopRightRadius: 12, borderBottomStartRadius: roundingBottom, borderBottomEndRadius: roundingBottom}}>
             <View style={styles.circle}>
 
@@ -87,6 +90,7 @@ const TrainerSelect: React.FC<TrainerSelectProps> = ({ isSelected, isActive, tra
             </View>
           </View>
         )}
+        </TouchableOpacity>
       </View>
     );
   };

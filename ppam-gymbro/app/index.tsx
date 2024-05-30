@@ -62,7 +62,7 @@ export default function App() {
       <StatusBar style="auto" />
     </View>
      {/* <Redirect href={"/main"} /> */}
-     <Redirect href={"/main/workout"} />
+     <Redirect href={"/main/active_Trainer"} />
      </>
   );
 }
