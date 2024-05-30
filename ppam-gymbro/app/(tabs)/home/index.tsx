@@ -8,7 +8,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.layout} >
       <View style = {{flex : 1, width : "100%", flexDirection : "column", alignItems : "center", justifyContent : "flex-end", backgroundColor : "white"}}>
-      <Link href={"/main/profile"} asChild>
+      <Link href={"/(tabs/home/profile"} asChild>
         <Pressable>
         <View style = {{flex : 1, width : "100%", flexDirection : "row", alignItems : "center", justifyContent : "flex-start"}}> 
         

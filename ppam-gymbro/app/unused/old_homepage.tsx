@@ -9,9 +9,9 @@ export default function HomeScreen() {
       <Header username="Kean"/>
 
       <Link href="../auth/login"><Box text="Test Login Page"/></Link>
-      <Link href="/main/find_Trainer"><Box text="Find Trainers"/></Link>
-      <Link href="/main/test_page"><Box text="Test Page"/></Link>
-      <Link href="/main/workout"><Box text="Workout Plan"/></Link>
+      <Link href="/(tabs)/find_Trainer"><Box text="Find Trainers"/></Link>
+      <Link href="/(tabs)/test_page"><Box text="Test Page"/></Link>
+      <Link href="/(tabs)/workout"><Box text="Workout Plan"/></Link>
       <StatusBar style="auto" />
     </View>
   );

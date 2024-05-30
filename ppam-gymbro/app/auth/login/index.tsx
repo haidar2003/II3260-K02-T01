@@ -57,7 +57,7 @@ export default function login_1() {
 
             {/* Allowing the user to use the button only if the input boxes are filled */}
             {isButtonEnabled ? (
-              <Link href="" style={styles.WhiteButton}>
+              <Link href="/(tabs)/home/" style={styles.WhiteButton}>
                 <Text style={styles.buttonText}>Log In</Text>
               </Link>
             ) : (

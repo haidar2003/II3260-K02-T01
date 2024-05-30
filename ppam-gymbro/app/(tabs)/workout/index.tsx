@@ -5,20 +5,17 @@ import { Link } from 'expo-router';
 import { Image } from 'expo-image';
 
 
-export default function TrainerWorkout() {
-    const trainerWorkout = [
-        {id : "1" , category: 'core', name : "Core Plan 1", difficulty: 'easy', type: 'trainer'} ,
-        {id : "2" , category: 'core', name : "Core Plan 2", difficulty: 'easy', type: 'trainer'} ,
-        {id : "3" , category: 'core', name : "Core Plan 3", difficulty: 'easy', type: 'trainer'} ,
-        {id : "4" , category: 'core', name : "Core Plan 4", difficulty: 'easy', type: 'trainer'} ,
-      ]
-
-    const finishedWorkout = [
-        {id : "5" , category: 'core', name : "Core Plan 5", difficulty: 'easy', type: 'trainer'} ,
-        {id : "6" , category: 'core', name : "Core Plan 6", difficulty: 'easy', type: 'trainer'} ,
-        {id : "7" , category: 'core', name : "Core Plan 7", difficulty: 'easy', type: 'trainer'} ,
-        {id : "8" , category: 'core', name : "Core Plan 8", difficulty: 'easy', type: 'trainer'} ,
-      ]
+export default function MainWorkout() {
+  const trainerWorkout = [
+    {id : "1" , category: 'core', name : "Core Plan 1", difficulty: 'easy', type: 'trainer'} ,
+    {id : "2" , category: 'core', name : "Core Plan 2", difficulty: 'easy', type: 'trainer'} ,
+    {id : "3" , category: 'core', name : "Core Plan 3", difficulty: 'easy', type: 'trainer'} ,
+  ]
+  const userWorkout = [
+    {id : "1" , category: 'core', name : "Core A", difficulty: 'easy', type: 'free'} ,
+    {id : "2" , category: 'core', name : "Core B", difficulty: 'easy', type: 'free'} ,
+    {id : "3" , category: 'core', name : "Core C", difficulty: 'easy', type: 'free'} ,
+  ]
   const renderWorkout = ({ item }) => {
     
       return (
@@ -33,15 +30,8 @@ export default function TrainerWorkout() {
       <View style = {styles.topBar}>
           {/* Yang atas */}
           
-          <View style = {{flex : 1, justifyContent : "flex-start",flexDirection : "row", alignItems : "center", width : "100%", padding : 15}}>
-            <Link href="/main/workout" asChild>
-                <Pressable> 
-                    <Text style = {{fontSize : 18, fontWeight : "bold"}}>Back</Text>
-                </Pressable>
-            </Link>
-            <View style = {{flex : 1}} />
-            <Text style = {{fontSize : 24, fontWeight : "bold"}}>Trainer Plan</Text>
-            <View style = {{flex : 1.2}} />
+          <View style = {{flex : 1, justifyContent : "center", alignItems : "center"}}>
+            <Text style = {{fontSize : 24, fontWeight : "bold"}}>Workout Plan</Text>
           </View>
           {/* <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
           </View> */}
@@ -49,7 +39,12 @@ export default function TrainerWorkout() {
 
       <ScrollView style = {{flex : 1}}>
         <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center"}} >
-          <Text style = {{fontSize : 20, fontWeight : "bold"}}> Active Plan</Text>
+          <Text style = {{fontSize : 20, fontWeight : "bold"}}> Tailored Plan</Text>
+          <Link href="/(tabs)/workout/TrainerWorkout/" asChild>
+            <Pressable> 
+              <Text style = {{fontSize : 14, fontWeight:"300"}}>Browse All</Text>
+            </Pressable>
+          </Link>
         </View>
         <ScrollView horizontal = {true}>
           <FlatList data={trainerWorkout}
@@ -58,10 +53,15 @@ export default function TrainerWorkout() {
           style = {{maxWidth : "100%"}} />
         </ScrollView>
         <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center"}} >
-          <Text style = {{fontSize : 20, fontWeight : "bold"}}> Finished Plan</Text>
+          <Text style = {{fontSize : 20, fontWeight : "bold"}}> Free Plan</Text>
+          <Link href="/(tabs)/workout/FreeWorkout/" asChild>
+            <Pressable> 
+              <Text style = {{fontSize : 14, fontWeight:"300"}}>Browse All</Text>
+            </Pressable>
+          </Link>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={finishedWorkout}
+          <FlatList data={userWorkout}
           renderItem={renderWorkout}
           keyExtractor={item => item.id}
           style = {{maxWidth : "100%"}} />

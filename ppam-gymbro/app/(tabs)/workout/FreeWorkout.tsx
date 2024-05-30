@@ -5,17 +5,14 @@ import { Link } from 'expo-router';
 import { Image } from 'expo-image';
 
 
-export default function MainWorkout() {
-  const trainerWorkout = [
-    {id : "1" , category: 'core', name : "Core Plan 1", difficulty: 'easy', type: 'trainer'} ,
-    {id : "2" , category: 'core', name : "Core Plan 2", difficulty: 'easy', type: 'trainer'} ,
-    {id : "3" , category: 'core', name : "Core Plan 3", difficulty: 'easy', type: 'trainer'} ,
-  ]
-  const userWorkout = [
-    {id : "1" , category: 'core', name : "Core A", difficulty: 'easy', type: 'free'} ,
-    {id : "2" , category: 'core', name : "Core B", difficulty: 'easy', type: 'free'} ,
-    {id : "3" , category: 'core', name : "Core C", difficulty: 'easy', type: 'free'} ,
-  ]
+export default function FreeWorkout() {
+    const userWorkout = [
+        {id : "1" , category: 'core', name : "Core A", difficulty: 'easy', type: 'free'} ,
+        {id : "2" , category: 'core', name : "Core B", difficulty: 'easy', type: 'free'} ,
+        {id : "3" , category: 'core', name : "Core C", difficulty: 'easy', type: 'free'} ,
+        {id : "4" , category: 'core', name : "Core D", difficulty: 'easy', type: 'free'} ,
+      ]
+
   const renderWorkout = ({ item }) => {
     
       return (
@@ -30,8 +27,15 @@ export default function MainWorkout() {
       <View style = {styles.topBar}>
           {/* Yang atas */}
           
-          <View style = {{flex : 1, justifyContent : "center", alignItems : "center"}}>
-            <Text style = {{fontSize : 24, fontWeight : "bold"}}>Workout Plan</Text>
+          <View style = {{flex : 1, justifyContent : "flex-start",flexDirection : "row", alignItems : "center", width : "100%", padding : 15}}>
+            <Link href="/(tabs)/workout" asChild>
+                <Pressable> 
+                    <Text style = {{fontSize : 18, fontWeight : "bold"}}>Back</Text>
+                </Pressable>
+            </Link>
+            <View style = {{flex : 1}} />
+            <Text style = {{fontSize : 24, fontWeight : "bold"}}>Free Plan</Text>
+            <View style = {{flex : 1.2}} />
           </View>
           {/* <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
           </View> */}
@@ -40,25 +44,6 @@ export default function MainWorkout() {
       <ScrollView style = {{flex : 1}}>
         <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center"}} >
           <Text style = {{fontSize : 20, fontWeight : "bold"}}> Tailored Plan</Text>
-          <Link href="/main/workout/TrainerWorkout/" asChild>
-            <Pressable> 
-              <Text style = {{fontSize : 14, fontWeight:"300"}}>Browse All</Text>
-            </Pressable>
-          </Link>
-        </View>
-        <ScrollView horizontal = {true}>
-          <FlatList data={trainerWorkout}
-          renderItem={renderWorkout}
-          keyExtractor={item => item.id}
-          style = {{maxWidth : "100%"}} />
-        </ScrollView>
-        <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center"}} >
-          <Text style = {{fontSize : 20, fontWeight : "bold"}}> Free Plan</Text>
-          <Link href="/main/workout/FreeWorkout/" asChild>
-            <Pressable> 
-              <Text style = {{fontSize : 14, fontWeight:"300"}}>Browse All</Text>
-            </Pressable>
-          </Link>
         </View>
         <ScrollView horizontal = {true}>
           <FlatList data={userWorkout}
