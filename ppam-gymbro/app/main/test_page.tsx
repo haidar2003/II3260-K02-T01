@@ -13,6 +13,7 @@ import UserReview from '@/screen/find_trainer_component/UserReview';
 import ReserveTrainerPlan from '@/screen/find_trainer_component/ReserveTrainerPlan';
 import ReserveTrainerCart from '@/screen/find_trainer_component/ReserveTrainerCart';
 import ReserveTrainerCheckout from '@/screen/find_trainer_component/ReserveTrainerCheckout';
+import TrainerProfile from '@/screen/find_trainer_component/TrainerProfile';
 
 const data = [
   {id : "1" , name : "Black Sheep", rating : 5 , pricee : 25500} ,
@@ -32,6 +33,7 @@ export default function HomeScreen() {
     <View style = {styles.layout}>
     <ScrollView contentContainerStyle={styles.content_layout}>
       <View></View>
+      <TrainerProfile trainerName='Raditya Azka' trainerUsername='iyaq' trainerRating={4} trainerCity='Bandung'/>
       <ReserveTrainerCheckout onlineBundle={5} offlineBundle={5} offlineUnitPrice={30000} onlineUnitPrice={20000} trainerName='Haidar' />
       <ReserveTrainerCheckout offlineBundle={5} offlineUnitPrice={30000} trainerName='Haidar' />
       <ReserveTrainerCheckout onlineBundle={5} onlineUnitPrice={20000} trainerName='Haidar' />
@@ -44,10 +46,10 @@ export default function HomeScreen() {
       <TrainingPlan type='Offline' price={130000}/>
       <TrainingPlan type='Online' price={80000}/>
       <UserReview username='Rafi Haidar' rating={5} review='VEEEEEEEEEERYYY LOOONG TEXTTTTT :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3'/>
-      <TrainerSelect isActive={true} isSelected={false} trainerName='Haidar' onlineSessions={2} offlineSessions={2}/>
+      {/* <TrainerSelect isActive={true} isSelected={false} trainerName='Haidar' onlineSessions={2} offlineSessions={2}/>
       <TrainerSelect isActive={true} isSelected={true} trainerName='Haidar' onlineSessions={2} offlineSessions={2}/>
       <TrainerSelect isActive={false} isSelected={false} trainerName='Haidar' onlineSessions={2} offlineSessions={2} monthPassed={2}/>
-      <TrainerSelect isActive={false} isSelected={true} trainerName='Haidar' onlineSessions={0} offlineSessions={0} monthPassed={2}/>
+      <TrainerSelect isActive={false} isSelected={true} trainerName='Haidar' onlineSessions={0} offlineSessions={0} monthPassed={2}/> */}
       <ExcerciseProgress duration={8} difficulty='Intermediate'/>
       <HomeTrainer trainerName='Rubah Kampus' sessions={3}/>
       <Excercise sets={4} reps={10} name='Push Up' isChecked={true} number={1}/>
