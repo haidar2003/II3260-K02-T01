@@ -1,44 +1,72 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable } from 'react-native';
 import CustomBox from '@/screen/workout_component/CustomBox';
 import { Link } from 'expo-router';
 import { Image } from 'expo-image';
 
 
 export default function MainWorkout() {
-  const userWorkout = [
+  const trainerWorkout = [
     {id : "1" , category: 'core', name : "Core Plan 1", difficulty: 'easy', type: 'trainer'} ,
-    {id : "2" , category: 'core', name : "Core Plan 2", difficulty: 'easy', type: 'free'} ,
+    {id : "2" , category: 'core', name : "Core Plan 2", difficulty: 'easy', type: 'trainer'} ,
     {id : "3" , category: 'core', name : "Core Plan 3", difficulty: 'easy', type: 'trainer'} ,
-    {id : "4" , category: 'core', name : "Core Plan 4", difficulty: 'easy', type: 'free'} ,
   ]
-
-  const renderTrainerWorkout = ({ item }) => {
-    if (item.type === 'trainer') {
+  const userWorkout = [
+    {id : "1" , category: 'core', name : "Core A", difficulty: 'easy', type: 'free'} ,
+    {id : "2" , category: 'core', name : "Core B", difficulty: 'easy', type: 'free'} ,
+    {id : "3" , category: 'core', name : "Core C", difficulty: 'easy', type: 'free'} ,
+  ]
+  const renderWorkout = ({ item }) => {
+    
       return (
         <View style = {{padding : 5}}>
           <CustomBox name={item.name} difficulty={item.difficulty} location='main-workout'/>
         </View>
       )
-    }
   };
 
   return (
     <View style={styles.layout}>
       <View style = {styles.topBar}>
           {/* Yang atas */}
-          <Text>Bruh</Text>
-          <View style = {{flex : 1}}></View>
-          <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
+          
+          <View style = {{flex : 1, justifyContent : "center", alignItems : "center"}}>
+            <Text style = {{fontSize : 24, fontWeight : "bold"}}>Workout Plan</Text>
           </View>
+          {/* <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
+          </View> */}
       </View>
 
-      <View style = {{flex : 1, alignItems : "center", justifyContent : "center"}}>
-          <FlatList data={userWorkout}
-          renderItem={renderTrainerWorkout}
+      <ScrollView style = {{flex : 1}}>
+        <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center"}} >
+          <Text style = {{fontSize : 20, fontWeight : "bold"}}> Tailored Plan</Text>
+          <Link href="/main/workout/TrainerWorkout/" asChild>
+            <Pressable> 
+              <Text style = {{fontSize : 14, fontWeight:"300"}}>Browse All</Text>
+            </Pressable>
+          </Link>
+        </View>
+        <ScrollView horizontal = {true}>
+          <FlatList data={trainerWorkout}
+          renderItem={renderWorkout}
           keyExtractor={item => item.id}
           style = {{maxWidth : "100%"}} />
-      </View>
+        </ScrollView>
+        <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center"}} >
+          <Text style = {{fontSize : 20, fontWeight : "bold"}}> Free Plan</Text>
+          <Link href="/main/workout/FreeWorkout/" asChild>
+            <Pressable> 
+              <Text style = {{fontSize : 14, fontWeight:"300"}}>Browse All</Text>
+            </Pressable>
+          </Link>
+        </View>
+        <ScrollView horizontal = {true}>
+          <FlatList data={userWorkout}
+          renderItem={renderWorkout}
+          keyExtractor={item => item.id}
+          style = {{maxWidth : "100%"}} />
+        </ScrollView>
+      </ScrollView>
 
 
 
@@ -115,9 +143,8 @@ const styles = StyleSheet.create({
     alignItems : "center",
     justifyContent : "flex-end",
     backgroundColor : "lightgrey",
-    borderBottomLeftRadius : 20,
-    borderBottomRightRadius : 20,
-    marginTop : 0
+    marginTop : 0,
+    paddingTop : 10
   },
   layout: {
     flex: 1,
