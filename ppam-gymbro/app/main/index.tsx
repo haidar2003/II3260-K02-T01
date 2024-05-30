@@ -1,96 +1,48 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View , Dimensions, Image} from 'react-native';
 import { Link } from "expo-router"
-
+import {format} from "date-fns"
+import CustomBox from "@/screen/workout_component/CustomBox";
+import HomeTrainer from '@/screen/home_component/HomeTrainer';
 export default function HomeScreen() {
   return (
-    <View style={styles.layout}>
-
-      <Header username="Kean"/>
-
-      <Link href="../auth/login"><Box text="Test Login Page"/></Link>
-      <Link href="/main/find_Trainer"><Box text="Find Trainers"/></Link>
-      <Link href="/main/test_page"><Box text="Test Page"/></Link>
-      <Link href="/main/workout"><Box text="Workout Plan"/></Link>
-      <StatusBar style="auto" />
+    <View style={styles.layout} >
+      <View style = {{flex : 1, width : "100%", flexDirection : "column", alignItems : "center", justifyContent : "flex-end", backgroundColor : "white"}}>
+        <View style = {{flex : 1, width : "100%", flexDirection : "row", alignItems : "center", justifyContent : "flex-start"}}> 
+          <Image style = {{width : "20%", aspectRatio : 1, borderRadius : 1000, margin : 10}} source={require("@/assets/profile_picture_placeholder.jpg")}/>
+          <View style ={{flex : 1, flexDirection : "column"}}>
+            <Text style = {{fontSize : 12}}> Hello Rafi Haidar!</Text>
+            <Text style = {{fontSize : 18, fontWeight : "bold"}}>{format(new Date(), 'EEEE, dd MMMM') } </Text>
+          </View>
+        </View>
+          
+      </View>
+      <View style = {{flex : 2 ,width : "100%", alignItems : "center"}}>
+        <HomeTrainer trainerName='Rubah Kampus' sessions={3}></HomeTrainer>
+      </View>
+      <View style = {{flex : 2,width : "100%"}}>
+        <Text style = {{fontWeight : "bold", fontSize : 16, marginHorizontal : 40}}> Trainer Plan</Text>
+        <View style = {{flex : 1, width : "100%", alignItems : "center"}}>
+          <CustomBox difficulty='easy' location='main-home' type='trainer-plan' name='Core Plan 1'/>
+        </View>
+      </View>
+      <View style = {{flex : 2,width : "100%"}}>
+      <Text style = {{fontWeight : "bold", fontSize : 16, marginHorizontal : 40}}> Personal Plan</Text>
+        <View style = {{flex : 1, width : "100%", alignItems : "center"}}>
+          <CustomBox difficulty='easy' location='main-home' type='trainer-plan' name='Core Plan 2'/>
+        </View>
+      </View>
     </View>
   );
 }
 
- const Box = (props) => {
-  return(
-    <View style={[styles.box, styles.boxElevation]}>
-      <Text style={styles.boxFont}>{props.text}</Text>
-    </View>
-  );
-}
-
-const Header = (props) => {
-  return(
-    <View style={styles.header}>
-      <Text style={styles.headerFont}>Welcome to GymBro! {props.username}</Text>
-    </View>
-  )
-}
-
-const styles = StyleSheet.create({
-  layout: {
-    flex: 2,
-    flexDirection: 'column',
-    backgroundColor: '#f4dfb9',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-    // headerLayout Gk dipake
-  headerLayout: {
-    flex: 1,
-    height: '10%',
-    width: '100%',
-    flexDirection: 'column',
-    backgroundColor: '#f4dfb9',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  header: {
-    height: '20%',
-    width: '90%',
-    backgroundColor: 'black',
-    margin: 12,
-    padding: 12,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  headerFont: {
-    fontWeight: 'bold',
-    fontSize: 32,
-    textAlign: 'left',
-    color: '#f4dfb9',
-  },
-
-  box: {
-    height: '12%',
-    width: '80%',
-    backgroundColor: 'white',
-    margin: 12,
-    borderRadius: 8,
-    padding: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  boxFont: {
-    fontWeight: 'bold',
-    fontSize: 28,
-    textAlign: 'center'
-  },
-
-  boxElevation: {
-    elevation: 15,
-    shadowColor: '#black',
-  },
-
-});
+const styles = StyleSheet.create(  {layout: {
+  flex: 1,
+  width: Dimensions.get("window").width , //for full screen
+  height: Dimensions.get("window").height, //for full screen
+  alignItems: 'center',
+  justifyContent: 'flex-start',
+  backgroundColor: 'white',
+  position : "relative",
+  padding : 10}
+})
