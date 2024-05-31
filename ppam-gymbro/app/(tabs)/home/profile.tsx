@@ -15,7 +15,7 @@ export default function Profile() {
             <View style = {{flex : 1.5, width : "100%", justifyContent : "flex-end"}}>
                 <View style = {{flex : 1}}></View>
                 <View style = {{flex : 1, width : "100%", flexDirection : "row", justifyContent : "space-between", alignItems : "center"}}>
-                    <Link href={"/main"} asChild>
+                    <Link href={"/(tabs)/home"} asChild>
                     <Pressable>
                     <Text style={{fontSize : 20, fontWeight : "bold"}}> Back </Text>
                     </Pressable>
