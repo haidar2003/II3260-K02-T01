@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     borderRadius: 16,
-    width: 320,
+    width: screenWidth * (320/360),
     borderWidth: 2.5,
     backgroundColor: 'white',
     padding: 0,

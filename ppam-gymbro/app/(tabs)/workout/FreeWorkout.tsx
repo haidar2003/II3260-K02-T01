@@ -3,29 +3,130 @@ import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensi
 import CustomBox from '@/screen/workout_component/CustomBox';
 import { Link } from 'expo-router';
 import { Image } from 'expo-image';
+import { Circle } from 'react-native-progress';
 
+const screenWidth = Dimensions.get('window').width;
+
+function WorkoutCategory() {
+  return (
+    <View style={{width: screenWidth * (325/360), flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+      <View style={{
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 25
+      }}>
+        <View style={styles.categoryContainer}>
+          <View style={styles.circle}>
+
+          </View>
+          <Text style={styles.smallText}>
+            Full Body
+          </Text>
+        </View>
+        <View style={styles.categoryContainer}>
+          <View style={styles.circle}>
+
+          </View>
+          <Text style={styles.smallText}>
+            Weight
+          </Text>
+        </View>
+      </View>
+      <View style={{
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 25
+      }}>
+        <View style={styles.categoryContainer}>
+          <View style={styles.circle}>
+
+          </View>
+          <Text style={styles.smallText}>
+            Upper Body
+          </Text>
+        </View>
+        <View style={styles.categoryContainer}>
+          <View style={styles.circle}>
+
+          </View>
+          <Text style={styles.smallText}>
+            Yoga
+          </Text>
+        </View>
+      </View>
+      <View style={{
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 25
+      }}>
+        <View style={styles.categoryContainer}>
+          <View style={styles.circle}>
+
+          </View>
+          <Text style={styles.smallText}>
+            Lower Body
+          </Text>
+        </View>
+        <View style={styles.categoryContainer}>
+          <View style={styles.circle}>
+
+          </View>
+          <Text style={styles.smallText}>
+            Running
+          </Text>
+        </View>
+      </View>
+      <View style={{
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 25
+      }}>
+        <View style={styles.categoryContainer}>
+          <View style={styles.circle}>
+
+          </View>
+          <Text style={styles.smallText}>
+            Core
+          </Text>
+        </View>
+        <View style={styles.categoryContainer}>
+          <View style={styles.circle}>
+
+          </View>
+          <Text style={styles.smallText}>
+            Rucking
+          </Text>
+        </View>
+      </View>
+    </View>
+  );
+}
 
 export default function FreeWorkout() {
     const userWorkout = [
-        {id : "1" , category: 'core', name : "Core A", difficulty: 'easy', type: 'free'} ,
-        {id : "2" , category: 'core', name : "Core B", difficulty: 'easy', type: 'free'} ,
-        {id : "3" , category: 'core', name : "Core C", difficulty: 'easy', type: 'free'} ,
-        {id : "4" , category: 'core', name : "Core D", difficulty: 'easy', type: 'free'} ,
+        {id : "1" , category: 'core', name : "Core A", difficulty: 'Beginner', type: 'free'} ,
+        {id : "2" , category: 'core', name : "Core B", difficulty: 'Beginner', type: 'free'} ,
+        {id : "3" , category: 'core', name : "Core C", difficulty: 'Beginner', type: 'free'} ,
+        {id : "4" , category: 'core', name : "Core D", difficulty: 'Beginner', type: 'free'} ,
       ]
 
   const renderWorkout = ({ item }) => {
     
       return (
         <View style = {{padding : 5}}>
-          <CustomBox name={item.name} difficulty={item.difficulty} location='main-workout'/>
+          <CustomBox name={item.name} difficulty={item.difficulty} location='free-menu'/>
         </View>
       )
   };
 
   return (
     <View style={styles.layout}>
-      <View style = {styles.topBar}>
-          {/* Yang atas */}
+      {/* <View style = {styles.topBar}>
+          Yang atas
           
           <View style = {{flex : 1, justifyContent : "flex-start",flexDirection : "row", alignItems : "center", width : "100%", padding : 15}}>
             <Link href="/(tabs)/workout" asChild>
@@ -37,13 +138,28 @@ export default function FreeWorkout() {
             <Text style = {{fontSize : 24, fontWeight : "bold"}}>Free Plan</Text>
             <View style = {{flex : 1.2}} />
           </View>
-          {/* <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
-          </View> */}
-      </View>
+          <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
+          </View>
+      </View> */}
 
       <ScrollView style = {{flex : 1}}>
-        <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center"}} >
-          <Text style = {{fontSize : 20, fontWeight : "bold"}}> Tailored Plan</Text>
+        <View style={{ marginTop: screenWidth * (35/360), paddingVertical: screenWidth * (20/360), paddingHorizontal: screenWidth * (10/360), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+          <Link href="/(tabs)/workout" asChild>
+            <Pressable> 
+              <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
+              </View>
+            </Pressable>
+          </Link>
+          <View>
+            <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#444444' }}>
+              Free Plan
+            </Text>
+          </View>
+          <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360) }}/>
+        </View>
+        <WorkoutCategory />
+        <View style = {{ flexDirection : "row", justifyContent : "flex-start", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (15/360), marginBottom: screenWidth * (10/360),marginTop: screenWidth * (30/360)}} >
+          <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Active Plan</Text>
         </View>
         <ScrollView horizontal = {true}>
           <FlatList data={userWorkout}
@@ -296,7 +412,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
-
-
-
+  circle: {
+    width: 64,
+    height: 64,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FF7D40',
+    borderRadius: 64
+  },
+  smallText: {
+    fontSize: 12,
+    fontWeight: 'bold'
+  },
+  categoryContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 15
+  }
 });

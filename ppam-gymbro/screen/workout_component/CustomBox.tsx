@@ -80,7 +80,7 @@ const CustomBox: React.FC<CustomBoxProps> = ({ name, location, difficulty, isSel
     
           {/* Right Section with Text and Progress Bar */}
           <View style={styles.rightSection}>
-            <Text style={styles.text}>{name}</Text>
+            <Text style={[styles.text, {fontWeight: 'bold'}]}>{name}</Text>
             <View style={styles.difficultyContainer}>
               {difficulty && ( 
                 <Text style={styles.textSmall}>
@@ -90,7 +90,7 @@ const CustomBox: React.FC<CustomBoxProps> = ({ name, location, difficulty, isSel
                   {difficulty === 'Expert' && 4}
                 </Text>
               )}
-              <Text style={styles.textSmall}>Text 2</Text>
+              <Text style={styles.textSmall}>{difficulty}</Text>
             </View>
             {((location === 'trainer-menu') && isOver) ? 
             (<View style={styles.progressContainer}>
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     width: screenWidth * (320/360),
-    height: screenWidth * (100/360),
+    height: screenWidth * (110/360),
     borderRadius: 24,
     backgroundColor: '#FFEAD9'
 
@@ -265,12 +265,14 @@ const styles = StyleSheet.create({
   topContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     height: screenWidth * (80/360),
-    width: screenWidth * (280/360)
+    width: screenWidth * (280/360),
+    gap: 25,
   },
 
   continueWorkout: {
-    marginTop: 15,
+    marginTop: 10,
     width: screenWidth * (280/360),
     height: screenWidth * (60/360),
     flexDirection: 'row',
@@ -288,26 +290,23 @@ const styles = StyleSheet.create({
   },
 
   leftSection: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   rightSection: {
-    flex: 2,
-    justifyContent: 'space-between', 
-    padding: 10,
+    justifyContent: 'center',
+    gap: 10
   },
   text: {
     fontSize: 16,
   },
   textSmall: {
     fontSize: 12,
-    marginLeft: 10
   },
   difficultyContainer: {
     flexDirection: 'row', 
-    alignItems: 'center', 
-    marginVertical: 8,
+    alignItems: 'center',
+    gap: 5
     
   },
   circle: {
@@ -315,11 +314,11 @@ const styles = StyleSheet.create({
     height: 62,
     borderRadius: 36, 
     backgroundColor: '#FF7D40',
-    margin: 22,
   },
   progressContainer: {
     flexDirection: 'row', 
     alignItems: 'center', 
+    gap: 12
   },
 });
 

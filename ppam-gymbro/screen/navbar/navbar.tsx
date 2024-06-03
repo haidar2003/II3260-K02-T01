@@ -44,6 +44,7 @@ export default function NavBar() {
             <Tabs.Screen
             name='workout'
             options={{
+                headerShown: false,
                 href : "/workout",
                 tabBarIcon : ({color}) => (
                     <FontAwesomeIcon icon={faBolt} style={{color : color, width : 24, height : 24} as any}/>
