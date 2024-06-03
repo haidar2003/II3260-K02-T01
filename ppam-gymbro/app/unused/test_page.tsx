@@ -15,7 +15,8 @@ import ReserveTrainerCart from '@/screen/find_trainer_component/ReserveTrainerCa
 import ReserveTrainerCheckout from '@/screen/find_trainer_component/ReserveTrainerCheckout';
 import TrainerProfile from '@/screen/find_trainer_component/TrainerProfile';
 import Navbar from '@/screen/home_component/Navbar';
-import Room from '@/screen/navbar/Room';
+
+
 
 const data = [
   {id : "1" , name : "Black Sheep", rating : 5 , pricee : 25500} ,
@@ -35,8 +36,6 @@ export default function HomeScreen() {
     <View style = {styles.layout}>
     <ScrollView contentContainerStyle={styles.content_layout}>
       <View></View>
-      <Room isSelected={false} roomName='Test Unselected' roomCapacity={10}/>
-      <Room isSelected={true} roomName='Test Selected' roomCapacity={10}/>
       <Navbar location='home'/>
       <Navbar location='trainer-search'/>
       <Navbar location='trainer-select'/>

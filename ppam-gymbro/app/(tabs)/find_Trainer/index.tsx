@@ -1,35 +1,52 @@
 import { StyleSheet, Text, TextInput, View, Image, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import {useEffect, useState} from 'react';
 import RowComp from '@/screen/find_trainer_component/row_comp';
 import Filter from '@/screen/find_trainer_component/Filter';
 import {numberToRupiah} from "@/utils/formatting"
 import {Tag, Tag_status} from "@/utils/tag"
+import LoadingScreen from '@/screen/loading_screen/loadingScreen';
+import { supabase } from '@/utils/supabase';
 export default function Find_Trainer() {
-  const referenceTags = [
-    {id : 1, name : "Calisthenic"},
-    {id : 2, name : "Yoga"},
-    {id : 3, name : "Running"},
-    {id : 4, name : "Jogging"},
-    {id : 5, name : "Swimming"},
-    {id : 6, name : "Upper Body"},
-    {id : 7, name : "Lower Body"},
-    {id : 8, name : "Full Body"},
-    {id : 9, name : "Weight Training"},
-    {id : 10, name : "Rucking"}
-  ]
-  const dataTags:Tag_status[] = referenceTags.map(item => ({
-    ...item,
-    active:false
-  }))
-
+  const [isloading, setLoading] = useState(true)
+  const [referenceTags, setReferenceTags] = useState([])
+  const [dataTrainer, setDataTrainer] = useState([])
   const [minPrice, setMinPrice] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(1000000);
-  const [tags, setTags] = useState<Tag_status[]>(dataTags); 
+  const [tags, setTags] = useState<Tag_status[]>([]); 
   const [location, setLocation] = useState<string>("");
   const [online, setOnline] = useState<boolean>(true);
   const [offline, setOffline] = useState<boolean>(true);
   const [stateScreen, setStateScreen] = useState<number>(0);
   const [rating, setRating] = useState<number>(0);
+  const fetchInitialData = async () => {
+    try {
+      const {data: fetchTagData, error : errorTag} = await supabase.from("Tag").select("*");
+      const {data : fetchTrainerData, error :  errorTrainer} = await supabase.from("Trainer").select("*")
+        if (errorTag){
+          console.error("error, fetching tag", errorTag)
+        } else {
+          setReferenceTags(fetchTagData)
+          setDataTrainer(fetchTrainerData)
+       }
+     }   finally { 
+        setLoading(false)
+        const dataTags:Tag_status[] = referenceTags.map(item => ({
+          ...item,
+          active:false
+        }))
+        setTags(dataTags)
+    }
+  }
+  useEffect( () => {fetchInitialData()}, [])
+
+  if (isloading) {
+    return <LoadingScreen/>
+  }
+
+
+
+
+  
   
   const toggleTags = (id : number) => {
     setTags((prevItems) => {
@@ -45,14 +62,7 @@ export default function Find_Trainer() {
 
 
 
-  const dataTrainer = [
-    {id : "1" , name : "Black Sheep", rating : 5 , pricee : 25500} ,
-    {id : "2" , name : "White Sheep", rating : 4 , pricee : 20000} ,
-    {id : "3" , name : "Red Sheep", rating : 3 , pricee : 100000} ,
-    {id : "4" , name : "Blue Sheep", rating : 3 , pricee : 350000} ,
-    {id : "5" , name : "Orange Sheep", rating : 3 , pricee : 350000} ,
-    {id : "6" , name : "Pink Sheep", rating : 3 , pricee : 350000} 
-  ]
+
 
   const renderTrainer = ({ item }) => (
     <View style = {{padding : 10}}>
