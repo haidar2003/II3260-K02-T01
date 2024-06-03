@@ -1,10 +1,13 @@
-import { StyleSheet, View, Animated, Image } from 'react-native';
+import { StyleSheet, View, Animated, Image, Dimensions } from 'react-native';
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { Tabs, Redirect, Link, router, useNavigation } from "expo-router";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import {faHome, faUsers, faBolt, faMessage, faSearch} from '@fortawesome/free-solid-svg-icons'
+
+const { width, height } = Dimensions.get('window');
+
 export default function NavBar() {
-    
+
     return (
         <Tabs 
         initialRouteName='home'
