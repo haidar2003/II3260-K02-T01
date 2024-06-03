@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CheckBox } from 'react-native-btr';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import * as Progress from 'react-native-progress';
 
 interface TrainingPlanProps {
@@ -8,10 +8,12 @@ interface TrainingPlanProps {
   price?: number;
 }
 
+const screenWidth = Dimensions.get('window').width;
+
 const TrainingPlan: React.FC<TrainingPlanProps> = ({ type, price }) => {
   return (
     <View style={styles.mainContainer}>
-      <View style={{ width: 308, height: 45, borderTopLeftRadius: 13, borderTopRightRadius: 13, backgroundColor: "#FF7D40", margin: 0, justifyContent: 'center', paddingLeft: 20 }}>
+      <View style={{ width: screenWidth * (308/360), height: screenWidth * (45/360), borderTopLeftRadius: 13, borderTopRightRadius: 13, backgroundColor: "#FF7D40", margin: 0, justifyContent: 'center', paddingLeft: 20 }}>
         <Text style={{ fontSize: 16, color: '#FEFEFE', fontWeight: 'bold' }}>{type} Training Plan</Text>
       </View>
       <Text style={{marginLeft: 20, marginTop: 12}}>
@@ -28,8 +30,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     borderRadius: 16,
-    width: 310,
-    height: 100,
+    width: screenWidth * (310/360),
+    height: screenWidth * (100/360),
     borderWidth: 2,
     borderColor: "#FF7D40",
     backgroundColor: 'white',

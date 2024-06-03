@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { CheckBox } from 'react-native-btr';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import * as Progress from 'react-native-progress';
 
+const screenWidth = Dimensions.get('window').width;
 
 interface UserReviewProps {
     username?: string,
@@ -35,8 +36,8 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
         borderRadius: 16,
-        width: 220,
-        height: 310,
+        width: screenWidth * (220/360),
+        height: screenWidth * (310/360),
         backgroundColor: 'white',
         padding: 15
     },

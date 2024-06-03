@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CheckBox } from 'react-native-btr';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import * as Progress from 'react-native-progress';
 
 interface ReserveTrainerPlanProps {
@@ -9,6 +9,8 @@ interface ReserveTrainerPlanProps {
   unitPrice?: number;
   isAdded?: boolean;
 }
+
+const screenWidth = Dimensions.get('window').width;
 
 const ReserveTrainerPlan: React.FC<ReserveTrainerPlanProps> = ({ isAdded, bundle, type, unitPrice }) => {
     const [isAdding, setIsAdding] = useState(isAdded);
@@ -50,7 +52,7 @@ const ReserveTrainerPlan: React.FC<ReserveTrainerPlanProps> = ({ isAdded, bundle
         <View style={{margin: 8}}>
             <Text style={{ fontSize: 20, color: fontColor, fontWeight: 'bold' }}>{bundle}x</Text>
             <Text style={{ fontSize: 16, color: fontColor }}>{type} Sessions</Text>
-            <View style={{ marginVertical: 5, width: 140, height: 1, backgroundColor: color}}></View>
+            <View style={{ marginVertical: 5, width: screenWidth * (140/360), height: 1, backgroundColor: color}}></View>
             <Text style={{ fontSize: 16, color: fontColor, fontWeight: 'bold' }}>Rp{finalPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}</Text>
         </View>
         {(discount != 0) && (
@@ -72,8 +74,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     borderRadius: 16,
-    width: 160,
-    height: 200,
+    width: screenWidth * (160/360),
+    height: screenWidth * (200/360),
     borderWidth: 2.5,
     backgroundColor: 'white',
     padding: 0,
@@ -83,8 +85,8 @@ const styles = StyleSheet.create({
     height: 0,
     backgroundColor: "transparent",
     borderStyle: "solid",
-    borderRightWidth: 80,
-    borderTopWidth: 80,
+    borderRightWidth: screenWidth * (80/360),
+    borderTopWidth: screenWidth * (80/360),
     borderTopLeftRadius: 12,
     borderRightColor: "transparent",
     transform: [{ rotate: "270deg" }]
