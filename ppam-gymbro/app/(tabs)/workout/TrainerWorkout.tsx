@@ -3,35 +3,46 @@ import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensi
 import CustomBox from '@/screen/workout_component/CustomBox';
 import { Link } from 'expo-router';
 import { Image } from 'expo-image';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
+const screenWidth = Dimensions.get('window').width;
 
 export default function TrainerWorkout() {
     const trainerWorkout = [
-        {id : "1" , category: 'core', name : "Core Plan 1", difficulty: 'easy', type: 'trainer'} ,
-        {id : "2" , category: 'core', name : "Core Plan 2", difficulty: 'easy', type: 'trainer'} ,
-        {id : "3" , category: 'core', name : "Core Plan 3", difficulty: 'easy', type: 'trainer'} ,
-        {id : "4" , category: 'core', name : "Core Plan 4", difficulty: 'easy', type: 'trainer'} ,
+        {id : "1" , category: 'core', name : "Core Plan 1", difficulty: 'Beginner', type: 'trainer'} ,
+        {id : "2" , category: 'core', name : "Core Plan 2", difficulty: 'Beginner', type: 'trainer'} ,
+        {id : "3" , category: 'core', name : "Core Plan 3", difficulty: 'Beginner', type: 'trainer'} ,
+        {id : "4" , category: 'core', name : "Core Plan 4", difficulty: 'Beginner', type: 'trainer'} ,
       ]
 
     const finishedWorkout = [
-        {id : "5" , category: 'core', name : "Core Plan 5", difficulty: 'easy', type: 'trainer'} ,
-        {id : "6" , category: 'core', name : "Core Plan 6", difficulty: 'easy', type: 'trainer'} ,
-        {id : "7" , category: 'core', name : "Core Plan 7", difficulty: 'easy', type: 'trainer'} ,
-        {id : "8" , category: 'core', name : "Core Plan 8", difficulty: 'easy', type: 'trainer'} ,
+        {id : "5" , category: 'core', name : "Core Plan 5", difficulty: 'Beginner', type: 'trainer'} ,
+        {id : "6" , category: 'core', name : "Core Plan 6", difficulty: 'Beginner', type: 'trainer'} ,
+        {id : "7" , category: 'core', name : "Core Plan 7", difficulty: 'Beginner', type: 'trainer'} ,
+        {id : "8" , category: 'core', name : "Core Plan 8", difficulty: 'Beginner', type: 'trainer'} ,
       ]
-  const renderWorkout = ({ item }) => {
+  const renderWorkoutActive = ({ item }) => {
     
       return (
         <View style = {{padding : 5}}>
-          <CustomBox name={item.name} difficulty={item.difficulty} location='main-workout'/>
+          <CustomBox name={item.name} difficulty={item.difficulty} location='trainer-menu'/>
         </View>
       )
   };
 
+  const renderWorkoutFinished = ({ item }) => {
+    
+    return (
+      <View style = {{padding : 5}}>
+        <CustomBox name={item.name} difficulty={item.difficulty} isOver={true} location='trainer-menu'/>
+      </View>
+    )
+};
+
   return (
     <View style={styles.layout}>
-      <View style = {styles.topBar}>
-          {/* Yang atas */}
+      {/* <View style = {styles.topBar}>
+          Yang atas
           
           <View style = {{flex : 1, justifyContent : "flex-start",flexDirection : "row", alignItems : "center", width : "100%", padding : 15}}>
             <Link href="/(tabs)/workout" asChild>
@@ -43,26 +54,40 @@ export default function TrainerWorkout() {
             <Text style = {{fontSize : 24, fontWeight : "bold"}}>Trainer Plan</Text>
             <View style = {{flex : 1.2}} />
           </View>
-          {/* <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
-          </View> */}
-      </View>
+          <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
+          </View>
+      </View> */}
 
       <ScrollView style = {{flex : 1}}>
-        <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center"}} >
-          <Text style = {{fontSize : 20, fontWeight : "bold"}}> Active Plan</Text>
+        <View style={{ marginTop: screenWidth * (35/360), paddingVertical: screenWidth * (20/360), paddingHorizontal: screenWidth * (10/360), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+          <Link href="/(tabs)/workout" asChild>
+            <Pressable> 
+              <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
+              </View>
+            </Pressable>
+          </Link>
+          <View>
+            <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#444444' }}>
+              Trainer Plan
+            </Text>
+          </View>
+          <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360) }}/>
+        </View>
+        <View style = {{ flexDirection : "row", justifyContent : "flex-start", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (15/360), marginBottom: screenWidth * (10/360)}} >
+          <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Active Plan</Text>
         </View>
         <ScrollView horizontal = {true}>
           <FlatList data={trainerWorkout}
-          renderItem={renderWorkout}
+          renderItem={renderWorkoutActive}
           keyExtractor={item => item.id}
           style = {{maxWidth : "100%"}} />
         </ScrollView>
-        <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center"}} >
-          <Text style = {{fontSize : 20, fontWeight : "bold"}}> Finished Plan</Text>
+        <View style = {{ flexDirection : "row", justifyContent : "flex-start", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (15/360), marginBottom: screenWidth * (10/360), marginTop: screenWidth * (20/360)}} >
+          <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Finished Plan</Text>
         </View>
         <ScrollView horizontal = {true}>
           <FlatList data={finishedWorkout}
-          renderItem={renderWorkout}
+          renderItem={renderWorkoutFinished}
           keyExtractor={item => item.id}
           style = {{maxWidth : "100%"}} />
         </ScrollView>

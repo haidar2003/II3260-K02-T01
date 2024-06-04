@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { CheckBox } from 'react-native-btr';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import * as Progress from 'react-native-progress';
-
 
 interface ExcerciseProps {
     sets?: number;
@@ -11,6 +10,8 @@ interface ExcerciseProps {
     number?: number;
     isChecked?: boolean;
   }
+
+const screenWidth = Dimensions.get('window').width;
   
   const Excercise: React.FC<ExcerciseProps> = ({ sets, reps, name, isChecked, number }) => {
     const [isSelected, setSelection] = useState(isChecked);
@@ -48,21 +49,21 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        width: 360,
-        height: 60,
+        width: screenWidth,
+        height: screenWidth * (60/360),
         paddingHorizontal: 30
     },
     mainContainer: {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        width: 360,
-        height: 62,
+        width: screenWidth,
+        height: screenWidth * (62/360),
         backgroundColor: 'white'
 
     },
     divider: {
-        width: 340,
+        width: screenWidth * (340/360),
         height: 1,
         borderRadius: 20,
         backgroundColor: '#E1E1E1'

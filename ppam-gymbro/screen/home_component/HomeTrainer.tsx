@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, TouchableOpacity, Dimensions } from 'react-native';
 
-const { width: screenWidth } = Dimensions.get('window');
+const screenWidth = Dimensions.get('window').width;
 
 interface HomeTrainerProps {
     trainerName?: string,
@@ -22,10 +22,10 @@ const HomeTrainer: React.FC<HomeTrainerProps> = ({ trainerName, sessions }) => {
             </View>
         </View>
         <View style={styles.buttonContainer}>
-            <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FEFEFE', backgroundColor: '#FEFEFE', height: 40, width: 140, borderRadius: 16, justifyContent: 'center' , alignItems: 'center'}}>
+            <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FEFEFE', backgroundColor: '#FEFEFE', height: screenWidth * (40/360), width: screenWidth * (140/360), borderRadius: 16, justifyContent: 'center' , alignItems: 'center'}}>
                 <Text style={{color: '#444444', fontWeight: 'bold'}}>Message</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FEFEFE', backgroundColor: '#FEFEFE', height: 40, width: 140, borderRadius: 16, justifyContent: 'center' , alignItems: 'center'}}>
+            <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FEFEFE', backgroundColor: '#FEFEFE', height: screenWidth * (40/360), width: screenWidth * (140/360), borderRadius: 16, justifyContent: 'center' , alignItems: 'center'}}>
                 <Text style={{color: '#444444', fontWeight: 'bold'}}>Switch</Text>
             </TouchableOpacity>
         </View>
@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
         gap: 15,
-        width: 320,
-        height: 180,
+        width: screenWidth * (320/360),
+        height: screenWidth * (180/360),
         borderRadius: 24,
         backgroundColor: '#FF7D40'
       },

@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform } from 'react-native';
-import { Link } from 'expo-router';
+import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform , TouchableOpacity} from 'react-native';
+import { Link, router } from 'expo-router';
 import { Image } from 'expo-image';
+import { useRegister } from '@/provider/RegisterProvider';
 
 const password_states = {
   EMPTY: "EMPTY",
@@ -11,10 +12,15 @@ const password_states = {
 
 
 export default function register_password() {
-  const [password, setPassword] = React.useState("")
+  const [password, setInputPassword] = React.useState("")
   const [confirmPassword, setConfirmPassword] = React.useState("")
   const [passwordState, setPasswordState] = React.useState(password_states.EMPTY)
+  const {register, setUsernameAndEmail, setPassword} = useRegister();
 
+  const handlePress = () => {
+    setPassword(password)
+    router.navigate('./registerFullName')
+  }
   // Password bisa kosong, tidak matching, atau matching
   useEffect(() => {
     if (!password || !confirmPassword){
@@ -42,7 +48,7 @@ export default function register_password() {
               placeholder="Password"
               secureTextEntry = {true}
               value={password}
-              onChangeText={setPassword}
+              onChangeText={setInputPassword}
             />
 
             <TextInput
@@ -76,9 +82,9 @@ export default function register_password() {
               </View>
             }
             {passwordState === password_states.MATCHING && 
-              <Link href="../login/" style={styles.WhiteButton}>
+              <TouchableOpacity onPress={handlePress} style={styles.WhiteButton}>
                 <Text style={styles.buttonText}>Register</Text>
-              </Link>
+              </TouchableOpacity>
             }
           </View>
         

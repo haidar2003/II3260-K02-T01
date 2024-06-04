@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import * as Progress from 'react-native-progress';
 
+const screenWidth = Dimensions.get('window').width;
 
 interface ExcerciseDayProps {
     day?: string;
@@ -31,7 +32,7 @@ interface ExcerciseDayProps {
             <Text style={{color: fontColor, fontWeight: fontStyle}} >Day {day}</Text>
             <View style={{flexDirection: 'row', justifyContent: 'flex-end', alignItems:'center'}}>
                 <View>
-                    <Progress.Bar borderWidth={0} unfilledColor='#FDE4D3' progress={progress/100} width={140} color='#FF7D40'/>
+                    <Progress.Bar borderWidth={0} unfilledColor='#FDE4D3' progress={progress/100} width={screenWidth * (140/360)} color='#FF7D40'/>
                 </View>
                 { (progress === 100) ? (
                     <View style={styles.circle}>
@@ -54,16 +55,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        width: 360,
-        height: 60,
+        width: screenWidth,
+        height: screenWidth * (60/360),
         paddingHorizontal: 30
     },
     mainContainer: {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        width: 360,
-        height: 62,
+        width: screenWidth,
+        height: screenWidth * (62/360),
         backgroundColor: 'white'
 
     },
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FF7D40',
     },
     divider: {
-        width: 340,
+        width: screenWidth * (340/360),
         height: 1,
         borderRadius: 20,
         backgroundColor: '#E1E1E1'

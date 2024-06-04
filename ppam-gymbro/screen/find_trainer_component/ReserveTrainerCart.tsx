@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CheckBox } from 'react-native-btr';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import * as Progress from 'react-native-progress';
 
 interface ReserveTrainerCartProps {
@@ -10,6 +10,8 @@ interface ReserveTrainerCartProps {
   onlineUnitPrice?: number;
   trainerName?: string;
 }
+
+const screenWidth = Dimensions.get('window').width;
 
 const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({ onlineBundle, offlineBundle, offlineUnitPrice, onlineUnitPrice, trainerName }) => {
     const [onlineSelected, setOnlineSelected] = useState(true);
@@ -63,9 +65,9 @@ const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({ onlineBundle, o
         {(onlineBundle || offlineBundle) && (
             <View style={[styles.mainContainer, {height: containerHeight}]}>
                 <Text style={{marginHorizontal: 20, marginVertical: 13, fontWeight: 'bold', fontSize: 16}}>{trainerName}</Text>
-                <View style={{marginBottom: 10, marginHorizontal: 8, backgroundColor: '#E1E1E1', width: 300, height: 2, borderRadius: 16}}></View>
+                <View style={{marginBottom: 10, marginHorizontal: 8, backgroundColor: '#E1E1E1', width: screenWidth * (300/360), height: 2, borderRadius: 16}}></View>
                 {onlineBundle && (
-                    <View style={{marginBottom: 10, marginHorizontal: 15,width: 280, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between'}}>
+                    <View style={{marginBottom: 10, marginHorizontal: 15,width: screenWidth * (280/360), flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between'}}>
                         <View style={{gap: 15, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                             <TouchableOpacity onPress={handlePressOnline} style={{ width: 20, height: 20, borderRadius: 4, justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
                                 {onlineSelected ? (
@@ -85,7 +87,7 @@ const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({ onlineBundle, o
                     </View>
                 )}
                 {offlineBundle && (
-                    <View style={{marginHorizontal: 15,width: 280, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between'}}>
+                    <View style={{marginHorizontal: 15,width: screenWidth * (280/360), flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between'}}>
                         <View style={{gap: 15, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                             <TouchableOpacity onPress={handlePressOffline} style={{ width: 20, height: 20, borderRadius: 4, justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
                                 {offlineSelected ? (
@@ -116,7 +118,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     borderRadius: 16,
-    width: 320,
+    width: screenWidth * (320/360),
     borderWidth: 2.5,
     backgroundColor: 'white',
     padding: 0,

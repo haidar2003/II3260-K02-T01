@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableOpacity, Dimensions } from 'react-native';
 import * as Progress from 'react-native-progress';
 
-
 interface CustomBoxProps {
-    difficulty?: 'easy' | 'medium' | 'hard' | 'expert'; 
+    difficulty?: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
     type?: 'free-plan' | 'trainer-plan';
     location?: 'main-home' | 'main-workout' | 'trainer-menu' | 'free-menu' | 'free-menu-selection';
     isOver?: boolean;
     isSelected?: boolean;
     isAdded?: boolean;
     name?: string;
-  }
+}
+
+const screenWidth = Dimensions.get('window').width;
   
-  const CustomBox: React.FC<CustomBoxProps> = ({ name, location, difficulty, isSelected, isOver, isAdded}) => {
+const CustomBox: React.FC<CustomBoxProps> = ({ name, location, difficulty, isSelected, isOver, isAdded}) => {
     const [isAdding, setIsAdding] = useState(isAdded);
     
     // Style
@@ -79,17 +80,17 @@ interface CustomBoxProps {
     
           {/* Right Section with Text and Progress Bar */}
           <View style={styles.rightSection}>
-            <Text style={styles.text}>{name}</Text>
+            <Text style={[styles.text, {fontWeight: 'bold'}]}>{name}</Text>
             <View style={styles.difficultyContainer}>
               {difficulty && ( 
                 <Text style={styles.textSmall}>
-                  {difficulty === 'easy' && 1}
-                  {difficulty === 'medium' && 2}
-                  {difficulty === 'hard' && 3}
-                  {difficulty === 'expert' && 4}
+                  {difficulty === 'Beginner' && 1}
+                  {difficulty === 'Intermediate' && 2}
+                  {difficulty === 'Advanced' && 3}
+                  {difficulty === 'Expert' && 4}
                 </Text>
               )}
-              <Text style={styles.textSmall}>Text 2</Text>
+              <Text style={styles.textSmall}>{difficulty}</Text>
             </View>
             {((location === 'trainer-menu') && isOver) ? 
             (<View style={styles.progressContainer}>
@@ -98,7 +99,7 @@ interface CustomBoxProps {
             </View>) : 
             // Line 92
             (<View style={styles.progressContainer}> 
-              <Progress.Bar borderWidth={0} unfilledColor='#FDE4D3' progress={0.3} width={140} color='#FF7D40'/>
+              <Progress.Bar borderWidth={0} unfilledColor='#FDE4D3' progress={0.3} width={screenWidth * (140/360)} color='#FF7D40'/>
               {(100 === 100) ? 
               (<Text style={{fontSize: 12, marginLeft: 18, marginBottom: 5 }}>{Math.round(30)}%</Text>) : 
               (<Text style={styles.textSmall}>Finished</Text>)}
@@ -121,20 +122,20 @@ interface CustomBoxProps {
           <View>
             {location === 'free-menu' && (
               <View style={styles.buttonsContainer}>
-                <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: '#FF7D40', height: 40, width: 135, borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
+                <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: '#FF7D40', height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
                   <Text style={{color: '#FEFEFE', fontWeight: 'bold'}}>Remove</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: '#FF7D40', height: 40, width: 135, borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
+                <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: '#FF7D40', height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
                   <Text style={{color: '#FEFEFE', fontWeight: 'bold'}}>Continue</Text>
                 </TouchableOpacity>
               </View>
             )}
             {location === 'free-menu-selection' && (
               <View style={styles.buttonsContainer}>
-                <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: buttonColor, height: 40, width: 135, borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
+                <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: buttonColor, height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
                   {isAdding ? (<Text style={{color: '#FEFEFE', fontWeight: 'bold'}}>Remove</Text>) : (<Text style={{color: '#FF7D40', fontWeight: 'bold'}}>Add</Text>)}
                 </TouchableOpacity>
-                <TouchableOpacity style={{ height: 40, width: 135, borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
+                <TouchableOpacity style={{ height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
                   <Text style={{color: '#FF7D40', fontWeight: 'bold'}}>See Details</Text>
                 </TouchableOpacity>
               </View>
@@ -151,8 +152,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: 320,
-    height: 185,
+    width: screenWidth * (320/360),
+    height: screenWidth * (185/360),
     borderRadius: 24,
     backgroundColor: '#FFEAD9'
 
@@ -162,8 +163,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: 320,
-    height: 110,
+    width: screenWidth * (320/360),
+    height: screenWidth * (110/360),
     borderRadius: 24,
     backgroundColor: '#FFEAD9'
 
@@ -173,8 +174,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: 320,
-    height: 110,
+    width: screenWidth * (320/360),
+    height: screenWidth * (110/360),
     borderRadius: 24,
     backgroundColor: '#FFEAD9'
 
@@ -184,8 +185,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: 320,
-    height: 110,
+    width: screenWidth * (320/360),
+    height: screenWidth * (110/360),
     borderRadius: 24,
     backgroundColor: '#EEEEEE'
 
@@ -195,8 +196,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: 320,
-    height: 110,
+    width: screenWidth * (320/360),
+    height: screenWidth * (110/360),
     borderRadius: 24,
     backgroundColor: '#FFEAD9'
 
@@ -206,8 +207,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: 320,
-    height: 170,
+    width: screenWidth * (320/360),
+    height: screenWidth * (170/360),
     borderRadius: 24,
     backgroundColor: '#FFEAD9'
 
@@ -217,8 +218,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: 320,
-    height: 110,
+    width: screenWidth * (320/360),
+    height: screenWidth * (110/360),
     borderRadius: 24,
     borderWidth: 2.5,
     borderColor: '#E1E1E1',
@@ -230,8 +231,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: 320,
-    height: 110,
+    width: screenWidth * (320/360),
+    height: screenWidth * (110/360),
     borderRadius: 24,
     backgroundColor: '#FFEAD9'
 
@@ -241,8 +242,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: 320,
-    height: 170,
+    width: screenWidth * (320/360),
+    height: screenWidth * (170/360),
     borderRadius: 24,
     borderWidth: 2.5,
     borderColor: '#E1E1E1',
@@ -254,8 +255,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: 320,
-    height: 170,
+    width: screenWidth * (320/360),
+    height: screenWidth * (170/360),
     borderRadius: 24,
     backgroundColor: '#FFEAD9'
 
@@ -264,14 +265,16 @@ const styles = StyleSheet.create({
   topContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 80,
-    width: 280
+    justifyContent: 'flex-start',
+    height: screenWidth * (80/360),
+    width: screenWidth * (280/360),
+    gap: 25,
   },
 
   continueWorkout: {
-    marginTop: 15,
-    width: 280,
-    height: 60,
+    marginTop: 10,
+    width: screenWidth * (280/360),
+    height: screenWidth * (60/360),
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#FEFEFE',
@@ -280,33 +283,30 @@ const styles = StyleSheet.create({
   
   buttonsContainer: {
     marginTop: 15,
-    width: 280,
+    width: screenWidth * (280/360),
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center'
   },
 
   leftSection: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   rightSection: {
-    flex: 2,
-    justifyContent: 'space-between', 
-    padding: 10,
+    justifyContent: 'center',
+    gap: 10
   },
   text: {
     fontSize: 16,
   },
   textSmall: {
     fontSize: 12,
-    marginLeft: 10
   },
   difficultyContainer: {
     flexDirection: 'row', 
-    alignItems: 'center', 
-    marginVertical: 8,
+    alignItems: 'center',
+    gap: 5
     
   },
   circle: {
@@ -314,11 +314,11 @@ const styles = StyleSheet.create({
     height: 62,
     borderRadius: 36, 
     backgroundColor: '#FF7D40',
-    margin: 22,
   },
   progressContainer: {
     flexDirection: 'row', 
     alignItems: 'center', 
+    gap: 12
   },
 });
 

@@ -4,22 +4,23 @@ import CustomBox from '@/screen/workout_component/CustomBox';
 import { Link } from 'expo-router';
 import { Image } from 'expo-image';
 
+const screenWidth = Dimensions.get('window').width;
 
 export default function MainWorkout() {
   const trainerWorkout = [
-    {id : "1" , category: 'core', name : "Core Plan 1", difficulty: 'easy', type: 'trainer'} ,
-    {id : "2" , category: 'core', name : "Core Plan 2", difficulty: 'easy', type: 'trainer'} ,
-    {id : "3" , category: 'core', name : "Core Plan 3", difficulty: 'easy', type: 'trainer'} ,
+    {id : "1" , category: 'core', name : "Core Plan 1", difficulty: 'Beginner', type: 'trainer'} ,
+    {id : "2" , category: 'core', name : "Core Plan 2", difficulty: 'Beginner', type: 'trainer'} ,
+    {id : "3" , category: 'core', name : "Core Plan 3", difficulty: 'Beginner', type: 'trainer'} ,
   ]
   const userWorkout = [
-    {id : "1" , category: 'core', name : "Core A", difficulty: 'easy', type: 'free'} ,
-    {id : "2" , category: 'core', name : "Core B", difficulty: 'easy', type: 'free'} ,
-    {id : "3" , category: 'core', name : "Core C", difficulty: 'easy', type: 'free'} ,
+    {id : "1" , category: 'core', name : "Core A", difficulty: 'Beginner', type: 'free'} ,
+    {id : "2" , category: 'core', name : "Core B", difficulty: 'Beginner', type: 'free'} ,
+    {id : "3" , category: 'core', name : "Core C", difficulty: 'Beginner', type: 'free'} ,
   ]
   const renderWorkout = ({ item }) => {
     
       return (
-        <View style = {{padding : 5}}>
+        <View style = {{paddingVertical : screenWidth * (5/360)}}>
           <CustomBox name={item.name} difficulty={item.difficulty} location='main-workout'/>
         </View>
       )
@@ -27,22 +28,27 @@ export default function MainWorkout() {
 
   return (
     <View style={styles.layout}>
-      <View style = {styles.topBar}>
+      {/* <View style = {styles.topBar}> */}
           {/* Yang atas */}
           
-          <View style = {{flex : 1, justifyContent : "center", alignItems : "center"}}>
-            <Text style = {{fontSize : 24, fontWeight : "bold"}}>Workout Plan</Text>
-          </View>
+          {/* <View style = {{flex : 1, justifyContent : "center", alignItems : "center"}}> */}
+            {/* <Text style = {{fontSize : 24, fontWeight : "bold"}}>Workout Plan</Text> */}
+          {/* </View> */}
           {/* <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
           </View> */}
-      </View>
+      {/* </View> */}
 
       <ScrollView style = {{flex : 1}}>
-        <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center"}} >
-          <Text style = {{fontSize : 20, fontWeight : "bold"}}> Tailored Plan</Text>
+        <View style={{ marginTop: screenWidth * (35/360), paddingVertical: screenWidth * (35/360), justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#444444' }}>
+            Workout Plan
+          </Text>
+        </View>
+        <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (10/360), marginBottom: screenWidth * (10/360)}} >
+          <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Tailored Plan</Text>
           <Link href="/(tabs)/workout/TrainerWorkout/" asChild>
             <Pressable> 
-              <Text style = {{fontSize : 14, fontWeight:"300"}}>Browse All</Text>
+              <Text style = {{color: '#444444', fontSize : 16, fontWeight:"300"}}>Browse All</Text>
             </Pressable>
           </Link>
         </View>
@@ -52,11 +58,11 @@ export default function MainWorkout() {
           keyExtractor={item => item.id}
           style = {{maxWidth : "100%"}} />
         </ScrollView>
-        <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center"}} >
-          <Text style = {{fontSize : 20, fontWeight : "bold"}}> Free Plan</Text>
+        <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (10/360), marginBottom: screenWidth * (10/360), marginTop: screenWidth * (20/360)}} >
+          <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Free Plan</Text>
           <Link href="/(tabs)/workout/FreeWorkout/" asChild>
             <Pressable> 
-              <Text style = {{fontSize : 14, fontWeight:"300"}}>Browse All</Text>
+              <Text style = {{color: '#444444', fontSize : 16, fontWeight:"300"}}>Browse All</Text>
             </Pressable>
           </Link>
         </View>

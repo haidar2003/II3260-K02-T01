@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, Button, TouchableOpacity} from 'react-native';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { Image } from 'expo-image';
 import { Checkbox } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
-
+import { useRegister } from '@/provider/RegisterProvider';
+import { supabase } from '@/utils/supabase';
 
 export default function register_fullName() {
   // const [text, onChangeText] = React.useState('');
@@ -12,6 +13,7 @@ export default function register_fullName() {
   const [date, setDate] = React.useState(new Date()); // Default Date Value of Today
   const [showDatePicker, setShowDatePicker] = React.useState(false);
   const today = React.useState(new Date().getFullYear())
+  const {register, setUsernameAndEmail, setPassword} = useRegister();
 
   const onChange = (event, selectedDate) => {
     if (selectedDate){
@@ -23,6 +25,18 @@ export default function register_fullName() {
   const [fullName, setFullName] = React.useState("")
   const isButtonEnabled = fullName.length > 0
 
+  const handlePress = async () => {
+    console.log(register.password)
+    const { data, error } = await supabase.auth.signUp({
+      email: register.email,
+      password: register.password,
+    })
+    if (error) {
+      console.log(error)
+    } else {
+      router.replace("/(tabs)/home/") 
+    }
+  }
   return (
     <View style={styles.layout}>
       <ScrollView contentContainerStyle={styles.scrollLayout}>
@@ -74,7 +88,9 @@ export default function register_fullName() {
             <Text style={styles.subtext}>Already have an account? <Link href="../login/" style={styles.subtextBold}>Log In</Link></Text>
             {
               isButtonEnabled?(
-                <Link href="../login" style={styles.WhiteButton}><Text style={styles.buttonText}>Register</Text></Link>
+                <TouchableOpacity onPress={handlePress} style={styles.WhiteButton}>
+                  <Text style={styles.buttonText}>Register</Text>
+                </TouchableOpacity>
               ): (
                 <View style={styles.disabledWhiteButton}>
                   <Text style={styles.disabledButtonText}>Register</Text>

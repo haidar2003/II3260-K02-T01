@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CheckBox } from 'react-native-btr';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import * as Progress from 'react-native-progress';
 
 interface ReserveTrainerCheckoutProps {
@@ -10,6 +10,8 @@ interface ReserveTrainerCheckoutProps {
   onlineUnitPrice?: number;
   trainerName?: string;
 }
+
+const screenWidth = Dimensions.get('window').width;
 
 const ReserveTrainerCheckout: React.FC<ReserveTrainerCheckoutProps> = ({ onlineBundle, offlineBundle, offlineUnitPrice, onlineUnitPrice, trainerName }) => {
     const [onlineSelected, setOnlineSelected] = useState(true);
@@ -66,9 +68,9 @@ const ReserveTrainerCheckout: React.FC<ReserveTrainerCheckoutProps> = ({ onlineB
         {(onlineBundle || offlineBundle) && (
             <View style={[styles.mainContainer, {height: containerHeight}]}>
                 <Text style={{marginHorizontal: 20, marginVertical: 13, fontWeight: 'bold', fontSize: 16}}>{trainerName}</Text>
-                <View style={{marginBottom: 10, marginHorizontal: 8, backgroundColor: '#E1E1E1', width: 300, height: 2, borderRadius: 16}}></View>
+                <View style={{marginBottom: 10, marginHorizontal: 8, backgroundColor: '#E1E1E1', width: screenWidth * (300/360), height: 2, borderRadius: 16}}></View>
                 {onlineBundle && (
-                    <View style={{marginBottom: 10, marginHorizontal: 15,width: 280, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+                    <View style={{marginBottom: 10, marginHorizontal: 15,width: screenWidth * (280/360), flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                         <View style={{gap: 15, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                             <Text>1.</Text>
                             <View style={{flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 10 }}>
@@ -79,7 +81,7 @@ const ReserveTrainerCheckout: React.FC<ReserveTrainerCheckoutProps> = ({ onlineB
                     </View>
                 )}
                 {offlineBundle && (
-                    <View style={{marginHorizontal: 15,width: 280, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+                    <View style={{marginHorizontal: 15,width: screenWidth * (280/360), flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                         <View style={{gap: 15, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                             <Text>{twoItem ? '2.' : '1.'}</Text>
                             <View style={{flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 10 }}>
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     borderRadius: 16,
-    width: 320,
+    width: screenWidth * (320/360),
     borderWidth: 2.5,
     backgroundColor: 'white',
     padding: 0,
