@@ -33,8 +33,8 @@ export default function trainerProfile() {
         { reviewId: 3, userFullName: 'X', rating: 4, review: 'Lorem Ipsum Dolor Sit Amet Wakakakakakkakakakakak' },
       ],
       trainerPlan: [
-        { planType: 'Online', planUnitPrice: 50000 },
-        { planType: 'Offline', planUnitPrice: 80000 }
+        { planId: 1, planType: 'Online', planUnitPrice: 50000 },
+        { planId: 2, planType: 'Offline', planUnitPrice: 80000 }
       ],
       trainerDescription: 'Saya adalah seorang personal trainer dengan 5 tahun lebih pengalaman melatih binaragawan lokal di daerah Bandung.',
       trainerTags: ['tag 1', 'asdtag 2', 'taasdasdasdasg 3', 'taasdasdg 4', 'taasdg 4', 'tag 4', 'taasdasdasdasdg 4']
@@ -42,7 +42,7 @@ export default function trainerProfile() {
 
   const renderPlan = ({ item }) => {
       return (
-        <View style = {{margin : 0}}>
+        <View style = {{marginVertical : 10}}>
           <TrainerPlan planType={item.planType} planUnitPrice={item.planUnitPrice} />
         </View>
       )
@@ -134,9 +134,52 @@ export default function trainerProfile() {
              </View>
             )}
 
-           
+            {currentScreen === 'Pricing' && (
+              <View style={{ width: screenWidth * (310/360), flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', gap: 30 }}>
+               <View style={{ width: screenWidth * (310/360), flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 15 }}>
+                 <Text style={{ color: '#444444', fontSize: 20, fontWeight: 'bold' }}>
+                   {trainer.trainerName}'s Plan
+                 </Text>
+                 <ScrollView horizontal = {true}>
+                   <View style={{ width: screenWidth * (310/360), gap: 10 }}>
+                     <FlatList
+                       data={trainer.trainerPlan}
+                       renderItem={renderPlan}
+                       keyExtractor={item => item.planId}
+                       style = {{maxWidth : screenWidth * (310/360)}}
+                     />
+                   </View>
+                 </ScrollView>
+               </View>
+             </View>
+            )}
 
-          
+            {currentScreen === 'Review' && (
+              <View style={{ width: screenWidth * (310/360), flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', gap: 30 }}>
+               <View style={{ width: screenWidth * (310/360), flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 15 }}>
+                 <View style={{ width: screenWidth * (310/360), flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                  <Text style={{ color: '#444444', fontSize: 20, fontWeight: 'bold' }}>
+                    User Reviews
+                  </Text>
+                  <Text style={{ color: '#444444', fontSize: 16 }}>
+                    {trainer.trainerReview.length} Reviews
+                  </Text>
+                 </View>
+                 
+                 
+                 <ScrollView>
+                   <View style={{ flexDirection: 'row' }}>
+                     <FlatList
+                        horizontal={true}
+                        data={trainer.trainerReview}
+                        renderItem={renderReview}
+                        keyExtractor={item => item.reviewId}
+                     />
+                   </View>
+                 </ScrollView>
+               </View>
+             </View>
+            )}
           </View>
 
           {/* Reserve Button */}

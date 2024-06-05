@@ -1,14 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform } from 'react-native';
-import { Link } from 'expo-router';
+import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform , TouchableOpacity} from 'react-native';
+import { Link, router } from 'expo-router';
 import { Image } from 'expo-image';
-
+import { useRegister } from '@/provider/RegisterProvider';
+import { supabase } from '@/utils/supabase';
 
 export default function register_username() {
   const [username, setUsername] = React.useState("")
   const [email, setEmail] = React.useState("")
-
+  const {register, setUsernameAndEmail, setPassword} = useRegister();
   const isButtonEnabled = username.length > 0 && email.length > 0
+
+  const handlePress = () => {
+    setUsernameAndEmail(username, email);
+    console.log("continue pressed")
+    router.navigate('./registerPassword')
+  }
 
   return (
     <View style={styles.layout}>
@@ -46,9 +53,9 @@ export default function register_username() {
           {/* View yang isinya tombol log in */}
           <View style = {styles.LowerThird}>
             {isButtonEnabled ? (
-                <Link href="./registerOTP" style={styles.WhiteButton}>
+                <TouchableOpacity onPress={handlePress} style={styles.WhiteButton}>
                   <Text style={styles.buttonText}>Continue</Text>
-                </Link>
+                </TouchableOpacity>
               ) : (
                 <View style={styles.disabledWhiteButton}>
                   <Text style={styles.disabledButtonText}>Continue</Text>

@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform } from 'react-native';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { Image } from 'expo-image';
-
-
+import { supabase } from '@/utils/supabase';
+import { useRegister } from '@/provider/RegisterProvider';
 export default function otp_register() {
   // const [text, onChangeText] = React.useState('');
   const [singleNumbers, setSingleNumbers] = React.useState(['', '', '', '', '']); // Array to store single numbers for each OTP box
-
+  const {register, setUsernameAndEmail, setPassword} = useRegister();
   const handleSingleNumberChange = (index, text) => {
     // Create a new array to update the state immutably
     const newSingleNumbers = [...singleNumbers];
@@ -21,7 +21,18 @@ export default function otp_register() {
 
   // Function to check if all OTP boxes are filled
   const allBoxesFilled = singleNumbers.every(number => number !== '');
-
+  
+  const handlePress = async () => {
+    const email = register.email
+    const joinedString = singleNumbers.join('')
+    
+    const {data, error} = await supabase.auth.verifyOtp({email, token : joinedString , type : "email" })
+    if (error) {
+      console.log(error) //TOLONG YA
+    } else {
+      router.navigate("./registerPassword")
+    }
+  }
   return (
     <View style={styles.layout}>
       <ScrollView contentContainerStyle={styles.scrollLayout}>

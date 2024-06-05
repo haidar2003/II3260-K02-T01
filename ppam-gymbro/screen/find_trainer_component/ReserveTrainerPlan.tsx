@@ -4,18 +4,18 @@ import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-nati
 import * as Progress from 'react-native-progress';
 
 interface ReserveTrainerPlanProps {
-  type?: 'Online' | 'Offline';
-  bundle?: number;
-  unitPrice?: number;
-  isAdded?: boolean;
+  planType?: 'Online' | 'Offline';
+  planBundle?: number;
+  planUnitPrice?: number;
+  isSelected?: boolean;
 }
 
 const screenWidth = Dimensions.get('window').width;
 
-const ReserveTrainerPlan: React.FC<ReserveTrainerPlanProps> = ({ isAdded, bundle, type, unitPrice }) => {
-    const [isAdding, setIsAdding] = useState(isAdded);
+const ReserveTrainerPlan: React.FC<ReserveTrainerPlanProps> = ({ isSelected, planBundle, planType, planUnitPrice }) => {
+    const [isAdding, setIsAdding] = useState(isSelected);
 
-    let finalPrice = unitPrice * bundle;
+    let finalPrice = planUnitPrice * planBundle;
     let color, fontColor, fontColorDiscount;
     let discount = 0;
 
@@ -29,16 +29,16 @@ const ReserveTrainerPlan: React.FC<ReserveTrainerPlanProps> = ({ isAdded, bundle
         fontColorDiscount = '#444444'
     }
 
-    if (bundle === 5) {
-        if (type === 'Online') {
+    if (planBundle === 5) {
+        if (planType === 'Online') {
             discount = 0.95;
             finalPrice = finalPrice * discount;
         } else {
             discount = 0.90;
             finalPrice = finalPrice * discount;
         }     
-    } else if (bundle === 10) {
-        if (type === 'Online') {
+    } else if (planBundle === 10) {
+        if (planType === 'Online') {
             discount = 0.90;
             finalPrice = finalPrice * discount;
         } else {
@@ -50,8 +50,8 @@ const ReserveTrainerPlan: React.FC<ReserveTrainerPlanProps> = ({ isAdded, bundle
   return (
     <View style={[styles.mainContainer, {borderColor: color}]}>
         <View style={{margin: 8}}>
-            <Text style={{ fontSize: 20, color: fontColor, fontWeight: 'bold' }}>{bundle}x</Text>
-            <Text style={{ fontSize: 16, color: fontColor }}>{type} Sessions</Text>
+            <Text style={{ fontSize: 20, color: fontColor, fontWeight: 'bold' }}>{planBundle}x</Text>
+            <Text style={{ fontSize: 16, color: fontColor }}>{planType} Sessions</Text>
             <View style={{ marginVertical: 5, width: screenWidth * (140/360), height: 1, backgroundColor: color}}></View>
             <Text style={{ fontSize: 16, color: fontColor, fontWeight: 'bold' }}>Rp{finalPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}</Text>
         </View>

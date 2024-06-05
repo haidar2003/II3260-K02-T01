@@ -1,11 +1,14 @@
 {
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.23.1",
     "@react-native-community/checkbox": "^0.5.17",
+    "@supabase/supabase-js": "^2.43.4",
     "date-fns": "^3.6.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-paper": "^5.12.3",
     "react-native-progress": "^5.0.1",
     "react-native-progress-circle": "^2.1.0",
+    "react-native-url-polyfill": "^2.0.0",
     "react-native-vector-icons": "^10.1.0"
   },
   "devDependencies": {

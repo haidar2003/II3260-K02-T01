@@ -4,14 +4,14 @@ import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-nati
 import * as Progress from 'react-native-progress';
 
 interface ReserveTrainerCartProps {
-  onlineBundle?: 3 | 5 | 10;
-  offlineBundle?: 3 | 5 | 10;
+  onlineBundle?: 0 | 3 | 5 | 10;
+  offlineBundle?: 0 | 3 | 5 | 10;
   offlineUnitPrice?: number;
   onlineUnitPrice?: number;
   trainerName?: string;
 }
 
-const screenWidth = Dimensions.get('window').width;
+const screenWidth = 360;
 
 const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({ onlineBundle, offlineBundle, offlineUnitPrice, onlineUnitPrice, trainerName }) => {
     const [onlineSelected, setOnlineSelected] = useState(true);

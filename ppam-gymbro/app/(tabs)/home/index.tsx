@@ -54,41 +54,55 @@ export default function HomeScreen() {
           </View>
         </View>
 
+        <HomeTrainer trainerName={user.currentTrainer.trainerName} sessions={user.currentTrainer.offlineSessions + user.currentTrainer.onlineSessions}></HomeTrainer>
+        
         {/* PLACEHOLDER LINKS NANTI DIHAPUS */}
-        <View style = {{flex : 1, flexDirection : "column", justifyContent : "center", alignItems :"center", marginVertical: screenWidth * (20/360), backgroundColor: 'lightgrey'}} >
+        <View style = {{flex : 1, flexDirection : "column", justifyContent : "center", alignItems :"center", paddingVertical: screenWidth * (20/360), backgroundColor: 'lightgrey'}} >
           <Link href="/(tabs)/workout/Plan" asChild>
               <Pressable> 
-                <View style={{ width: 150, height: 50, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                   <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Plan Template</Text>
                 </View>
               </Pressable>
           </Link>
           <Link href="/(tabs)/workout/ExcerciseList" asChild>
               <Pressable> 
-                <View style={{ width: 150, height: 50, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                   <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Plan Excercise List</Text>
                 </View>
               </Pressable>
           </Link>
           <Link href="/(tabs)/workout/FreeWorkoutSelection" asChild>
               <Pressable> 
-                <View style={{ width: 250, height: 50, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                   <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Free Excercise Selection</Text>
                 </View>
               </Pressable>
           </Link>
           <Link href="/(tabs)/find_Trainer/[trainerProfile]" asChild>
               <Pressable> 
-                <View style={{ width: 250, height: 50, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Trainer Profile</Text>
+                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Trainer</Text>
+                </View>
+              </Pressable>
+          </Link>
+          <Link href="/(tabs)/find_Trainer/TrainerReserve" asChild>
+              <Pressable> 
+                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Trainer Reserve</Text>
+                </View>
+              </Pressable>
+          </Link>
+          <Link href="/(tabs)/find_Trainer/Cart" asChild>
+              <Pressable> 
+                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Cart</Text>
                 </View>
               </Pressable>
           </Link>
         </View>
         {/* PLACEHOLDER LINKS NANTI DIHAPUS */}
 
-        <HomeTrainer trainerName={user.currentTrainer.trainerName} sessions={user.currentTrainer.offlineSessions + user.currentTrainer.onlineSessions}></HomeTrainer>
-        
         <View style = {{ flexDirection : "row", justifyContent : "flex-start", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (15/360), marginBottom: screenWidth * (10/360), marginTop: screenWidth * (20/360)}} >
           <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Trainer's Plan</Text>
         </View>

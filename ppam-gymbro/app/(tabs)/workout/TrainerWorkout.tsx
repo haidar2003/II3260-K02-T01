@@ -75,61 +75,7 @@ export default function TrainerWorkout() {
           style = {{maxWidth : "100%"}} />
         </ScrollView>
       </ScrollView>
-
-
-
-      {/* <ScrollView contentContainerStyle={styles.scrollLayout}> */}
-        {/* View yang isinya logo + welcome back */}
-          {/* <View style={styles.LogoSpace}>
-            <Text style={styles.titleNotBold}>Start You</Text>
-            <Text style={styles.title}>Workout Journey</Text>
-          </View> */}
-          
-          {/* View yang isinya input username dan email*/}
-          {/* <View style={styles.InputSpace}> */}
-            {/* Displaying text if the input boxes are not filled */}
-            {/* {isButtonEnabled ? (
-              <Text style={styles.subtextBold}></Text>
-            ) : (
-              <Text style={styles.subtextBold}>Please input your username and email</Text>
-            )}
-            <TextInput
-              style={styles.InputBox}
-              placeholder="Username"
-              value={username}
-              onChangeText={setUsername}
-            /> */}
-{/* 
-            <TextInput
-              style={styles.InputBox}
-              placeholder="Email"
-              value={email}
-              onChangeText={setEmail}
-            /> */}
-
-          {/* </View> */}
-          
-          {/* View yang isinya tombol log in */}
-          {/* <View style = {styles.LowerThird}>
-            {isButtonEnabled ? (
-                <Link href="./registerOTP" style={styles.WhiteButton}>
-                  <Text style={styles.buttonText}>Continue</Text>
-                </Link>
-              ) : (
-                <View style={styles.disabledWhiteButton}>
-                  <Text style={styles.disabledButtonText}>Continue</Text>
-                </View>
-              )}
-            </View> */}
-        
-      {/* </ScrollView>  */}
-
-      {/* <ImageBackground 
-        source={require("../../../assets/Landing - Login.png")} 
-        style={[styles.fixed, styles.imageBackgroundContainer, {zIndex: -1}]}
-      /> */}
     </View>
-    
   )
 }
 
