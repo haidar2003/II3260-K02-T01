@@ -26,38 +26,49 @@ export default function ActiveTrainer() {
     {trainerId : 12 , trainerName : "Pink Sheep",  isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} 
   ]
 
-  const activeTrainerSelection = activeTrainer.map(item => ({ ...item, isSelected: false }));
-  const pastTrainerSelection = nonActiveTrainer.map(item => ({ ...item, isSelected: false }));
-
-  const [activeTrainerList, setActiveTrainerList] = useState(activeTrainerSelection)
-  const [pastTrainerList, setPastTrainerList] = useState(pastTrainerSelection)
-
-  useEffect(() => {},)
+  // const activeTrainerSelection = activeTrainer.map(item => ({ ...item, isSelected: false }));
+  // const pastTrainerSelection = nonActiveTrainer.map(item => ({ ...item, isSelected: false }));
 
 
-  useEffect(() => {
-    setActiveTrainerList(prevData =>
-      prevData.map(item => {
-        if (item.trainerId === currentTrainerId) {
-          return { ...item, isSelected: true };
-        } else {
-          return { ...item, isSelected: false };
-        }
-      })
-    );
-  },[activeTrainer]);
 
-  useEffect(() => {
-    setPastTrainerList(prevData =>
-      prevData.map(item => {
-        if (item.trainerId === currentTrainerId) {
-          return { ...item, isSelected: true };
-        } else {
-          return { ...item, isSelected: false };
-        }
-      })
-    );
-  },[nonActiveTrainer]);
+  const [activeTrainerList, setActiveTrainerList] = useState(null)
+  const [pastTrainerList, setPastTrainerList] = useState(null)
+
+  useEffect(() => { 
+    if  ( activeTrainer != null &&   activeTrainer.length > 0 ) {
+      const activeTrainerSelection = activeTrainer.map(item => ({ ...item, isSelected: false }));
+      setActiveTrainerList(activeTrainerSelection)
+    }
+    if  ( nonActiveTrainer != null &&   nonActiveTrainer.length > 0 ) {
+      const pastTrainerSelection =  nonActiveTrainer.map(item => ({ ...item, isSelected: false }));
+      setPastTrainerList(pastTrainerSelection)
+    }
+   },[activeTrainer, nonActiveTrainer])
+
+
+  // useEffect(() => {
+  //   setActiveTrainerList(prevData =>
+  //     prevData.map(item => {
+  //       if (item.trainerId === currentTrainerId) {
+  //         return { ...item, isSelected: true };
+  //       } else {
+  //         return { ...item, isSelected: false };
+  //       }
+  //     })
+  //   );
+  // },[activeTrainer]);
+
+  // useEffect(() => {
+  //   setPastTrainerList(prevData =>
+  //     prevData.map(item => {
+  //       if (item.trainerId === currentTrainerId) {
+  //         return { ...item, isSelected: true };
+  //       } else {
+  //         return { ...item, isSelected: false };
+  //       }
+  //     })
+  //   );
+  // },[nonActiveTrainer]);
 
   const setSelectedActiveTrainer = (id) => {
     setActiveTrainerList(prevData => prevData.map(item => {

@@ -4,10 +4,13 @@ import CustomBox from '@/screen/workout_component/CustomBox';
 import { Link } from 'expo-router';
 import { Image } from 'expo-image';
 import { Circle } from 'react-native-progress';
-
+import { useWorkout } from '@/provider/WorkoutProvider';
+import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 const screenWidth = Dimensions.get('window').width;
 
 function WorkoutCategory() {
+
+
   return (
     <View style={{width: screenWidth * (325/360), flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
       <View style={{
@@ -108,7 +111,7 @@ function WorkoutCategory() {
 
 export default function FreeWorkout() {
     const [freeWorkoutList, setFreeWorkoutList] = useState(null)
-    
+    const {workoutList, getWorkoutList, workoutLoading} = useWorkout()
     const userFreeWorkout = [
         { planId: 1, planName: "Core 1", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, FreeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
         { planId: 2, planName: "Core 2", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, FreeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
@@ -120,10 +123,14 @@ export default function FreeWorkout() {
     
       return (
         <View style = {{padding : 5}}>
-          <CustomBox planName={item.planName} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} freeWorkoutIsSelected={item.freeWorkoutIsSelected} location='free-menu'/>
+          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} freeWorkoutIsSelected={item.freeWorkoutIsSelected} location='free-menu'/>
         </View>
       )
   };
+
+  if (workoutLoading) {
+    return <LoadingScreen/>
+  }
 
   return (
     <View style={styles.layout}>
