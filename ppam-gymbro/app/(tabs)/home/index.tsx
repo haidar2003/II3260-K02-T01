@@ -1,27 +1,51 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View , Dimensions, Image, Pressable, ScrollView, FlatList} from 'react-native';
-import { Link } from "expo-router"
+import { Link, router } from "expo-router"
 // import {format} from "date-fns"
 import CustomBox from "@/screen/workout_component/CustomBox";
 import HomeTrainer from '@/screen/home_component/HomeTrainer';
-
+import { supabase } from '@/utils/supabase';
+import { useAuth } from '@/provider/AuthProvider';
+import LoadingScreen from '@/screen/loading_screen/loadingScreen';
+import { useEffect, useState } from 'react';
 const screenWidth = Dimensions.get('window').width;
-
+import { useCurrentTrainer } from '@/provider/CurrentTrainerProvider';
 
 export default function HomeScreen() {
   const currentUser = 1;
-
+  const {session,authLoading,userData,getSession,updateUserData} = useAuth()
+  const [loading, setLoading] = useState(false)
+  const [trainerPlan,setTrainerPlan ] = useState(null) 
+  const [freePlan,setFreePlan ] = useState(null) 
+  const {activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer, currentTrainerSession} = useCurrentTrainer()
+  const fetchIntialData = async () => {
+    console.log("Home Initial Data    :",userData)
+    setLoading(true)
+    const {data : trainerPlanData, error : trainerPlanError} = await supabase.from("Workout_Plan").select("id_workout_plan ,name_workout_plan, planDifficulty, planDuration, planCategory, currentProgress, currentDay" ).eq("id_user", userData.id_user).eq("planCategory", "Trainer")
+    if (trainerPlanError) {
+      console.log(trainerPlanError)
+    } else {
+      setTrainerPlan(trainerPlanData)
+    }
+    setLoading(false)
+    const {data : freePlanData, error : freePlanError} = await supabase.from("Workout_Plan").select("id_workout_plan ,name_workout_plan, planDifficulty, planDuration, planCategory, currentProgress, currentDay" ).eq("id_user", userData.id_user).neq("planCategory", "Trainer")
+    if (freePlanError) {
+      console.log(freePlanError)
+    } else {
+      setFreePlan(freePlanData)
+    }
+  }
   const user = {
       userFullName: "Rubah Kampus",
       currentTrainer: {trainerId : 1, trainerName : "Rafi Haidar",  isActive : false, onlineSessions : 2, offlineSessions : 6, monthPassed : 1},
       userPlan: {
         trainerPlan : [
-          { planId: 1, planName: "Rafi Haidar's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', currentProgress: 50, currentDay: 4 }
+          { planId: 1, name_workout_plan: "Rafi Haidar's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', currentProgress: 50, currentDay: 4 }
         ],
         freePlan : [
-          { planId: 2, planName: "Core 1", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', currentProgress: 50, currentDay: 4 },
-          { planId: 3, planName: "Core 3", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', currentProgress: 50, currentDay: 4 },
-          { planId: 4, planName: "Core 5", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', currentProgress: 50, currentDay: 4 }
+          { planId: 2, name_workout_plan: "Core 1", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', currentProgress: 50, currentDay: 4 },
+          { planId: 3, name_workout_plan: "Core 3", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', currentProgress: 50, currentDay: 4 },
+          { planId: 4, name_workout_plan: "Core 5", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', currentProgress: 50, currentDay: 4 }
         ]
       }
   }
@@ -29,11 +53,16 @@ export default function HomeScreen() {
   const renderWorkout = ({ item }) => {
       return (
         <View style = {{marginVertical: 5}}>
-          <CustomBox planName={item.planName} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='main-home'/>
+          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='main-home'/>
         </View>
       )
   };
 
+  useEffect( () => {fetchIntialData()} ,[currentTrainer, userData])
+
+  if (authLoading || loading) {
+    return <LoadingScreen/>
+  }
   return (
     <View style={styles.layout}>
       <ScrollView style = {{flex : 1}}>
@@ -46,7 +75,7 @@ export default function HomeScreen() {
           </Link>
           <View style={{ gap: 5 }}>
             <Text style={{ fontSize: 16, fontWeight: 'normal', color: '#8F8F8F' }}>
-              {user.userFullName}
+              {userData.nama_user}
             </Text>
             <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#444444' }}>
               Thursday, 08 July
@@ -54,7 +83,9 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        <HomeTrainer trainerName={user.currentTrainer.trainerName} sessions={user.currentTrainer.offlineSessions + user.currentTrainer.onlineSessions}></HomeTrainer>
+        {currentTrainer ?  <HomeTrainer trainerName={currentTrainer.nama_trainer} sessions={currentTrainerSession}></HomeTrainer> : 
+        <Text>Tidak ada Trainer yang aktif </Text>
+        }
         
         {/* PLACEHOLDER LINKS NANTI DIHAPUS */}
         <View style = {{flex : 1, flexDirection : "column", justifyContent : "center", alignItems :"center", paddingVertical: screenWidth * (20/360), backgroundColor: 'lightgrey'}} >
@@ -135,10 +166,13 @@ export default function HomeScreen() {
           <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Trainer's Plan</Text>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={user.userPlan.trainerPlan}
-          renderItem={renderWorkout}
-          keyExtractor={item => item.planId}
-          style = {{maxWidth : "100%"}} />
+          {trainerPlan ? (
+            <FlatList data={trainerPlan}
+            renderItem={renderWorkout}
+            keyExtractor={item => item.planId}
+            style = {{maxWidth : "100%"}} />
+          ) : <Text>No Trainer Workout Plan</Text>}
+
         </ScrollView>
 
         <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (15/360), marginBottom: screenWidth * (10/360), marginTop: screenWidth * (15/360)}} >
@@ -150,7 +184,7 @@ export default function HomeScreen() {
           </Link>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={user.userPlan.freePlan}
+          <FlatList data={freePlan}
           renderItem={renderWorkout}
           keyExtractor={item => item.planId}
           style = {{maxWidth : "100%"}} />
