@@ -12,7 +12,7 @@ import TrainerSelect from '@/screen/select_trainer_component/TrainerSelect';
 import UserReview from '@/screen/find_trainer_component/UserReview';
 import ReserveTrainerPlan from '@/screen/find_trainer_component/ReserveTrainerPlan';
 import ReserveTrainerCart from '@/screen/find_trainer_component/ReserveTrainerCart';
-import ReserveTrainerCheckout from '@/screen/find_trainer_component/ReserveTrainerCheckout';
+import ReserveTrainerCheckout from '@/screen/find_trainer_component/ReserveTrainerInvoice';
 import TrainerProfile from '@/screen/find_trainer_component/TrainerProfile';
 import TrainerChat from '@/screen/chat_component/TrainerChat';
 import Navbar from '@/screen/home_component/Navbar';

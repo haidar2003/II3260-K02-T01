@@ -100,6 +100,13 @@ export default function HomeScreen() {
                 </View>
               </Pressable>
           </Link>
+          <Link href="/(tabs)/find_Trainer/Invoice" asChild>
+              <Pressable> 
+                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Invoice</Text>
+                </View>
+              </Pressable>
+          </Link>
         </View>
         {/* PLACEHOLDER LINKS NANTI DIHAPUS */}
 

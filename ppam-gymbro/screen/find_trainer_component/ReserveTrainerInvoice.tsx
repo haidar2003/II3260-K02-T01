@@ -3,9 +3,9 @@ import { CheckBox } from 'react-native-btr';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import * as Progress from 'react-native-progress';
 
-interface ReserveTrainerCheckoutProps {
-  onlineBundle?: 3 | 5 | 10;
-  offlineBundle?: 3 | 5 | 10;
+interface ReserveTrainerInvoiceProps {
+  onlineBundle?: 0 | 3 | 5 | 10;
+  offlineBundle?: 0 | 3 | 5 | 10;
   offlineUnitPrice?: number;
   onlineUnitPrice?: number;
   trainerName?: string;
@@ -13,7 +13,7 @@ interface ReserveTrainerCheckoutProps {
 
 const screenWidth = Dimensions.get('window').width;
 
-const ReserveTrainerCheckout: React.FC<ReserveTrainerCheckoutProps> = ({ onlineBundle, offlineBundle, offlineUnitPrice, onlineUnitPrice, trainerName }) => {
+const ReserveTrainerInvoice: React.FC<ReserveTrainerInvoiceProps> = ({ onlineBundle, offlineBundle, offlineUnitPrice, onlineUnitPrice, trainerName }) => {
     const [onlineSelected, setOnlineSelected] = useState(true);
     const [offlineSelected, setOfflineSelected] = useState(true);
 
@@ -69,7 +69,7 @@ const ReserveTrainerCheckout: React.FC<ReserveTrainerCheckoutProps> = ({ onlineB
             <View style={[styles.mainContainer, {height: containerHeight}]}>
                 <Text style={{marginHorizontal: 20, marginVertical: 13, fontWeight: 'bold', fontSize: 16}}>{trainerName}</Text>
                 <View style={{marginBottom: 10, marginHorizontal: 8, backgroundColor: '#E1E1E1', width: screenWidth * (300/360), height: 2, borderRadius: 16}}></View>
-                {onlineBundle && (
+                {onlineBundle != 0 && (
                     <View style={{marginBottom: 10, marginHorizontal: 15,width: screenWidth * (280/360), flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                         <View style={{gap: 15, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                             <Text>1.</Text>
@@ -80,7 +80,7 @@ const ReserveTrainerCheckout: React.FC<ReserveTrainerCheckoutProps> = ({ onlineB
                         </View>
                     </View>
                 )}
-                {offlineBundle && (
+                {offlineBundle != 0 && (
                     <View style={{marginHorizontal: 15,width: screenWidth * (280/360), flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                         <View style={{gap: 15, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                             <Text>{twoItem ? '2.' : '1.'}</Text>
@@ -111,4 +111,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ReserveTrainerCheckout;
+export default ReserveTrainerInvoice;

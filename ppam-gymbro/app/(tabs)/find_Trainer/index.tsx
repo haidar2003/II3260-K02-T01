@@ -4,16 +4,13 @@ import RowComp from '@/screen/find_trainer_component/row_comp';
 import Filter from '@/screen/find_trainer_component/Filter';
 import {numberToRupiah} from "@/utils/formatting"
 import {Tag, Tag_status} from "@/utils/tag"
-<<<<<<< HEAD
 import { Link } from 'expo-router';
+import LoadingScreen from '@/screen/loading_screen/loadingScreen';
+import { supabase } from '@/utils/supabase';
 
 const screenWidth = Dimensions.get('window').width;
 
 
-=======
-import LoadingScreen from '@/screen/loading_screen/loadingScreen';
-import { supabase } from '@/utils/supabase';
->>>>>>> 5ae39cf17ce8cd2b5898a8e98fc7a14d272efc2a
 export default function Find_Trainer() {
   const [isloading, setLoading] = useState(true)
   const [referenceTags, setReferenceTags] = useState([])
