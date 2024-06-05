@@ -5,12 +5,12 @@ import Filter from '@/screen/find_trainer_component/Filter';
 import {numberToRupiah} from "@/utils/formatting"
 import {Tag, Tag_status} from "@/utils/tag"
 import { Link } from 'expo-router';
-import LoadingScreen from '@/screen/loading_screen/loadingScreen';
-import { supabase } from '@/utils/supabase';
 
 const screenWidth = Dimensions.get('window').width;
 
 
+import LoadingScreen from '@/screen/loading_screen/loadingScreen';
+import { supabase } from '@/utils/supabase';
 export default function Find_Trainer() {
   const [isloading, setLoading] = useState(true)
   const [referenceTags, setReferenceTags] = useState([])

@@ -34,7 +34,17 @@ export default function register_fullName() {
     if (error) {
       console.log(error)
     } else {
-      router.replace("/(tabs)/home/") 
+      const {error } = await supabase
+      .from('User')
+      .insert(
+        { id_user: data.user.id, username: register.username, nama_user : date , DoB : fullName},
+      )
+      if (error) {
+        console.log(error)
+      }  else {
+        router.replace("/(tabs)/home/")
+      }
+       
     }
   }
   return (
