@@ -9,7 +9,7 @@ const CurrentTrainerProvider = ({ children }) => {
   const [currentTrainerLoading, setCurrentTrainerLoading] = useState(false)
   const [activeTrainer, setActiveTrainer] = useState(null)
   const [currentTrainer, setCurrentTrainer] = useState(null)
-
+  const [currentTrainerSession , setCurrentTrainerSession ] = useState(0)
   const {session,authLoading,userData,getSession,updateUserData}  = useAuth()
   const updateActiveTrainer = async () => {
       setCurrentTrainerLoading(true)
@@ -36,12 +36,20 @@ const CurrentTrainerProvider = ({ children }) => {
         }
       }
     }
-    
-    
-    const value = {
-      activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer
+    const updateCurrentTrainer = async () => {
+      
+      const {count , error} = await supabase.from("session").select("*", {count : "exact", head : true}).eq("id_user", userData.id_user).eq("trainer_id", currentTrainer.trainer_id)
+      if (error) {
+        console.log("get Current Trainer Session Error ", error)
+      } else {
+        setCurrentTrainerSession(count)
+      }
     }
     
+    const value = {
+      activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer, currentTrainerSession
+    }
+    useEffect(() => {updateCurrentTrainer()} , [currentTrainer])
     return (
         <CurrentTrainerContext.Provider value = {value}>
             {children}

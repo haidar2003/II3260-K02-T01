@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
           console.error("Error getting session: ", error);
           setLoading(false);
         } else {
-            setSession(data.session, );
+            setSession(data.session);
             
             setLoading(false);
           }
