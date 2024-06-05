@@ -15,6 +15,7 @@ export default function Find_Trainer() {
   const [isloading, setLoading] = useState(true)
   const [referenceTags, setReferenceTags] = useState([])
   const [dataTrainer, setDataTrainer] = useState([])
+  const [dataTrainerWithPrice, setDataTrainerWithPrice] = useState([])
   const [minPrice, setMinPrice] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(1000000);
   const [tags, setTags] = useState<Tag_status[]>([]); 
@@ -23,11 +24,12 @@ export default function Find_Trainer() {
   const [offline, setOffline] = useState<boolean>(true);
   const [stateScreen, setStateScreen] = useState<number>(0);
   const [rating, setRating] = useState<number>(0);
+  const [query, setQuery] = useState("")
   const fetchInitialData = async () => {
     try {
       const {data: fetchTagData, error : errorTag} = await supabase.from("Tag").select("*");
       const {data : fetchTrainerData, error :  errorTrainer} = await supabase.from("Trainer").select("*")
-        if (errorTag){
+      if (errorTag){
           console.error("error, fetching tag", errorTag)
         } else {
           setReferenceTags(fetchTagData)
@@ -42,8 +44,14 @@ export default function Find_Trainer() {
         setTags(dataTags)
     }
   }
-  useEffect( () => {fetchInitialData()}, [])
 
+  
+
+  useEffect(() => {  }, [dataTrainer])
+  useEffect( () => {fetchInitialData()}, [])
+  const searchTrainer = async () => {
+    const{data : fetchTrainerData, error : errorTrainer} = await supabase.from("trainer").select("*").or(`nama_trainer.ilike.%${query}%,description.ilike.%${query}%,location.ilike.%${query}%`);
+  }
   if (isloading) {
     return <LoadingScreen/>
   }
@@ -71,7 +79,7 @@ export default function Find_Trainer() {
 
   const renderTrainer = ({ item }) => (
     <View style = {{ marginHorizontal: 5, marginVertical: 7.5}}>
-      <RowComp name={item.name} rating={item.rating} price={item.pricee} />
+      <RowComp name={item.nama_trainer} rating={item.rating} price={item.min_price} />
     </View>
   );
   const renderTags = ({item}) => (

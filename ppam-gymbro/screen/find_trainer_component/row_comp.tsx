@@ -14,27 +14,29 @@ export default function Row_Comp({ name, rating, price}) {
         source={require("@/assets/trainer_icon_placeholder.png")}/> 
 
         <View style = {{paddingVertical : 5, paddingHorizontal: 10, justifyContent: 'flex-start', gap: screenWidth * (25/360) }}>
+          
           <View style={{ gap: 3 }}>
             <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#444444' }}>
               { name }
             </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 10 }}>
               <View style={{ width: 12, height: 12, backgroundColor: 'black' }}/>
-              <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#444444' }}>
+              {rating !== null && (
+                <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#444444' }}>
               { rating }  
-              </Text>
+              </Text>)}
             </View>
           </View>
           
   
-          <Text>
+          { price != null && (<Text>
             <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#444444' }}>
               Rp{ numberToRupiah(price) }
             </Text>
             <Text style={{ fontSize: 12, fontWeight: 'normal', color: '#444444' }}>
               /session
-            </Text>
-          </Text>
+            </Text> 
+          </Text>)}
         </View>
     </View>
   )

@@ -70,6 +70,7 @@ export default function HomeScreen() {
           <Link href="/(tabs)/workout" asChild>
             <Pressable> 
               <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
+                {/* <Image source={{   }}></Image> */}
               </View>
             </Pressable>
           </Link>
