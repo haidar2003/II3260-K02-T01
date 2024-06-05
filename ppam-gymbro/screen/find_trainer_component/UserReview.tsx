@@ -6,12 +6,13 @@ import * as Progress from 'react-native-progress';
 const screenWidth = Dimensions.get('window').width;
 
 interface UserReviewProps {
-    username?: string,
+    reviewId?: number,
+    userFullName?: string,
     rating?: number,
     review?: string,
   }
   
-  const UserReview: React.FC<UserReviewProps> = ({ username, rating, review }) => {
+  const UserReview: React.FC<UserReviewProps> = ({ userFullName, rating, review }) => {
     return (
       <View style={styles.mainContainer}> 
         <View style= {{marginTop: 0, marginBottom: 15, gap: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
@@ -19,12 +20,12 @@ interface UserReviewProps {
 
             </View>
             <View style={{gap: 5, flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}}>
-                <Text style={{fontSize: 14, fontWeight: 'bold'}}>{username}</Text>
+                <Text style={{fontSize: 14, fontWeight: 'bold'}}>{userFullName}</Text>
                 <Text style={{fontSize: 12, fontWeight: 'bold'}}>⭐ {rating}</Text>
             </View>
         </View> 
         <View style={{ flex: 1 }}>
-            <Text style={{ fontSize: 14 }}>{review}</Text>
+            <Text style={{ fontSize: 14 , lineHeight: 25}}>{review}</Text>
         </View>
       </View>
     );

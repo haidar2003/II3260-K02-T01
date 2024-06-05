@@ -4,17 +4,17 @@ import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-nati
 import * as Progress from 'react-native-progress';
 
 interface ExcerciseProps {
+    excerciseId?: number;
+    excerciseName?: string;
+    isFinished?: boolean;
     sets?: number;
     reps?: number;
-    name?: string;
-    number?: number;
-    isChecked?: boolean;
   }
 
 const screenWidth = Dimensions.get('window').width;
   
-  const Excercise: React.FC<ExcerciseProps> = ({ sets, reps, name, isChecked, number }) => {
-    const [isSelected, setSelection] = useState(isChecked);
+  const Excercise: React.FC<ExcerciseProps> = ({ sets, reps, excerciseName, isFinished, excerciseId }) => {
+    const [isSelected, setSelection] = useState(isFinished);
 
     const handlePress = () => {
         console.log('test')
@@ -25,9 +25,9 @@ const screenWidth = Dimensions.get('window').width;
       <View style={styles.mainContainer}> 
         <View style= {styles.topContainer}>
             <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start'}}>
-                <Text style={{marginRight: 10}}>{number}.</Text>
+                <Text style={{marginRight: 10}}>{excerciseId}.</Text>
                 <View style={{gap: 5, flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-                    <Text style={{fontWeight: 'bold'}}>{name}</Text>
+                    <Text style={{fontWeight: 'bold'}}>{excerciseName}</Text>
                     <Text style={{fontSize: 12}}>{reps} reps • {sets} sets</Text>
                 </View>
             </View>

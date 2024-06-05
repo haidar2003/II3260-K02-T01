@@ -1,11 +1,13 @@
-import { StyleSheet, Text, View, ScrollView, Dimensions, FlatList, Pressable } from 'react-native'
+import React from 'react';
+import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable } from 'react-native';
+import CustomBox from '@/screen/workout_component/CustomBox';
 import { Link } from 'expo-router';
-import ExcerciseDay from '@/screen/workout_component/ExcerciseDay';
-import ExcerciseProgress from '@/screen/workout_component/ExcerciseProgress';
-
+import Excercise from '@/screen/workout_component/Excercise';
 const screenWidth = Dimensions.get('window').width;
 
-export default function Plan() {
+export default function ExcerciseList() {
+    const currentDay = 4;
+
     const plan = {
         planName: "Rubah Kampus' Plan",
         planDifficulty: 'Beginner',
@@ -65,61 +67,48 @@ export default function Plan() {
         ] 
     }
 
-  const renderDay = ({ item }) => {
-    
+  const renderExcercise = ({ item }) => {
       return (
-        <View style = {{margin : 0, width: '100%'}}>
-          <ExcerciseDay day={ item.day } currentProgress={ item.currentProgress } isCurrent = { item.day === plan.currentDay ? true : false }/>
+        <View style = {{margin : 0}}>
+          <Excercise excerciseId={item.excerciseId} excerciseName={item.excerciseName} sets={item.sets} reps={item.reps} isFinished={item.isFinished}/>
         </View>
       )
   };
 
-
   return (
-    <View style={styles.layout} >
-        <View style={{ width: '100%', marginTop: screenWidth * (420/360), paddingVertical: screenWidth * (20/360), paddingHorizontal: screenWidth * (25/360), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-          <Link href="/(tabs)/workout" asChild>
-            <Pressable> 
-              <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
-              </View>
-            </Pressable>
-          </Link>
-          <View>
-            <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#444444' }}>
-              { plan.planName }
-            </Text>
-          </View>
-          <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360) }}/>
-        </View>
-        <View>
-            <ExcerciseProgress planDifficulty={plan.planDifficulty} planDuration={ plan.planDuration } currentDay={ plan.currentDay } currentProgress={ plan.currentProgress }/>
-        </View>
-        <View style={{ backgroundColor: '#FEFEFE', alignItems: 'center', borderRadius: 32, marginTop: screenWidth * (110/720) }}>
-            <View style={{ marginBottom: screenWidth * (20/720), marginTop: screenWidth * (-65/720), width: screenWidth * (65/360), height:  screenWidth * (65/360), borderRadius: 60, backgroundColor: '#FF7D40' }}>
-                <View>
-
+    <View style={styles.layout}>
+      <ScrollView style = {{flex : 1}}>
+        <View style={{ marginTop: screenWidth * (35/360), paddingVertical: screenWidth * (20/360), paddingHorizontal: screenWidth * (25/360), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+            <Link href="/(tabs)/workout" asChild>
+              <Pressable> 
+                <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
                 </View>
-            </View>
+              </Pressable>
+            </Link>
             <View>
-                <ScrollView style = {{flex : 1}}>
-                    <View>
-                        <ScrollView horizontal={true}>
-                            <FlatList 
-                            data={ plan.day }
-                            renderItem={renderDay}
-                            keyExtractor={item => item.day}
-                            style = {{maxWidth : "100%"}}
-                            />
-                        </ScrollView>
-                    </View>
-                </ScrollView>
+              <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#444444' }}>
+                Day {currentDay}
+              </Text>
             </View>
+            <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360) }}/>
         </View>
+        <View style={{ width: screenWidth, alignItems: 'center', marginVertical: 5 }}>
+          <View style = {{ flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (10/360), marginBottom: screenWidth * (10/360)}} >
+            <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Excercises</Text>
+            <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>{plan.day[currentDay-1].currentProgress}%</Text>
+          </View>
+        </View>
+        <ScrollView horizontal = {true}>
+            <FlatList data={plan.day[currentDay-1].excercise}
+            renderItem={renderExcercise}
+            keyExtractor={item => item.excerciseId}
+            style = {{maxWidth : "100%"}} />
+          </ScrollView>
+      </ScrollView>
     </View>
     
   )
 }
-
 
 const styles = StyleSheet.create({
   layout: {
@@ -128,7 +117,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height, //for full screen
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FFEAD9',
+    backgroundColor: 'white',
     position : "relative"
   },
 });

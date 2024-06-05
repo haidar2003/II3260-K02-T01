@@ -1,70 +1,101 @@
 import { StyleSheet, Text, TextInput, View, Image, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import TrainerSelect  from '@/screen/select_trainer_component/TrainerSelect';
 import { SearchTrainerElement } from '@/utils/searchTrainerElement';
 
+const screenWidth = Dimensions.get('window').width;
 
-export default function Find_Trainer() {
-
-
+export default function ActiveTrainer() {
+  const currentTrainerId = 10;
   
-
-
-
-
-  const fetchActiveTrainer = [
-    {id : "1" , name : "Black Sheep", isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} ,
-    {id : "2" , name : "White Sheep", isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} ,
-    {id : "3" , name : "Red Sheep",  isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} ,
-    {id : "4" , name : "Blue Sheep",  isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} ,
-    {id : "5" , name : "Orange Sheep",  isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} ,
-    {id : "6" , name : "Pink Sheep",  isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} 
-  ]
-
-  const dataActiveTrainer = fetchActiveTrainer.map(item => ({...item, isSelected : false}))
-
   const fetchTrainer = [
-    {id : "1" , name : "Black Sheep",  isActive : false, onlineSessions : 2, offlineSessions : 6, monthPassed : 1} ,
-    {id : "2" , name : "White Sheep",  isActive : false, onlineSessions : 1, offlineSessions : 2, monthPassed : 1} ,
-    {id : "3" , name : "Red Sheep",  isActive : false, onlineSessions : 3, offlineSessions : 4, monthPassed : 1} ,
-    {id : "4" , name : "Blue Sheep",  isActive : false, onlineSessions : 1, offlineSessions : 5, monthPassed : 1} ,
-    {id : "5" , name : "Orange Sheep",  isActive : false, onlineSessions : 2, offlineSessions : 3, monthPassed : 1} ,
-    {id : "6" , name : "Pink Sheep",  isActive : false, onlineSessions : 6, offlineSessions : 4, monthPassed : 1} ,
-    {id : "7" , name : "Black Sheep", isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} ,
-    {id : "8" , name : "White Sheep", isActive : true, onlineSessions : 4, offlineSessions : 9, monthPassed : 1} ,
-    {id : "9" , name : "Red Sheep",  isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} ,
-    {id : "10" , name : "Blue Sheep",  isActive : true, onlineSessions : 2, offlineSessions : 4, monthPassed : 1} ,
-    {id : "11" , name : "Orange Sheep",  isActive : true, onlineSessions : 1, offlineSessions : 4, monthPassed : 1} ,
-    {id : "12" , name : "Pink Sheep",  isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} 
+    {trainerId : 1, trainerName : "Black Sheep",  isActive : false, onlineSessions : 2, offlineSessions : 6, monthPassed : 1} ,
+    {trainerId : 2, trainerName : "White Sheep",  isActive : false, onlineSessions : 1, offlineSessions : 2, monthPassed : 1} ,
+    {trainerId : 3, trainerName : "Red Sheep",  isActive : false, onlineSessions : 3, offlineSessions : 4, monthPassed : 1} ,
+    {trainerId : 4, trainerName : "Blue Sheep",  isActive : false, onlineSessions : 1, offlineSessions : 5, monthPassed : 1} ,
+    {trainerId : 5, trainerName : "Orange Sheep",  isActive : false, onlineSessions : 2, offlineSessions : 3, monthPassed : 1} ,
+    {trainerId : 6, trainerName : "Pink Sheep",  isActive : false, onlineSessions : 6, offlineSessions : 4, monthPassed : 1} ,
+    {trainerId : 7, trainerName : "Black Sheep", isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} ,
+    {trainerId : 8, trainerName : "White Sheep", isActive : true, onlineSessions : 4, offlineSessions : 9, monthPassed : 1} ,
+    {trainerId : 9, trainerName : "Red Sheep",  isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} ,
+    {trainerId : 10 , trainerName : "Blue Sheep",  isActive : true, onlineSessions : 2, offlineSessions : 4, monthPassed : 1} ,
+    {trainerId : 11 , trainerName : "Orange Sheep",  isActive : true, onlineSessions : 1, offlineSessions : 4, monthPassed : 1} ,
+    {trainerId : 12 , trainerName : "Pink Sheep",  isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} 
   ]
 
-  const dataTrainer = fetchTrainer.map(item => ({...item, isSelected : false}))
-  const [trainerList, setTrainerList] = useState(dataTrainer)
-  const setSelectedTrainer = (id) => {
-    setTrainerList(prevData => prevData.map(item => {
-      if (item.id === id) {
+  const activeTrainer = fetchTrainer.filter(item => item.isActive).map(item => ({ ...item, isSelected: false }));
+  const pastTrainer = fetchTrainer.filter(item => !item.isActive).map(item => ({ ...item, isSelected: false }));
+
+  const [activeTrainerList, setActiveTrainerList] = useState(activeTrainer)
+  const [pastTrainerList, setPastTrainerList] = useState(pastTrainer)
+
+  useEffect(() => {
+    setActiveTrainerList(prevData =>
+      prevData.map(item => {
+        if (item.trainerId === currentTrainerId) {
+          return { ...item, isSelected: true };
+        } else {
+          return { ...item, isSelected: false };
+        }
+      })
+    );
+  },[]);
+
+  const setSelectedActiveTrainer = (id) => {
+    setActiveTrainerList(prevData => prevData.map(item => {
+      if (item.trainerId === id) {
         return { ...item, isSelected: true };
       } else {
         return { ...item, isSelected: false };
       }
     }));
   };
-  const renderSelectTrainer = ({item}) => {
+
+  const renderActiveTrainer = ({item}) => {
     return (
-      <View style = {{margin : 2}} >
+      <View style = {{marginVertical: screenWidth * (5/360)}} >
         <TrainerSelect
-        id = {item.id}
+        trainerId = {item.trainerId}
         isActive = {item.isActive}
-        trainerName= {item.name}
+        trainerName= {item.trainerName}
         onlineSessions={item.onlineSessions}
         offlineSessions={item.offlineSessions}
         monthPassed={item.monthPassed}
-        setSelected={setSelectedTrainer}
+        setSelected={setSelectedActiveTrainer}
         isSelected = {item.isSelected}
-        ></TrainerSelect>
+        />
       </View>
     )
   }
+
+  const setSelectedPastTrainer = (id) => {
+    setPastTrainerList(prevData => prevData.map(item => {
+      if (item.trainerId === id) {
+        return { ...item, isSelected: true };
+      } else {
+        return { ...item, isSelected: false };
+      }
+    }));
+  };
+
+  const renderPastTrainer = ({item}) => {
+    return (
+      <View style = {{marginVertical: screenWidth * (5/360)}} >
+        <TrainerSelect
+        trainerId = {item.trainerId}
+        isActive = {item.isActive}
+        trainerName= {item.trainerName}
+        onlineSessions={item.onlineSessions}
+        offlineSessions={item.offlineSessions}
+        monthPassed={item.monthPassed}
+        setSelected={setSelectedPastTrainer}
+        isSelected = {item.isSelected}
+        />
+      </View>
+    )
+  }
+
+
   return (
     <View style={styles.layout}>
       {/* <View style={{position : "absolute", top : 0, left : 0}}> */}
@@ -73,7 +104,7 @@ export default function Find_Trainer() {
           <View style = {{flex : 1}}></View>
           <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
             <View style={styles.searchBar}>  
-              <Image source={require("@/assets/search.png")} style = {{margin : 5}}>
+              <Image source={require("@/assets/search.png")} style = {{margin : 20}}>
                 {/* Icon Kaca Pembesar */}
               </Image>
               <TextInput>
@@ -87,22 +118,22 @@ export default function Find_Trainer() {
 
       </View>
            <ScrollView style = {{flex : 1}}>
-        <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center"}} >
-          <Text style = {{fontSize : 20, fontWeight : "bold"}}> Active Trainer</Text>
+        <View style = {{flex : 1, marginTop: screenWidth * (20/360),  marginBottom: screenWidth * (10/360), paddingHorizontal: 10, flexDirection : "row", justifyContent : "flex-start", alignItems :"center"}} >
+          <Text style = {{fontSize : 20, fontWeight : "bold", color: '#444444' }}>Active Trainer</Text>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={trainerList.filter(item => (item.isActive))}
-          renderItem={renderSelectTrainer}
-          keyExtractor={item => item.id}
+          <FlatList data={activeTrainerList}
+          renderItem={renderActiveTrainer}
+          keyExtractor={item => item.trainerId}
           style = {{maxWidth : "100%"}} />
         </ScrollView>
-        <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center"}} >
-          <Text style = {{fontSize : 20, fontWeight : "bold"}}> Past Trainer</Text>
+        <View style = {{flex : 1, marginTop: screenWidth * (20/360),  marginBottom: screenWidth * (10/360), paddingHorizontal: 10, flexDirection : "row", justifyContent : "flex-start", alignItems :"center"}} >
+          <Text style = {{fontSize : 20, fontWeight : "bold", color: '#444444' }}>Past Trainer</Text>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={trainerList.filter(item => !(item.isActive))}
-          renderItem={renderSelectTrainer}
-          keyExtractor={item => item.id}
+          <FlatList data={pastTrainerList}
+          renderItem={renderPastTrainer}
+          keyExtractor={item => item.trainerId}
           style = {{maxWidth : "100%"}} />
         </ScrollView>
       </ScrollView>   
@@ -118,10 +149,13 @@ const styles = StyleSheet.create({
     alignItems : "center",
     flexDirection : "row",
     borderRadius : 30,
-    width : "80%",
-    height : "50%",
+    width : screenWidth * (318/360),
+    height : screenWidth * (38/360),
     maxHeight : 40,
-    padding : 5
+    padding : 5,
+    borderWidth: 2,
+    borderColor: '#EEEEEE',
+    marginTop: 5
   },
   layout: {
     flex: 1,
@@ -135,7 +169,7 @@ const styles = StyleSheet.create({
   },
   topBar :{
     flex: 1,
-    maxHeight : 100,
+    maxHeight : 110,
     width : "100%",
     alignItems : "center",
     justifyContent : "flex-end",

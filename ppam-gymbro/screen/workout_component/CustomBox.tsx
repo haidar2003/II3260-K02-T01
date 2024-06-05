@@ -3,19 +3,21 @@ import { View, Text, StyleSheet, Button, TouchableOpacity, Dimensions } from 're
 import * as Progress from 'react-native-progress';
 
 interface CustomBoxProps {
-    difficulty?: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
-    type?: 'free-plan' | 'trainer-plan';
+    planId?: number;
+    planName?: string;
+    planDifficulty?: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
     location?: 'main-home' | 'main-workout' | 'trainer-menu' | 'free-menu' | 'free-menu-selection';
-    isOver?: boolean;
-    isSelected?: boolean;
-    isAdded?: boolean;
-    name?: string;
+    trainerWorkoutIsOver?: boolean;
+    freeWorkoutIsSelected?: boolean;
+    freeWorkoutIsAdded?: boolean;
+    homeNextWorkout?: string;
+    currentProgress?: number
 }
 
 const screenWidth = Dimensions.get('window').width;
   
-const CustomBox: React.FC<CustomBoxProps> = ({ name, location, difficulty, isSelected, isOver, isAdded}) => {
-    const [isAdding, setIsAdding] = useState(isAdded);
+const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty, location, trainerWorkoutIsOver, freeWorkoutIsSelected, freeWorkoutIsAdded, homeNextWorkout, currentProgress}) => {
+    const [isAdding, setIsAdding] = useState(freeWorkoutIsAdded);
     
     // Style
     let containerStyle, buttonColor;
@@ -34,14 +36,14 @@ const CustomBox: React.FC<CustomBoxProps> = ({ name, location, difficulty, isSel
         containerStyle = styles.mainWorkout
       }
       else if (location === 'trainer-menu') {
-        if (isOver) {
+        if (trainerWorkoutIsOver) {
           containerStyle = styles.trainerMenuOver
         } else {
           containerStyle = styles.trainerMenu
         }
       }
       else if (location === 'free-menu') {
-        if (isSelected){
+        if (freeWorkoutIsSelected){
           containerStyle = styles.freeMenuSelected
         } 
         else {
@@ -49,15 +51,15 @@ const CustomBox: React.FC<CustomBoxProps> = ({ name, location, difficulty, isSel
         }
       }
       else if (location === 'free-menu-selection') {
-        if (isSelected){
-          if (isAdded) {
+        if (freeWorkoutIsSelected){
+          if (freeWorkoutIsAdded) {
             containerStyle = styles.freeMenuSelectionSelectedAdded
           } else {
             containerStyle = styles.freeMenuSelectionSelected
           }
         } 
         else {
-          if (isAdded) {
+          if (freeWorkoutIsAdded) {
             containerStyle = styles.freeMenuSelectionAdded
           } else {
             containerStyle = styles.freeMenuSelection
@@ -80,19 +82,19 @@ const CustomBox: React.FC<CustomBoxProps> = ({ name, location, difficulty, isSel
     
           {/* Right Section with Text and Progress Bar */}
           <View style={styles.rightSection}>
-            <Text style={[styles.text, {fontWeight: 'bold'}]}>{name}</Text>
-            <View style={styles.difficultyContainer}>
-              {difficulty && ( 
+            <Text style={[styles.text, {fontWeight: 'bold'}]}>{planName}</Text>
+            <View style={styles.planDifficultyContainer}>
+              {planDifficulty && ( 
                 <Text style={styles.textSmall}>
-                  {difficulty === 'Beginner' && 1}
-                  {difficulty === 'Intermediate' && 2}
-                  {difficulty === 'Advanced' && 3}
-                  {difficulty === 'Expert' && 4}
+                  {planDifficulty === 'Beginner' && 1}
+                  {planDifficulty === 'Intermediate' && 2}
+                  {planDifficulty === 'Advanced' && 3}
+                  {planDifficulty === 'Expert' && 4}
                 </Text>
               )}
-              <Text style={styles.textSmall}>{difficulty}</Text>
+              <Text style={styles.textSmall}>{planDifficulty}</Text>
             </View>
-            {((location === 'trainer-menu') && isOver) ? 
+            {((location === 'trainer-menu') && trainerWorkoutIsOver) ? 
             (<View style={styles.progressContainer}>
               <Text>Clock</Text>
               <Text>A month ago</Text>
@@ -101,7 +103,7 @@ const CustomBox: React.FC<CustomBoxProps> = ({ name, location, difficulty, isSel
             (<View style={styles.progressContainer}> 
               <Progress.Bar borderWidth={0} unfilledColor='#FDE4D3' progress={0.3} width={screenWidth * (140/360)} color='#FF7D40'/>
               {(100 === 100) ? 
-              (<Text style={{fontSize: 12, marginLeft: 18, marginBottom: 5 }}>{Math.round(30)}%</Text>) : 
+              (<Text style={{fontSize: 12, marginLeft: 18, marginBottom: 5 }}>{currentProgress}%</Text>) : 
               (<Text style={styles.textSmall}>Finished</Text>)}
             </View>) }
             {/* <View style={styles.progressContainer}>
@@ -118,7 +120,7 @@ const CustomBox: React.FC<CustomBoxProps> = ({ name, location, difficulty, isSel
           </View>
         )}
 
-        {isSelected && ( 
+        {freeWorkoutIsSelected && ( 
           <View>
             {location === 'free-menu' && (
               <View style={styles.buttonsContainer}>
@@ -222,7 +224,7 @@ const styles = StyleSheet.create({
     height: screenWidth * (110/360),
     borderRadius: 24,
     borderWidth: 2.5,
-    borderColor: '#E1E1E1',
+    borderColor: '#EEEEEE',
     backgroundColor: '#FEFEFE',
 
   },
@@ -246,7 +248,7 @@ const styles = StyleSheet.create({
     height: screenWidth * (170/360),
     borderRadius: 24,
     borderWidth: 2.5,
-    borderColor: '#E1E1E1',
+    borderColor: '#EEEEEE',
     backgroundColor: '#FEFEFE',
 
   },
@@ -303,7 +305,7 @@ const styles = StyleSheet.create({
   textSmall: {
     fontSize: 12,
   },
-  difficultyContainer: {
+  planDifficultyContainer: {
     flexDirection: 'row', 
     alignItems: 'center',
     gap: 5

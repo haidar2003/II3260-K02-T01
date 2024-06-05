@@ -7,43 +7,69 @@ import { Image } from 'expo-image';
 const screenWidth = Dimensions.get('window').width;
 
 export default function MainWorkout() {
-  const trainerWorkout = [
-    {id : "1" , category: 'core', name : "Core Plan 1", difficulty: 'Beginner', type: 'trainer'} ,
-    {id : "2" , category: 'core', name : "Core Plan 2", difficulty: 'Beginner', type: 'trainer'} ,
-    {id : "3" , category: 'core', name : "Core Plan 3", difficulty: 'Beginner', type: 'trainer'} ,
-  ]
   const userWorkout = [
-    {id : "1" , category: 'core', name : "Core A", difficulty: 'Beginner', type: 'free'} ,
-    {id : "2" , category: 'core', name : "Core B", difficulty: 'Beginner', type: 'free'} ,
-    {id : "3" , category: 'core', name : "Core C", difficulty: 'Beginner', type: 'free'} ,
+    { planId: 1, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
+    { planId: 2, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
+    { planId: 3, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
+    { planId: 4, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
+    { planId: 5, planName: "Core 1", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', currentProgress: 50, currentDay: 4 },
+    { planId: 6, planName: "Lower Body 2", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Lower Body', currentProgress: 50, currentDay: 4 },
+    { planId: 7, planName: "Yoga 4", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Yoga', currentProgress: 50, currentDay: 4 },
+    { planId: 8, planName: "Rucking 2", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Rucking', currentProgress: 50, currentDay: 4 },
   ]
-  const renderWorkout = ({ item }) => {
-    
+
+  const renderTrainerWorkout = ({ item }) => {
+    if (item.planCategory === 'Trainer')
       return (
         <View style = {{paddingVertical : screenWidth * (5/360)}}>
-          <CustomBox name={item.name} difficulty={item.difficulty} location='main-workout'/>
+          <CustomBox planName={item.planName} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='main-workout'/>
         </View>
       )
   };
 
+  const renderFreeWorkout = ({ item }) => {
+    if (!(item.planCategory === 'Trainer'))
+      return (
+        <View style = {{paddingVertical : screenWidth * (5/360)}}>
+          <CustomBox planName={item.planName} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='main-workout'/>
+        </View>
+      )
+};
+
   return (
     <View style={styles.layout}>
-      {/* <View style = {styles.topBar}> */}
-          {/* Yang atas */}
-          
-          {/* <View style = {{flex : 1, justifyContent : "center", alignItems : "center"}}> */}
-            {/* <Text style = {{fontSize : 24, fontWeight : "bold"}}>Workout Plan</Text> */}
-          {/* </View> */}
-          {/* <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
-          </View> */}
-      {/* </View> */}
-
       <ScrollView style = {{flex : 1}}>
         <View style={{ marginTop: screenWidth * (35/360), paddingVertical: screenWidth * (35/360), justifyContent: 'center', alignItems: 'center'}}>
           <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#444444' }}>
             Workout Plan
           </Text>
         </View>
+        {/* PLACEHOLDER LINKS NANTI DIHAPUS */}
+        <View style = {{flex : 1, flexDirection : "column", justifyContent : "center", alignItems :"center", marginVertical: screenWidth * (20/360), backgroundColor: 'lightgrey'}} >
+          <Link href="/(tabs)/workout/Plan" asChild>
+              <Pressable> 
+                <View style={{ width: 150, height: 50, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Plan Template</Text>
+                </View>
+              </Pressable>
+          </Link>
+          <Link href="/(tabs)/workout/ExcerciseList" asChild>
+              <Pressable> 
+                <View style={{ width: 150, height: 50, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Plan Excercise List</Text>
+                </View>
+              </Pressable>
+          </Link>
+          <Link href="/(tabs)/workout/FreeWorkoutSelection" asChild>
+              <Pressable> 
+                <View style={{ width: 250, height: 50, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Free Excercise Selection</Text>
+                </View>
+              </Pressable>
+          </Link>
+        </View>
+        {/* PLACEHOLDER LINKS NANTI DIHAPUS */}
+
         <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (10/360), marginBottom: screenWidth * (10/360)}} >
           <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Tailored Plan</Text>
           <Link href="/(tabs)/workout/TrainerWorkout/" asChild>
@@ -53,9 +79,9 @@ export default function MainWorkout() {
           </Link>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={trainerWorkout}
-          renderItem={renderWorkout}
-          keyExtractor={item => item.id}
+          <FlatList data={userWorkout}
+          renderItem={renderTrainerWorkout}
+          keyExtractor={item => item.planId}
           style = {{maxWidth : "100%"}} />
         </ScrollView>
         <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (10/360), marginBottom: screenWidth * (10/360), marginTop: screenWidth * (20/360)}} >
@@ -68,64 +94,11 @@ export default function MainWorkout() {
         </View>
         <ScrollView horizontal = {true}>
           <FlatList data={userWorkout}
-          renderItem={renderWorkout}
-          keyExtractor={item => item.id}
+          renderItem={renderFreeWorkout}
+          keyExtractor={item => item.planId}
           style = {{maxWidth : "100%"}} />
         </ScrollView>
       </ScrollView>
-
-
-
-      {/* <ScrollView contentContainerStyle={styles.scrollLayout}> */}
-        {/* View yang isinya logo + welcome back */}
-          {/* <View style={styles.LogoSpace}>
-            <Text style={styles.titleNotBold}>Start You</Text>
-            <Text style={styles.title}>Workout Journey</Text>
-          </View> */}
-          
-          {/* View yang isinya input username dan email*/}
-          {/* <View style={styles.InputSpace}> */}
-            {/* Displaying text if the input boxes are not filled */}
-            {/* {isButtonEnabled ? (
-              <Text style={styles.subtextBold}></Text>
-            ) : (
-              <Text style={styles.subtextBold}>Please input your username and email</Text>
-            )}
-            <TextInput
-              style={styles.InputBox}
-              placeholder="Username"
-              value={username}
-              onChangeText={setUsername}
-            /> */}
-{/* 
-            <TextInput
-              style={styles.InputBox}
-              placeholder="Email"
-              value={email}
-              onChangeText={setEmail}
-            /> */}
-
-          {/* </View> */}
-          
-          {/* View yang isinya tombol log in */}
-          {/* <View style = {styles.LowerThird}>
-            {isButtonEnabled ? (
-                <Link href="./registerOTP" style={styles.WhiteButton}>
-                  <Text style={styles.buttonText}>Continue</Text>
-                </Link>
-              ) : (
-                <View style={styles.disabledWhiteButton}>
-                  <Text style={styles.disabledButtonText}>Continue</Text>
-                </View>
-              )}
-            </View> */}
-        
-      {/* </ScrollView>  */}
-
-      {/* <ImageBackground 
-        source={require("../../../assets/Landing - Login.png")} 
-        style={[styles.fixed, styles.imageBackgroundContainer, {zIndex: -1}]}
-      /> */}
     </View>
     
   )

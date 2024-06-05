@@ -5,7 +5,7 @@ import ExcerciseProgress from '@/screen/workout_component/ExcerciseProgress';
 import CustomBox from "@/screen/workout_component/CustomBox";
 import Excercise from '@/screen/workout_component/Excercise';
 import HomeTrainer from '@/screen/home_component/HomeTrainer';
-import TrainingPlan from '@/screen/find_trainer_component/TrainingPlan';
+import TrainingPlan from '@/screen/find_trainer_component/TrainerPlan';
 // import {RowComp} from '@/screen/find_trainer_component/row_comp';
 import ExcerciseDay from '@/screen/workout_component/ExcerciseDay';
 import TrainerSelect from '@/screen/select_trainer_component/TrainerSelect';

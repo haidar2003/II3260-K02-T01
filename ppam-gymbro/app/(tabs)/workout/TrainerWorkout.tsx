@@ -9,55 +9,38 @@ const screenWidth = Dimensions.get('window').width;
 
 export default function TrainerWorkout() {
     const trainerWorkout = [
-        {id : "1" , category: 'core', name : "Core Plan 1", difficulty: 'Beginner', type: 'trainer'} ,
-        {id : "2" , category: 'core', name : "Core Plan 2", difficulty: 'Beginner', type: 'trainer'} ,
-        {id : "3" , category: 'core', name : "Core Plan 3", difficulty: 'Beginner', type: 'trainer'} ,
-        {id : "4" , category: 'core', name : "Core Plan 4", difficulty: 'Beginner', type: 'trainer'} ,
-      ]
-
-    const finishedWorkout = [
-        {id : "5" , category: 'core', name : "Core Plan 5", difficulty: 'Beginner', type: 'trainer'} ,
-        {id : "6" , category: 'core', name : "Core Plan 6", difficulty: 'Beginner', type: 'trainer'} ,
-        {id : "7" , category: 'core', name : "Core Plan 7", difficulty: 'Beginner', type: 'trainer'} ,
-        {id : "8" , category: 'core', name : "Core Plan 8", difficulty: 'Beginner', type: 'trainer'} ,
-      ]
-  const renderWorkoutActive = ({ item }) => {
+      { planId: 1, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
+      { planId: 2, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
+      { planId: 3, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
+      { planId: 4, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
+      { planId: 5, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: true, currentProgress: 50, currentDay: 4 },
+      { planId: 6, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: true, currentProgress: 50, currentDay: 4 },
+      { planId: 7, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: true, currentProgress: 50, currentDay: 4 },
+      { planId: 8, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: true, currentProgress: 50, currentDay: 4 },
+    ]
     
+  const renderWorkoutActive = ({ item }) => {
+    if (!item.trainerWorkoutIsOver){
       return (
         <View style = {{padding : 5}}>
-          <CustomBox name={item.name} difficulty={item.difficulty} location='trainer-menu'/>
+          <CustomBox planName={item.planName} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='trainer-menu'/>
         </View>
       )
+    }
   };
 
   const renderWorkoutFinished = ({ item }) => {
-    
-    return (
-      <View style = {{padding : 5}}>
-        <CustomBox name={item.name} difficulty={item.difficulty} isOver={true} location='trainer-menu'/>
-      </View>
-    )
+    if (item.trainerWorkoutIsOver){
+      return (
+        <View style = {{padding : 5}}>
+          <CustomBox planName={item.planName} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='trainer-menu'/>
+        </View>
+      )
+    }
 };
 
   return (
     <View style={styles.layout}>
-      {/* <View style = {styles.topBar}>
-          Yang atas
-          
-          <View style = {{flex : 1, justifyContent : "flex-start",flexDirection : "row", alignItems : "center", width : "100%", padding : 15}}>
-            <Link href="/(tabs)/workout" asChild>
-                <Pressable> 
-                    <Text style = {{fontSize : 18, fontWeight : "bold"}}>Back</Text>
-                </Pressable>
-            </Link>
-            <View style = {{flex : 1}} />
-            <Text style = {{fontSize : 24, fontWeight : "bold"}}>Trainer Plan</Text>
-            <View style = {{flex : 1.2}} />
-          </View>
-          <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
-          </View>
-      </View> */}
-
       <ScrollView style = {{flex : 1}}>
         <View style={{ marginTop: screenWidth * (35/360), paddingVertical: screenWidth * (20/360), paddingHorizontal: screenWidth * (10/360), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
           <Link href="/(tabs)/workout" asChild>
@@ -79,16 +62,16 @@ export default function TrainerWorkout() {
         <ScrollView horizontal = {true}>
           <FlatList data={trainerWorkout}
           renderItem={renderWorkoutActive}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.planId}
           style = {{maxWidth : "100%"}} />
         </ScrollView>
         <View style = {{ flexDirection : "row", justifyContent : "flex-start", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (15/360), marginBottom: screenWidth * (10/360), marginTop: screenWidth * (20/360)}} >
           <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Finished Plan</Text>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={finishedWorkout}
+          <FlatList data={trainerWorkout}
           renderItem={renderWorkoutFinished}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.planId}
           style = {{maxWidth : "100%"}} />
         </ScrollView>
       </ScrollView>

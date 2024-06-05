@@ -5,16 +5,16 @@ import * as Progress from 'react-native-progress';
 const screenWidth = Dimensions.get('window').width;
 
 interface ExcerciseDayProps {
-    day?: string;
-    progress?: number;
+    day?: number;
+    currentProgress?: number;
     isCurrent?: boolean;
   }
   
-  const ExcerciseDay: React.FC<ExcerciseDayProps> = ({ progress, isCurrent, day }) => {
+  const ExcerciseDay: React.FC<ExcerciseDayProps> = ({ currentProgress, isCurrent, day }) => {
 
     let fontStyle, fontColor;
 
-    if (progress >= 100) {
+    if (currentProgress >= 100) {
         fontColor = '#E1E1E1'
     } else {
         fontColor = '#575757'
@@ -32,15 +32,15 @@ interface ExcerciseDayProps {
             <Text style={{color: fontColor, fontWeight: fontStyle}} >Day {day}</Text>
             <View style={{flexDirection: 'row', justifyContent: 'flex-end', alignItems:'center'}}>
                 <View>
-                    <Progress.Bar borderWidth={0} unfilledColor='#FDE4D3' progress={progress/100} width={screenWidth * (140/360)} color='#FF7D40'/>
+                    <Progress.Bar borderWidth={0} unfilledColor='#FDE4D3' progress={currentProgress/100} width={screenWidth * (140/360)} color='#FF7D40'/>
                 </View>
-                { (progress === 100) ? (
+                { (currentProgress === 100) ? (
                     <View style={styles.circle}>
 
                     </View>
                 ) : (
                     <View style={{marginLeft: 18, width: 30, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end'}}>
-                            <Text style={{fontWeight: fontStyle}}>{progress}%</Text>
+                            <Text style={{fontWeight: fontStyle}}>{currentProgress}%</Text>
                     </View>
                 )}
             </View>

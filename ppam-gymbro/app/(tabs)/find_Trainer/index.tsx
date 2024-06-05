@@ -4,6 +4,11 @@ import RowComp from '@/screen/find_trainer_component/row_comp';
 import Filter from '@/screen/find_trainer_component/Filter';
 import {numberToRupiah} from "@/utils/formatting"
 import {Tag, Tag_status} from "@/utils/tag"
+import { Link } from 'expo-router';
+
+const screenWidth = Dimensions.get('window').width;
+
+
 export default function Find_Trainer() {
   const referenceTags = [
     {id : 1, name : "Calisthenic"},
@@ -55,7 +60,7 @@ export default function Find_Trainer() {
   ]
 
   const renderTrainer = ({ item }) => (
-    <View style = {{padding : 10}}>
+    <View style = {{ marginHorizontal: 5, marginVertical: 7.5}}>
       <RowComp name={item.name} rating={item.rating} price={item.pricee} />
     </View>
   );
@@ -82,6 +87,7 @@ export default function Find_Trainer() {
             <Image source={require("@/assets/shopping-cart.png")} style={{marginLeft : 10}} />
           </View>
         </View>
+
         <View style = {styles.filter_sort}>
           <View style = {{flex : 1, margin : 5, padding : 5, flexDirection : "row", alignItems : "center",justifyContent : "center" }}>
             <View style = {{flex : 3, backgroundColor : "#FFEAD9", borderRadius : 20, marginRight : 20, alignItems : "center",justifyContent : "center", padding : 5 }}>
@@ -92,6 +98,9 @@ export default function Find_Trainer() {
             </Pressable>
             <Image source={require("@/assets/sort.png")}  style={{marginHorizontal : 5}}></Image>
           </View>
+
+          
+
           <FlatList 
             style = {{flex : 1}}
             data={tags.filter(item => item.active)}
@@ -99,6 +108,8 @@ export default function Find_Trainer() {
             renderItem={renderTags}
             keyExtractor={(item) => item.id}/>
         </View>
+
+        
 
         <View style = {{flex : 2, alignItems : "center", justifyContent : "center", marginTop : 10}}>
           <FlatList data={dataTrainer}

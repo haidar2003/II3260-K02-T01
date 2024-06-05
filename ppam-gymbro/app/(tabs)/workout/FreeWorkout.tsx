@@ -107,18 +107,18 @@ function WorkoutCategory() {
 }
 
 export default function FreeWorkout() {
-    const userWorkout = [
-        {id : "1" , category: 'core', name : "Core A", difficulty: 'Beginner', type: 'free'} ,
-        {id : "2" , category: 'core', name : "Core B", difficulty: 'Beginner', type: 'free'} ,
-        {id : "3" , category: 'core', name : "Core C", difficulty: 'Beginner', type: 'free'} ,
-        {id : "4" , category: 'core', name : "Core D", difficulty: 'Beginner', type: 'free'} ,
-      ]
+    const userFreeWorkout = [
+        { planId: 1, planName: "Core 1", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, FreeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
+        { planId: 2, planName: "Core 2", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, FreeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
+        { planId: 3, planName: "Core 3", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, FreeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
+        { planId: 4, planName: "Core 4", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, FreeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
+    ]
 
   const renderWorkout = ({ item }) => {
     
       return (
         <View style = {{padding : 5}}>
-          <CustomBox name={item.name} difficulty={item.difficulty} location='free-menu'/>
+          <CustomBox planName={item.planName} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} freeWorkoutIsSelected={item.freeWorkoutIsSelected} location='free-menu'/>
         </View>
       )
   };
@@ -162,9 +162,9 @@ export default function FreeWorkout() {
           <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Active Plan</Text>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={userWorkout}
+          <FlatList data={userFreeWorkout}
           renderItem={renderWorkout}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.planId}
           style = {{maxWidth : "100%"}} />
         </ScrollView>
       </ScrollView>
