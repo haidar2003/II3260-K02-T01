@@ -6,11 +6,11 @@ import ReserveTrainerPlan from '@/screen/find_trainer_component/ReserveTrainerPl
 import { Link } from 'expo-router';
 import ReserveTrainerCart from '@/screen/find_trainer_component/ReserveTrainerCart';
 
-// const screenWidth = Dimensions.get('window').width;
-const screenWidth = 360;
+const screenWidth = Dimensions.get('window').width;
 
 export default function Cart() {
   const currentUserId = 1;
+
   
   const userCart = [
     { 
@@ -30,16 +30,59 @@ export default function Cart() {
         { planId: 1, planType: 'Online', planUnitPrice: 70000 },
         { planId: 2, planType: 'Offline', planUnitPrice: 10000 }
       ], 
-      onlineBundle: 5,
-      offlineBundle: 0
+      onlineBundle: 0,
+      offlineBundle: 3
     },
   ]
 
   const [cart, setCart] = useState(userCart)
+  const [isSelected, setSelection] = useState(false);
+
+  const handlePress = () => {
+      console.log('test')
+      setSelection(!isSelected);
+  };
+
+  const calculateTotalPrice = (cart) => {
+    let totalPrice = 0;
+  
+    for (const item of cart) {
+      const { trainerPlan, onlineBundle, offlineBundle } = item;
+  
+      let finalOnlinePrice = 0;
+      let finalOfflinePrice = 0;
+  
+      for (const plan of trainerPlan) {
+        const { planType, planUnitPrice } = plan;
+  
+        if (planType === 'Online') {
+          let onlineDiscount = 0;
+          if (onlineBundle === 5) {
+            onlineDiscount = 0.05;
+          } else if (onlineBundle === 10) {
+            onlineDiscount = 0.1;
+          }
+          finalOnlinePrice = planUnitPrice * onlineBundle * (1 - onlineDiscount);
+        } else if (planType === 'Offline') {
+          let offlineDiscount = 0;
+          if (offlineBundle === 5) {
+            offlineDiscount = 0.05;
+          } else if (offlineBundle === 10) {
+            offlineDiscount = 0.1;
+          }
+          finalOfflinePrice = planUnitPrice * offlineBundle * (1 - offlineDiscount);
+        }
+      }
+  
+      totalPrice += finalOnlinePrice + finalOfflinePrice;
+    }
+  
+    return totalPrice;
+  };
 
   const renderCart = ({item}) => {
     return (
-      <View style = {{marginHorizontal: screenWidth * (5/360)}} >
+      <View style={{ marginVertical: screenWidth * (10/360) }}>
         <ReserveTrainerCart 
           trainerName={item.trainerName}
           onlineBundle={item.onlineBundle}
@@ -62,46 +105,57 @@ export default function Cart() {
           </Link>
           <View>
             <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#444444' }}>
-              Reserve Trainer
+              Cart
             </Text>
           </View>
           <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360)}} />
         </View>
 
-        <View style={{paddingHorizontal: screenWidth * (10/360)}}>
-          <View style = {{flex : 1, marginTop: screenWidth * (5/360),  marginBottom: screenWidth * (10/360), paddingHorizontal: 20, flexDirection : "column", justifyContent : "flex-start", alignItems :"center"}} >
-            <View style={{ paddingHorizontal: 20, alignItems: 'flex-start' }}>
+        <View style={{alignItems: 'center'}}>
+          <View style = {{ flex : 1,  marginBottom: screenWidth * (10/360), paddingHorizontal: 20, flexDirection : "column", justifyContent : "center", alignItems :"flex-start"}} >
+            <View style={{ paddingHorizontal: 5, alignItems: 'flex-start', justifyContent: 'flex-start', marginBottom: 10 }}>
               <Text style = {{fontSize : 20, fontWeight : "bold", color: '#444444' }}>Reservations</Text>
             </View>
-            <View style={{ width: screenWidth* (320/360), height: 2, backgroundColor: '#E1E1E1' }}/>
+            <View style={{ width: screenWidth * (320/360), height: 2, backgroundColor: '#E1E1E1' }}/>
           </View>
-          <ReserveTrainerCart 
-          trainerName={cart[1].trainerName}
-          onlineBundle={cart[1].onlineBundle}
-          offlineBundle={cart[1].offlineBundle}
-          onlineUnitPrice={cart[1].trainerPlan.find(plan => plan.planType === 'Online').planUnitPrice}
-          offlineUnitPrice={cart[1].trainerPlan.find(plan => plan.planType === 'Offline').planUnitPrice}
-          />
-          <ReserveTrainerCart 
-          trainerName={cart[1].trainerName}
-          onlineBundle={cart[1].onlineBundle}
-          offlineBundle={cart[1].offlineBundle}
-          onlineUnitPrice={cart[1].trainerPlan.find(plan => plan.planType === 'Online').planUnitPrice}
-          offlineUnitPrice={cart[1].trainerPlan.find(plan => plan.planType === 'Offline').planUnitPrice}
-          />
-          {/* <ScrollView>
-            <View style={{ flexDirection: 'row' }}>
-              <FlatList
-                horizontal={true}
-                data={cart}
-                renderItem={renderCart}
-                keyExtractor={item => item.trainerId}
-              />
+
+          <ScrollView horizontal = {true}>
+            <FlatList
+              data={cart}
+              renderItem={renderCart}
+              keyExtractor={item => item.trainerId}
+            />
+          </ScrollView>
+
+          <View style = {{ flex : 1,  marginBottom: screenWidth * (10/360), paddingHorizontal: 20, flexDirection : "column", justifyContent : "center", alignItems :"flex-start", marginTop: screenWidth * (10/360) }} >
+            <View style={{ paddingHorizontal: 5, alignItems: 'flex-start', justifyContent: 'flex-start', marginBottom: 10 }}>
+              <Text style = {{fontSize : 20, fontWeight : "bold", color: '#444444' }}>Payment Options</Text>
             </View>
-          </ScrollView> */}
-          <View style = {{flex : 1, marginTop: screenWidth * (20/360),  marginBottom: screenWidth * (10/360), paddingHorizontal: 20, flexDirection : "row", justifyContent : "flex-start", alignItems :"center"}} >
-            <Text style = {{fontSize : 20, fontWeight : "bold", color: '#444444' }}>Offline Plan</Text>
+            <View style={{ width: screenWidth * (320/360), height: 2, backgroundColor: '#E1E1E1' }}/>
           </View>
+
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: screenWidth * (315/360), paddingHorizontal: 5 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+              <View style={{ width: 65, height: 25, backgroundColor: 'grey' }}/>
+              <Text style={{ fontSize: 12 }}>
+                QRIS Payment
+              </Text>
+            </View>
+            <TouchableOpacity onPress={handlePress} style={{ width: 24, height: 24, borderRadius: 4, justifyContent: 'center', alignItems: 'center' }}>
+            {isSelected ? (
+                <View style={{ width: 24, height: 24, borderRadius: 20, borderWidth: 2, borderColor: '#FF7D40' , backgroundColor: '#FF7D40' }} />
+            ) : (
+                <View style={{ width: 24, height: 24, borderRadius: 20, borderWidth: 2, borderColor: '#FF7D40' }} />
+            )}
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{ borderRadius: 16, width: screenWidth * (300/360), height: screenWidth * (56/360), backgroundColor: '#FF7D40', justifyContent: 'center', alignItems: 'center', marginTop: screenWidth * (70/360), marginBottom: 30 }}>
+                <Text style={{color: '#FEFEFE', fontWeight: 'bold'}}>Rp{calculateTotalPrice(cart).toLocaleString('en-US', { minimumFractionDigits: 2 })} - Pay</Text>
+            </View>
+          </TouchableOpacity>
+
         </View>
       </ScrollView>   
     </View>
@@ -110,20 +164,6 @@ export default function Cart() {
 }
 
 const styles = StyleSheet.create({
-  searchBar : {
-    backgroundColor: '#fff', 
-    justifyContent : "flex-start",
-    alignItems : "center",
-    flexDirection : "row",
-    borderRadius : 30,
-    width : screenWidth * (318/360),
-    height : screenWidth * (38/360),
-    maxHeight : 40,
-    padding : 5,
-    borderWidth: 2,
-    borderColor: '#EEEEEE',
-    marginTop: 5
-  },
   layout: {
     flex: 1,
     // flexDirection: 'row',
@@ -134,51 +174,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     position : "relative"
   },
-  topBar :{
-    flex: 1,
-    maxHeight : 110,
-    width : "100%",
-    alignItems : "center",
-    justifyContent : "flex-end",
-    backgroundColor : "#FF7D40",
-    borderBottomLeftRadius : 20,
-    borderBottomRightRadius : 20,
-    marginTop : 0
-  },
-  filter_sort : {
-  flex : 1,
-   maxHeight : 100,
-   width : "100%",
-   alignItems : "flex-start",
-   justifyContent : "flex-end",
-  //  backgroundColor : "black"
-  },
-  tags : {
-    flex : 1,
-    alignItems : "center",
-    backgroundColor : "#FFEAD9",
-    margin : 10,
-    padding : 5
-  },
-  item: {
-    width: 100, // Set width to control the spacing between items
-    height: 100,
-    backgroundColor: 'blue',
-    margin: 10,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    color: 'white',
-  }, 
-  grey : {
-    backgroundColor : "grey", 
-    position : 'absolute', 
-    width: Dimensions.get("window").width , //for full screen
-    height: Dimensions.get("window").height, //for full screen
-    top : 0, 
-    left : 0,
-    opacity : 0.8,
-    zIndex : 1,
-    justifyContent : "flex-start"
-  } ,
 
 })

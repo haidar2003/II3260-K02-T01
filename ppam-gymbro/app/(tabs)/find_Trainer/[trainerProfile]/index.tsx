@@ -8,8 +8,7 @@ import UserReview from '@/screen/find_trainer_component/UserReview';
 import TrainerPlan from '@/screen/find_trainer_component/TrainerPlan';
 import TrainerProfile from '@/screen/find_trainer_component/TrainerProfile';
 
-// const screenWidth = Dimensions.get('window').width;
-const screenWidth = 360;
+const screenWidth = Dimensions.get('window').width;
 
 export default function trainerProfile() {
     const trainerId = 1;

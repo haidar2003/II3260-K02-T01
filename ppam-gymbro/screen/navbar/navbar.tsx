@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { Tabs, Redirect, Link, router, useNavigation } from "expo-router";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import {faHome, faUsers, faBolt, faMessage, faSearch} from '@fortawesome/free-solid-svg-icons'
+import ChatBubble from '../chat_component/ChatBubble';
 
 const { width, height } = Dimensions.get('window');
 
@@ -48,6 +49,15 @@ export default function NavBar() {
                 href : "/workout",
                 tabBarIcon : ({color}) => (
                     <FontAwesomeIcon icon={faBolt} style={{color : color, width : 24, height : 24} as any}/>
+                )
+            }} />
+            <Tabs.Screen
+            name='message_trainer'
+            options={{
+                headerShown: false,
+                href : "/message_trainer",
+                tabBarIcon : ({color}) => (
+                    <FontAwesomeIcon icon={faMessage} style={{color : color, width : 24, height : 24} as any}/>
                 )
             }} />
         </Tabs>

@@ -11,7 +11,7 @@ interface ReserveTrainerCartProps {
   trainerName?: string;
 }
 
-const screenWidth = 360;
+const screenWidth = Dimensions.get('window').width;
 
 const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({ onlineBundle, offlineBundle, offlineUnitPrice, onlineUnitPrice, trainerName }) => {
     const [onlineSelected, setOnlineSelected] = useState(true);
@@ -66,7 +66,7 @@ const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({ onlineBundle, o
             <View style={[styles.mainContainer, {height: containerHeight}]}>
                 <Text style={{marginHorizontal: 20, marginVertical: 13, fontWeight: 'bold', fontSize: 16}}>{trainerName}</Text>
                 <View style={{marginBottom: 10, marginHorizontal: 8, backgroundColor: '#E1E1E1', width: screenWidth * (300/360), height: 2, borderRadius: 16}}></View>
-                {onlineBundle && (
+                {onlineBundle != 0 && (
                     <View style={{marginBottom: 10, marginHorizontal: 15,width: screenWidth * (280/360), flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between'}}>
                         <View style={{gap: 15, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                             <TouchableOpacity onPress={handlePressOnline} style={{ width: 20, height: 20, borderRadius: 4, justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
@@ -86,7 +86,7 @@ const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({ onlineBundle, o
                         </View>
                     </View>
                 )}
-                {offlineBundle && (
+                {offlineBundle != 0 && (
                     <View style={{marginHorizontal: 15,width: screenWidth * (280/360), flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between'}}>
                         <View style={{gap: 15, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                             <TouchableOpacity onPress={handlePressOffline} style={{ width: 20, height: 20, borderRadius: 4, justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
