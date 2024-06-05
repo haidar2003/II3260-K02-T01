@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform } from 'react-native';
-import { Link } from 'expo-router';
+import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
+import { Link, router } from 'expo-router';
 import { Image } from 'expo-image';
-
+import { supabase } from '@/utils/supabase';
 
 export default function login_1() {
   const [username, setUsername] = React.useState('');
@@ -10,6 +10,17 @@ export default function login_1() {
 
   const isButtonEnabled = username.length > 0 && password.length > 0;
 
+  const handlePress = async () => {
+    const { data, error } = await supabase.auth.signUp({
+      email: username,
+      password: password,
+    })
+    if (error) {
+      console.log(error)
+    } else {
+      router.replace("/(tabs)/home/") 
+    }
+  }
   return (
     <View style={styles.layout}>
       <ScrollView contentContainerStyle={styles.scrollLayout}>
@@ -57,9 +68,9 @@ export default function login_1() {
 
             {/* Allowing the user to use the button only if the input boxes are filled */}
             {isButtonEnabled ? (
-              <Link href="/(tabs)/home/" style={styles.WhiteButton}>
+              <TouchableOpacity onPress={() => {router.replace("/(tabs)/home/")}} style={styles.WhiteButton}>
                 <Text style={styles.buttonText}>Log In</Text>
-              </Link>
+              </TouchableOpacity>
             ) : (
               <View style={styles.disabledWhiteButton}>
                 <Text style={styles.disabledButtonText}>Log In</Text>
