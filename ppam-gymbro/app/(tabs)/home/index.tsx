@@ -1,16 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View , Dimensions, Image, Pressable, ScrollView, FlatList} from 'react-native';
-import { Link } from "expo-router"
+import { Link, router } from "expo-router"
 // import {format} from "date-fns"
 import CustomBox from "@/screen/workout_component/CustomBox";
 import HomeTrainer from '@/screen/home_component/HomeTrainer';
-
+import { supabase } from '@/utils/supabase';
+import { useAuth } from '@/provider/AuthProvider';
+import LoadingScreen from '@/screen/loading_screen/loadingScreen';
+import { useState } from 'react';
 const screenWidth = Dimensions.get('window').width;
 
 
 export default function HomeScreen() {
   const currentUser = 1;
-
+  const {session,authLoading,userData,getSession,updateUserData} = useAuth()
+  const [loading, setLoading] = useState(false)
+  const [trainerPlan,setTrainerPlan ] = useState(null) 
+  const fetchIntialData = async () => {
+    setLoading(true)
+    const {data : trainerPlanData, error : trainerPlanError} = await supabase.from("WorkoutPlan").select("id_workout_plan ,name_workout_plan, planDifficulty, planDuration, planCategory, currentProgress, currentDay" ).eq("id_user", userData.id_user)
+    if (trainerPlanError) {
+      console.log(trainerPlanError)
+    } else {
+      setTrainerPlan(trainerPlanData)
+    }
+  }
   const user = {
       userFullName: "Rubah Kampus",
       currentTrainer: {trainerId : 1, trainerName : "Rafi Haidar",  isActive : false, onlineSessions : 2, offlineSessions : 6, monthPassed : 1},
@@ -34,6 +48,9 @@ export default function HomeScreen() {
       )
   };
 
+  if (authLoading || loading) {
+    return <LoadingScreen/>
+  }
   return (
     <View style={styles.layout}>
       <ScrollView style = {{flex : 1}}>

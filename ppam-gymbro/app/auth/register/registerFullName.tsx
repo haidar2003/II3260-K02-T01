@@ -6,6 +6,8 @@ import { Checkbox } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useRegister } from '@/provider/RegisterProvider';
 import { supabase } from '@/utils/supabase';
+import { useAuth } from '@/provider/AuthProvider';
+import { useCurrentTrainer } from '@/provider/CurrentTrainerProvider';
 
 export default function register_fullName() {
   // const [text, onChangeText] = React.useState('');
@@ -14,6 +16,8 @@ export default function register_fullName() {
   const [showDatePicker, setShowDatePicker] = React.useState(false);
   const today = React.useState(new Date().getFullYear())
   const {register, setUsernameAndEmail, setPassword} = useRegister();
+  const {session,authLoading,userData,getSession,updateUserData  } = useAuth()
+  const {activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer} = useCurrentTrainer()
 
   const onChange = (event, selectedDate) => {
     if (selectedDate){
@@ -26,7 +30,6 @@ export default function register_fullName() {
   const isButtonEnabled = fullName.length > 0
 
   const handlePress = async () => {
-    console.log(register.password)
     const { data, error } = await supabase.auth.signUp({
       email: register.email,
       password: register.password,
@@ -37,12 +40,14 @@ export default function register_fullName() {
       const {error } = await supabase
       .from('User')
       .insert(
-        { id_user: data.user.id, username: register.username, nama_user : date , DoB : fullName},
+        { id_user: data.user.id, username: register.username, nama_user : fullName , DoB : date},
       )
       if (error) {
         console.log(error)
       }  else {
         router.replace("/(tabs)/home/")
+        await getSession()
+        await updateActiveTrainer()
       }
        
     }

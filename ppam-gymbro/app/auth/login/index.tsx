@@ -3,15 +3,17 @@ import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensi
 import { Link, router } from 'expo-router';
 import { Image } from 'expo-image';
 import { supabase } from '@/utils/supabase';
-
+import { useAuth } from '@/provider/AuthProvider';
+import { useCurrentTrainer } from '@/provider/CurrentTrainerProvider';
 export default function login_1() {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
-
+  const {session,authLoading,userData,getSession,updateUserData}   = useAuth()
+  const {activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer}= useCurrentTrainer()
   const isButtonEnabled = username.length > 0 && password.length > 0;
 
   const handlePress = async () => {
-    const { data, error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: username,
       password: password,
     })
@@ -19,6 +21,8 @@ export default function login_1() {
       console.log(error)
     } else {
       router.replace("/(tabs)/home/") 
+      await getSession()
+      await updateActiveTrainer()
     }
   }
   return (
@@ -68,7 +72,7 @@ export default function login_1() {
 
             {/* Allowing the user to use the button only if the input boxes are filled */}
             {isButtonEnabled ? (
-              <TouchableOpacity onPress={() => {router.replace("/(tabs)/home/")}} style={styles.WhiteButton}>
+              <TouchableOpacity onPress={handlePress} style={styles.WhiteButton}>
                 <Text style={styles.buttonText}>Log In</Text>
               </TouchableOpacity>
             ) : (
