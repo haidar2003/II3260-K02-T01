@@ -107,6 +107,20 @@ export default function HomeScreen() {
                 </View>
               </Pressable>
           </Link>
+          <Link href="/(tabs)/message_trainer" asChild>
+              <Pressable> 
+                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Chat List</Text>
+                </View>
+              </Pressable>
+          </Link>
+          <Link href="(tabs)/message_trainer/TrainerChat" asChild>
+              <Pressable> 
+                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Chat</Text>
+                </View>
+              </Pressable>
+          </Link>
         </View>
         {/* PLACEHOLDER LINKS NANTI DIHAPUS */}
 

@@ -5,23 +5,24 @@ const screenWidth = Dimensions.get('window').width;
 
 
 interface ChatBubbleProps {
-    type?: 'trainer' | 'user',
-    message?: string,
+    messageId?: number,
+    messageType?: 'Trainer' | 'User',
+    messageContent?: string,
     messageTime?: string,
   }
   
-  const ChatBubble: React.FC<ChatBubbleProps> = ({ type, message, messageTime }) => {
+  const ChatBubble: React.FC<ChatBubbleProps> = ({ messageType, messageContent, messageTime }) => {
     return (
         <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent:'flex-start' }}>
-            {(type === 'trainer' && (
+            {(messageType === 'Trainer' && (
                 <View style={styles.circle}>
 
                 </View>
             ))}
-            <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: (type === 'trainer') ? 'flex-start' : 'flex-end'} }>
-                <View style={ type == 'trainer' ? styles.trainerBubble : styles.userBubble}> 
-                    <Text style={{ color: '#444444', fontSize: 14 }}>
-                        {message}
+            <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: (messageType === 'Trainer') ? 'flex-start' : 'flex-end'} }>
+                <View style={ messageType == 'Trainer' ? styles.trainerBubble : styles.userBubble}> 
+                    <Text style={{ color: '#444444', fontSize: 14 , lineHeight: 25}}>
+                        {messageContent}
                     </Text>
                 </View>
                 <View style={{ padding: 8 }}>
