@@ -45,7 +45,7 @@ export default function register_fullName() {
       if (error) {
         console.log(error)
       }  else {
-        router.replace("/(tabs)/home/")
+        router.replace("/auth/login")
         await getSession()
         await updateActiveTrainer()
       }

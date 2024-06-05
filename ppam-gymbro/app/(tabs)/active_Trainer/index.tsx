@@ -2,12 +2,15 @@ import { StyleSheet, Text, TextInput, View, Image, ImageBackground, ScrollView, 
 import React, {useEffect, useState} from 'react';
 import TrainerSelect  from '@/screen/select_trainer_component/TrainerSelect';
 import { SearchTrainerElement } from '@/utils/searchTrainerElement';
-
+import { useCurrentTrainer } from '@/provider/CurrentTrainerProvider';
+import { useAuth } from '@/provider/AuthProvider';
+import { getMonthDiff } from '@/utils/getMonthDiffts';
 const screenWidth = Dimensions.get('window').width;
 
 export default function ActiveTrainer() {
-  const currentTrainerId = 10;
-  
+  const currentTrainerId = 0;
+  const {activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer,nonActiveTrainer} = useCurrentTrainer()
+
   const fetchTrainer = [
     {trainerId : 1, trainerName : "Black Sheep",  isActive : false, onlineSessions : 2, offlineSessions : 6, monthPassed : 1} ,
     {trainerId : 2, trainerName : "White Sheep",  isActive : false, onlineSessions : 1, offlineSessions : 2, monthPassed : 1} ,
@@ -23,11 +26,14 @@ export default function ActiveTrainer() {
     {trainerId : 12 , trainerName : "Pink Sheep",  isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} 
   ]
 
-  const activeTrainer = fetchTrainer.filter(item => item.isActive).map(item => ({ ...item, isSelected: false }));
-  const pastTrainer = fetchTrainer.filter(item => !item.isActive).map(item => ({ ...item, isSelected: false }));
+  const activeTrainerSelection = activeTrainer.map(item => ({ ...item, isSelected: false }));
+  const pastTrainerSelection = nonActiveTrainer.map(item => ({ ...item, isSelected: false }));
 
-  const [activeTrainerList, setActiveTrainerList] = useState(activeTrainer)
-  const [pastTrainerList, setPastTrainerList] = useState(pastTrainer)
+  const [activeTrainerList, setActiveTrainerList] = useState(activeTrainerSelection)
+  const [pastTrainerList, setPastTrainerList] = useState(pastTrainerSelection)
+
+  useEffect(() => {},)
+
 
   useEffect(() => {
     setActiveTrainerList(prevData =>
@@ -39,7 +45,19 @@ export default function ActiveTrainer() {
         }
       })
     );
-  },[]);
+  },[activeTrainer]);
+
+  useEffect(() => {
+    setPastTrainerList(prevData =>
+      prevData.map(item => {
+        if (item.trainerId === currentTrainerId) {
+          return { ...item, isSelected: true };
+        } else {
+          return { ...item, isSelected: false };
+        }
+      })
+    );
+  },[nonActiveTrainer]);
 
   const setSelectedActiveTrainer = (id) => {
     setActiveTrainerList(prevData => prevData.map(item => {
@@ -55,9 +73,9 @@ export default function ActiveTrainer() {
     return (
       <View style = {{marginVertical: screenWidth * (5/360)}} >
         <TrainerSelect
-        trainerId = {item.trainerId}
+        trainerId = {item.trainer_Id}
         isActive = {item.isActive}
-        trainerName= {item.trainerName}
+        trainerName= {item.nama_trainer}
         onlineSessions={item.onlineSessions}
         offlineSessions={item.offlineSessions}
         monthPassed={item.monthPassed}

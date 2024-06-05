@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable } from 'react-native';
 import CustomBox from '@/screen/workout_component/CustomBox';
 import { Link } from 'expo-router';
@@ -107,6 +107,8 @@ function WorkoutCategory() {
 }
 
 export default function FreeWorkout() {
+    const [freeWorkoutList, setFreeWorkoutList] = useState(null)
+    
     const userFreeWorkout = [
         { planId: 1, planName: "Core 1", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, FreeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
         { planId: 2, planName: "Core 2", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, FreeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },

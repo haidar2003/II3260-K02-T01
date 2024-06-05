@@ -17,7 +17,7 @@ export default function HomeScreen() {
   const [loading, setLoading] = useState(false)
   const [trainerPlan,setTrainerPlan ] = useState(null) 
   const [freePlan,setFreePlan ] = useState(null) 
-  const {activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer, currentTrainerSession} = useCurrentTrainer()
+  const {activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer,nonActiveTrainer} = useCurrentTrainer()
   const fetchIntialData = async () => {
     console.log("Home Initial Data    :",userData)
     setLoading(true)
@@ -60,7 +60,7 @@ export default function HomeScreen() {
 
   useEffect( () => {fetchIntialData()} ,[currentTrainer, userData])
 
-  if (authLoading || loading) {
+  if (authLoading || loading || currentTrainerLoading) {
     return <LoadingScreen/>
   }
   return (
@@ -84,7 +84,7 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {currentTrainer ?  <HomeTrainer trainerName={currentTrainer.nama_trainer} sessions={currentTrainerSession}></HomeTrainer> : 
+        {currentTrainer ?  <HomeTrainer trainerName={currentTrainer.nama_trainer} sessions={currentTrainer.offlinecount + currentTrainer.onlinecount }></HomeTrainer> : 
         <Text>Tidak ada Trainer yang aktif </Text>
         }
         

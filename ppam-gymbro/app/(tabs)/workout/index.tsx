@@ -3,10 +3,12 @@ import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensi
 import CustomBox from '@/screen/workout_component/CustomBox';
 import { Link } from 'expo-router';
 import { Image } from 'expo-image';
-
+import { useWorkout } from '@/provider/WorkoutProvider';
+import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 const screenWidth = Dimensions.get('window').width;
 
 export default function MainWorkout() {
+  const {workoutList, getWorkoutList, workoutLoading} = useWorkout()
   const userWorkout = [
     { planId: 1, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
     { planId: 2, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
@@ -18,11 +20,13 @@ export default function MainWorkout() {
     { planId: 8, planName: "Rucking 2", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Rucking', currentProgress: 50, currentDay: 4 },
   ]
 
+  
+
   const renderTrainerWorkout = ({ item }) => {
     if (item.planCategory === 'Trainer')
       return (
         <View style = {{paddingVertical : screenWidth * (5/360)}}>
-          <CustomBox planName={item.planName} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='main-workout'/>
+          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='main-workout'/>
         </View>
       )
   };
@@ -31,10 +35,13 @@ export default function MainWorkout() {
     if (!(item.planCategory === 'Trainer'))
       return (
         <View style = {{paddingVertical : screenWidth * (5/360)}}>
-          <CustomBox planName={item.planName} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='main-workout'/>
+          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='main-workout'/>
         </View>
       )
 };
+  if (workoutLoading ) {
+    return <LoadingScreen/>
+  }
 
   return (
     <View style={styles.layout}>
@@ -79,9 +86,9 @@ export default function MainWorkout() {
           </Link>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={userWorkout}
+          <FlatList data={workoutList}
           renderItem={renderTrainerWorkout}
-          keyExtractor={item => item.planId}
+          keyExtractor={item => item.id_workout_plan}
           style = {{maxWidth : "100%"}} />
         </ScrollView>
         <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (10/360), marginBottom: screenWidth * (10/360), marginTop: screenWidth * (20/360)}} >
@@ -93,9 +100,9 @@ export default function MainWorkout() {
           </Link>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={userWorkout}
+          <FlatList data={workoutList}
           renderItem={renderFreeWorkout}
-          keyExtractor={item => item.planId}
+          keyExtractor={item => item.id_workout_plan}
           style = {{maxWidth : "100%"}} />
         </ScrollView>
       </ScrollView>
