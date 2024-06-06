@@ -126,7 +126,7 @@ export default function FreeWorkout() {
       return (
        <Pressable onPress={ () => {setSelectedFreeWorkout(item.id_workout_plan)} }> 
         <View style = {{padding : 5}}>
-          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} freeWorkoutIsSelected={item.isSelected} location='free-menu'/>
+          <CustomBox planId={item.id_workout_plan} planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} freeWorkoutIsSelected={item.isSelected} location='free-menu'/>
         </View>
         </Pressable>
       )

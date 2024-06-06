@@ -9,14 +9,14 @@ const screenWidth = Dimensions.get('window').width;
 import { useWorkout } from '@/provider/WorkoutProvider';
 import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 export default function Plan() {
-  const { id } = useLocalSearchParams()
+  const { Plan } = useLocalSearchParams()
   const [loading, setLoading] = useState(false)
   const [excerciseList, setExcerciseList] = useState(null)
   const { workoutList, getWorkoutList, workoutLoading } = useWorkout()
   const fetch_data = async () => {
     setLoading(true)
-    console.log(id)
-    const { data, error } = await supabase.from("Workout").select("*").eq("id_workout_plan", id)
+    console.log(Plan)
+    const { data, error } = await supabase.from("Workout").select("*").eq("id_workout_plan", Plan)
     if (error) {
       console.log("Exercise Fetch fail", error)
       setLoading(false)
@@ -150,12 +150,12 @@ export default function Plan() {
           <ScrollView style={{ flex: 1 }}>
             <View>
               <ScrollView horizontal={true}>
-                <FlatList
+                {/* <FlatList
                   data={excerciseList}
                   renderItem={renderDay}
                   keyExtractor={item => item.day}
                   style={{ maxWidth: "100%" }}
-                />
+                /> */}
               </ScrollView>
             </View>
           </ScrollView>
