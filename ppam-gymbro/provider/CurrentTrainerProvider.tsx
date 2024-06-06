@@ -13,32 +13,33 @@ const CurrentTrainerProvider = ({ children }) => {
   const {session,authLoading,userData,getSession,updateUserData}  = useAuth()
 
   const updateActiveTrainer = async () => {
-      setCurrentTrainerLoading(true)
-      const id_user_input = userData.id_user
-      const {data : dataActiveTrainer , error : errorActiveTrainer } = await supabase
-      .rpc('get_active_trainer',  {
-        id_user_input
-      })
-      if (errorActiveTrainer) {
-        console.log("failed to fetch active trainer", errorActiveTrainer)
-        console.log(userData.id_user)
-      } else {
-        setActiveTrainer(dataActiveTrainer)
-        setCurrentTrainer(dataActiveTrainer[0])
-        console.log(dataActiveTrainer)
+    if (userData != null) {
+        setCurrentTrainerLoading(true)
+        const id_user_input = userData.id_user
+        const {data : dataActiveTrainer , error : errorActiveTrainer } = await supabase
+        .rpc('get_active_trainer',  {
+          id_user_input
+        })
+        if (errorActiveTrainer) {
+          console.log("failed to fetch active trainer", errorActiveTrainer)
+          console.log(userData.id_user)
+        } else {
+          setActiveTrainer(dataActiveTrainer)
+          setCurrentTrainer(dataActiveTrainer[0])
+          console.log(dataActiveTrainer)
+        }
+        const {data : dataNonActiveTrainer , error : errorNonActiveTrainer } = await supabase
+        .rpc('get_non_active_trainer', {id_user_input})
+        if (errorNonActiveTrainer) {
+          console.log("failed to fetch non-active trainer", errorNonActiveTrainer)
+          console.log(userData.id_user)
+        } else {
+          setNonActiveTrainer(dataNonActiveTrainer)
+          console.log(dataNonActiveTrainer)
+        }
+        setCurrentTrainerLoading(false)
       }
-      const {data : dataNonActiveTrainer , error : errorNonActiveTrainer } = await supabase
-      .rpc('get_non_active_trainer', {id_user_input})
-      if (errorNonActiveTrainer) {
-        console.log("failed to fetch non-active trainer", errorNonActiveTrainer)
-        console.log(userData.id_user)
-      } else {
-        setNonActiveTrainer(dataNonActiveTrainer)
-        console.log(dataNonActiveTrainer)
-      }
-      setCurrentTrainerLoading(false)
     }
-    
     
     const value = {
       activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer,nonActiveTrainer

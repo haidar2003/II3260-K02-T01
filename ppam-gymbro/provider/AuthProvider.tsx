@@ -25,6 +25,7 @@ const AuthProvider = ({ children }) => {
         
       }
     const updateUserData = async () => {
+      if (session != null) {
         setLoading(true)
         console.log(session.user.id)
         const {data : fetchUserData, error} = await  supabase.from("User").select("*").eq("id_user", session.user.id).single()
@@ -36,6 +37,7 @@ const AuthProvider = ({ children }) => {
             setLoading(false);
             console.log(fetchUserData)
         }
+      }
     }
     const value = {
         session,
