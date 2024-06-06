@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable } from 'react-native';
 import CustomBox from '@/screen/workout_component/CustomBox';
 import { Link } from 'expo-router';
@@ -9,7 +9,7 @@ import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 const screenWidth = Dimensions.get('window').width;
 
 function WorkoutCategory() {
-
+  
 
   return (
     <View style={{width: screenWidth * (325/360), flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
@@ -112,22 +112,47 @@ function WorkoutCategory() {
 export default function FreeWorkout() {
     const [freeWorkoutList, setFreeWorkoutList] = useState(null)
     const {workoutList, getWorkoutList, workoutLoading} = useWorkout()
+    const [SelectionFreeWorkout, setSelectionFreeWorkout] = useState(null)
     const userFreeWorkout = [
         { planId: 1, planName: "Core 1", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, FreeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
         { planId: 2, planName: "Core 2", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, FreeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
         { planId: 3, planName: "Core 3", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, FreeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
         { planId: 4, planName: "Core 4", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, FreeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
     ]
-
+    // freeWorkoutIsSelected (kalau dipencet), FreeWorkoutIsAdded di database
   const renderWorkout = ({ item }) => {
     
       return (
+       <Pressable onPress={ () => {setSelectedFreeWorkout(item.id_workout_plan)} }> 
         <View style = {{padding : 5}}>
-          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} freeWorkoutIsSelected={item.freeWorkoutIsSelected} location='free-menu'/>
+          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} freeWorkoutIsSelected={item.isSelected} location='free-menu'/>
         </View>
+        </Pressable>
       )
   };
+  
+  useEffect(() => { 
+    if  ( workoutList != null &&   workoutList.length > 0 ) {
+      const  SelectionFreeWorkoutInit1 = workoutList.filter((item) => item.planCategory != "Trainer")
+      const SelectionFreeWorkoutInit2 = SelectionFreeWorkoutInit1.map(item => ({ ...item, isSelected: false }));
+      setSelectionFreeWorkout(SelectionFreeWorkoutInit2)
+    }
+    
+   },[workoutList])
 
+  const setSelectedFreeWorkout = (id) => {
+    setSelectionFreeWorkout(prevData => prevData.map(item => {
+
+      if (item.id_workout_plan === id) {
+
+        return { ...item, isSelected: true }
+      } else {
+        
+        return { ...item, isSelected: false }
+      }
+        
+    }))
+  }
   if (workoutLoading) {
     return <LoadingScreen/>
   }
@@ -171,9 +196,9 @@ export default function FreeWorkout() {
           <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Active Plan</Text>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={userFreeWorkout}
+          <FlatList data={SelectionFreeWorkout.filter((item) => item.planCategory != "Trainer")}
           renderItem={renderWorkout}
-          keyExtractor={item => item.planId}
+          keyExtractor={item => item.id_workout_plan}
           style = {{maxWidth : "100%"}} />
         </ScrollView>
       </ScrollView>

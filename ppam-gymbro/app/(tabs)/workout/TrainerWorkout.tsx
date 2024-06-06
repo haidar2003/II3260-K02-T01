@@ -4,10 +4,11 @@ import CustomBox from '@/screen/workout_component/CustomBox';
 import { Link } from 'expo-router';
 import { Image } from 'expo-image';
 import AntDesign from '@expo/vector-icons/AntDesign';
-
+import { useWorkout } from '@/provider/WorkoutProvider';
 const screenWidth = Dimensions.get('window').width;
 
 export default function TrainerWorkout() {
+    const {workoutList, getWorkoutList, workoutLoading} = useWorkout()
     const trainerWorkout = [
       { planId: 1, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
       { planId: 2, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
@@ -18,22 +19,22 @@ export default function TrainerWorkout() {
       { planId: 7, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: true, currentProgress: 50, currentDay: 4 },
       { planId: 8, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: true, currentProgress: 50, currentDay: 4 },
     ]
-    
+    // trainerWorkoutIsOver, kalau trainer nggak aktif = true
   const renderWorkoutActive = ({ item }) => {
-    if (!item.trainerWorkoutIsOver){
+    if (!item.isActive){
       return (
         <View style = {{padding : 5}}>
-          <CustomBox planName={item.planName} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='trainer-menu'/>
+          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='trainer-menu'/>
         </View>
       )
     }
   };
 
   const renderWorkoutFinished = ({ item }) => {
-    if (item.trainerWorkoutIsOver){
+    if (item.isActive){
       return (
         <View style = {{padding : 5}}>
-          <CustomBox planName={item.planName} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='trainer-menu'/>
+          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='trainer-menu'/>
         </View>
       )
     }
@@ -60,7 +61,7 @@ export default function TrainerWorkout() {
           <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Active Plan</Text>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={trainerWorkout}
+          <FlatList data={workoutList.filter( (item) => item.planCategory == "Trainer")}
           renderItem={renderWorkoutActive}
           keyExtractor={item => item.planId}
           style = {{maxWidth : "100%"}} />
@@ -69,7 +70,7 @@ export default function TrainerWorkout() {
           <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Finished Plan</Text>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={trainerWorkout}
+          <FlatList data={workoutList.filter( (item) => item.planCategory == "Trainer")}
           renderItem={renderWorkoutFinished}
           keyExtractor={item => item.planId}
           style = {{maxWidth : "100%"}} />

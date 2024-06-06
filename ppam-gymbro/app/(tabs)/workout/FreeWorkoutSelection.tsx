@@ -7,21 +7,21 @@ export default function FreeWorkoutSelection() {
     const chosenCategory = 'Core';
 
     const chosenFreeWorkout = [
-        { planId: 1, planName: "Core 1", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: false, currentProgress: 50, currentDay: 4 },
-        { planId: 2, planName: "Core 2", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
-        { planId: 3, planName: "Core 3", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: false, currentProgress: 50, currentDay: 4 },
-        { planId: 4, planName: "Core 4", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: false, currentProgress: 50, currentDay: 4 },
-        { planId: 5, planName: "Core 5", planDifficulty: 'Intermediate', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
-        { planId: 6, planName: "Core 6", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
-        { planId: 7, planName: "Core 7", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: false, currentProgress: 50, currentDay: 4 },
-        { planId: 8, planName: "Core 8", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: false, currentProgress: 50, currentDay: 4 },
+        { planId: 1, name_workout_plan: "Core 1", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: false, currentProgress: 50, currentDay: 4 },
+        { planId: 2, name_workout_plan: "Core 2", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
+        { planId: 3, name_workout_plan: "Core 3", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: false, currentProgress: 50, currentDay: 4 },
+        { planId: 4, name_workout_plan: "Core 4", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: false, currentProgress: 50, currentDay: 4 },
+        { planId: 5, name_workout_plan: "Core 5", planDifficulty: 'Intermediate', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
+        { planId: 6, name_workout_plan: "Core 6", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
+        { planId: 7, name_workout_plan: "Core 7", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: false, currentProgress: 50, currentDay: 4 },
+        { planId: 8, name_workout_plan: "Core 8", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: false, currentProgress: 50, currentDay: 4 },
     ]
 
 
   const renderFreeWorkout = ({ item }) => {
       return (
         <View style = {{marginVertical : screenWidth * (5/360)}}>
-          <CustomBox planName={item.planName} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} freeWorkoutIsSelected={false} freeWorkoutIsAdded={item.freeWorkoutIsAdded} location='free-menu-selection'/>
+          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} freeWorkoutIsSelected={false} freeWorkoutIsAdded={item.freeWorkoutIsAdded} location='free-menu-selection'/>
         </View>
       )
   };

@@ -86,10 +86,10 @@ export default function ActiveTrainer() {
         <TrainerSelect
         trainerId = {item.trainer_Id}
         isActive = {item.isActive}
-        trainerName= {item.nama_trainer}
-        onlineSessions={item.onlineSessions}
-        offlineSessions={item.offlineSessions}
-        monthPassed={item.monthPassed}
+        trainerName= {item.nama_trainer_active}
+        onlineSessions={item.onlinecount }
+        offlineSessions={item.offlinecount}
+        monthPassed={getMonthDiff(new Date() , new Date(item.lastsession))}
         setSelected={setSelectedActiveTrainer}
         isSelected = {item.isSelected}
         />
@@ -111,12 +111,12 @@ export default function ActiveTrainer() {
     return (
       <View style = {{marginVertical: screenWidth * (5/360)}} >
         <TrainerSelect
-        trainerId = {item.trainerId}
+        trainerId = {item.trainer_Id}
         isActive = {item.isActive}
-        trainerName= {item.trainerName}
-        onlineSessions={item.onlineSessions}
-        offlineSessions={item.offlineSessions}
-        monthPassed={item.monthPassed}
+        trainerName= {item.nama_trainer_non_active}
+        onlineSessions={item.onlinecount }
+        offlineSessions={item.offlinecount}
+        monthPassed={getMonthDiff( new Date(item.lastsession), new Date())}
         setSelected={setSelectedPastTrainer}
         isSelected = {item.isSelected}
         />
