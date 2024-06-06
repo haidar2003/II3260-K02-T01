@@ -113,6 +113,7 @@ export default function FreeWorkout() {
     const [freeWorkoutList, setFreeWorkoutList] = useState(null)
     const {workoutList, getWorkoutList, workoutLoading} = useWorkout()
     const [SelectionFreeWorkout, setSelectionFreeWorkout] = useState(null)
+    
     const userFreeWorkout = [
         { planId: 1, planName: "Core 1", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, FreeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
         { planId: 2, planName: "Core 2", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, FreeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
@@ -196,7 +197,7 @@ export default function FreeWorkout() {
           <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Active Plan</Text>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={SelectionFreeWorkout.filter((item) => item.planCategory != "Trainer")}
+          <FlatList data={SelectionFreeWorkout}
           renderItem={renderWorkout}
           keyExtractor={item => item.id_workout_plan}
           style = {{maxWidth : "100%"}} />

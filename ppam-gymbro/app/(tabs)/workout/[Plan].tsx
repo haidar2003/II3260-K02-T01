@@ -2,10 +2,13 @@ import { StyleSheet, Text, View, ScrollView, Dimensions, FlatList, Pressable } f
 import { Link } from 'expo-router';
 import ExcerciseDay from '@/screen/workout_component/ExcerciseDay';
 import ExcerciseProgress from '@/screen/workout_component/ExcerciseProgress';
-
+import { useLocalSearchParams } from 'expo-router';
+import { useState } from 'react';
 const screenWidth = Dimensions.get('window').width;
 
 export default function Plan() {
+    const { id_plan } = useLocalSearchParams();
+    const [loading, setLoading] = useState(false);
     const plan = {
         planName: "Rubah Kampus' Plan",
         planDifficulty: 'Beginner',
