@@ -19,21 +19,27 @@ export default function HomeScreen() {
   const [freePlan,setFreePlan ] = useState(null) 
   const {activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer,nonActiveTrainer} = useCurrentTrainer()
   const fetchIntialData = async () => {
-    console.log("Home Initial Data    :",userData)
     setLoading(true)
-    const {data : trainerPlanData, error : trainerPlanError} = await supabase.from("Workout_Plan").select("id_workout_plan ,name_workout_plan, planDifficulty, planDuration, planCategory, currentProgress, currentDay" ).eq("id_user", userData.id_user).eq("planCategory", "Trainer")
-    if (trainerPlanError) {
-      console.log(trainerPlanError)
-    } else {
-      setTrainerPlan(trainerPlanData)
+    if (userData != null) {
+      console.log("Home Initial Data    :",userData)
+      
+      const {data : trainerPlanData, error : trainerPlanError} = await supabase.from("Workout_Plan").select("id_workout_plan ,name_workout_plan, planDifficulty, planDuration, planCategory, currentProgress, currentDay" ).eq("id_user", userData.id_user).eq("planCategory", "Trainer")
+      if (trainerPlanError) {
+        console.log(trainerPlanError)
+      } else {
+        setTrainerPlan(trainerPlanData)
+      }
+      
+      const {data : freePlanData, error : freePlanError} = await supabase.from("Workout_Plan").select("id_workout_plan ,name_workout_plan, planDifficulty, planDuration, planCategory, currentProgress, currentDay" ).eq("id_user", userData.id_user).neq("planCategory", "Trainer")
+      if (freePlanError) {
+        console.log(freePlanError)
+        
+      } else {
+        setFreePlan(freePlanData)
+        setLoading(false)
+      }
     }
-    setLoading(false)
-    const {data : freePlanData, error : freePlanError} = await supabase.from("Workout_Plan").select("id_workout_plan ,name_workout_plan, planDifficulty, planDuration, planCategory, currentProgress, currentDay" ).eq("id_user", userData.id_user).neq("planCategory", "Trainer")
-    if (freePlanError) {
-      console.log(freePlanError)
-    } else {
-      setFreePlan(freePlanData)
-    }
+    
   }
   const user = {
       userFullName: "Rubah Kampus",
@@ -60,7 +66,7 @@ export default function HomeScreen() {
 
   useEffect( () => {fetchIntialData()} ,[currentTrainer, userData])
 
-  if (authLoading || loading || currentTrainerLoading) {
+  if (authLoading || loading || currentTrainerLoading || (userData == null) ) {
     return <LoadingScreen/>
   }
   return (
