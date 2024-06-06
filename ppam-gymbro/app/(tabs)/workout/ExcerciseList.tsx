@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable } from 'react-native';
 import CustomBox from '@/screen/workout_component/CustomBox';
-import { Link } from 'expo-router';
+import { Link, useLocalSearchParams } from 'expo-router';
 import Excercise from '@/screen/workout_component/Excercise';
+import { supabase } from '@/utils/supabase';
+import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 const screenWidth = Dimensions.get('window').width;
 
 export default function ExcerciseList() {
     const currentDay = 4;
-
+    const {id_workout} = useLocalSearchParams()
+    const [loading , setLoading] = useState(false)
+    const [excerciseList, setExcerciseList] = useState(null)
+    const fetch_data = async () => {
+      setLoading(true)
+      const {data, error} = await supabase.from("workout").select("*").eq("id_workout_plan", id_workout)
+      if (error) {
+        console.log("Exercise Fetch fail", error )
+      } else {
+        setExcerciseList(data)
+      }
+    }
     const plan = {
         planName: "Rubah Kampus' Plan",
         planDifficulty: 'Beginner',
@@ -75,6 +88,9 @@ export default function ExcerciseList() {
       )
   };
 
+  if (loading ) {
+    return (<LoadingScreen/>)
+  }
   return (
     <View style={styles.layout}>
       <ScrollView style = {{flex : 1}}>
@@ -99,9 +115,9 @@ export default function ExcerciseList() {
           </View>
         </View>
         <ScrollView horizontal = {true}>
-            <FlatList data={plan.day[currentDay-1].excercise}
+            <FlatList data={excerciseList}
             renderItem={renderExcercise}
-            keyExtractor={item => item.excerciseId}
+            keyExtractor={item => item.id_workout}
             style = {{maxWidth : "100%"}} />
           </ScrollView>
       </ScrollView>
