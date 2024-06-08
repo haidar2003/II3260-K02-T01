@@ -3,18 +3,21 @@ import React, {useEffect, useState} from 'react';
 import TrainerSelect  from '@/screen/select_trainer_component/TrainerSelect';
 import { SearchTrainerElement } from '@/utils/searchTrainerElement';
 import ReserveTrainerPlan from '@/screen/find_trainer_component/ReserveTrainerPlan';
-import { Link, useLocalSearchParams } from 'expo-router';
+import { Link, router, useLocalSearchParams } from 'expo-router';
 import { supabase } from '@/utils/supabase';
 import LoadingScreen from '@/screen/loading_screen/loadingScreen';
+import { useCart } from '@/provider/CartProvider';
 
 const screenWidth = Dimensions.get('window').width;
 
 export default function TrainerReserve() {
   const currentTrainerId = 1;
   const {trainer_id} = useLocalSearchParams();
+  const [loading1, setLoading1] = useState(false)
   const [trainerData, setTrainerData] = useState(null)
   const [pricingData, setPricingwData] = useState(null)
   const [loading3, setLoading3] = useState(false)
+  const {cartList, addToCart, removeFromCart} = useCart()
   const getPricingData = async () => {
     setLoading3(true)
     const {data, error} = await supabase.from("Pricing_Plan").select("*").eq("id_numeric", trainer_id)
@@ -24,6 +27,20 @@ export default function TrainerReserve() {
       setPricingwData(data)
     }
     setLoading3(false)
+  }
+  const getTrainerData = async () => {
+    setLoading1(true)
+    console.log(trainer_id)
+    const {data, error} = await supabase.from("Trainer").select("*").eq("id_numeric", trainer_id).single()
+    if (error) {
+      console.log("get trainer data failed",trainer_id,error)
+      setLoading1(false)
+    } else {
+      console.log("Get TRAINER DATA",data)
+      setTrainerData(data)
+      setLoading1(false)
+    }
+    
   }
 
   const trainer = {
@@ -67,7 +84,7 @@ export default function TrainerReserve() {
     setOnlinePlans(prevData => prevData.map(item => {
       if (item.bundle === bundle) {
         console.log(bundle)
-        return { ...item, isSelected: true };
+        return { ...item, isSelected: !item.isSelected };
       } else {
         return { ...item, isSelected: false };
       }
@@ -94,7 +111,7 @@ export default function TrainerReserve() {
     setOfflinePlans(prevData => prevData.map(item => {
       if (item.bundle === bundle) {
         console.log(bundle)
-        return { ...item, isSelected: true };
+        return { ...item, isSelected: !item.isSelected };
       } else {
         return { ...item, isSelected: false };
       }
@@ -116,16 +133,45 @@ export default function TrainerReserve() {
     )
   }
 
-  useEffect(() => { getPricingData(); }, [] )
+  useEffect(() => { getPricingData(); getTrainerData()}, [] )
   useEffect(() => {
     console.log(pricingData)
     if (pricingData != null ) {
     setOnlinePlans(getPlansForType('Online', [3, 5, 10]) ); 
     setOfflinePlans(getPlansForType('Offline', [3, 5, 10]) )}
   }, [pricingData])
-  if(loading3 || (pricingData == null)) {
+
+  const handlePress = () => {
+    const offlineElement = offlinePlans.find(item => item.isSelected)
+    const onlineElement = onlinePlans.find(item => item.isSelected)
+    const newElement = {
+      trainerId : trainerData.id_numeric,
+      trainerName : trainerData.nama_trainer,
+      onlineBundle : 0,
+      offlineBundle : 0,
+      onlineUnitPrice :  0,
+      offlineUnitPrice : 0
+    }
+    if (offlineElement != null){
+      newElement.offlineBundle = offlineElement.bundle
+      newElement.offlineUnitPrice = offlineElement.planUnitPrice
+    }
+    if (onlineElement != null){
+      newElement.onlineBundle = onlineElement.bundle
+      newElement.onlineUnitPrice = onlineElement.planUnitPrice
+      
+    }
+    if ((onlineElement != null) || (offlineElement != null)) {
+      addToCart(newElement)
+    } 
+    router.navigate("/(tabs)/find_Trainer/cart")
+    
+  }
+
+  if(loading3 || (pricingData == null) || (trainerData == null)) {
     return <LoadingScreen/>
   }
+  
 
   return (
     <View style={styles.layout}>
@@ -179,7 +225,12 @@ export default function TrainerReserve() {
           </ScrollView>
         </View>
         
-        
+        <TouchableOpacity onPress={() => {  handlePress()}} style={{justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{ borderRadius: 16, width: screenWidth * (300/360), height: screenWidth * (56/360), backgroundColor: '#FF7D40', justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{color: '#FEFEFE', fontWeight: 'bold'}}>Add To Cart</Text>
+            </View>
+          </TouchableOpacity>
+
       </ScrollView>   
     </View>
 

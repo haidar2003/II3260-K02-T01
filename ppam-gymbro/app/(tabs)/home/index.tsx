@@ -131,7 +131,7 @@ export default function HomeScreen() {
                 </View>
               </Pressable>
           </Link>
-          <Link href="/(tabs)/find_Trainer/Cart" asChild>
+          <Link href="/(tabs)/find_Trainer/cart" asChild>
               <Pressable> 
                 <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                   <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Cart</Text>

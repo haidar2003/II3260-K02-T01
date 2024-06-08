@@ -3,12 +3,15 @@ import { Slot } from "expo-router";
 import { RegisterProvider } from "@/provider/RegisterProvider";
 import { AuthProvider } from "@/provider/AuthProvider";
 import { CurrentTrainerProvider } from "@/provider/CurrentTrainerProvider";
+import { CartProvider } from "@/provider/CartProvider";
 export default function AppLayout(){
     return (
     <AuthProvider>
         <CurrentTrainerProvider>
             <RegisterProvider>
+                <CartProvider>
                 <Slot/>
+                </CartProvider>
             </RegisterProvider>
         </CurrentTrainerProvider>
     </AuthProvider>

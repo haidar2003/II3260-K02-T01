@@ -5,12 +5,13 @@ import { SearchTrainerElement } from '@/utils/searchTrainerElement';
 import ReserveTrainerPlan from '@/screen/find_trainer_component/ReserveTrainerPlan';
 import { Link } from 'expo-router';
 import ReserveTrainerCart from '@/screen/find_trainer_component/ReserveTrainerCart';
+import { useCart } from '@/provider/CartProvider';
 
 const screenWidth = Dimensions.get('window').width;
 
 export default function Cart() {
   const currentUserId = 1;
-
+  const {cartList, addToCart, removeFromCart} = useCart()
   
   const userCart = [
     { 
@@ -84,15 +85,19 @@ export default function Cart() {
     return (
       <View style={{ marginVertical: screenWidth * (10/360) }}>
         <ReserveTrainerCart 
+          id = {item.id}
           trainerName={item.trainerName}
           onlineBundle={item.onlineBundle}
           offlineBundle={item.offlineBundle}
-          onlineUnitPrice={item.trainerPlan.find(plan => plan.planType === 'Online').planUnitPrice}
-          offlineUnitPrice={item.trainerPlan.find(plan => plan.planType === 'Offline').planUnitPrice}
+          onlineUnitPrice={item.onlineUnitPrice}
+          offlineUnitPrice={item.offlineUnitPrice}
+          removeFromCart={removeFromCart}
         />
       </View>
     )
   }
+
+  useEffect(() => console.log(cartList) ,[cartList])
   return (
     <View style={styles.layout}>
       <ScrollView style = {{flex : 1}}>
@@ -120,11 +125,11 @@ export default function Cart() {
           </View>
 
           <ScrollView horizontal = {true}>
-            <FlatList
-              data={cart}
+            { (cartList.length > 0) && <FlatList
+              data={cartList}
               renderItem={renderCart}
-              keyExtractor={item => item.trainerId}
-            />
+              keyExtractor={item => item.id}
+            />}
           </ScrollView>
 
           <View style = {{ flex : 1,  marginBottom: screenWidth * (10/360), paddingHorizontal: 20, flexDirection : "column", justifyContent : "center", alignItems :"flex-start", marginTop: screenWidth * (10/360) }} >
@@ -167,7 +172,7 @@ const styles = StyleSheet.create({
   layout: {
     flex: 1,
     // flexDirection: 'row',
-    width: 360 , //for full screen
+    width: Dimensions.get("window").width , //for full screen
     height: Dimensions.get("window").height, //for full screen
     alignItems: 'center',
     justifyContent: 'flex-start',

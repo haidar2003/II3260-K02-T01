@@ -2,21 +2,23 @@ import React, { useState } from 'react';
 import { CheckBox } from 'react-native-btr';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import * as Progress from 'react-native-progress';
+import { useCart } from '@/provider/CartProvider';
 
 interface ReserveTrainerCartProps {
+  id : number
   onlineBundle?: 0 | 3 | 5 | 10;
   offlineBundle?: 0 | 3 | 5 | 10;
   offlineUnitPrice?: number;
   onlineUnitPrice?: number;
   trainerName?: string;
+  removeFromCart?
 }
 
 const screenWidth = Dimensions.get('window').width;
 
-const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({ onlineBundle, offlineBundle, offlineUnitPrice, onlineUnitPrice, trainerName }) => {
+const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({id, onlineBundle, offlineBundle, offlineUnitPrice, onlineUnitPrice, trainerName, removeFromCart }) => {
     const [onlineSelected, setOnlineSelected] = useState(true);
     const [offlineSelected, setOfflineSelected] = useState(true);
-
     let containerHeight, finalOnlinePrice, finalOfflinePrice
     let onlineDiscount = 0 
     let offlineDiscount = 0
@@ -81,9 +83,11 @@ const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({ onlineBundle, o
                                 <Text style={{fontSize: 12, fontWeight: 'bold'}}>Rp{finalOnlinePrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}</Text>
                             </View>
                         </View>
+                        <TouchableOpacity onPress={() => {removeFromCart(id, "Online")}}>
                         <View>
                             <Text>X</Text>
                         </View>
+                        </TouchableOpacity>
                     </View>
                 )}
                 {offlineBundle != 0 && (
@@ -101,9 +105,11 @@ const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({ onlineBundle, o
                                 <Text style={{fontSize: 12, fontWeight: 'bold'}}>Rp{finalOfflinePrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}</Text>
                             </View>
                         </View>
+                        <TouchableOpacity onPress={() => {removeFromCart(id, "Offline")}}>
                         <View>
                             <Text>X</Text>
                         </View>
+                        </TouchableOpacity>
                     </View>
                 )}
             </View>
