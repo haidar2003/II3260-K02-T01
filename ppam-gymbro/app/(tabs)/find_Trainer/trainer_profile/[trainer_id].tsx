@@ -17,55 +17,61 @@ export default function trainerProfile() {
     const pathname = usePathname();
     const [trainerData, setTrainerData] = useState(null)
     const [currentScreen, setCurrentScreen] = useState('Details');
-    const [loading, setLoading] = useState(true)
+    const [loading1, setLoading1] = useState(false)
+    const [loading2, setLoading2] = useState(false)
+    const [loading3, setLoading3] = useState(false)
+    const [loading4, setLoading4] = useState(false)
     const [reviewData, setReviewData] = useState(null)
     const [pricingData, setPricingwData] = useState(null)
+    const [tagData, setTagData] = useState(null)
     const handleScreenChange = (screen) => {
       setCurrentScreen(screen);
     };
     const getTrainerData = async () => {
-      setLoading(true)
+      setLoading1(true)
       console.log(trainer_id)
       const {data, error} = await supabase.from("Trainer").select("*").eq("id_numeric", trainer_id)
       if (error) {
         console.log("get trainer data failed",trainer_id,error)
+        setLoading1(false)
       } else {
+        console.log("Get TRAINER DATA",data)
         setTrainerData(data)
-        console.log(data)
+        setLoading1(false)
       }
-      setLoading(false)
+      
     }
 
     const getReviewData = async () => {
-      setLoading(true)
+      setLoading2(true)
       const {data, error} = await supabase.from("Review").select("*").eq("id_numeric", trainer_id)
       if (error) {
         console.log("get review data failed",trainer_id,error)
       } else {
         setReviewData(data)
       }
-      setLoading(false)
+      setLoading2(false)
     }
     const getPricingData = async () => {
-      setLoading(true)
+      setLoading3(true)
       const {data, error} = await supabase.from("Pricing_Plan").select("*").eq("id_numeric", trainer_id)
       if (error) {
         console.log("get pricing data failed",trainer_id,error)
       } else {
         setPricingwData(data)
       }
-      setLoading(false)
+      setLoading3(false)
     }
 
     const getTagData = async () => {
-      setLoading(true)
+      setLoading4(true)
       const {data, error} = await supabase.from("Pricing_Plan").select("*").eq("id_numeric", trainer_id)
       if (error) {
         console.log("get pricing data failed",trainer_id,error)
       } else {
         setPricingwData(data)
       }
-      setLoading(false)
+      setLoading4(false)
     }
 
 
@@ -115,16 +121,22 @@ export default function trainerProfile() {
     )
   };
 
-  useEffect(() => {
+  useEffect(  () => {
+    // getTrainerData;
     getTrainerData();
     getPricingData();
     getReviewData();
     console.log(pathname)
+    // console.log(trainerData)
+    console.log("TASF",trainerData)
+
   }, [currentScreen]);
 
-  if (loading) {
+  if (loading1 || loading2 || loading3 || loading4 || (trainerData == null) || (pricingData == null) || (reviewData == null) ) {
     return <LoadingScreen/>
-  }
+  } else {
+
+  
 
   return (
     <View style={styles.layout}>
@@ -170,10 +182,10 @@ export default function trainerProfile() {
               <View style={{ width: screenWidth * (310/360), flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', gap: 30 }}>
                <View style={{ width: screenWidth * (310/360), flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 15 }}>
                  <Text style={{ color: '#444444', fontSize: 20, fontWeight: 'bold' }}>
-                   About {trainer.trainerName}
+                   About {trainerData.nama_trainer}
                  </Text>
                  <Text style={{ color: '#444444', fontSize: 14, fontWeight: 'normal', lineHeight: 25 }}>
-                   {trainer.trainerDescription}
+                   {trainerData.description}
                  </Text>
                </View>
                <View style={{ width: screenWidth * (310/360), flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 15 }}>
@@ -184,7 +196,7 @@ export default function trainerProfile() {
                    <View style={{ width: screenWidth * (310/360) }}>
                      <FlatList
                        contentContainerStyle={{flexDirection : "row", flexWrap : "wrap"}}
-                       data={trainer.trainerTags}
+                       data={tagData}
                        renderItem={renderTags}
                        keyExtractor={(item, index) => index.toString()}
                      />
@@ -222,7 +234,7 @@ export default function trainerProfile() {
                     User Reviews
                   </Text>
                   <Text style={{ color: '#444444', fontSize: 16 }}>
-                    {trainer.trainerReview.length} Reviews
+                    {reviewData.length} Reviews
                   </Text>
                  </View>
                  
@@ -243,7 +255,7 @@ export default function trainerProfile() {
           </View>
 
           {/* Reserve Button */}
-          <TouchableOpacity onPress={() => {router.navigate("./TrainerReserve")}} style={{justifyContent: 'center', alignItems: 'center'}}>
+          <TouchableOpacity onPress={() => {router.navigate("/(tabs)/find_Trainer/trainer_reserve/"+trainer_id)}} style={{justifyContent: 'center', alignItems: 'center'}}>
             <View style={{ borderRadius: 16, width: screenWidth * (300/360), height: screenWidth * (56/360), backgroundColor: '#FF7D40', justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{color: '#FEFEFE', fontWeight: 'bold'}}>Reserve</Text>
             </View>
@@ -255,7 +267,7 @@ export default function trainerProfile() {
     
   )
 }
-
+}
 const styles = StyleSheet.create({
   layout: {
     flex: 1,
