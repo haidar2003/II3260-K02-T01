@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CheckBox } from 'react-native-btr';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import * as Progress from 'react-native-progress';
@@ -14,7 +14,7 @@ const screenWidth = Dimensions.get('window').width;
 
 const ReserveTrainerPlan: React.FC<ReserveTrainerPlanProps> = ({ isSelected, planBundle, planType, planUnitPrice }) => {
     const [isAdding, setIsAdding] = useState(isSelected);
-
+    useEffect(() => {setIsAdding(isSelected)},[isSelected])
     let finalPrice = planUnitPrice * planBundle;
     let color, fontColor, fontColorDiscount;
     let discount = 0;

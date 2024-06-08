@@ -66,15 +66,18 @@ export default function TrainerReserve() {
   const setSelectedOnlinePlan = (bundle) => {
     setOnlinePlans(prevData => prevData.map(item => {
       if (item.bundle === bundle) {
+        console.log(bundle)
         return { ...item, isSelected: true };
       } else {
         return { ...item, isSelected: false };
       }
-    }));
+    }))
+    
   };
 
   const renderOnlinePlan = ({item}) => {
     return (
+      <Pressable onPress={() => {setSelectedOnlinePlan(item.bundle)}}>
       <View style = {{marginHorizontal: screenWidth * (5/360)}} >
         <ReserveTrainerPlan 
           planType='Online'
@@ -83,12 +86,14 @@ export default function TrainerReserve() {
           isSelected={item.isSelected}
         />
       </View>
+      </Pressable>
     )
   }
 
   const setSelectedOfflinePlan = (bundle) => {
     setOfflinePlans(prevData => prevData.map(item => {
       if (item.bundle === bundle) {
+        console.log(bundle)
         return { ...item, isSelected: true };
       } else {
         return { ...item, isSelected: false };
@@ -98,6 +103,7 @@ export default function TrainerReserve() {
 
   const renderOfflinePlan = ({item}) => {
     return (
+      <Pressable onPress={() => {setSelectedOfflinePlan(item.bundle)}}>
       <View style = {{marginHorizontal: screenWidth * (5/360)}} >
         <ReserveTrainerPlan 
           planType='Offline'
@@ -106,6 +112,7 @@ export default function TrainerReserve() {
           isSelected={item.isSelected}
         />
       </View>
+      </Pressable>
     )
   }
 
@@ -125,7 +132,7 @@ export default function TrainerReserve() {
       <ScrollView style = {{flex : 1}}>
         <View style={{ marginTop: screenWidth * (35/360), paddingVertical: screenWidth * (20/360), paddingHorizontal: screenWidth * (25/360), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
           <Link href="/(tabs)/workout" asChild>
-            <Pressable> 
+            <Pressable > 
               <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
               </View>
             </Pressable>
