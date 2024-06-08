@@ -106,7 +106,7 @@ export default function trainerProfile() {
   const renderReview = ({ item }) => {
     return (
       <View style = {{margin : 0}}>
-        <UserReview reviewId={item.id_review} userFullName={item.userFullName} rating={item.rating} review={item.content_review} />
+        <UserReview reviewId={item.id_review} userFullName={"test"} rating={item.star} review={item.content_review} />
       </View>
     )
   };
@@ -245,7 +245,7 @@ export default function trainerProfile() {
                    <View style={{ flexDirection: 'row' }}>
                      <FlatList
                         horizontal={true}
-                        data={trainer.trainerReview}
+                        data={reviewData}
                         renderItem={renderReview}
                         keyExtractor={item => item.reviewId}
                      />
