@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import TrainerSelect  from '@/screen/select_trainer_component/TrainerSelect';
 import { SearchTrainerElement } from '@/utils/searchTrainerElement';
 import ReserveTrainerPlan from '@/screen/find_trainer_component/ReserveTrainerPlan';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import ReserveTrainerCart from '@/screen/find_trainer_component/ReserveTrainerCart';
 import { useCart } from '@/provider/CartProvider';
 
@@ -149,7 +149,7 @@ export default function Cart() {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}}>
+          <TouchableOpacity onPress={() => {router.navigate("./invoice")}} style={{justifyContent: 'center', alignItems: 'center'}}>
             <View style={{ borderRadius: 16, width: screenWidth * (300/360), height: screenWidth * (56/360), backgroundColor: '#FF7D40', justifyContent: 'center', alignItems: 'center', marginTop: screenWidth * (70/360), marginBottom: 30 }}>
                 <Text style={{color: '#FEFEFE', fontWeight: 'bold'}}>Rp{calculateTotalPrice(cartList).toLocaleString('en-US', { minimumFractionDigits: 2 })} - Pay</Text>
             </View>

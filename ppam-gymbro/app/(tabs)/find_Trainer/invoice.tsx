@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
   layout: {
     flex: 1,
     // flexDirection: 'row',
-    width: 360 , //for full screen
+    width: screenWidth , //for full screen
     height: Dimensions.get("window").height, //for full screen
     alignItems: 'center',
     justifyContent: 'flex-start',
