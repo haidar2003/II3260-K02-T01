@@ -1,25 +1,75 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable, TouchableOpacity } from 'react-native';
 import CustomBox from '@/screen/workout_component/CustomBox';
-import { Link } from 'expo-router';
+import { Link, router, useGlobalSearchParams, useLocalSearchParams, usePathname } from 'expo-router';
 import Excercise from '@/screen/workout_component/Excercise';
 import UserReview from '@/screen/find_trainer_component/UserReview';
 import TrainerPlan from '@/screen/find_trainer_component/TrainerPlan';
 import TrainerProfile from '@/screen/find_trainer_component/TrainerProfile';
+import { supabase } from '@/utils/supabase';
+import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 
 const screenWidth = Dimensions.get('window').width;
 
 export default function trainerProfile() {
-    const trainerId = 1;
-
+    const {trainer_id} = useLocalSearchParams();
+    const pathname = usePathname();
+    const [trainerData, setTrainerData] = useState(null)
     const [currentScreen, setCurrentScreen] = useState('Details');
-
+    const [loading, setLoading] = useState(true)
+    const [reviewData, setReviewData] = useState(null)
+    const [pricingData, setPricingwData] = useState(null)
     const handleScreenChange = (screen) => {
       setCurrentScreen(screen);
     };
+    const getTrainerData = async () => {
+      setLoading(true)
+      console.log(trainer_id)
+      const {data, error} = await supabase.from("Trainer").select("*").eq("id_numeric", trainer_id)
+      if (error) {
+        console.log("get trainer data failed",trainer_id,error)
+      } else {
+        setTrainerData(data)
+        console.log(data)
+      }
+      setLoading(false)
+    }
 
-    
+    const getReviewData = async () => {
+      setLoading(true)
+      const {data, error} = await supabase.from("Review").select("*").eq("id_numeric", trainer_id)
+      if (error) {
+        console.log("get review data failed",trainer_id,error)
+      } else {
+        setReviewData(data)
+      }
+      setLoading(false)
+    }
+    const getPricingData = async () => {
+      setLoading(true)
+      const {data, error} = await supabase.from("Pricing_Plan").select("*").eq("id_numeric", trainer_id)
+      if (error) {
+        console.log("get pricing data failed",trainer_id,error)
+      } else {
+        setPricingwData(data)
+      }
+      setLoading(false)
+    }
+
+    const getTagData = async () => {
+      setLoading(true)
+      const {data, error} = await supabase.from("Pricing_Plan").select("*").eq("id_numeric", trainer_id)
+      if (error) {
+        console.log("get pricing data failed",trainer_id,error)
+      } else {
+        setPricingwData(data)
+      }
+      setLoading(false)
+    }
+
+
+
     const trainer = {
       trainerId: 1,
       trainerName: 'Radityta Azka',
@@ -42,7 +92,7 @@ export default function trainerProfile() {
   const renderPlan = ({ item }) => {
       return (
         <View style = {{marginVertical : 10}}>
-          <TrainerPlan planType={item.planType} planUnitPrice={item.planUnitPrice} />
+          <TrainerPlan planType={item.type} planUnitPrice={item.price} />
         </View>
       )
   };
@@ -50,7 +100,7 @@ export default function trainerProfile() {
   const renderReview = ({ item }) => {
     return (
       <View style = {{margin : 0}}>
-        <UserReview reviewId={item.reviewId} userFullName={item.userFullName} rating={item.rating} review={item.review} />
+        <UserReview reviewId={item.id_review} userFullName={item.userFullName} rating={item.rating} review={item.content_review} />
       </View>
     )
   };
@@ -65,6 +115,17 @@ export default function trainerProfile() {
     )
   };
 
+  useEffect(() => {
+    getTrainerData();
+    getPricingData();
+    getReviewData();
+    console.log(pathname)
+  }, [currentScreen]);
+
+  if (loading) {
+    return <LoadingScreen/>
+  }
+
   return (
     <View style={styles.layout}>
       <ScrollView style = {{flex : 1}}>
@@ -75,7 +136,7 @@ export default function trainerProfile() {
                 </View>
               </Pressable>
             </Link>
-            <TrainerProfile trainerName={trainer.trainerName} trainerUsername={trainer.trainerUsername} trainerRating={trainer.trainerRating} trainerCity={trainer.trainerCity}/>
+            <TrainerProfile trainerName={trainerData.nama_trainer} trainerUsername={trainerData.username} trainerRating={trainerData.rating} trainerCity={trainerData.location}/>
             <Link href="/(tabs)/workout" asChild>
               <Pressable> 
                 <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
@@ -182,7 +243,7 @@ export default function trainerProfile() {
           </View>
 
           {/* Reserve Button */}
-          <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}}>
+          <TouchableOpacity onPress={() => {router.navigate("./TrainerReserve")}} style={{justifyContent: 'center', alignItems: 'center'}}>
             <View style={{ borderRadius: 16, width: screenWidth * (300/360), height: screenWidth * (56/360), backgroundColor: '#FF7D40', justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{color: '#FEFEFE', fontWeight: 'bold'}}>Reserve</Text>
             </View>

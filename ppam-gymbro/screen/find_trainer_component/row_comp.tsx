@@ -1,13 +1,15 @@
-import { StyleSheet, Text, View, Image, Dimensions} from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity} from 'react-native';
 import {numberToRupiah} from "@/utils/formatting"
 
 import React from 'react';
+import { router } from 'expo-router';
 
 const screenWidth = Dimensions.get('window').width;
 
 
-export default function Row_Comp({ name, rating, price}) {
+export default function Row_Comp({id ,name, rating, price}) {
   return (
+    <TouchableOpacity onPress={ () => {console.log(("/(tabs)/find_Trainer/trainer_profile/"+id));router.navigate("/(tabs)/find_Trainer/trainer_profile/"+id)}}>
     <View style={{ width : screenWidth * (155/360), height : screenWidth * (250/360), borderRadius: 8, backgroundColor: 'grey' }}>
         <Image 
         style= {{width : screenWidth * (155/360), height : screenWidth * (155/360), borderTopRightRadius : 8, borderTopLeftRadius : 8}} 
@@ -39,6 +41,7 @@ export default function Row_Comp({ name, rating, price}) {
           </Text>)}
         </View>
     </View>
+    </TouchableOpacity>
   )
 }
 
