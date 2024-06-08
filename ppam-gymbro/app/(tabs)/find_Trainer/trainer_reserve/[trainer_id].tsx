@@ -3,13 +3,29 @@ import React, {useEffect, useState} from 'react';
 import TrainerSelect  from '@/screen/select_trainer_component/TrainerSelect';
 import { SearchTrainerElement } from '@/utils/searchTrainerElement';
 import ReserveTrainerPlan from '@/screen/find_trainer_component/ReserveTrainerPlan';
-import { Link } from 'expo-router';
+import { Link, useLocalSearchParams } from 'expo-router';
+import { supabase } from '@/utils/supabase';
+import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 
 const screenWidth = Dimensions.get('window').width;
 
 export default function TrainerReserve() {
   const currentTrainerId = 1;
-  
+  const {trainer_id} = useLocalSearchParams();
+  const [trainerData, setTrainerData] = useState(null)
+  const [pricingData, setPricingwData] = useState(null)
+  const [loading3, setLoading3] = useState(false)
+  const getPricingData = async () => {
+    setLoading3(true)
+    const {data, error} = await supabase.from("Pricing_Plan").select("*").eq("id_numeric", trainer_id)
+    if (error) {
+      console.log("get pricing data failed",trainer_id,error)
+    } else {
+      setPricingwData(data)
+    }
+    setLoading3(false)
+  }
+
   const trainer = {
     trainerId: 1,
     trainerName: 'Radityta Azka',
@@ -30,7 +46,7 @@ export default function TrainerReserve() {
   }
 
   const getPlansForType = (planType, bundles) => {
-    const plan = trainer.trainerPlan.find(plan => plan.planType === planType);
+    const plan = pricingData.find(plan => plan.type === planType);
   
     if (!plan) {
       return [];
@@ -39,13 +55,13 @@ export default function TrainerReserve() {
     return bundles.map(bundle => ({
       bundle,
       planType,
-      planUnitPrice: plan.planUnitPrice,
+      planUnitPrice: plan.price,
       isSelected: false
     }));
   };
 
-  const [onlinePlans, setOnlinePlans] = useState(getPlansForType('Online', [3, 5, 10]))
-  const [offlinePlans, setOfflinePlans] = useState(getPlansForType('Offline', [3, 5, 10]))
+  const [onlinePlans, setOnlinePlans] = useState(null )
+  const [offlinePlans, setOfflinePlans] = useState(null)
 
   const setSelectedOnlinePlan = (bundle) => {
     setOnlinePlans(prevData => prevData.map(item => {
@@ -93,6 +109,16 @@ export default function TrainerReserve() {
     )
   }
 
+  useEffect(() => { getPricingData(); }, [] )
+  useEffect(() => {
+    console.log(pricingData)
+    if (pricingData != null ) {
+    setOnlinePlans(getPlansForType('Online', [3, 5, 10]) ); 
+    setOfflinePlans(getPlansForType('Offline', [3, 5, 10]) )}
+  }, [pricingData])
+  if(loading3 || (pricingData == null)) {
+    return <LoadingScreen/>
+  }
 
   return (
     <View style={styles.layout}>

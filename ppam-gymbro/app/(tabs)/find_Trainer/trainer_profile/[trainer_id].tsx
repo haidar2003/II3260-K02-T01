@@ -106,7 +106,7 @@ export default function trainerProfile() {
   const renderReview = ({ item }) => {
     return (
       <View style = {{margin : 0}}>
-        <UserReview reviewId={item.id_review} userFullName={"test"} rating={item.star} review={item.content_review} />
+        <UserReview reviewId={item.id_review} userFullName={item.name_user} rating={item.star} review={item.content_review} />
       </View>
     )
   };
@@ -126,7 +126,7 @@ export default function trainerProfile() {
     getTrainerData();
     getPricingData();
     getReviewData();
-    console.log(pathname)
+    console.log(pathname) 
     // console.log(trainerData)
     console.log("TASF",trainerData)
 
