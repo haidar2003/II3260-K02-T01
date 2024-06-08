@@ -48,32 +48,26 @@ export default function Cart() {
     let totalPrice = 0;
   
     for (const item of cart) {
-      const { trainerPlan, onlineBundle, offlineBundle } = item;
+      const { onlineUnitPrice,offlineUnitPrice, onlineBundle, offlineBundle } = item;
   
       let finalOnlinePrice = 0;
       let finalOfflinePrice = 0;
   
-      for (const plan of trainerPlan) {
-        const { planType, planUnitPrice } = plan;
-  
-        if (planType === 'Online') {
-          let onlineDiscount = 0;
-          if (onlineBundle === 5) {
-            onlineDiscount = 0.05;
-          } else if (onlineBundle === 10) {
-            onlineDiscount = 0.1;
-          }
-          finalOnlinePrice = planUnitPrice * onlineBundle * (1 - onlineDiscount);
-        } else if (planType === 'Offline') {
-          let offlineDiscount = 0;
-          if (offlineBundle === 5) {
-            offlineDiscount = 0.05;
-          } else if (offlineBundle === 10) {
-            offlineDiscount = 0.1;
-          }
-          finalOfflinePrice = planUnitPrice * offlineBundle * (1 - offlineDiscount);
-        }
+      let onlineDiscount = 0;
+      if (onlineBundle === 5) {
+        onlineDiscount = 0.05;
+      } else if (onlineBundle === 10) {
+        onlineDiscount = 0.1;
       }
+      finalOnlinePrice = onlineUnitPrice * onlineBundle * (1 - onlineDiscount);
+
+      let offlineDiscount = 0;
+      if (offlineBundle === 5) {
+        offlineDiscount = 0.05;
+      } else if (offlineBundle === 10) {
+        offlineDiscount = 0.1;
+      }
+      finalOfflinePrice = offlineUnitPrice * offlineBundle * (1 - offlineDiscount);
   
       totalPrice += finalOnlinePrice + finalOfflinePrice;
     }
@@ -157,7 +151,7 @@ export default function Cart() {
 
           <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}}>
             <View style={{ borderRadius: 16, width: screenWidth * (300/360), height: screenWidth * (56/360), backgroundColor: '#FF7D40', justifyContent: 'center', alignItems: 'center', marginTop: screenWidth * (70/360), marginBottom: 30 }}>
-                <Text style={{color: '#FEFEFE', fontWeight: 'bold'}}>Rp{calculateTotalPrice(cart).toLocaleString('en-US', { minimumFractionDigits: 2 })} - Pay</Text>
+                <Text style={{color: '#FEFEFE', fontWeight: 'bold'}}>Rp{calculateTotalPrice(cartList).toLocaleString('en-US', { minimumFractionDigits: 2 })} - Pay</Text>
             </View>
           </TouchableOpacity>
 
