@@ -217,7 +217,7 @@ export default function trainerProfile() {
                  <ScrollView horizontal = {true}>
                    <View style={{ width: screenWidth * (310/360), gap: 10 }}>
                      <FlatList
-                       data={trainer.trainerPlan}
+                       data={pricingData}
                        renderItem={renderPlan}
                        keyExtractor={item => item.planId}
                        style = {{maxWidth : screenWidth * (310/360)}}
