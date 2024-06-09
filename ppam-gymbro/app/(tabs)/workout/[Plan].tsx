@@ -13,6 +13,7 @@ export default function Plan() {
   const [loading, setLoading] = useState(false)
   const [excerciseList, setExcerciseList] = useState(null)
   const { workoutList, getWorkoutList, workoutLoading } = useWorkout()
+  const [dayList, setDayList] = useState(null)
   const fetch_data = async () => {
     setLoading(true)
     console.log(Plan)
@@ -22,7 +23,16 @@ export default function Plan() {
       setLoading(false)
       return
     } else {
+      const lastDay = getMaxDay(data)
+      const dayInput = []
+      for (let i = 1; i <= lastDay; i++){
+        let NewDay = { day : i , currentProgress : calculateProgress(i, data)} 
+        dayInput.push(NewDay)
+
+      }
+
       setExcerciseList(data)
+      setDayList(dayInput)
       console.log(data)
       setLoading(false)
       return
@@ -31,6 +41,21 @@ export default function Plan() {
 
   useEffect(() => { fetch_data()}, [] )
 
+  const getMaxDay = (array) => {
+    return array.reduce((max, item) => (item.day > max ? item.day : max), 0);
+  };
+
+  const calculateProgress = (day, array) => {
+    const thisDay = array.filter(item => item.day == day)
+    let done = 0
+    for (const item of thisDay){
+      if (item.isDone) {
+        done += 1
+      }
+    }
+    return (thisDay.length > 0 ? Math.round((100 * done / thisDay.length)) : 0);
+
+  }
   const plan = {
     planName: "Rubah Kampus' Plan",
     planDifficulty: 'Beginner',
@@ -150,12 +175,12 @@ export default function Plan() {
           <ScrollView style={{ flex: 1 }}>
             <View>
               <ScrollView horizontal={true}>
-                {/* <FlatList
-                  data={excerciseList}
+                <FlatList
+                  data={dayList}
                   renderItem={renderDay}
                   keyExtractor={item => item.day}
                   style={{ maxWidth: "100%" }}
-                /> */}
+                />
               </ScrollView>
             </View>
           </ScrollView>

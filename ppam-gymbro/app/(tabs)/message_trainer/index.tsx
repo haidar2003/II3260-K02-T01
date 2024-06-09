@@ -2,11 +2,43 @@ import { StyleSheet, Text, TextInput, View, Image, ImageBackground, ScrollView, 
 import React, {useEffect, useState} from 'react';
 import TrainerSelect  from '@/screen/select_trainer_component/TrainerSelect';
 import TrainerChat from '@/screen/chat_component/TrainerChat';
+import { useAuth } from '@/provider/AuthProvider';
+import { supabase } from '@/utils/supabase';
+import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 
 const screenWidth = Dimensions.get('window').width;
 
 export default function TrainerChatList() {
   const currentUserId = 1;
+  const {session,authLoading,userData,getSession,updateUserData} = useAuth()
+  const [messageData, setMessageData] = useState(null)
+  const [trainerData, setTrainerData] = useState(null)
+  const [loading , setLoading] = useState(false)
+  const [loading2 , setLoading2] = useState(false)
+
+  const getMessageData = async () => {
+    setLoading(true)
+    const {data, error} = await supabase.from("message").select("*").eq("id_user",userData.id_user)
+    if (error){
+      console.log("get Message fail",error)
+    } else {
+      setMessageData(data)
+    }
+    setLoading(false)
+  }
+
+  const getTrainerData = async () => {
+    setLoading2(true)
+    const {data, error} = await supabase.from("Trainer").select("*")
+    if (error){
+      console.log("get Message fail",error)
+    } else {
+      setTrainerData(data)
+    }
+    setLoading2(false)
+  }
+
+  
 
   function isSameDayAsToday(date) {
     const today = new Date();
@@ -38,10 +70,10 @@ export default function TrainerChatList() {
     let displayedTime;
   
     if (item.message.length !== 0) {
-      const lastMessage = item.message[item.message.length - 1];
+      const lastMessage = item.last_message;
   
       if (lastMessage) {
-        const lastMessageTime = new Date(lastMessage.messageTime);
+        const lastMessageTime = new Date(item.last_message_time);
   
         if (!isSameDayAsToday(lastMessageTime)) {
           displayedTime = `${lastMessageTime.getDate()}/${
@@ -55,8 +87,8 @@ export default function TrainerChatList() {
       return (
         <View style={{ marginVertical: screenWidth * (15 / 360) }}>
           <TrainerChat
-            trainerId={item.trainerId}
-            trainerName={item.trainerName}
+            trainerId={item.id_numeric}
+            trainerName={item.nama_trainer}
             lastMessage={lastMessage ? lastMessage.messageContent : ''}
             lastMessageTime={displayedTime}
           />
@@ -76,6 +108,10 @@ export default function TrainerChatList() {
     }
   };
 
+
+  if (loading) {
+    return <LoadingScreen></LoadingScreen>
+  }
 
   return (
     <View style={styles.layout}>
