@@ -22,7 +22,10 @@ function WorkoutCategory() {
         <TouchableOpacity onPress={()=> {console.log("asa");router.navigate("/(tabs)/workout/FreeWorkoutSelection/Body")}}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_full_body.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Full Body
@@ -32,7 +35,10 @@ function WorkoutCategory() {
         <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/FreeWorkoutSelection/Weight")}}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_weight.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Weight
@@ -49,7 +55,10 @@ function WorkoutCategory() {
         <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/FreeWorkoutSelection/Upper Body")}}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_upper_body.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Upper Body
@@ -59,7 +68,10 @@ function WorkoutCategory() {
         <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/FreeWorkoutSelection/Yoga")}}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_yoga.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Yoga
@@ -76,7 +88,10 @@ function WorkoutCategory() {
         <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/FreeWorkoutSelection/Lower Body")}}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_lower_body.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Lower Body
@@ -86,7 +101,10 @@ function WorkoutCategory() {
         <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/FreeWorkoutSelection/Running")}}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_running.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Running
@@ -104,7 +122,10 @@ function WorkoutCategory() {
         <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/FreeWorkoutSelection/Core")}}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_core.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Core
@@ -114,7 +135,10 @@ function WorkoutCategory() {
         <TouchableOpacity>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_rucking.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Rucking
