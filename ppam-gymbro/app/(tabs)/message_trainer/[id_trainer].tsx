@@ -15,6 +15,7 @@ export default function TrainerChat() {
   const [messageList, setMessageList] = useState(null)
   const [trainerData, setTrainerData] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [userMessage, setUserMessage] = useState('')
   const currentUserId = userData.id_user;
   function getDayName(date) {
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -126,12 +127,20 @@ export default function TrainerChat() {
                 />
               </View>   
         <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: screenWidth * (10/360), marginVertical: 10 }}>
-          <View style={{ width: screenWidth * (280/360), height: screenWidth * (50/360), borderWidth: 2, borderColor: '#EEEEEE', borderRadius: 40 }}>
-
-          </View>
-          <View style={{ width: screenWidth * (50/360), height: screenWidth * (50/360), backgroundColor: '#FF7D40', borderRadius: 40 }}>
-
-          </View>
+          <TextInput
+                    style={{ width: screenWidth * (280 / 360), height: screenWidth * (50 / 360), borderWidth: 2, borderColor: '#EEEEEE', borderRadius: 40, paddingHorizontal: 10 }}
+                    value={userMessage}
+                    onChangeText={setUserMessage}
+          />
+          <TouchableOpacity>
+            <View style={{ justifyContent: 'center', alignItems: 'center', width: screenWidth * (50/360), height: screenWidth * (50/360), backgroundColor: '#FF7D40', borderRadius: 40 }}>
+              <Image
+                style = {{ height: 25, width: 25, marginRight: 5 }}
+                source = {require("@/assets/icons/continue_plan.png")}
+              />
+            </View>
+          </TouchableOpacity>
+          
         </View>
     </View>
 
@@ -155,9 +164,8 @@ const styles = StyleSheet.create({
   },
   layout: {
     flex: 1,
-    // flexDirection: 'row',
-    width: Dimensions.get("window").width , //for full screen
-    height: Dimensions.get("window").height, //for full screen
+    width: Dimensions.get("window").width , 
+    height: Dimensions.get("window").height, 
     alignItems: 'center',
     justifyContent: 'flex-start',
     backgroundColor: 'white',
@@ -181,7 +189,6 @@ const styles = StyleSheet.create({
    width : "100%",
    alignItems : "flex-start",
    justifyContent : "flex-end",
-  //  backgroundColor : "black"
   },
   tags : {
     flex : 1,
@@ -191,7 +198,7 @@ const styles = StyleSheet.create({
     padding : 5
   },
   item: {
-    width: 100, // Set width to control the spacing between items
+    width: 100, 
     height: 100,
     backgroundColor: 'blue',
     margin: 10,
@@ -202,8 +209,8 @@ const styles = StyleSheet.create({
   grey : {
     backgroundColor : "grey", 
     position : 'absolute', 
-    width: Dimensions.get("window").width , //for full screen
-    height: Dimensions.get("window").height, //for full screen
+    width: Dimensions.get("window").width ,
+    height: Dimensions.get("window").height, 
     top : 0, 
     left : 0,
     opacity : 0.8,
