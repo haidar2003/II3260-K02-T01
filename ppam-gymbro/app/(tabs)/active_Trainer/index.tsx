@@ -6,7 +6,9 @@ import { useCurrentTrainer } from '@/provider/CurrentTrainerProvider';
 import { useAuth } from '@/provider/AuthProvider';
 import { getMonthDiff } from '@/utils/getMonthDiffts';
 const screenWidth = Dimensions.get('window').width;
-
+import TrainerReview from '@/screen/select_trainer_component/TrainerReview';
+import { Modal } from 'react-native-paper';
+import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 export default function ActiveTrainer() {
   const currentTrainerId = 0;
   const {activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer,nonActiveTrainer} = useCurrentTrainer()
@@ -33,8 +35,10 @@ export default function ActiveTrainer() {
 
   const [activeTrainerList, setActiveTrainerList] = useState(null)
   const [pastTrainerList, setPastTrainerList] = useState(null)
+  const [reviewVisible , setReviewVisible] = useState(false)
 
   useEffect(() => { 
+    console.log("aaa",currentTrainer)
     if  ( activeTrainer != null &&   activeTrainer.length > 0 ) {
       const activeTrainerSelection = activeTrainer.map(item => ({ ...item, isSelected: false }));
       setActiveTrainerList(activeTrainerSelection)
@@ -71,8 +75,11 @@ export default function ActiveTrainer() {
   // },[nonActiveTrainer]);
 
   const setSelectedActiveTrainer = (id) => {
+    // setCurrentTrainer(id)
+    console.log(id)
+    console.log(activeTrainerList)
     setActiveTrainerList(prevData => prevData.map(item => {
-      if (item.trainerId === id) {
+      if (item.id_trainer_active === id) {
         return { ...item, isSelected: true };
       } else {
         return { ...item, isSelected: false };
@@ -84,7 +91,7 @@ export default function ActiveTrainer() {
     return (
       <View style = {{marginVertical: screenWidth * (5/360)}} >
         <TrainerSelect
-        trainerId = {item.trainer_Id}
+        trainerId = {item.id_trainer_active}
         isActive = {item.isActive}
         trainerName= {item.nama_trainer_active}
         onlineSessions={item.onlinecount }
@@ -98,8 +105,9 @@ export default function ActiveTrainer() {
   }
 
   const setSelectedPastTrainer = (id) => {
+    // console.log(pastTrainerList)
     setPastTrainerList(prevData => prevData.map(item => {
-      if (item.trainerId === id) {
+      if (item.id_trainer_non_active === id) {
         return { ...item, isSelected: true };
       } else {
         return { ...item, isSelected: false };
@@ -111,7 +119,7 @@ export default function ActiveTrainer() {
     return (
       <View style = {{marginVertical: screenWidth * (5/360)}} >
         <TrainerSelect
-        trainerId = {item.trainer_Id}
+        trainerId = {item.id_trainer_non_active}
         isActive = {item.isActive}
         trainerName= {item.nama_trainer_non_active}
         onlineSessions={item.onlinecount }
@@ -124,6 +132,10 @@ export default function ActiveTrainer() {
     )
   }
 
+  if (currentTrainerLoading) {
+    
+    return <LoadingScreen></LoadingScreen>
+  }
 
   return (
     <View style={styles.layout}>
@@ -144,7 +156,9 @@ export default function ActiveTrainer() {
           </View>
         </View>
       <View>
-
+      <Modal visible = {reviewVisible}>
+        <TrainerReview  trainerName = {"currentTrainer.nama_trainer_active"} trainer_id = {"currentTrainer.id_trainer_active"} ></TrainerReview>
+      </Modal>
       </View>
            <ScrollView style = {{flex : 1}}>
         <View style = {{flex : 1, marginTop: screenWidth * (20/360),  marginBottom: screenWidth * (10/360), paddingHorizontal: 10, flexDirection : "row", justifyContent : "flex-start", alignItems :"center"}} >

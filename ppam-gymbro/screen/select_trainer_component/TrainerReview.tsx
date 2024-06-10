@@ -4,10 +4,11 @@ import { View, TouchableOpacity, Text, Image, TextInput, StyleSheet, Dimensions 
 const screenWidth = Dimensions.get('window').width;
 
 interface TrainerReviewProps {
+    trainer_id : string
     trainerName: string
 }
 
-const TrainerReview: React.FC<TrainerReviewProps> = ({trainerName }) => {
+const TrainerReview: React.FC<TrainerReviewProps> = ({trainerName, trainer_id }) => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
 
@@ -104,6 +105,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderRadius: 8,
     backgroundColor: '#FEFEFE'
+
   },
   ratingContainer: {
     flexDirection: 'row',
