@@ -5,11 +5,13 @@ import { SearchTrainerElement } from '@/utils/searchTrainerElement';
 import ReserveTrainerPlan from '@/screen/find_trainer_component/ReserveTrainerPlan';
 import { Link } from 'expo-router';
 import ReserveTrainerInvoice from '@/screen/find_trainer_component/ReserveTrainerInvoice';
+import { useAuth } from '@/provider/AuthProvider';
 
 const screenWidth = Dimensions.get('window').width;
 
 export default function Invoice() {
   const currentUserId = 1;
+  const {session,authLoading,userData,getSession,updateUserData} = useAuth()
   const currentUserInvoice = 123123123;
   const today = new Date();
 

@@ -107,7 +107,7 @@ export default function TrainerChat() {
   return (
     <View style={styles.layout}>
       {/* <View style={{position : "absolute", top : 0, left : 0}}> */}
-        <View style={{ width: '100%', marginTop: screenWidth * (35/360), paddingVertical: screenWidth * (20/360), paddingHorizontal: screenWidth * (25/360), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+        <View style={{width: '100%', marginTop: screenWidth * (35/360), paddingVertical: screenWidth * (20/360), paddingHorizontal: screenWidth * (25/360), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
             <Link href="/(tabs)/workout" asChild>
               <Pressable> 
                 <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
@@ -121,25 +121,24 @@ export default function TrainerChat() {
             </View>
             <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360) }}/>
         </View>
-
-              <View style={{ flexDirection: 'column' }}>
+        <View style={{ flexDirection: 'column', height: screenWidth * (540/360) }}>
                 <FlatList 
                   data={messageList}
                   renderItem={renderMessages}
                   keyExtractor={item => item.id_message}
                   style = {{maxWidth : "100%"}} 
                 />
-              </View>   
-        <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: screenWidth * (10/360), marginVertical: 10 }}>
+        </View>   
+        <View style={{ width: screenWidth * (360 / 360), height: screenWidth * (50 / 360), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: screenWidth * (10/360), marginVertical: 10 }}>
           <TextInput
                     style={{ width: screenWidth * (280 / 360), height: screenWidth * (50 / 360), borderWidth: 2, borderColor: '#EEEEEE', borderRadius: 40, paddingHorizontal: 10 }}
                     value={userMessage}
                     onChangeText={setUserMessage}
           />
           <TouchableOpacity>
-            <View style={{ justifyContent: 'center', alignItems: 'center', width: screenWidth * (50/360), height: screenWidth * (50/360), backgroundColor: '#FF7D40', borderRadius: 40 }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center', width: screenWidth * (50/360), height: screenWidth * (50/360), backgroundColor: '#FF7D40', borderRadius: 60 }}>
               <Image
-                style = {{ height: 25, width: 25, marginRight: 5 }}
+                style = {{ height: 25, width: 25 }}
                 source = {require("@/assets/icons/continue_plan.png")}
               />
             </View>
