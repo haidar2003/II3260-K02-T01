@@ -21,7 +21,10 @@ function WorkoutCategory() {
       }}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_full_body.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Full Body
@@ -29,7 +32,10 @@ function WorkoutCategory() {
         </View>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_weight.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Weight
@@ -44,7 +50,10 @@ function WorkoutCategory() {
       }}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_upper_body.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Upper Body
@@ -52,7 +61,10 @@ function WorkoutCategory() {
         </View>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_yoga.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Yoga
@@ -67,7 +79,10 @@ function WorkoutCategory() {
       }}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_lower_body.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Lower Body
@@ -75,7 +90,10 @@ function WorkoutCategory() {
         </View>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_running.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Running
@@ -90,7 +108,10 @@ function WorkoutCategory() {
       }}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_core.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Core
@@ -98,7 +119,10 @@ function WorkoutCategory() {
         </View>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
-
+            <Image
+              style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
+              source={require('@/assets/icons/plan_rucking.png')}
+            />
           </View>
           <Text style={styles.smallText}>
             Rucking

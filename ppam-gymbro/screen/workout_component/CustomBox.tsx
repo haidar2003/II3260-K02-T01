@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Button, Image, TouchableOpacity, Dimensions } from 'react-native';
 import * as Progress from 'react-native-progress';
 
 interface CustomBoxProps {
@@ -13,13 +13,14 @@ interface CustomBoxProps {
     freeWorkoutIsAdded?: boolean;
     homeNextWorkout?: string;
     currentProgress?: number
+    planCategory?: 'full_body' | 'upper_body' | 'lower_body' |'core' | 'weight' | 'yoga' | 'running' | 'rucking' | 'trainer'
 }
 
 const screenWidth = Dimensions.get('window').width;
 
 
 
-const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty, location, trainerWorkoutIsOver, freeWorkoutIsSelected, freeWorkoutIsAdded, homeNextWorkout, currentProgress}) => {
+const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty, location, trainerWorkoutIsOver, freeWorkoutIsSelected, freeWorkoutIsAdded, homeNextWorkout, currentProgress, planCategory}) => {
     const [isAdding, setIsAdding] = useState(freeWorkoutIsAdded);
     
     // Style
@@ -70,6 +71,39 @@ const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty,
         }
       }
     }
+
+    let imageSource
+    let difficultySymbol
+
+    if (planCategory === 'full_body') {
+      imageSource = require('@/assets/icons/plan_full_body.png')
+    } else if (planCategory === 'upper_body') {
+      imageSource = require('@/assets/icons/plan_upper_body.png')
+    } else if (planCategory === 'lower_body') {
+      imageSource = require('@/assets/icons/plan_lower_body.png')
+    } else if (planCategory === 'core') {
+      imageSource = require('@/assets/icons/plan_core.png')
+    } else if (planCategory === 'weight') {
+      imageSource = require('@/assets/icons/plan_weight.png')
+    } else if (planCategory === 'yoga') {
+      imageSource = require('@/assets/icons/plan_yoga.png')
+    } else if (planCategory === 'running') {
+      imageSource = require('@/assets/icons/plan_running.png')
+    } else if (planCategory === 'rucking') {
+      imageSource = require('@/assets/icons/plan_rucking.png')
+    } else if (planCategory === 'trainer') {
+      imageSource = require('@/assets/icons/plan_trainer.png')
+    }
+
+    if (planDifficulty === 'Beginner') {
+      difficultySymbol = require('@/assets/icons/beginner.png')
+    } else if (planDifficulty === 'Intermediate') {
+      difficultySymbol = require('@/assets/icons/intermediate.png')
+    } else if (planDifficulty === 'Advanced') {
+      difficultySymbol = require('@/assets/icons/advanced.png')
+    } else if (planDifficulty === 'Expert') {
+      difficultySymbol = require('@/assets/icons/expert.png')
+    }
     
 
     return (
@@ -79,7 +113,10 @@ const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty,
           {/* Left Section */}
           <View style={styles.leftSection}>
             <View style={styles.circle} >
-              {/* Image */}
+              <Image
+                style={{ width: screenWidth * (26 / 360), height: screenWidth * (26 / 360) }}
+                source={imageSource}
+              />
             </View>
           </View>
     
@@ -88,12 +125,10 @@ const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty,
             <Text style={[styles.text, {fontWeight: 'bold'}]}>{planName}</Text>
             <View style={styles.planDifficultyContainer}>
               {planDifficulty && ( 
-                <Text style={styles.textSmall}>
-                  {planDifficulty === 'Beginner' && 1}
-                  {planDifficulty === 'Intermediate' && 2}
-                  {planDifficulty === 'Advanced' && 3}
-                  {planDifficulty === 'Expert' && 4}
-                </Text>
+                <Image
+                style={{ width: screenWidth * (18 / 360), height: screenWidth * (18 / 360) }}
+                source={difficultySymbol}
+                />
               )}
               <Text style={styles.textSmall}>{planDifficulty}</Text>
             </View>
@@ -104,8 +139,8 @@ const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty,
             </View>) : 
             // Line 92
             (<View style={styles.progressContainer}> 
-              <Progress.Bar borderWidth={0} unfilledColor='#FDE4D3' progress={0.3} width={screenWidth * (140/360)} color='#FF7D40'/>
-              {(100 === 100) ? 
+              <Progress.Bar borderWidth={0} unfilledColor='#FDE4D3' progress={currentProgress/100} width={screenWidth * (140/360)} color='#FF7D40'/>
+              {(currentProgress != 100) ? 
               (<Text style={{fontSize: 12, marginLeft: 18, marginBottom: 5 }}>{currentProgress}%</Text>) : 
               (<Text style={styles.textSmall}>Finished</Text>)}
             </View>) }
