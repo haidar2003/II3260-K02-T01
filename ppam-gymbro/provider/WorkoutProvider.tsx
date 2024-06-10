@@ -10,6 +10,9 @@ const WorkoutProvider = ({ children }) => {
     const [workoutList , setWorkoutList] = useState(null)
     const [workoutLoading, setWorkoutLoading] = useState(false)
     const getWorkoutList = async () => { 
+      if (userData != null) {
+        
+      
         setWorkoutLoading(true)
         const {data, error} = await supabase.from("Workout_Plan").select("*").eq("id_user", userData.id_user)
         if (error) {
@@ -19,10 +22,10 @@ const WorkoutProvider = ({ children }) => {
         }
         setWorkoutLoading(false)
     }
-
+    }
     useEffect(() => {
         getWorkoutList()
-    }, [])
+    }, [userData])
 
     const value = {
         workoutList, getWorkoutList, workoutLoading
