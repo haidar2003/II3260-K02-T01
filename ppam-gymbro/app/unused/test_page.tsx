@@ -37,7 +37,7 @@ export default function HomeScreen() {
     <View style = {styles.layout}>
     <ScrollView contentContainerStyle={styles.content_layout}>
       <View style={{marginBottom: 100}}></View>
-      <TrainerReview />
+      <TrainerReview trainerName='Rubah Kampus'/>
 
 
       {/* <ChatBubble type='trainer' message='Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet ' messageTime='21.00'/>
