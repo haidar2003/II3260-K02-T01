@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CheckBox } from 'react-native-btr';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { useCart } from '@/provider/CartProvider';
 
@@ -73,7 +73,12 @@ const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({id, onlineBundle
                         <View style={{gap: 15, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                             <TouchableOpacity onPress={handlePressOnline} style={{ width: 20, height: 20, borderRadius: 4, justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
                                 {onlineSelected ? (
-                                    <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: '#FF7D40' , backgroundColor: '#FF7D40' }} />
+                                    <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: '#FF7D40' , backgroundColor: '#FF7D40', justifyContent: 'center', alignItems: 'center' }} >
+                                    <Image
+                                    style={{ width: screenWidth * (10 / 360), height: screenWidth * (10 / 360) }}
+                                    source={require('@/assets/icons/check.png')}
+                                    />
+                                </View>
                                 ) : (
                                     <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: '#FF7D40' }} />
                                 )}
@@ -95,7 +100,12 @@ const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({id, onlineBundle
                         <View style={{gap: 15, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                             <TouchableOpacity onPress={handlePressOffline} style={{ width: 20, height: 20, borderRadius: 4, justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
                                 {offlineSelected ? (
-                                    <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: '#FF7D40' , backgroundColor: '#FF7D40' }} />
+                                    <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: '#FF7D40' , backgroundColor: '#FF7D40', justifyContent: 'center', alignItems: 'center' }} >
+                                    <Image
+                                    style={{ width: screenWidth * (10 / 360), height: screenWidth * (10 / 360) }}
+                                    source={require('@/assets/icons/check.png')}
+                                    />
+                                </View>
                                 ) : (
                                     <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: '#FF7D40' }} />
                                 )}
@@ -107,7 +117,7 @@ const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({id, onlineBundle
                         </View>
                         <TouchableOpacity onPress={() => {removeFromCart(id, "Offline")}}>
                         <View>
-                            <Text>X</Text>
+                        <Image style= {{width : screenWidth * (24/360), height : screenWidth * (24/360), }} source={require("@/assets/icons/x.png")}/> 
                         </View>
                         </TouchableOpacity>
                     </View>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CheckBox } from 'react-native-btr';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
 
 interface ExcerciseProps {
@@ -33,7 +33,12 @@ const screenWidth = Dimensions.get('window').width;
             </View>
             <TouchableOpacity onPress={handlePress} style={{ width: 20, height: 20, borderRadius: 4, justifyContent: 'center', alignItems: 'center' }}>
             {isSelected ? (
-                <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: '#FF7D40' , backgroundColor: '#FF7D40' }} />
+                <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: '#FF7D40' , backgroundColor: '#FF7D40', justifyContent: 'center', alignItems: 'center' }} >
+                    <Image
+                    style={{ width: screenWidth * (10 / 360), height: screenWidth * (10 / 360) }}
+                    source={require('@/assets/icons/check.png')}
+                    />
+                </View>
             ) : (
                 <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: '#FF7D40' }} />
             )}

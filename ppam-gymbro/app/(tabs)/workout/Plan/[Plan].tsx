@@ -199,10 +199,11 @@ export default function Plan() {
         <ExcerciseProgress planDifficulty={workoutPlan.planDifficulty} planDuration={workoutPlan.planDuration} currentDay={workoutPlan.currentDay} currentProgress={workoutPlan.currentProgress} />
       </View>
       <View style={{ backgroundColor: '#FEFEFE', alignItems: 'center', borderRadius: 32, marginTop: screenWidth * (110 / 720) }}>
-        <View style={{ marginBottom: screenWidth * (20 / 720), marginTop: screenWidth * (-65 / 720), width: screenWidth * (65 / 360), height: screenWidth * (65 / 360), borderRadius: 60, backgroundColor: '#FF7D40' }}>
-          <View>
-
-          </View>
+        <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: screenWidth * (20 / 720), marginTop: screenWidth * (-65 / 720), width: screenWidth * (65 / 360), height: screenWidth * (65 / 360), borderRadius: 60, backgroundColor: '#FF7D40' }}>
+          <Image
+            style = {{ height: 25, width: 25, marginRight: 0 }}
+            source = {require("@/assets/icons/continue_plan.png")}
+            />
         </View>
         <View>
           <ScrollView style={{ flex: 1 }}>

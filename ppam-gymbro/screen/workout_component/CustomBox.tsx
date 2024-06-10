@@ -24,6 +24,8 @@ const screenWidth = Dimensions.get('window').width;
 
 const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty, location, trainerWorkoutIsOver, freeWorkoutIsSelected, freeWorkoutIsAdded, homeNextWorkout, currentProgress, planCategory}) => {
     const [isAdding, setIsAdding] = useState(freeWorkoutIsAdded);
+
+    
     const {workoutList, getWorkoutList, workoutLoading} = useWorkout()
     const handleRemoveAdd = async () => {
       console.log("ASFgsdghs",planId, planName, freeWorkoutIsAdded)
@@ -154,7 +156,7 @@ const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty,
           <View style={styles.leftSection}>
             <View style={styles.circle} >
               <Image
-                style={{ width: screenWidth * (26 / 360), height: screenWidth * (26 / 360) }}
+                style={{ width: screenWidth * (24 / 360), height: screenWidth * (24 / 360) }}
                 source={imageSource}
               />
             </View>
@@ -174,7 +176,10 @@ const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty,
             </View>
             {((location === 'trainer-menu') && trainerWorkoutIsOver) ? 
             (<View style={styles.progressContainer}>
-              <Text>Clock</Text>
+                <Image
+                style={{ width: screenWidth * (18 / 360), height: screenWidth * (18 / 360) }}
+                source={require('@/assets/icons/clock.png')}
+                />
               <Text>A month ago</Text>
             </View>) : 
             // Line 92
@@ -182,7 +187,12 @@ const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty,
               <Progress.Bar borderWidth={0} unfilledColor='#FDE4D3' progress={currentProgress/100} width={screenWidth * (140/360)} color='#FF7D40'/>
               {(currentProgress != 100) ? 
               (<Text style={{fontSize: 12, marginLeft: 18, marginBottom: 5 }}>{currentProgress}%</Text>) : 
-              (<Text style={styles.textSmall}>Finished</Text>)}
+              (<View style={{ height: 20, width: 20, borderRadius: 20, backgroundColor: '#FF7D40', alignItems: 'center', justifyContent: 'center' }}>
+                  <Image
+                    style={{ width: screenWidth * (13 / 360), height: screenWidth * (13 / 360) }}
+                    source={require('@/assets/icons/check.png')}
+                    />
+              </View>)}
             </View>) }
             {/* <View style={styles.progressContainer}>
               <Progress.Bar progress={0.3} width={140} />
@@ -194,7 +204,18 @@ const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty,
         {/* Bottom */}
         {(location === 'main-home') && ( 
           <View style={styles.continueWorkout}>
-            
+            <Image
+              style = {{ height: 25, width: 40 }}
+              source = {require("@/assets/icons/continue_home.png")}
+              />
+              <View style={{gap: 5}}>
+                <Text style={{fontSize: 12}}>
+                  Next Excercise
+                </Text>
+                <Text style={{fontSize: 14, fontWeight: 'bold'}}>
+                    PLACEHOLDER
+                </Text>
+              </View>
           </View>
         )}
 
@@ -357,8 +378,11 @@ const styles = StyleSheet.create({
     height: screenWidth * (60/360),
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     backgroundColor: '#FEFEFE',
     borderRadius: 24,
+    gap: 20,
+    paddingHorizontal: 20
   },
   
   buttonsContainer: {
