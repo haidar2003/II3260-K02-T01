@@ -102,9 +102,16 @@ export default function Profile() {
             </View>
 
             <View style={{ gap: 10, marginVertical: 10 }}>
-                <Text style={{ color: '#444444', fontWeight: 'bold', fontSize: 16 }}>
-                    Password
-                </Text>
+                <View style={{ width: screenWidth * (314 / 360), flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                    <Text style={{ color: '#444444', fontWeight: 'bold', fontSize: 16 }}>
+                        Password
+                    </Text>
+                    <TouchableOpacity>
+                        <Text style={{ color: '#575757', fontSize: 12 }}>
+                            Change Password
+                        </Text>
+                    </TouchableOpacity>
+                </View>
                 <TextInput
                     style={{ width: screenWidth * (314 / 360), height: screenWidth * (56 / 360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12, paddingHorizontal: 10 }}
                     value={password}
@@ -113,15 +120,14 @@ export default function Profile() {
                 />
             </View>
 
-                <View style={{ width: screenWidth * (300/360), height: screenWidth * (56/360), alignItems: 'center', borderWidth: 2, justifyContent: 'center', borderColor: '#FF7D40', borderRadius: 12, marginTop: 150, marginBottom: 30 }}>
-                    <Text style={{ color: '#FF7D40', fontWeight: 'bold', fontSize: 16 }}>
-                        Logout
-                    </Text>
-                </View>
-
-                
-
-
+                <TouchableOpacity>
+                    <View style={{ width: screenWidth * (300/360), height: screenWidth * (56/360), alignItems: 'center', borderWidth: 2, justifyContent: 'center', borderColor: '#FF7D40', borderRadius: 12, marginTop: 150, marginBottom: 30 }}>
+                        <Text style={{ color: '#FF7D40', fontWeight: 'bold', fontSize: 16 }}>
+                            Logout
+                        </Text>
+                    </View> 
+                </TouchableOpacity>
+    
             </ScrollView>
         </View>
     )
