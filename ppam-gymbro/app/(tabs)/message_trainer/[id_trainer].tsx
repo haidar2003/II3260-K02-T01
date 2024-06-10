@@ -23,6 +23,39 @@ export default function TrainerChat() {
     return daysOfWeek[date.getDay()];
   }
   const getMessageData = async () => {
+    // setLoading(true)
+    const {data, error} = await supabase.from("Chat").select("*").eq("id_trainer",id_trainer).single()
+    if (error) {
+      console.log("failed fetch message", error) 
+    } else {
+      
+      const {data : data2, error : error2} = await supabase.from("Trainer").select("*").eq("trainer_id", id_trainer).single()
+      if (error2) {
+        console.log("failed fetch message trainer", error2)
+      } else {
+        const {data : data3, error : error3} = await supabase.from("Message").select("*").eq("id_chat", data.id_chat)
+        if (error3) {
+          console.log("failed fetch message trainer", error3)
+        } else {
+          // console.log(data3)
+          const earliestMessage = data3.reduce((earliest, current) => {
+            const earliestDate = new Date(earliest.date);
+            const currentDate = new Date(current.date);
+            
+            return currentDate < earliestDate ? current : earliest;
+          }, data3[0]);
+          // console.log("A",earliestMessage.date)
+          lastDate.current = new Date(earliestMessage.date)
+          // console.log("B",lastDate)
+          setChatData(data)
+          setTrainerData(data2)
+          setMessageList(data3)
+        }
+      }
+    }
+    // setLoading(false)
+  }
+  const fetchData = async () => {
     setLoading(true)
     const {data, error} = await supabase.from("Chat").select("*").eq("id_trainer",id_trainer).single()
     if (error) {
@@ -100,7 +133,7 @@ export default function TrainerChat() {
         </View>
       )
   };
-  useEffect(() => {getMessageData()}, [])
+  useEffect(() => {fetchData()}, [])
   
   if (loading) {
     return <LoadingScreen/>
@@ -137,7 +170,7 @@ export default function TrainerChat() {
                     value={userMessage}
                     onChangeText={setUserMessage}
           />
-          <TouchableOpacity onPress={()=>{handleSend(); setTimeout(()=> {getMessageData()}, 500)}}>
+          <TouchableOpacity onPress={()=>{handleSend(); setTimeout(()=> {getMessageData()}, 10)}}>
             <View style={{ justifyContent: 'center', alignItems: 'center', width: screenWidth * (50/360), height: screenWidth * (50/360), backgroundColor: '#FF7D40', borderRadius: 60 }}>
               <Image
                 style = {{ height: 25, width: 25 }}
