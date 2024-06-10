@@ -150,23 +150,23 @@ export default function Find_Trainer() {
 
         { stateScreen === 1 &&(
         
-          <Filter         minPrice={minPrice}
-          maxPrice={maxPrice}
-          tags={tags}
-          location={location}
-          online={online}
-          offline={offline}
-          rating={rating}
-          setMinPrice={setMinPrice}
-          setMaxPrice={setMaxPrice}
-          setTags={setTags}
-          setLocation={setLocation}
-          setOnline={setOnline}
-          setOffline={setOffline}
-          setRating={setRating}
-          toggleTags={toggleTags}>
-      
-          </Filter>
+          <Filter         
+            minPrice={minPrice}
+            maxPrice={maxPrice}
+            tags={tags}
+            location={location}
+            online={online}
+            offline={offline}
+            rating={rating}
+            setMinPrice={setMinPrice}
+            setMaxPrice={setMaxPrice}
+            setTags={setTags}
+            setLocation={setLocation}
+            setOnline={setOnline}
+            setOffline={setOffline}
+            setRating={setRating}
+            toggleTags={toggleTags}
+          />
         )} 
     </View>
 

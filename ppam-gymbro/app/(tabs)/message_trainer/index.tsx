@@ -148,7 +148,7 @@ export default function TrainerChatList() {
           <View style = {{flex : 1}}></View>
           <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
             <View style={styles.searchBar}>  
-              <Image source={require("@/assets/search.png")} style = {{margin : 20}}>
+              <Image source={require("@/assets/icons/search.png")} style = {{ width: 25, height: 25, margin : 20 }}>
                 {/* Icon Kaca Pembesar */}
               </Image>
               <TextInput>

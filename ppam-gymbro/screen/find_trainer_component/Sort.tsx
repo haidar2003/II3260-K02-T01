@@ -44,8 +44,8 @@ const screenWidth = Dimensions.get('window').width;
 
   const [minPriceTemp, setMinPriceTemp] = useState(minPrice)    
   const [maxPriceTemp, setMaxPriceTemp] = useState(maxPrice)
-  const [minPriceDisplay, setMinPriceDisplay] = useState( numberToRupiah(minPrice))    
-  const [maxPriceDisplay, setMaxPriceDisplay] = useState( numberToRupiah(maxPrice))
+  const [minPriceDisplay, setMinPriceDisplay] = useState("Rp " + numberToRupiah(minPrice))    
+  const [maxPriceDisplay, setMaxPriceDisplay] = useState("Rp " + numberToRupiah(maxPrice))
   const [ratingTemp, setRatingTemp] = useState(rating)
   const [ratingDisplay, setRatingDisplay] = useState(rating.toString())
   const [locationTemp, setLocationTemp ] = useState(location)
