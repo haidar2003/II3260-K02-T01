@@ -5,6 +5,7 @@ import Filter from '@/screen/find_trainer_component/Filter';
 import {numberToRupiah} from "@/utils/formatting"
 import {Tag, Tag_status} from "@/utils/tag"
 import { Link } from 'expo-router';
+import Sort from '@/screen/find_trainer_component/Sort';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -25,6 +26,11 @@ export default function Find_Trainer() {
   const [stateScreen, setStateScreen] = useState<number>(0);
   const [rating, setRating] = useState<number>(0);
   const [query, setQuery] = useState("")
+
+  const [sortPrice, setSortPrice] = useState(0)
+  const [sortRating, setSortRating] = useState(0)
+  const [sortName, setSortName] = useState(0)
+
   const fetchInitialData = async () => {
     try {
       const {data: fetchTagData, error : errorTag} = await supabase.from("Tag").select("*");
@@ -116,9 +122,11 @@ export default function Find_Trainer() {
                 <Image source={require("@/assets/icons/filter.png")} style={{width: 20, height: 20 }} />
               </View>
             </Pressable>
-            <View style={{ height: screenWidth * (32/360), width: screenWidth * (40/360), marginHorizontal : 5, justifyContent: 'center', alignItems: 'center', backgroundColor: '#FF7D40', borderRadius: 12 }}>
-                <Image source={require("@/assets/icons/sort.png")} style={{width: 20, height: 20 }} />
-            </View>
+            <Pressable onPress = {() => setStateScreen(2)}>
+              <View style={{ height: screenWidth * (32/360), width: screenWidth * (40/360), marginHorizontal : 5, justifyContent: 'center', alignItems: 'center', backgroundColor: '#FF7D40', borderRadius: 12 }}>
+                  <Image source={require("@/assets/icons/sort.png")} style={{width: 20, height: 20 }} />
+              </View>
+            </Pressable>
           </View>
 
           
@@ -141,14 +149,15 @@ export default function Find_Trainer() {
           style = {{maxWidth : "95%"}} />
         </View>
         {/* </View> */}
-        { stateScreen === 1 &&( 
+
+        { stateScreen === 1 && ( 
         <View style = {styles.grey}>
           <TouchableOpacity onPress={ () => setStateScreen(0)} disabled = {false} style={{flex : 1}}>
             <View style = {{flex : 1}}/>
           </TouchableOpacity>
         </View>)}
 
-        { stateScreen === 1 &&(
+        { stateScreen === 1 && (
         
           <Filter         
             minPrice={minPrice}
@@ -167,9 +176,30 @@ export default function Find_Trainer() {
             setRating={setRating}
             toggleTags={toggleTags}
           />
-        )} 
-    </View>
 
+        )} 
+
+        { stateScreen === 2 && ( 
+        <View style = {styles.grey}>
+          <TouchableOpacity onPress={ () => setStateScreen(0)} disabled = {false} style={{flex : 1}}>
+            <View style = {{flex : 1}}/>
+          </TouchableOpacity>
+        </View>)}
+
+        { stateScreen === 2 && (
+        
+          <Sort         
+            sortPrice={sortPrice}
+            sortRating={sortRating}
+            sortName={sortName}
+            setSortPrice={setSortPrice}
+            setSortRating={setSortRating}
+            setSortName={setSortName}
+          />
+
+        )} 
+
+    </View>
   )
 }
 
