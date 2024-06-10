@@ -29,13 +29,13 @@ export default function trainerProfile() {
     };
     const getTrainerData = async () => {
       setLoading1(true)
-      console.log(trainer_id)
+      // console.log(trainer_id)
       const {data, error} = await supabase.from("Trainer").select("*").eq("id_numeric", trainer_id).single()
       if (error) {
         console.log("get trainer data failed",trainer_id,error)
         setLoading1(false)
       } else {
-        console.log("Get TRAINER DATA",data)
+        // console.log("Get TRAINER DATA",data)
         setTrainerData(data)
         setLoading1(false)
       }
@@ -128,7 +128,7 @@ export default function trainerProfile() {
     getReviewData();
     console.log(pathname) 
     // console.log(trainerData)
-    console.log("TASF",trainerData)
+    // console.log("TASF",trainerData)
 
   }, [currentScreen]);
 
@@ -136,9 +136,9 @@ export default function trainerProfile() {
     return <LoadingScreen/>
   } else {
 
-  console.log(reviewData)
-  console.log(trainerData)
-  console.log(pricingData)
+  // console.log(reviewData)
+  // console.log(trainerData)
+  // console.log(pricingData)
 
   return (
     <View style={styles.layout}>

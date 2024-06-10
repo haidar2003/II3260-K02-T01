@@ -21,7 +21,7 @@ export default function HomeScreen() {
   const fetchIntialData = async () => {
     setLoading(true)
     if (userData != null) {
-      console.log("Home Initial Data    :",userData)
+      // console.log("Home Initial Data    :",userData)
       
       const {data : trainerPlanData, error : trainerPlanError} = await supabase.from("Workout_Plan").select("id_workout_plan ,name_workout_plan, planDifficulty, planDuration, planCategory, currentProgress, currentDay" ).eq("id_user", userData.id_user).eq("planCategory", "Trainer")
       if (trainerPlanError) {

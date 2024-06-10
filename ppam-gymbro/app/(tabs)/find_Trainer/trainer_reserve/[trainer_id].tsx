@@ -30,13 +30,13 @@ export default function TrainerReserve() {
   }
   const getTrainerData = async () => {
     setLoading1(true)
-    console.log(trainer_id)
+    // console.log(trainer_id)
     const {data, error} = await supabase.from("Trainer").select("*").eq("id_numeric", trainer_id).single()
     if (error) {
       console.log("get trainer data failed",trainer_id,error)
       setLoading1(false)
     } else {
-      console.log("Get TRAINER DATA",data)
+      // console.log("Get TRAINER DATA",data)
       setTrainerData(data)
       setLoading1(false)
     }
@@ -83,7 +83,7 @@ export default function TrainerReserve() {
   const setSelectedOnlinePlan = (bundle) => {
     setOnlinePlans(prevData => prevData.map(item => {
       if (item.bundle === bundle) {
-        console.log(bundle)
+        // console.log(bundle)
         return { ...item, isSelected: !item.isSelected };
       } else {
         return { ...item, isSelected: false };
@@ -110,7 +110,7 @@ export default function TrainerReserve() {
   const setSelectedOfflinePlan = (bundle) => {
     setOfflinePlans(prevData => prevData.map(item => {
       if (item.bundle === bundle) {
-        console.log(bundle)
+        // console.log(bundle)
         return { ...item, isSelected: !item.isSelected };
       } else {
         return { ...item, isSelected: false };

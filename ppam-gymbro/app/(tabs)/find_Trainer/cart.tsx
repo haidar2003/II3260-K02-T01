@@ -91,7 +91,7 @@ export default function Cart() {
     )
   }
 
-  useEffect(() => console.log(cartList) ,[cartList])
+  // useEffect(() => console.log(cartList) ,[cartList])
   return (
     <View style={styles.layout}>
       <ScrollView style = {{flex : 1}}>

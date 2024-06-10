@@ -8,27 +8,37 @@ import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 const screenWidth = Dimensions.get('window').width;
 
 export default function ExcerciseList() {
-    const currentDay = 4;
+    
     const {id_workout, day} = useLocalSearchParams()
     const [loading , setLoading] = useState(false)
     const [excerciseList, setExcerciseList] = useState(null)
     const fetch_data = async () => {
+      console.log(day)
       setLoading(true)
-      const {data, error} = await supabase.from("workout").select("*").eq("id_workout_plan", id_workout)
+      const {data, error} = await supabase.from("Workout").select("*").eq("id_workout_plan", id_workout)
       if (error) {
         console.log("Exercise Fetch fail", error )
       } else {
         setExcerciseList(data)
       }
+      
+      setLoading(false)
     }
     const calculateProgress = (day, array) => {
+
+      // return 0
       const thisDay = array.filter(item => item.day == day)
       let done = 0
+      console.log(thisDay)
+      console.log("Ada berapa ",thisDay.length)
       for (const item of thisDay){
+        console.log(item.isDone)
         if (item.isDone) {
-          done += 1
+          
+          done = done + 1
         }
       }
+      console.log(done)
       return (thisDay.length > 0 ? Math.round((100 * done / thisDay.length)) : 0);
   
     }
@@ -100,7 +110,7 @@ export default function ExcerciseList() {
       )
   };
 
-  if (loading  ) {
+  if (loading || excerciseList == null ) {
     return (<LoadingScreen/>)
   }
   return (
@@ -115,7 +125,7 @@ export default function ExcerciseList() {
             </Link>
             <View>
               <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#444444' }}>
-                Day {currentDay}
+                Day {day}
               </Text>
             </View>
             <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360) }}/>
@@ -123,7 +133,7 @@ export default function ExcerciseList() {
         <View style={{ width: screenWidth, alignItems: 'center', marginVertical: 5 }}>
           <View style = {{ flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (10/360), marginBottom: screenWidth * (10/360)}} >
             <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Excercises</Text>
-            <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>{calculateProgress(currentDay, excerciseList)}%</Text>
+            <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>{calculateProgress(day, excerciseList)}%</Text>
           </View>
         </View>
         <ScrollView horizontal = {true}>

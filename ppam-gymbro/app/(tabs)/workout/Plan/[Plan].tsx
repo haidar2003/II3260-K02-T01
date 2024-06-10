@@ -14,9 +14,12 @@ export default function Plan() {
   const [excerciseList, setExcerciseList] = useState(null)
   const { workoutList, getWorkoutList, workoutLoading } = useWorkout()
   const [dayList, setDayList] = useState(null)
+  const workoutPlan = workoutList.find(item => item.id_workout_plan == Plan)
   const fetch_data = async () => {
     setLoading(true)
-    console.log(Plan)
+    console.log("H",Plan)
+    console.log("HF",workoutList)
+    console.log("HFG",workoutPlan)
     const { data, error } = await supabase.from("Workout").select("*").eq("id_workout_plan", Plan)
     if (error) {
       console.log("Exercise Fetch fail", error)
@@ -33,8 +36,12 @@ export default function Plan() {
 
       setExcerciseList(data)
       setDayList(dayInput)
-      console.log(data)
+      // console.log(dayInput)
       setLoading(false)
+      // const { data : data2, error : error2 } = await supabase.from("Workout_Plan").select("*").eq("id_workout_plan", Plan).single()
+      // if (error2) {
+      //   console.log(error2)
+      // } else {}
       return
     }
   }
@@ -154,9 +161,9 @@ export default function Plan() {
   const renderDay = ({ item }) => {
 
     return (
-      <TouchableOpacity onPress={ () => {router.navigate("/workout/Exercise/"+Plan+"?day="+plan.day)}}>
+      <TouchableOpacity onPress={ () => {router.navigate("/workout/Exercise/"+Plan+"?day="+item.day); }}>
         <View style={{ margin: 0, width: '100%' }}>
-          <ExcerciseDay day={item.day} currentProgress={item.currentProgress} isCurrent={item.day === plan.currentDay ? true : false} />
+          <ExcerciseDay day={item.day} currentProgress={item.currentProgress} isCurrent={item.day === CurrentDay ? true : false} />
         </View>
       </TouchableOpacity>
     )
@@ -185,7 +192,7 @@ export default function Plan() {
         <View style={{ height: screenWidth * (56 / 360), width: screenWidth * (56 / 360) }} />
       </View>
       <View>
-        <ExcerciseProgress planDifficulty={plan.planDifficulty} planDuration={plan.planDuration} currentDay={plan.currentDay} currentProgress={plan.currentProgress} />
+        <ExcerciseProgress planDifficulty={workoutPlan.planDifficulty} planDuration={workoutPlan.planDuration} currentDay={workoutPlan.currentDay} currentProgress={workoutPlan.currentProgress} />
       </View>
       <View style={{ backgroundColor: '#FEFEFE', alignItems: 'center', borderRadius: 32, marginTop: screenWidth * (110 / 720) }}>
         <View style={{ marginBottom: screenWidth * (20 / 720), marginTop: screenWidth * (-65 / 720), width: screenWidth * (65 / 360), height: screenWidth * (65 / 360), borderRadius: 60, backgroundColor: '#FF7D40' }}>

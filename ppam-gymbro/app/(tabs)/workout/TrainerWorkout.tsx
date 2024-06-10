@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable, TouchableOpacity } from 'react-native';
 import CustomBox from '@/screen/workout_component/CustomBox';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { Image } from 'expo-image';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useWorkout } from '@/provider/WorkoutProvider';
@@ -10,23 +10,16 @@ const screenWidth = Dimensions.get('window').width;
 
 export default function TrainerWorkout() {
     const {workoutList, getWorkoutList, workoutLoading} = useWorkout()
-    const trainerWorkout = [
-      { planId: 1, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
-      { planId: 2, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
-      { planId: 3, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
-      { planId: 4, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: false, currentProgress: 50, currentDay: 4 },
-      { planId: 5, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: true, currentProgress: 50, currentDay: 4 },
-      { planId: 6, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: true, currentProgress: 50, currentDay: 4 },
-      { planId: 7, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: true, currentProgress: 50, currentDay: 4 },
-      { planId: 8, planName: "Trainer X's Plan", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Trainer', trainerWorkoutIsOver: true, currentProgress: 50, currentDay: 4 },
-    ]
+
     // trainerWorkoutIsOver, kalau trainer nggak aktif = true
   const renderWorkoutActive = ({ item }) => {
     if (!item.isActive){
       return (
+        <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/Plan/"+item.planId)}}>
         <View style = {{padding : 5}}>
           <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='trainer-menu'/>
         </View>
+        </TouchableOpacity>
       )
     }
   };
@@ -34,9 +27,11 @@ export default function TrainerWorkout() {
   const renderWorkoutFinished = ({ item }) => {
     if (item.isActive){
       return (
+        <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/Plan/"+item.planId)}}>
         <View style = {{padding : 5}}>
           <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='trainer-menu'/>
         </View>
+        </TouchableOpacity>
       )
     }
 };
