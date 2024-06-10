@@ -20,7 +20,7 @@ export default function TrainerReserve() {
   const {cartList, addToCart, removeFromCart} = useCart()
   const getPricingData = async () => {
     setLoading3(true)
-    const {data, error} = await supabase.from("Pricing_Plan").select("*").eq("id_numeric", trainer_id)
+    const {data, error} = await supabase.from("Pricing_Plan").select("*").eq("trainer_id", trainer_id)
     if (error) {
       console.log("get pricing data failed",trainer_id,error)
     } else {
@@ -31,7 +31,7 @@ export default function TrainerReserve() {
   const getTrainerData = async () => {
     setLoading1(true)
     // console.log(trainer_id)
-    const {data, error} = await supabase.from("Trainer").select("*").eq("id_numeric", trainer_id).single()
+    const {data, error} = await supabase.from("Trainer").select("*").eq("trainer_id", trainer_id).single()
     if (error) {
       console.log("get trainer data failed",trainer_id,error)
       setLoading1(false)
@@ -145,7 +145,7 @@ export default function TrainerReserve() {
     const offlineElement = offlinePlans.find(item => item.isSelected)
     const onlineElement = onlinePlans.find(item => item.isSelected)
     const newElement = {
-      trainerId : trainerData.id_numeric,
+      trainerId : trainerData.trainer_id,
       trainerName : trainerData.nama_trainer,
       onlineBundle : 0,
       offlineBundle : 0,

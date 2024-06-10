@@ -85,7 +85,7 @@ export default function Find_Trainer() {
 
   const renderTrainer = ({ item }) => (
     <View style = {{ marginHorizontal: 5, marginVertical: 7.5}}>
-      <RowComp id = {item.id_numeric} name={item.nama_trainer} rating={item.rating} price={item.min_price} />
+      <RowComp id = {item.trainer_id} name={item.nama_trainer} rating={item.rating} price={item.min_price} />
     </View>
   );
   const renderTags = ({item}) => (

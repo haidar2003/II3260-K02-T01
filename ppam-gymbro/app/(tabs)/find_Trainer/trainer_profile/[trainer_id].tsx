@@ -30,7 +30,7 @@ export default function trainerProfile() {
     const getTrainerData = async () => {
       setLoading1(true)
       // console.log(trainer_id)
-      const {data, error} = await supabase.from("Trainer").select("*").eq("id_numeric", trainer_id).single()
+      const {data, error} = await supabase.from("Trainer").select("*").eq("trainer_id", trainer_id).single()
       if (error) {
         console.log("get trainer data failed",trainer_id,error)
         setLoading1(false)
@@ -44,7 +44,7 @@ export default function trainerProfile() {
 
     const getReviewData = async () => {
       setLoading2(true)
-      const {data, error} = await supabase.from("Review").select("*").eq("id_numeric", trainer_id)
+      const {data, error} = await supabase.from("Review").select("*").eq("trainer_id", trainer_id)
       if (error) {
         console.log("get review data failed",trainer_id,error)
       } else {
@@ -54,7 +54,7 @@ export default function trainerProfile() {
     }
     const getPricingData = async () => {
       setLoading3(true)
-      const {data, error} = await supabase.from("Pricing_Plan").select("*").eq("id_numeric", trainer_id)
+      const {data, error} = await supabase.from("Pricing_Plan").select("*").eq("trainer_id", trainer_id)
       if (error) {
         console.log("get pricing data failed",trainer_id,error)
       } else {
@@ -65,7 +65,7 @@ export default function trainerProfile() {
 
     const getTagData = async () => {
       setLoading4(true)
-      const {data, error} = await supabase.from("Pricing_Plan").select("*").eq("id_numeric", trainer_id)
+      const {data, error} = await supabase.from("Pricing_Plan").select("*").eq("trainer_id", trainer_id)
       if (error) {
         console.log("get pricing data failed",trainer_id,error)
       } else {
