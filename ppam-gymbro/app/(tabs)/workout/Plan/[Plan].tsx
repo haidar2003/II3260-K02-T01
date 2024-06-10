@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, ScrollView, Dimensions, FlatList, Pressable } from 'react-native'
-import { Link } from 'expo-router';
+import { StyleSheet, Text, View, ScrollView, Dimensions, FlatList, Pressable, TouchableOpacity } from 'react-native'
+import { Link, router } from 'expo-router';
 import ExcerciseDay from '@/screen/workout_component/ExcerciseDay';
 import ExcerciseProgress from '@/screen/workout_component/ExcerciseProgress';
 import { useLocalSearchParams } from 'expo-router';
@@ -44,6 +44,26 @@ export default function Plan() {
   const getMaxDay = (array) => {
     return array.reduce((max, item) => (item.day > max ? item.day : max), 0);
   };
+  const CurrentDay = (array) => {
+    let i = 1
+    let cday = 1
+    const max = array.length
+    if (max <= 0  ) {
+      return 1
+    }
+    else {
+      while (i <= max) {
+        if (array[i].currentProgress >= 99) {
+          if (cday <= array[i].day ) {
+            cday = array[i].day + 1
+          }
+
+        }
+
+      }
+    }
+
+  }
 
   const calculateProgress = (day, array) => {
     const thisDay = array.filter(item => item.day == day)
@@ -134,9 +154,11 @@ export default function Plan() {
   const renderDay = ({ item }) => {
 
     return (
-      <View style={{ margin: 0, width: '100%' }}>
-        <ExcerciseDay day={item.day} currentProgress={item.currentProgress} isCurrent={item.day === plan.currentDay ? true : false} />
-      </View>
+      <TouchableOpacity onPress={ () => {router.navigate("/workout/Exercise/"+Plan+"?day="+plan.day)}}>
+        <View style={{ margin: 0, width: '100%' }}>
+          <ExcerciseDay day={item.day} currentProgress={item.currentProgress} isCurrent={item.day === plan.currentDay ? true : false} />
+        </View>
+      </TouchableOpacity>
     )
   };
 

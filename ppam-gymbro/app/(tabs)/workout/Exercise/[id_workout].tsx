@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable } from 'react-native';
 import CustomBox from '@/screen/workout_component/CustomBox';
 import { Link, useLocalSearchParams } from 'expo-router';
@@ -9,7 +9,7 @@ const screenWidth = Dimensions.get('window').width;
 
 export default function ExcerciseList() {
     const currentDay = 4;
-    const {id_workout} = useLocalSearchParams()
+    const {id_workout, day} = useLocalSearchParams()
     const [loading , setLoading] = useState(false)
     const [excerciseList, setExcerciseList] = useState(null)
     const fetch_data = async () => {
@@ -21,6 +21,18 @@ export default function ExcerciseList() {
         setExcerciseList(data)
       }
     }
+    const calculateProgress = (day, array) => {
+      const thisDay = array.filter(item => item.day == day)
+      let done = 0
+      for (const item of thisDay){
+        if (item.isDone) {
+          done += 1
+        }
+      }
+      return (thisDay.length > 0 ? Math.round((100 * done / thisDay.length)) : 0);
+  
+    }
+    useEffect(() => {fetch_data()}, [])
     const plan = {
         planName: "Rubah Kampus' Plan",
         planDifficulty: 'Beginner',
@@ -66,16 +78,16 @@ export default function ExcerciseList() {
                 { excerciseId: 4, excerciseName: 'Back Up', sets: 2, reps: 4, isFinished: false },
             ] },
             { day: 7, currentProgress: 0, excercise: [
-                { excerciseId: 1, excerciseName: 'Push Up', sets: 2, reps: 4, isFinished: false },
-                { excerciseId: 2, excerciseName: 'Pull Up', sets: 2, reps: 4, isFinished: false },
-                { excerciseId: 3, excerciseName: 'Sit Up', sets: 2, reps: 4, isFinished: false },
-                { excerciseId: 4, excerciseName: 'Back Up', sets: 2, reps: 4, isFinished: false },
+                { excerciseId: 1, excerciseName: 'Push Up', sets: 2, reps: 4, isDone: false },
+                { excerciseId: 2, excerciseName: 'Pull Up', sets: 2, reps: 4, isDone: false },
+                { excerciseId: 3, excerciseName: 'Sit Up', sets: 2, reps: 4, isDone: false },
+                { excerciseId: 4, excerciseName: 'Back Up', sets: 2, reps: 4, isDone: false },
             ] },
             { day: 8, currentProgress: 0, excercise: [
-                { excerciseId: 1, excerciseName: 'Push Up', sets: 2, reps: 4, isFinished: false },
-                { excerciseId: 2, excerciseName: 'Pull Up', sets: 2, reps: 4, isFinished: false },
-                { excerciseId: 3, excerciseName: 'Sit Up', sets: 2, reps: 4, isFinished: false },
-                { excerciseId: 4, excerciseName: 'Back Up', sets: 2, reps: 4, isFinished: false },
+                { excerciseId: 1, excerciseName: 'Push Up', sets: 2, reps: 4, isDone: false },
+                { excerciseId: 2, excerciseName: 'Pull Up', sets: 2, reps: 4, isDone: false },
+                { excerciseId: 3, excerciseName: 'Sit Up', sets: 2, reps: 4, isDone: false },
+                { excerciseId: 4, excerciseName: 'Back Up', sets: 2, reps: 4, isDone: false },
             ] },
         ] 
     }
@@ -83,12 +95,12 @@ export default function ExcerciseList() {
   const renderExcercise = ({ item }) => {
       return (
         <View style = {{margin : 0}}>
-          <Excercise excerciseId={item.excerciseId} excerciseName={item.excerciseName} sets={item.sets} reps={item.reps} isFinished={item.isFinished}/>
+          <Excercise excerciseId={item.excerciseId} excerciseName={item.excerciseName} sets={item.sets} reps={item.reps} isFinished={item.isDone}/>
         </View>
       )
   };
 
-  if (loading ) {
+  if (loading  ) {
     return (<LoadingScreen/>)
   }
   return (
@@ -111,7 +123,7 @@ export default function ExcerciseList() {
         <View style={{ width: screenWidth, alignItems: 'center', marginVertical: 5 }}>
           <View style = {{ flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (10/360), marginBottom: screenWidth * (10/360)}} >
             <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Excercises</Text>
-            <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>{plan.day[currentDay-1].currentProgress}%</Text>
+            <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>{calculateProgress(currentDay, excerciseList)}%</Text>
           </View>
         </View>
         <ScrollView horizontal = {true}>
