@@ -59,7 +59,7 @@ export default function HomeScreen() {
   const renderWorkout = ({ item }) => {
       return (
         <View style = {{marginVertical: 5}}>
-          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='main-home'/>
+          <CustomBox planId={item.id_workout_plan} planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='main-home'/>
         </View>
       )
   };

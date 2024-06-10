@@ -46,9 +46,21 @@ const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty,
     }
 
     const handleAdd = async () => {
-
+      const {data, error} = await supabase.from("Workout_Plan").update({is_active : true}).eq("id_workout_plan", planId)
+      if (error) {
+        console.log(error)
+      }
+      setTimeout(() => {getWorkoutList()}, 400)
     }
 
+
+    const handleRemove = async () => {
+      const {data, error} = await supabase.from("Workout_Plan").update({is_active : false}).eq("id_workout_plan", planId)
+      if (error) {
+        console.log(error)
+      }
+      setTimeout(() => {getWorkoutList()}, 400)
+    }
 
 
     // Style
@@ -190,7 +202,7 @@ const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty,
           <View>
             {location === 'free-menu' && (
               <View style={styles.buttonsContainer}>
-                <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: '#FF7D40', height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
+                <TouchableOpacity onPress={() => {handleRemove()}} style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: '#FF7D40', height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
                   <Text style={{color: '#FEFEFE', fontWeight: 'bold'}}>Remove</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {router.navigate("/(tabs)/workout/Plan/"+planId)}} style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: '#FF7D40', height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>

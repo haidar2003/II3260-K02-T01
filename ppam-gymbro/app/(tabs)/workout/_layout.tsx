@@ -5,12 +5,12 @@ import { Slot, Stack } from "expo-router";
 export default function AppLayout(){
     
     return (
-    <WorkoutProvider>
+    
     <Stack
     screenOptions={{
         // Hide the header for all other routes.
         headerShown: false,
     }}
     />
-    </WorkoutProvider>)
+    )
 }

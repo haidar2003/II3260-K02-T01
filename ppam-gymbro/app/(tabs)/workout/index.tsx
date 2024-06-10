@@ -27,7 +27,7 @@ export default function MainWorkout() {
       return (
 
         <View style = {{paddingVertical : screenWidth * (5/360)}}>
-          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='main-workout'/>
+          <CustomBox planId={item.id_workout_plan} planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='main-workout'/>
         </View>
 
       )
@@ -37,7 +37,7 @@ export default function MainWorkout() {
     if (!(item.planCategory === 'Trainer'))
       return (
         <View style = {{paddingVertical : screenWidth * (5/360)}}>
-          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='main-workout'/>
+          <CustomBox planId={item.id_workout_plan} planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='main-workout'/>
         </View>
       )
 };
@@ -88,7 +88,7 @@ export default function MainWorkout() {
           </Link>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={workoutList}
+          <FlatList data={workoutList.filter(item => item.is_active)}
           renderItem={renderTrainerWorkout}
           keyExtractor={item => item.id_workout_plan}
           style = {{maxWidth : "100%"}} />
@@ -102,7 +102,7 @@ export default function MainWorkout() {
           </Link>
         </View>
         <ScrollView horizontal = {true}>
-          <FlatList data={workoutList}
+          <FlatList data={workoutList.filter(item => item.is_active)}
           renderItem={renderFreeWorkout}
           keyExtractor={item => item.id_workout_plan}
           style = {{maxWidth : "100%"}} />

@@ -10,6 +10,7 @@ const WorkoutProvider = ({ children }) => {
     const [workoutList , setWorkoutList] = useState(null)
     const [workoutLoading, setWorkoutLoading] = useState(false)
     const getWorkoutList = async () => { 
+      console.log('Hi from workout provider')
       if (userData != null) {
         
       
