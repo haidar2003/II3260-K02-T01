@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View, Image, ScrollView, Dimensions, Pressable} from 'react-native';
+import { StyleSheet, Text, TextInput, View, Image, ScrollView, Dimensions, Pressable, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import { Link } from 'expo-router';
 import { useAuth } from '@/provider/AuthProvider';
@@ -7,7 +7,7 @@ const screenWidth = Dimensions.get('window').width;
 
 export default function Profile() {
 
-    const [user, setUser] = useState({
+    const user = {
         userFullName: 'Arnold S.',
         username: 'terminator',
         userEmail: "TerminatorInbox@email.com",
@@ -15,12 +15,12 @@ export default function Profile() {
         userPassword: 'beback',
         userBirthdate: '17th August 2003'
         }
-    )
+
     const {session,authLoading,userData,getSession,updateUserData} = useAuth()
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [phone, setPhone] = useState("")
-    const [password, setPassword] = useState("")
+    const [name, setName] = useState(user.userFullName)
+    const [email, setEmail] = useState(user.userEmail)
+    const [phone, setPhone] = useState(user.userPhone)
+    const [password, setPassword] = useState(user.userPassword)
     const [hidePassword, setHidePassword] = useState(true)
     
     return (
@@ -28,10 +28,14 @@ export default function Profile() {
             <ScrollView style = {{flex : 1}}>
                 <View style={{ width: '100%', marginTop: screenWidth * (35/360),  paddingVertical: screenWidth * (20/360), paddingHorizontal: screenWidth * (5/360), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                     <Link href="/(tabs)/workout" asChild>
-                        <Pressable> 
-                        <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
-                        </View>
-                        </Pressable>
+                        <TouchableOpacity>
+                            <View style={{ alignItems: 'center', justifyContent:'center', height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
+                                <Image
+                                style = {{ height: 25, width: 25, marginRight: 5 }}
+                                source = {require("@/assets/icons/back.png")}
+                                />
+                            </View>
+                        </TouchableOpacity>
                     </Link>
                     <View>
                         <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#444444' }}>
@@ -39,10 +43,14 @@ export default function Profile() {
                         </Text>
                     </View>
                     <Link href="/(tabs)/workout" asChild>
-                        <Pressable> 
-                        <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
-                        </View>
-                        </Pressable>
+                        <TouchableOpacity>
+                            <View style={{ alignItems: 'center', justifyContent:'center', height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
+                                <Image
+                                style = {{ height: 25, width: 25}}
+                                source = {require("@/assets/icons/save.png")}
+                                />
+                            </View>
+                        </TouchableOpacity>
                     </Link>
                 </View>
 
@@ -59,44 +67,55 @@ export default function Profile() {
                 </View>
 
                 <View style={{ gap: 10, marginVertical: 10 }}>
-                    <Text style={{ color: '#444444', fontWeight: 'bold', fontSize: 16 }}>
-                        Full Name
-                    </Text>
-                    <View style={{ width: screenWidth * (314/360), height: screenWidth * (56/360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12 }}>
+                <Text style={{ color: '#444444', fontWeight: 'bold', fontSize: 16 }}>
+                    Full Name
+                </Text>
+                <TextInput
+                    style={{ width: screenWidth * (314 / 360), height: screenWidth * (56 / 360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12, paddingHorizontal: 10 }}
+                    value={name}
+                    onChangeText={setName}
+                />
+            </View>
 
-                    </View>
-                </View>
+            <View style={{ gap: 10, marginVertical: 10 }}>
+                <Text style={{ color: '#444444', fontWeight: 'bold', fontSize: 16 }}>
+                    Email
+                </Text>
+                <TextInput
+                    style={{ width: screenWidth * (314 / 360), height: screenWidth * (56 / 360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12, paddingHorizontal: 10 }}
+                    value={email}
+                    onChangeText={setEmail}
+                    keyboardType="email-address"
+                />
+            </View>
 
-                <View style={{ gap: 10, marginVertical: 10 }}>
-                    <Text style={{ color: '#444444', fontWeight: 'bold', fontSize: 16 }}>
-                        Email
-                    </Text>
-                    <View style={{ width: screenWidth * (314/360), height: screenWidth * (56/360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12 }}>
+            <View style={{ gap: 10, marginVertical: 10 }}>
+                <Text style={{ color: '#444444', fontWeight: 'bold', fontSize: 16 }}>
+                    Phone
+                </Text>
+                <TextInput
+                    style={{ width: screenWidth * (314 / 360), height: screenWidth * (56 / 360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12, paddingHorizontal: 10 }}
+                    value={phone}
+                    onChangeText={setPhone}
+                    keyboardType="phone-pad"
+                />
+            </View>
 
-                    </View>
-                </View>
-
-                <View style={{ gap: 10, marginVertical: 10 }}>
-                    <Text style={{ color: '#444444', fontWeight: 'bold', fontSize: 16 }}>
-                        Phone
-                    </Text>
-                    <View style={{ width: screenWidth * (314/360), height: screenWidth * (56/360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12 }}>
-
-                    </View>
-                </View>
-
-                <View style={{ gap: 10, marginVertical: 10 }}>
-                    <Text style={{ color: '#444444', fontWeight: 'bold', fontSize: 16 }}>
-                        Password
-                    </Text>
-                    <View style={{ width: screenWidth * (314/360), height: screenWidth * (56/360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12 }}>
-
-                    </View>
-                </View>
+            <View style={{ gap: 10, marginVertical: 10 }}>
+                <Text style={{ color: '#444444', fontWeight: 'bold', fontSize: 16 }}>
+                    Password
+                </Text>
+                <TextInput
+                    style={{ width: screenWidth * (314 / 360), height: screenWidth * (56 / 360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12, paddingHorizontal: 10 }}
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry={hidePassword}
+                />
+            </View>
 
                 <View style={{ width: screenWidth * (300/360), height: screenWidth * (56/360), alignItems: 'center', borderWidth: 2, justifyContent: 'center', borderColor: '#FF7D40', borderRadius: 12, marginTop: 150, marginBottom: 30 }}>
                     <Text style={{ color: '#FF7D40', fontWeight: 'bold', fontSize: 16 }}>
-                        Change
+                        Logout
                     </Text>
                 </View>
 
@@ -105,64 +124,6 @@ export default function Profile() {
 
             </ScrollView>
         </View>
-
-        // <View style={styles.layout}>
-        //     <View style = {{flex : 1.5, width : "100%", justifyContent : "flex-end"}}>
-        //         <View style = {{flex : 1}}></View>
-        //         <View style = {{flex : 1, width : "100%", flexDirection : "row", justifyContent : "space-between", alignItems : "center"}}>
-        //             <Link href={"/(tabs)/home"} asChild>
-        //             <Pressable>
-        //             <Text style={{fontSize : 20, fontWeight : "bold"}}> Back </Text>
-        //             </Pressable>
-        //             </Link>
-        //             <Text style={{fontSize : 24, fontWeight : "bold"}}> Profile </Text>
-        //             <Text style={{fontSize : 20, fontWeight : "bold"}}> Save </Text>
-        //         </View>
-        //     </View>
-        //     <View style = {{flex : 2, width : "100%", justifyContent : "flex-start", alignItems : "center", padding : 10}}>
-        //         <Image style = {{flex : 2, aspectRatio : 1, borderRadius : 1000, margin : 10}} source={require("@/assets/profile_picture_placeholder.jpg")}/>
-        //         <Text style = {{flex : 0.5, fontSize : 20, fontWeight : "bold"}}>Arnold Schwarzenegger</Text>
-        //         <Text style = {{flex : 0.5 , fontSize : 16, fontWeight : "400"}}>@Terminator</Text>
-        //         <Text style = {{flex : 0.5 , fontSize : 16, fontWeight : "400"}}>17th August 2023</Text>
-        //     </View>
-        //     <View style = {{flex : 1, width : "100%", justifyContent : "flex-start", margin : 10}}>
-        //         <Text style = {styles.subtitle} > Full Name</Text>
-        //         <TextInput style = {styles.form}
-        //         value={name}
-        //         onChangeText={(v) => (setName(v))}></TextInput>
-        //     </View>
-        //     <View style = {{flex : 1, width : "100%", justifyContent : "flex-start", margin : 10}}>
-        //         <Text style = {styles.subtitle} > Email</Text>
-        //         <TextInput style = {styles.form}
-        //         value={email}
-        //         onChangeText={(v) => (setEmail(v))}></TextInput>
-        //     </View>
-        //     <View style = {{flex : 1, width : "100%", justifyContent : "flex-start", margin : 10}}>
-        //         <Text style = {styles.subtitle} > Phone</Text>  
-        //         <TextInput style = {styles.form}
-        //         value={phone}
-        //         onChangeText={(v) => (setPhone(v))}></TextInput>
-        //     </View>
-        //     <View style = {{flex : 1, width : "100%" , justifyContent : "flex-start", margin : 10}}>
-        //         <Text style = {styles.subtitle} > Password</Text>
-        //         <View style = {{height : 60, width : "100%", borderRadius : 20,borderColor : "grey", padding : 10, borderWidth : 2, flexDirection : "row", justifyContent : "space-between", alignItems : "center"}}> 
-        //             <TextInput style = {{        height : 60, 
-        //             width : "90%", 
-        //             backgroundColor : "transparent", 
-        //             borderWidth : 0,
-        //             fontSize : 20,}}
-        //             value={password}
-        //             onChangeText={(v) => (setPassword(v))}
-        //             secureTextEntry = {hidePassword}></TextInput>
-        //             <Pressable onPress={() => {setHidePassword(!hidePassword)}} style={{flex : 1}}>
-        //             <Image source={require("@/assets/eye.png")} style ={{flex : 1}}></Image>
-        //             </Pressable>
-        //         </View>
-        //     </View>
-        //     <View style = {{flex : 1, width : "100%", alignItems : "center"}}>
-        //         <Text style = {styles.subtitle} >Logout</Text>
-        //     </View>
-        // </View>
     )
 }
 

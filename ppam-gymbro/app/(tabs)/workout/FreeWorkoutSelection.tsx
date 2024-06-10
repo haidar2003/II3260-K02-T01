@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, Dimensions, FlatList, Pressable } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Dimensions, FlatList, Image, TouchableOpacity } from 'react-native';
 import CustomBox from '@/screen/workout_component/CustomBox';
 import { Link } from 'expo-router';
 const screenWidth = Dimensions.get('window').width;
@@ -30,12 +30,16 @@ export default function FreeWorkoutSelection() {
     <View style={styles.layout}>
       <ScrollView style = {{flex : 1}}>
         <View style={{ marginTop: screenWidth * (35/360), paddingVertical: screenWidth * (20/360), paddingHorizontal: screenWidth * (5/360), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-            <Link href="/(tabs)/workout" asChild>
-              <Pressable> 
-                <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
-                </View>
-              </Pressable>
-            </Link>
+          <Link href="/(tabs)/workout" asChild>
+          <TouchableOpacity>
+              <View style={{ alignItems: 'center', justifyContent:'center', height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
+                  <Image
+                  style = {{ height: 25, width: 25, marginRight: 5 }}
+                  source = {require("@/assets/icons/back.png")}
+                  />
+              </View>
+          </TouchableOpacity>
+          </Link>
             <View>
               <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#444444' }}>
                 {chosenCategory}

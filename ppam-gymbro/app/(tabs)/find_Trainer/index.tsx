@@ -95,14 +95,14 @@ export default function Find_Trainer() {
           <View style = {{flex : 1}}></View>
           <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
             <View style={styles.searchBar}>  
-              <Image source={require("@/assets/search.png")} style = {{margin : 5}}>
+            <Image source={require("@/assets/icons/search.png")} style = {{height: 25, width: 25,margin : 5}}>
                 {/* Icon Kaca Pembesar */}
               </Image>
               <TextInput>
                 {/* Search Bar */}
               </TextInput>
             </View>
-            <Image source={require("@/assets/shopping-cart.png")} style={{marginLeft : 10}} />
+            <Image source={require("@/assets/icons/cart.png")} style={{height: 25, width: 25,marginLeft : 10}} />
           </View>
         </View>
 
@@ -112,9 +112,13 @@ export default function Find_Trainer() {
               <Text style={{fontFamily : "System"}}> Rp{numberToRupiah(minPrice)} - Rp{numberToRupiah(maxPrice)} </Text>
             </View>
             <Pressable onPress = {() => setStateScreen(1)}>
-            <Image source={require("@/assets/filter.png")} style={{marginHorizontal : 5}}></Image>
+              <View style={{ height: screenWidth * (32/360), width: screenWidth * (40/360), marginHorizontal : 5, justifyContent: 'center', alignItems: 'center', backgroundColor: '#FF7D40', borderRadius: 12 }}>
+                <Image source={require("@/assets/icons/filter.png")} style={{width: 20, height: 20 }} />
+              </View>
             </Pressable>
-            <Image source={require("@/assets/sort.png")}  style={{marginHorizontal : 5}}></Image>
+            <View style={{ height: screenWidth * (32/360), width: screenWidth * (40/360), marginHorizontal : 5, justifyContent: 'center', alignItems: 'center', backgroundColor: '#FF7D40', borderRadius: 12 }}>
+                <Image source={require("@/assets/icons/sort.png")} style={{width: 20, height: 20 }} />
+            </View>
           </View>
 
           

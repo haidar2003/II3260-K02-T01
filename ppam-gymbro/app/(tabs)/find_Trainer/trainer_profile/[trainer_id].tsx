@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable, TouchableOpacity } from 'react-native';
 import CustomBox from '@/screen/workout_component/CustomBox';
 import { Link, router, useGlobalSearchParams, useLocalSearchParams, usePathname } from 'expo-router';
 import Excercise from '@/screen/workout_component/Excercise';
@@ -144,12 +144,16 @@ export default function trainerProfile() {
     <View style={styles.layout}>
       <ScrollView style = {{flex : 1}}>
         <View style={{ marginTop: screenWidth * (35/360), paddingVertical: screenWidth * (20/360), paddingHorizontal: screenWidth * (25/360), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start'}}>
-            <Link href="/(tabs)/workout" asChild>
-              <Pressable> 
-                <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
+          <Link href="/(tabs)/workout" asChild>
+            <TouchableOpacity>
+                <View style={{ alignItems: 'center', justifyContent:'center', height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
+                    <Image
+                    style = {{ height: 25, width: 25, marginRight: 5 }}
+                    source = {require("@/assets/icons/back.png")}
+                    />
                 </View>
-              </Pressable>
-            </Link>
+            </TouchableOpacity>
+          </Link>
             <TrainerProfile trainerName={trainerData.nama_trainer} trainerUsername={trainerData.username} trainerRating={trainerData.rating} trainerCity={trainerData.location}/>
             <Link href="/(tabs)/workout" asChild>
               <Pressable> 
