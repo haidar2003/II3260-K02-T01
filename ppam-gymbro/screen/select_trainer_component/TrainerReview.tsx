@@ -6,9 +6,11 @@ const screenWidth = Dimensions.get('window').width;
 interface TrainerReviewProps {
     trainer_id : string
     trainerName: string
+    setReviewVisible : (isVisible : boolean) => void
+    ReviewVisible : boolean
 }
 
-const TrainerReview: React.FC<TrainerReviewProps> = ({trainerName, trainer_id }) => {
+const TrainerReview: React.FC<TrainerReviewProps> = ({trainerName, trainer_id,setReviewVisible, ReviewVisible }) => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
 
@@ -47,7 +49,7 @@ const TrainerReview: React.FC<TrainerReviewProps> = ({trainerName, trainer_id })
     <View style={styles.container}>
         <View>
             <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={ () => {setReviewVisible(false); console.log(ReviewVisible)}}>
                     <Image style= {{width : screenWidth * (24/360), height : screenWidth * (24/360), }} source={require("@/assets/icons/x.png")}/> 
                 </TouchableOpacity>
             </View>
@@ -95,7 +97,7 @@ const TrainerReview: React.FC<TrainerReviewProps> = ({trainerName, trainer_id })
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     padding: screenWidth * (20/360),
     width: screenWidth * (320/360),
     height: screenWidth * (480/360),
@@ -104,8 +106,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     borderRadius: 8,
-    backgroundColor: '#FEFEFE'
-
+    backgroundColor: '#FEFEFE',
+    marginTop:120,
+    
   },
   ratingContainer: {
     flexDirection: 'row',

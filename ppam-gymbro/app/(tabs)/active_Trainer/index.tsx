@@ -12,21 +12,8 @@ import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 export default function ActiveTrainer() {
   const currentTrainerId = 0;
   const {activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer,nonActiveTrainer} = useCurrentTrainer()
+  const [pastTrainerSelected, setPastTrainerSelected ] = useState(null)
 
-  const fetchTrainer = [
-    {trainerId : 1, trainerName : "Black Sheep",  isActive : false, onlineSessions : 2, offlineSessions : 6, monthPassed : 1} ,
-    {trainerId : 2, trainerName : "White Sheep",  isActive : false, onlineSessions : 1, offlineSessions : 2, monthPassed : 1} ,
-    {trainerId : 3, trainerName : "Red Sheep",  isActive : false, onlineSessions : 3, offlineSessions : 4, monthPassed : 1} ,
-    {trainerId : 4, trainerName : "Blue Sheep",  isActive : false, onlineSessions : 1, offlineSessions : 5, monthPassed : 1} ,
-    {trainerId : 5, trainerName : "Orange Sheep",  isActive : false, onlineSessions : 2, offlineSessions : 3, monthPassed : 1} ,
-    {trainerId : 6, trainerName : "Pink Sheep",  isActive : false, onlineSessions : 6, offlineSessions : 4, monthPassed : 1} ,
-    {trainerId : 7, trainerName : "Black Sheep", isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} ,
-    {trainerId : 8, trainerName : "White Sheep", isActive : true, onlineSessions : 4, offlineSessions : 9, monthPassed : 1} ,
-    {trainerId : 9, trainerName : "Red Sheep",  isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} ,
-    {trainerId : 10 , trainerName : "Blue Sheep",  isActive : true, onlineSessions : 2, offlineSessions : 4, monthPassed : 1} ,
-    {trainerId : 11 , trainerName : "Orange Sheep",  isActive : true, onlineSessions : 1, offlineSessions : 4, monthPassed : 1} ,
-    {trainerId : 12 , trainerName : "Pink Sheep",  isActive : true, onlineSessions : 4, offlineSessions : 4, monthPassed : 1} 
-  ]
 
   // const activeTrainerSelection = activeTrainer.map(item => ({ ...item, isSelected: false }));
   // const pastTrainerSelection = nonActiveTrainer.map(item => ({ ...item, isSelected: false }));
@@ -35,7 +22,7 @@ export default function ActiveTrainer() {
 
   const [activeTrainerList, setActiveTrainerList] = useState(null)
   const [pastTrainerList, setPastTrainerList] = useState(null)
-  const [reviewVisible , setReviewVisible] = useState(false)
+  const [reviewVisible , setReviewVisible] = useState<boolean>(false)
 
   useEffect(() => { 
     console.log("aaa",currentTrainer)
@@ -75,11 +62,9 @@ export default function ActiveTrainer() {
   // },[nonActiveTrainer]);
 
   const setSelectedActiveTrainer = (id) => {
-    // setCurrentTrainer(id)
-    console.log(id)
-    console.log(activeTrainerList)
     setActiveTrainerList(prevData => prevData.map(item => {
       if (item.id_trainer_active === id) {
+        setCurrentTrainer(item)
         return { ...item, isSelected: true };
       } else {
         return { ...item, isSelected: false };
@@ -99,6 +84,7 @@ export default function ActiveTrainer() {
         monthPassed={getMonthDiff(new Date() , new Date(item.lastsession))}
         setSelected={setSelectedActiveTrainer}
         isSelected = {item.isSelected}
+        setReviewVisible={setReviewVisible}
         />
       </View>
     )
@@ -127,10 +113,13 @@ export default function ActiveTrainer() {
         monthPassed={getMonthDiff( new Date(item.lastsession), new Date())}
         setSelected={setSelectedPastTrainer}
         isSelected = {item.isSelected}
+        setReviewVisible={setReviewVisible}
         />
       </View>
     )
   }
+
+  useEffect(() => {console.log(reviewVisible), "ASSAF"}, [reviewVisible])
 
   if (currentTrainerLoading) {
     
@@ -155,11 +144,17 @@ export default function ActiveTrainer() {
             
           </View>
         </View>
-      <View>
-      <Modal visible = {reviewVisible}>
-        <TrainerReview  trainerName = {"currentTrainer.nama_trainer_active"} trainer_id = {"currentTrainer.id_trainer_active"} ></TrainerReview>
+      
+        <View style = {{zIndex : 10, alignItems : "center", justifyContent : "center", position : "absolute"}}>
+      <Modal visible = {reviewVisible} >
+        <View style = {{alignItems : "center", justifyContent : "flex-start", }}>
+        <TrainerReview  trainerName = {currentTrainer.nama_trainer_active} trainer_id = {currentTrainer.id_trainer_active}  ReviewVisible = {reviewVisible}
+        setReviewVisible={setReviewVisible}></TrainerReview>
+        </View>
+        
       </Modal>
       </View>
+      
            <ScrollView style = {{flex : 1}}>
         <View style = {{flex : 1, marginTop: screenWidth * (20/360),  marginBottom: screenWidth * (10/360), paddingHorizontal: 10, flexDirection : "row", justifyContent : "flex-start", alignItems :"center"}} >
           <Text style = {{fontSize : 20, fontWeight : "bold", color: '#444444' }}>Active Trainer</Text>

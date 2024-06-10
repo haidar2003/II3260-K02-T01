@@ -12,11 +12,12 @@ interface TrainerSelectProps {
     offlineSessions?: number;
     monthPassed?: number;
     setSelected : (trainerId: number) => void;
+    setReviewVisible : (isVisible : boolean) => void
 }
 
 const screenWidth = Dimensions.get('window').width;
   
-const TrainerSelect: React.FC<TrainerSelectProps> = ({ trainerId, isSelected, isActive, trainerName, onlineSessions, offlineSessions, monthPassed, setSelected }) => {
+const TrainerSelect: React.FC<TrainerSelectProps> = ({ trainerId, isSelected, isActive, trainerName, onlineSessions, offlineSessions, monthPassed, setSelected, setReviewVisible }) => {
     let containerStyle, topContainerColor
     let roundingBottom = 12
     let fontColor = '#444444' 
@@ -72,7 +73,7 @@ const TrainerSelect: React.FC<TrainerSelectProps> = ({ trainerId, isSelected, is
               <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: '#FF7D40', height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 8, justifyContent: 'center' , alignItems: 'center'}}>
               <Text style={{color: "#FEFEFE", fontWeight: 'bold'}}>Invoice</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: '#FF7D40', height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 8, justifyContent: 'center' , alignItems: 'center'}}>
+              <TouchableOpacity onPress={ () => {setReviewVisible(true)}} style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: '#FF7D40', height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 8, justifyContent: 'center' , alignItems: 'center'}}>
                 <Text style={{color: "#FEFEFE", fontWeight: 'bold'}}>Review</Text>
               </TouchableOpacity>
             </View>
