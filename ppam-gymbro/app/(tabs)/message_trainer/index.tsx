@@ -35,7 +35,7 @@ export default function TrainerChatList() {
               console.log(error3)
             } else {
               
-              const ChatInput = data.map( chatItem => {
+              const ChatInput = await data.map( chatItem => {
                 const matchingTrainer = data2.find(trainerItem => 
                   trainerItem.trainer_id == chatItem.id_trainer
                 ) 
@@ -46,10 +46,10 @@ export default function TrainerChatList() {
                 
                   return currentDate > latestDate ? current : latest;
                 }, matchingMessage[0]);
-                console.log("A",matchingTrainer)
-                console.log("B",latestMessage)
-                console.log("C",latestMessage)
-                console.log("D", new Date(latestMessage.date))
+                // console.log("A",matchingTrainer)
+                // console.log("B",latestMessage)
+                // console.log("C",latestMessage)
+                // console.log("D", new Date(latestMessage.date))
                 return {id : chatItem.id_chat, nama_trainer : matchingTrainer.nama_trainer, id_trainer : chatItem.id_trainer,
                   lastMessage : latestMessage.content, lastMessageTIme : latestMessage.date
                 }
@@ -100,7 +100,7 @@ export default function TrainerChatList() {
       if (lastMessage) {
         const lastMessageTime = new Date(item.lastMessageTIme);
         // console.log("G", item.lastMessageTIme)
-        console.log("E", lastMessageTime)
+        // console.log("E", lastMessageTime)
         if (!isSameDayAsToday(lastMessageTime)) {
           displayedTime = `${lastMessageTime.getDate()}/${
             lastMessageTime.getMonth() + 1
@@ -109,7 +109,7 @@ export default function TrainerChatList() {
           displayedTime = `${lastMessageTime.getHours()}.${String(lastMessageTime.getMinutes() + 1).padStart(2, '0')}`
         }
       }
-      console.log("F", displayedTime)
+      // console.log("F", displayedTime)
       return (
         <View style={{ marginVertical: screenWidth * (15 / 360) }}>
           <TrainerChat

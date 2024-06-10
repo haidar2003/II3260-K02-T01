@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 
@@ -10,8 +11,9 @@ interface TrainerChatProps {
     lastMessageTime?: string,
   }
   
-  const TrainerChat: React.FC<TrainerChatProps> = ({ trainerName, lastMessage, lastMessageTime }) => {
+  const TrainerChat: React.FC<TrainerChatProps> = ({trainerId, trainerName, lastMessage, lastMessageTime }) => {
     return (
+    <TouchableOpacity onPress={() => {router.navigate("/(tabs)/message_trainer/"+trainerId)}}>
       <View style={styles.mainContainer}> 
         <View style={styles.circle}>
             {/* Gambar */}
@@ -32,6 +34,7 @@ interface TrainerChatProps {
             </View>
         </View>
       </View>
+      </TouchableOpacity>
     );
   };
 
