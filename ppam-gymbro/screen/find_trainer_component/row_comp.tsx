@@ -21,8 +21,8 @@ export default function Row_Comp({id ,name, rating, price}) {
             <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#444444' }}>
               { name }
             </Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 10 }}>
-              <View style={{ width: 12, height: 12, backgroundColor: 'black' }}/>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 5 }}>
+            <Image style= {{width : screenWidth * (15/360), height : screenWidth * (15/360), }} source={require("@/assets/icons/star_filled.png")}/> 
               {rating !== null && (
                 <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#444444' }}>
               { rating }  

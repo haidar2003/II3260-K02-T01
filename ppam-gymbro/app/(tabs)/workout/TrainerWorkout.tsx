@@ -1,9 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Image, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable, TouchableOpacity } from 'react-native';
 import CustomBox from '@/screen/workout_component/CustomBox';
 import { Link, router } from 'expo-router';
-import { Image } from 'expo-image';
-import AntDesign from '@expo/vector-icons/AntDesign';
 import { useWorkout } from '@/provider/WorkoutProvider';
 import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 const screenWidth = Dimensions.get('window').width;
@@ -44,10 +42,14 @@ export default function TrainerWorkout() {
       <ScrollView style = {{flex : 1}}>
         <View style={{ marginTop: screenWidth * (35/360), paddingVertical: screenWidth * (20/360), paddingHorizontal: screenWidth * (10/360), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
           <Link href="/(tabs)/workout" asChild>
-            <Pressable> 
-              <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
-              </View>
-            </Pressable>
+              <TouchableOpacity>
+                  <View style={{ alignItems: 'center', justifyContent:'center', height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
+                      <Image
+                      style = {{ height: 25, width: 25, marginRight: 5 }}
+                      source = {require("@/assets/icons/back.png")}
+                      />
+                  </View>
+              </TouchableOpacity>
           </Link>
           <View>
             <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#444444' }}>

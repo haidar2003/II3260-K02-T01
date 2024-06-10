@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, Dimensions, FlatList, Pressable, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, Dimensions, FlatList, Image, Pressable, TouchableOpacity } from 'react-native'
 import { Link, router } from 'expo-router';
 import ExcerciseDay from '@/screen/workout_component/ExcerciseDay';
 import ExcerciseProgress from '@/screen/workout_component/ExcerciseProgress';
@@ -179,10 +179,14 @@ export default function Plan() {
     <View style={styles.layout} >
       <View style={{ width: '100%', marginTop: screenWidth * (420 / 360), paddingVertical: screenWidth * (20 / 360), paddingHorizontal: screenWidth * (25 / 360), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
         <Link href="/(tabs)/workout" asChild>
-          <Pressable>
-            <View style={{ height: screenWidth * (56 / 360), width: screenWidth * (56 / 360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1' }}>
-            </View>
-          </Pressable>
+            <TouchableOpacity>
+                <View style={{ alignItems: 'center', justifyContent:'center', height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
+                    <Image
+                    style = {{ height: 25, width: 25, marginRight: 5 }}
+                    source = {require("@/assets/icons/back.png")}
+                    />
+                </View>
+            </TouchableOpacity>
         </Link>
         <View>
           <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#444444' }}>
