@@ -16,6 +16,7 @@ export default function TrainerChat() {
   const [trainerData, setTrainerData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [userMessage, setUserMessage] = useState('')
+  const [chatData, setChatData] = useState(null)
   const currentUserId = userData.id_user;
   function getDayName(date) {
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -36,16 +37,17 @@ export default function TrainerChat() {
         if (error3) {
           console.log("failed fetch message trainer", error3)
         } else {
-          console.log(data3)
+          // console.log(data3)
           const earliestMessage = data3.reduce((earliest, current) => {
             const earliestDate = new Date(earliest.date);
             const currentDate = new Date(current.date);
             
             return currentDate < earliestDate ? current : earliest;
           }, data3[0]);
-          console.log("A",earliestMessage.date)
+          // console.log("A",earliestMessage.date)
           lastDate.current = new Date(earliestMessage.date)
-          console.log("B",lastDate)
+          // console.log("B",lastDate)
+          setChatData(data)
           setTrainerData(data2)
           setMessageList(data3)
         }
@@ -66,7 +68,7 @@ export default function TrainerChat() {
   }
   const handleSend = ( async () => {
     const {data ,error} = await supabase.from("Message").insert([
-      {}
+      {"content": userMessage, id_chat :  chatData.id_chat, "messageType" : "User"}
     ])
   } )
 
@@ -135,7 +137,7 @@ export default function TrainerChat() {
                     value={userMessage}
                     onChangeText={setUserMessage}
           />
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>{handleSend(); setTimeout(()=> {getMessageData()}, 500)}}>
             <View style={{ justifyContent: 'center', alignItems: 'center', width: screenWidth * (50/360), height: screenWidth * (50/360), backgroundColor: '#FF7D40', borderRadius: 60 }}>
               <Image
                 style = {{ height: 25, width: 25 }}
