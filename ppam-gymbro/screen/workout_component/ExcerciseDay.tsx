@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
 
 const screenWidth = Dimensions.get('window').width;
@@ -36,7 +36,10 @@ interface ExcerciseDayProps {
                 </View>
                 { (currentProgress === 100) ? (
                     <View style={styles.circle}>
-
+                        <Image
+                            style={{ width: screenWidth * (13 / 360), height: screenWidth * (13 / 360) }}
+                            source={require('@/assets/icons/check.png')}
+                            />
                     </View>
                 ) : (
                     <View style={{marginLeft: 18, width: 30, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end'}}>
@@ -74,6 +77,8 @@ const styles = StyleSheet.create({
         height: 30,
         borderRadius: 36, 
         backgroundColor: '#FF7D40',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     divider: {
         width: screenWidth * (340/360),
