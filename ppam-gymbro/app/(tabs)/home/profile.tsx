@@ -17,10 +17,10 @@ export default function Profile() {
         }
 
     const {session,authLoading,userData,getSession,updateUserData} = useAuth()
-    const [name, setName] = useState(user.userFullName)
-    const [email, setEmail] = useState(user.userEmail)
-    const [phone, setPhone] = useState(user.userPhone)
-    const [password, setPassword] = useState(user.userPassword)
+    const [name, setName] = useState(userData.nama_user)
+    const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
+    const [password, setPassword] = useState("")
     const [hidePassword, setHidePassword] = useState(true)
     
     return (

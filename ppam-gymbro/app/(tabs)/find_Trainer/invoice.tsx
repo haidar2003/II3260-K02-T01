@@ -6,6 +6,7 @@ import ReserveTrainerPlan from '@/screen/find_trainer_component/ReserveTrainerPl
 import { Link } from 'expo-router';
 import ReserveTrainerInvoice from '@/screen/find_trainer_component/ReserveTrainerInvoice';
 import { useAuth } from '@/provider/AuthProvider';
+import { useCart } from '@/provider/CartProvider';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -14,7 +15,7 @@ export default function Invoice() {
   const {session,authLoading,userData,getSession,updateUserData} = useAuth()
   const currentUserInvoice = 123123123;
   const today = new Date();
-
+  const {cartList, addToCart, removeFromCart} = useCart()
   const user = {
     userId: 1,
     username: 'rahihaidar',
@@ -141,6 +142,9 @@ export default function Invoice() {
   
     return totalPrice;
   };
+
+
+  useEffect(() => {console.log("AAAAAAAAAA",cartList)}, [])
 
   const renderCart = ({item}) => {
     return (
