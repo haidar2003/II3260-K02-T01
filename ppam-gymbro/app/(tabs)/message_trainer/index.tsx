@@ -12,33 +12,58 @@ export default function TrainerChatList() {
   const currentUserId = 1;
   const {session,authLoading,userData,getSession,updateUserData} = useAuth()
   const [messageData, setMessageData] = useState(null)
+  const [chatData, setChatData] = useState(null)
   const [trainerData, setTrainerData] = useState(null)
   const [loading , setLoading] = useState(false)
-  const [loading2 , setLoading2] = useState(false)
+  
 
   const getMessageData = async () => {
     setLoading(true)
-    const {data, error} = await supabase.from("message").select("*").eq("id_user",userData.id_user)
-    if (error){
-      console.log("get Message fail",error)
-    } else {
-      setMessageData(data)
-    }
+    const id_current_user = userData.id_user
+
+  const {data , error} = await supabase.from("Chat").select("*").eq('id_user', id_current_user)
+      if (error) {
+        console.error(error)
+      } 
+      else {
+        const {data : data2 , error : error2} = await supabase.from("Trainer").select("*") 
+        if (error2) {
+          console.log(error2)
+        } else {
+          const {data : data3, error : error3} = await supabase.from("Message").select("*")
+            if (error3) {
+              console.log(error3)
+            } else {
+              
+              const ChatInput = data.map( chatItem => {
+                const matchingTrainer = data2.find(trainerItem => 
+                  trainerItem.trainer_id == chatItem.id_trainer
+                ) 
+                const matchingMessage = data3.filter(messageItem => messageItem.id_chat == chatItem.id_chat)
+                const latestMessage = matchingMessage.reduce((latest, current) => {
+                  const latestDate = new Date(latest.date);
+                  const currentDate = new Date(current.date);
+                
+                  return currentDate > latestDate ? current : latest;
+                }, matchingMessage[0]);
+                console.log("A",matchingTrainer)
+                console.log("B",latestMessage)
+                console.log("C",latestMessage)
+                console.log("D", new Date(latestMessage.date))
+                return {id : chatItem.id_chat, nama_trainer : matchingTrainer.nama_trainer, id_trainer : chatItem.id_trainer,
+                  lastMessage : latestMessage.content, lastMessageTIme : latestMessage.date
+                }
+                
+              })
+              console.log(ChatInput)
+              setChatData(ChatInput)
+            }
+        } 
+      }
     setLoading(false)
   }
 
-  const getTrainerData = async () => {
-    setLoading2(true)
-    const {data, error} = await supabase.from("Trainer").select("*")
-    if (error){
-      console.log("get Message fail",error)
-    } else {
-      setTrainerData(data)
-    }
-    setLoading2(false)
-  }
 
-  
 
   function isSameDayAsToday(date) {
     const today = new Date();
@@ -69,12 +94,13 @@ export default function TrainerChatList() {
   const renderChat = ({ item }) => {
     let displayedTime;
   
-    if (item.message.length !== 0) {
-      const lastMessage = item.last_message;
-  
+    if (item.lastMessage !== null) {
+      const lastMessage = item.lastMessage;
+      
       if (lastMessage) {
-        const lastMessageTime = new Date(item.last_message_time);
-  
+        const lastMessageTime = new Date(item.lastMessageTIme);
+        // console.log("G", item.lastMessageTIme)
+        console.log("E", lastMessageTime)
         if (!isSameDayAsToday(lastMessageTime)) {
           displayedTime = `${lastMessageTime.getDate()}/${
             lastMessageTime.getMonth() + 1
@@ -83,13 +109,13 @@ export default function TrainerChatList() {
           displayedTime = `${lastMessageTime.getHours()}.${String(lastMessageTime.getMinutes() + 1).padStart(2, '0')}`
         }
       }
-  
+      console.log("F", displayedTime)
       return (
         <View style={{ marginVertical: screenWidth * (15 / 360) }}>
           <TrainerChat
-            trainerId={item.id_numeric}
+            trainerId={item.id_trainer}
             trainerName={item.nama_trainer}
-            lastMessage={lastMessage ? lastMessage.messageContent : ''}
+            lastMessage={lastMessage ? lastMessage : ''}
             lastMessageTime={displayedTime}
           />
         </View>
@@ -98,7 +124,7 @@ export default function TrainerChatList() {
       return (
         <View style={{ marginVertical: screenWidth * (5 / 360) }}>
           <TrainerChat
-            trainerId={item.trainerId}
+            trainerId={item.id}
             trainerName={item.trainerName}
             lastMessage="No messages"
             lastMessageTime=""
@@ -108,6 +134,7 @@ export default function TrainerChatList() {
     }
   };
 
+  useEffect(() => {getMessageData()}, [])
 
   if (loading) {
     return <LoadingScreen></LoadingScreen>
@@ -134,9 +161,9 @@ export default function TrainerChatList() {
         <ScrollView style = {{flex : 1}}>
             <ScrollView horizontal = {true}>
                     <FlatList 
-                    data={trainerChat}
+                    data={chatData}
                     renderItem={renderChat}
-                    keyExtractor={item => item.trainerId}
+                    keyExtractor={item => item.id_chat}
                     style = {{maxWidth : "100%"}} 
                 />
             </ScrollView>
