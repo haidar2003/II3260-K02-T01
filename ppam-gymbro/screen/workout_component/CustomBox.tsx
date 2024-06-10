@@ -1,3 +1,5 @@
+import { useWorkout } from '@/provider/WorkoutProvider';
+import { supabase } from '@/utils/supabase';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, Image, TouchableOpacity, Dimensions } from 'react-native';
@@ -22,7 +24,28 @@ const screenWidth = Dimensions.get('window').width;
 
 const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty, location, trainerWorkoutIsOver, freeWorkoutIsSelected, freeWorkoutIsAdded, homeNextWorkout, currentProgress, planCategory}) => {
     const [isAdding, setIsAdding] = useState(freeWorkoutIsAdded);
-    
+    const {workoutList, getWorkoutList, workoutLoading} = useWorkout()
+    const handleRemoveAdd = async () => {
+      if (isAdding) {
+      const {data, error} = await supabase.from("Workout").update({is_active : false}).eq("id_workout_plan", planId)
+      if (error) {
+          console.log(error)
+        }
+      } else {
+        const {data, error} = await supabase.from("Workout").update({is_active : true}).eq("id_workout_plan", planId)
+        if (error) {
+          console.log(error)
+        }
+      }
+      setTimeout(() => {getWorkoutList()}, 400)
+    }
+
+    const handleAdd = async () => {
+
+    }
+
+
+
     // Style
     let containerStyle, buttonColor;
 
@@ -172,7 +195,7 @@ const CustomBox: React.FC<CustomBoxProps> = ({ planId, planName, planDifficulty,
             )}
             {location === 'free-menu-selection' && (
               <View style={styles.buttonsContainer}>
-                <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: buttonColor, height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
+                <TouchableOpacity onPress={ () => {handleRemoveAdd()} } style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: buttonColor, height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>
                   {isAdding ? (<Text style={{color: '#FEFEFE', fontWeight: 'bold'}}>Remove</Text>) : (<Text style={{color: '#FF7D40', fontWeight: 'bold'}}>Add</Text>)}
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {router.navigate("/(tabs)/workout/Plan/"+planId)}} style={{ height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 12, justifyContent: 'center' , alignItems: 'center'}}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, ImageBackground, ScrollView, Dimensions, KeyboardAvoidingView, Platform, FlatList, Pressable, TouchableOpacity } from 'react-native';
 import CustomBox from '@/screen/workout_component/CustomBox';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { Image } from 'expo-image';
 import { Circle } from 'react-native-progress';
 import { useWorkout } from '@/provider/WorkoutProvider';
@@ -19,6 +19,7 @@ function WorkoutCategory() {
         justifyContent: 'center',
         gap: 25
       }}>
+        <TouchableOpacity onPress={()=> {console.log("asa");router.navigate("/(tabs)/workout/FreeWorkoutSelection/Body")}}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
             <Image
@@ -30,6 +31,8 @@ function WorkoutCategory() {
             Full Body
           </Text>
         </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/FreeWorkoutSelection/Weight")}}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
             <Image
@@ -41,6 +44,7 @@ function WorkoutCategory() {
             Weight
           </Text>
         </View>
+        </TouchableOpacity>
       </View>
       <View style={{
         flexDirection: 'column',
@@ -48,6 +52,7 @@ function WorkoutCategory() {
         justifyContent: 'center',
         gap: 25
       }}>
+        <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/FreeWorkoutSelection/Upper Body")}}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
             <Image
@@ -59,6 +64,8 @@ function WorkoutCategory() {
             Upper Body
           </Text>
         </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/FreeWorkoutSelection/Yoga")}}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
             <Image
@@ -70,6 +77,7 @@ function WorkoutCategory() {
             Yoga
           </Text>
         </View>
+        </TouchableOpacity>
       </View>
       <View style={{
         flexDirection: 'column',
@@ -77,6 +85,7 @@ function WorkoutCategory() {
         justifyContent: 'center',
         gap: 25
       }}>
+        <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/FreeWorkoutSelection/Lower Body")}}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
             <Image
@@ -88,6 +97,8 @@ function WorkoutCategory() {
             Lower Body
           </Text>
         </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/FreeWorkoutSelection/Running")}}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
             <Image
@@ -99,13 +110,16 @@ function WorkoutCategory() {
             Running
           </Text>
         </View>
+        </TouchableOpacity>
       </View>
+      
       <View style={{
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         gap: 25
       }}>
+        <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/FreeWorkoutSelection/Core")}}>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
             <Image
@@ -117,6 +131,8 @@ function WorkoutCategory() {
             Core
           </Text>
         </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
         <View style={styles.categoryContainer}>
           <View style={styles.circle}>
             <Image
@@ -128,6 +144,7 @@ function WorkoutCategory() {
             Rucking
           </Text>
         </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -158,7 +175,8 @@ export default function FreeWorkout() {
   
   useEffect(() => { 
     if  ( workoutList != null &&   workoutList.length > 0 ) {
-      const  SelectionFreeWorkoutInit1 = workoutList.filter((item) => item.planCategory != "Trainer")
+      // console.log(workoutList)
+      const  SelectionFreeWorkoutInit1 = workoutList.filter((item) => (item.planCategory != "Trainer") && (item.is_active))
       const SelectionFreeWorkoutInit2 = SelectionFreeWorkoutInit1.map(item => ({ ...item, isSelected: false }));
       setSelectionFreeWorkout(SelectionFreeWorkoutInit2)
     }

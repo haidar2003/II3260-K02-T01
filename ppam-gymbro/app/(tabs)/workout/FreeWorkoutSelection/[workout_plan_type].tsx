@@ -1,11 +1,16 @@
 import { StyleSheet, Text, View, ScrollView, Dimensions, FlatList, Image, TouchableOpacity } from 'react-native';
 import CustomBox from '@/screen/workout_component/CustomBox';
-import { Link } from 'expo-router';
+import { Link, useLocalSearchParams } from 'expo-router';
+import { useWorkout } from '@/provider/WorkoutProvider';
+import LoadingScreen from '@/screen/loading_screen/loadingScreen';
+import { useEffect, useState } from 'react';
 const screenWidth = Dimensions.get('window').width;
 
 export default function FreeWorkoutSelection() {
     const chosenCategory = 'Core';
-
+    const {workout_plan_type} = useLocalSearchParams();
+    const {workoutList, getWorkoutList, workoutLoading} = useWorkout()
+    const [SelectionFreeWorkout, setSelectionFreeWorkout] = useState(null)
     const chosenFreeWorkout = [
         { planId: 1, name_workout_plan: "Core 1", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: false, currentProgress: 50, currentDay: 4 },
         { planId: 2, name_workout_plan: "Core 2", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Core', freeWorkoutIsSelected: false, freeWorkoutIsAdded: true, currentProgress: 50, currentDay: 4 },
@@ -20,12 +25,41 @@ export default function FreeWorkoutSelection() {
 
   const renderFreeWorkout = ({ item }) => {
       return (
+        <TouchableOpacity onPress={ () => {setSelectedFreeWorkout(item.id_workout_plan)}}>
         <View style = {{marginVertical : screenWidth * (5/360)}}>
-          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} freeWorkoutIsSelected={false} freeWorkoutIsAdded={item.freeWorkoutIsAdded} location='free-menu-selection'/>
+          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} freeWorkoutIsSelected={item.isSelected} freeWorkoutIsAdded={item.is_active} location='free-menu-selection'/>
         </View>
+        </TouchableOpacity>
       )
   };
 
+  const setSelectedFreeWorkout = (id) => {
+    setSelectionFreeWorkout(prevData => prevData.map(item => {
+
+      if (item.id_workout_plan === id) {
+
+        return { ...item, isSelected: true }
+      } else {
+        
+        return { ...item, isSelected: false }
+      }
+        
+    }))
+  }
+
+  useEffect(() => { 
+    if  ( workoutList != null &&   workoutList.length > 0 ) {
+      console.log(workoutList)
+      const  SelectionFreeWorkoutInit1 = workoutList.filter((item) => (item.planCategory == workout_plan_type) && (item.is_active))
+      const SelectionFreeWorkoutInit2 = SelectionFreeWorkoutInit1.map(item => ({ ...item, isSelected: false }));
+      setSelectionFreeWorkout(SelectionFreeWorkoutInit2)
+    }
+    
+   },[workoutList])
+
+  if (workoutLoading) {
+    return <LoadingScreen/>
+  }
   return (
     <View style={styles.layout}>
       <ScrollView style = {{flex : 1}}>
@@ -42,13 +76,13 @@ export default function FreeWorkoutSelection() {
           </Link>
             <View>
               <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#444444' }}>
-                {chosenCategory}
+                {workout_plan_type}
               </Text>
             </View>
             <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360) }}/>
         </View>
         <ScrollView horizontal = {true}>
-            <FlatList data={chosenFreeWorkout}
+            <FlatList data={SelectionFreeWorkout}
             renderItem={renderFreeWorkout}
             keyExtractor={item => item.planId}
             style = {{maxWidth : "100%"}} />

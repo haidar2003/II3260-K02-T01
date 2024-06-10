@@ -11,9 +11,9 @@ export default function TrainerWorkout() {
 
     // trainerWorkoutIsOver, kalau trainer nggak aktif = true
   const renderWorkoutActive = ({ item }) => {
-    if (!item.isActive){
+    if (item.isActive){
       return (
-        <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/Plan/"+item.planId)}}>
+        <TouchableOpacity onPress={()=> {console.log("ASF",item);router.navigate("/(tabs)/workout/Plan/"+item.id_workout_plan);}}>
         <View style = {{padding : 5}}>
           <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='trainer-menu'/>
         </View>
@@ -23,9 +23,10 @@ export default function TrainerWorkout() {
   };
 
   const renderWorkoutFinished = ({ item }) => {
-    if (item.isActive){
+    console.log("ASF",item)
+    if (!item.isActive){
       return (
-        <TouchableOpacity onPress={()=> {router.navigate("/(tabs)/workout/Plan/"+item.planId)}}>
+        <TouchableOpacity onPress={()=> {;router.navigate("/(tabs)/workout/Plan/"+item.id_workout_plan)}}>
         <View style = {{padding : 5}}>
           <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='trainer-menu'/>
         </View>
