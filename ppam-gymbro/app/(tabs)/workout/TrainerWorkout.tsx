@@ -5,6 +5,7 @@ import { Link } from 'expo-router';
 import { Image } from 'expo-image';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useWorkout } from '@/provider/WorkoutProvider';
+import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 const screenWidth = Dimensions.get('window').width;
 
 export default function TrainerWorkout() {
@@ -40,6 +41,9 @@ export default function TrainerWorkout() {
     }
 };
 
+  if (workoutLoading) {
+    return <LoadingScreen/>
+  }
   return (
     <View style={styles.layout}>
       <ScrollView style = {{flex : 1}}>

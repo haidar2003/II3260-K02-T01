@@ -73,7 +73,7 @@ export default function HomeScreen() {
     <View style={styles.layout}>
       <ScrollView style = {{flex : 1}}>
         <View style={{ marginTop: screenWidth * (35/360), paddingVertical: screenWidth * (20/360), paddingHorizontal: screenWidth * (5/360), flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', gap: 20}}>
-          <Link href="/(tabs)/workout" asChild>
+          <Link href="/(tabs)/home/profile" asChild>
             <Pressable> 
               <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
                 {/* <Image source={{   }}></Image> */}

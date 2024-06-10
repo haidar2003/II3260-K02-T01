@@ -19,17 +19,17 @@ export default function MainWorkout() {
     { planId: 7, planName: "Yoga 4", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Yoga', currentProgress: 50, currentDay: 4 },
     { planId: 8, planName: "Rucking 2", planDifficulty: 'Beginner', planDuration: 8, planCategory: 'Rucking', currentProgress: 50, currentDay: 4 },
   ]
-  const workoutPlanNavigate = (id) => {router.navigate("./"+id)}
+
   
 
   const renderTrainerWorkout = ({ item }) => {
     if (item.planCategory === 'Trainer')
       return (
-        <TouchableOpacity onPress={ () => {workoutPlanNavigate(item.id_workout_plan)}}>
+
         <View style = {{paddingVertical : screenWidth * (5/360)}}>
           <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} location='main-workout'/>
         </View>
-        </TouchableOpacity>
+
       )
   };
 

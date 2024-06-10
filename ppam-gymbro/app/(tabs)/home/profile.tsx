@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TextInput, View, Image, ScrollView, Dimensions, Pressable} from 'react-native';
 import React, {useState} from 'react';
 import { Link } from 'expo-router';
+import { useAuth } from '@/provider/AuthProvider';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -15,10 +16,10 @@ export default function Profile() {
         userBirthdate: '17th August 2003'
         }
     )
-
-    const [name, setName] = useState("Arnold S.")
-    const [email, setEmail] = useState("TerminatorInbox@email.com")
-    const [phone, setPhone] = useState("18004686287")
+    const {session,authLoading,userData,getSession,updateUserData} = useAuth()
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
     const [password, setPassword] = useState("")
     const [hidePassword, setHidePassword] = useState(true)
     
@@ -95,7 +96,7 @@ export default function Profile() {
 
                 <View style={{ width: screenWidth * (300/360), height: screenWidth * (56/360), alignItems: 'center', borderWidth: 2, justifyContent: 'center', borderColor: '#FF7D40', borderRadius: 12, marginTop: 150, marginBottom: 30 }}>
                     <Text style={{ color: '#FF7D40', fontWeight: 'bold', fontSize: 16 }}>
-                        Password
+                        Change
                     </Text>
                 </View>
 
