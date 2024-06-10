@@ -27,7 +27,7 @@ export default function FreeWorkoutSelection() {
       return (
         <TouchableOpacity onPress={ () => {setSelectedFreeWorkout(item.id_workout_plan)}}>
         <View style = {{marginVertical : screenWidth * (5/360)}}>
-          <CustomBox planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} freeWorkoutIsSelected={item.isSelected} freeWorkoutIsAdded={item.is_active} location='free-menu-selection'/>
+          <CustomBox planId={item.id_workout_plan} planName={item.name_workout_plan} planDifficulty={item.planDifficulty} currentProgress={item.currentProgress} freeWorkoutIsSelected={item.isSelected} freeWorkoutIsAdded={item.is_active} location='free-menu-selection'/>
         </View>
         </TouchableOpacity>
       )
@@ -50,7 +50,7 @@ export default function FreeWorkoutSelection() {
   useEffect(() => { 
     if  ( workoutList != null &&   workoutList.length > 0 ) {
       console.log(workoutList)
-      const  SelectionFreeWorkoutInit1 = workoutList.filter((item) => (item.planCategory == workout_plan_type) && (item.is_active))
+      const  SelectionFreeWorkoutInit1 = workoutList.filter((item) => (item.planCategory == workout_plan_type) )
       const SelectionFreeWorkoutInit2 = SelectionFreeWorkoutInit1.map(item => ({ ...item, isSelected: false }));
       setSelectionFreeWorkout(SelectionFreeWorkoutInit2)
     }
