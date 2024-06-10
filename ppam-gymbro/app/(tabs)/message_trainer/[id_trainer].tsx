@@ -63,7 +63,11 @@ export default function TrainerChat() {
         { messageId: 4, messageTime: new Date(2024, 6, 6, 11, 0, 0), messageType: 'User', messageContent: 'Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit' },
     ]
   }
-
+  const handleSend = ( async () => {
+    const {data ,error} = await supabase.from("Message").insert([
+      {}
+    ])
+  } )
 
   const renderMessages = ({ item }) => {
       let printDate = false
