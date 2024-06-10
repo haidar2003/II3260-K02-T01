@@ -175,6 +175,13 @@ export default function ActiveTrainer() {
           style = {{maxWidth : "100%"}} />
         </ScrollView>
       </ScrollView>   
+
+      { reviewVisible &&( 
+        <View style = {styles.grey}>
+          <TouchableOpacity style={{flex : 1}}>
+            <View style = {{flex : 1}}/>
+          </TouchableOpacity>
+        </View>)}
     </View>
 
   )
