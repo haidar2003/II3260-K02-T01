@@ -1,0 +1,1339 @@
+  {
+    planName: "Core 1",
+    planDifficulty: 'Beginner',
+    planDuration: 4,
+    planCategory: 'core',
+    currentProgress: 0,
+    currentDay: 1,
+    day: [
+      {
+        day: 1, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 2, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 2, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 2, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 2, reps: 4, isFinished: false },
+        ]
+      },
+      {
+        day: 2, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 4, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 4, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 4, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 4, reps: 4, isFinished: false },
+        ]
+      },
+      {
+        day: 3, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 6, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 6, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 6, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 6, reps: 4, isFinished: false },
+        ]
+      },
+      {
+        day: 4, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 8, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 8, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 8, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 8, reps: 4, isFinished: false },
+        ]
+      },
+    ]
+  }
+
+  {
+    planName: "Core 2",
+    planDifficulty: 'Intermediate',
+    planDuration: 4,
+    planCategory: 'core',
+    currentProgress: 0,
+    currentDay: 1,
+    day: [
+      {
+        day: 1, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 4, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 4, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 4, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 4, reps: 4, isFinished: false },
+        ]
+      },
+      {
+        day: 2, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 6, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 6, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 6, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 6, reps: 4, isFinished: false },
+        ]
+      },
+      {
+        day: 3, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 8, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 8, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 8, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 8, reps: 4, isFinished: false },
+        ]
+      },
+      {
+        day: 4, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 10, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 10, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 10, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 10, reps: 4, isFinished: false },
+        ]
+      },
+    ]
+  }
+
+  {
+    planName: "Core 3",
+    planDifficulty: 'Advanced',
+    planDuration: 4,
+    planCategory: 'core',
+    currentProgress: 0,
+    currentDay: 1,
+    day: [
+      {
+        day: 1, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 6, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 6, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 6, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 6, reps: 4, isFinished: false },
+        ]
+      },
+      {
+        day: 2, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 8, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 8, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 8, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 8, reps: 4, isFinished: false },
+        ]
+      },
+      {
+        day: 3, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 10, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 10, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 10, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 10, reps: 4, isFinished: false },
+        ]
+      },
+      {
+        day: 4, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 12, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 12, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 12, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 12, reps: 4, isFinished: false },
+        ]
+      },
+    ]
+  }
+
+  {
+    planName: "Core 4",
+    planDifficulty: 'Expert',
+    planDuration: 4,
+    planCategory: 'core',
+    currentProgress: 0,
+    currentDay: 1,
+    day: [
+      {
+        day: 1, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 8, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 8, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 8, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 8, reps: 4, isFinished: false },
+        ]
+      },
+      {
+        day: 2, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 10, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 10, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 10, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 10, reps: 4, isFinished: false },
+        ]
+      },
+      {
+        day: 3, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 12, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 12, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 12, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 12, reps: 4, isFinished: false },
+        ]
+      },
+      {
+        day: 4, currentProgress: 0, excercise: [
+          { excerciseId: 1, excerciseName: 'Push Up', sets: 14, reps: 4, isFinished: false },
+          { excerciseId: 2, excerciseName: 'Crunch', sets: 14, reps: 4, isFinished: false },
+          { excerciseId: 3, excerciseName: 'Sit Up', sets: 14, reps: 4, isFinished: false },
+          { excerciseId: 4, excerciseName: 'Back Up', sets: 14, reps: 4, isFinished: false },
+        ]
+      },
+    ]
+  }
+
+{
+  planName: "Full Body 1",
+  planDifficulty: 'Beginner',
+  planDuration: 4,
+  planCategory: 'full_body',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 2, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 2, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 2, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 2, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 4, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 6, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Full Body 2",
+  planDifficulty: 'Intermediate',
+  planDuration: 4,
+  planCategory: 'full_body',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 4, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 6, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 10, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Full Body 3",
+  planDifficulty: 'Advanced',
+  planDuration: 4,
+  planCategory: 'full_body',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 6, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 10, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 12, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Full Body 4",
+  planDifficulty: 'Expert',
+  planDuration: 4,
+  planCategory: 'full_body',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 10, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 12, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 14, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 14, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Bicep Curls', sets: 14, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Tricep Dips', sets: 14, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+
+{
+  planName: "Lower Body 1",
+  planDifficulty: 'Beginner',
+  planDuration: 4,
+  planCategory: 'lower_body',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 2, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 2, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 2, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 2, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 4, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 6, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Lower Body 2",
+  planDifficulty: 'Intermediate',
+  planDuration: 4,
+  planCategory: 'lower_body',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 4, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 6, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 10, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Lower Body 3",
+  planDifficulty: 'Advanced',
+  planDuration: 4,
+  planCategory: 'lower_body',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 6, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 10, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 12, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Lower Body 4",
+  planDifficulty: 'Expert',
+  planDuration: 4,
+  planCategory: 'lower_body',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 10, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 12, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Squats', sets: 14, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Lunges', sets: 14, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Calf Raises', sets: 14, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Glute Bridges', sets: 14, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Upper Body 1",
+  planDifficulty: 'Beginner',
+  planDuration: 4,
+  planCategory: 'upper_body',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 2, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 2, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 2, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 2, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 4, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 6, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Upper Body 2",
+  planDifficulty: 'Intermediate',
+  planDuration: 4,
+  planCategory: 'upper_body',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 4, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 6, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 10, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Upper Body 3",
+  planDifficulty: 'Advanced',
+  planDuration: 4,
+  planCategory: 'upper_body',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 6, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 10, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 12, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Upper Body 4",
+  planDifficulty: 'Expert',
+  planDuration: 4,
+  planCategory: 'upper_body',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 10, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 12, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Push Ups', sets: 14, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Bicep Curls', sets: 14, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tricep Dips', sets: 14, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Shoulder Raises', sets: 14, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Weight 1",
+  planDifficulty: 'Beginner',
+  planDuration: 4,
+  planCategory: 'weight',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 2, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 2, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 2, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 2, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 4, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 6, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Weight 2",
+  planDifficulty: 'Intermediate',
+  planDuration: 4,
+  planCategory: 'weight',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 4, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 6, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 10, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Weight 3",
+  planDifficulty: 'Advanced',
+  planDuration: 4,
+  planCategory: 'weight',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 6, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 10, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 12, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Weight 4",
+  planDifficulty: 'Expert',
+  planDuration: 4,
+  planCategory: 'weight',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 10, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 12, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Bench Press', sets: 14, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Deadlift', sets: 14, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Shoulder Press', sets: 14, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Bicep Curls', sets: 14, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Yoga 1",
+  planDifficulty: 'Beginner',
+  planDuration: 4,
+  planCategory: 'yoga',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 2, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 2, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 2, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 2, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 4, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 6, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Yoga 2",
+  planDifficulty: 'Intermediate',
+  planDuration: 4,
+  planCategory: 'yoga',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 4, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 4, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 6, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 10, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Yoga 3",
+  planDifficulty: 'Advanced',
+  planDuration: 4,
+  planCategory: 'yoga',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 6, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 6, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 10, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 12, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Yoga 4",
+  planDifficulty: 'Expert',
+  planDuration: 4,
+  planCategory: 'yoga',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 8, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 8, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 10, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 10, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 12, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 12, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: 'Sun Salutation', sets: 14, reps: 4, isFinished: false },
+        { excerciseId: 2, excerciseName: 'Downsward Dog', sets: 14, reps: 4, isFinished: false },
+        { excerciseId: 3, excerciseName: 'Tree Pose', sets: 14, reps: 4, isFinished: false },
+        { excerciseId: 4, excerciseName: 'Chair Pose', sets: 14, reps: 4, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Rucking 1",
+  planDifficulty: 'Beginner',
+  planDuration: 4,
+  planCategory: 'rucking',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '5K Ruck', sets: 1, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '7K Ruck', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '10K Ruck', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '12K Ruck', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Rucking 2",
+  planDifficulty: 'Intermediate',
+  planDuration: 4,
+  planCategory: 'rucking',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '7K Ruck', sets: 1, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '10K Ruck', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '12K Ruck', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '15K Ruck', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Rucking 3",
+  planDifficulty: 'Advanced',
+  planDuration: 4,
+  planCategory: 'rucking',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '10K Ruck', sets: 1, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '12K Ruck', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '15K Ruck', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '17K Ruck', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Rucking 4",
+  planDifficulty: 'Expert',
+  planDuration: 4,
+  planCategory: 'rucking',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '12K Ruck', sets: 1, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '15K Ruck', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '17K Ruck', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '20K Ruck', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Running 1",
+  planDifficulty: 'Beginner',
+  planDuration: 4,
+  planCategory: 'running',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '5K Run', sets: 1, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '7K Run', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '10K Run', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '12K Run', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Running 2",
+  planDifficulty: 'Intermediate',
+  planDuration: 4,
+  planCategory: 'running',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '7K Run', sets: 1, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '10K Run', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '12K Run', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '15K Run', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Running 3",
+  planDifficulty: 'Advanced',
+  planDuration: 4,
+  planCategory: 'running',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '10K Run', sets: 1, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '12K Run', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '15K Run', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '17K Run', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Running 4",
+  planDifficulty: 'Expert',
+  planDuration: 4,
+  planCategory: 'running',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+    {
+      day: 1, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '12K Run', sets: 1, reps: 4, isFinished: false },
+      ]
+    },
+    {
+      day: 2, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '15K Run', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 3, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '17K Run', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+    {
+      day: 4, currentProgress: 0, excercise: [
+        { excerciseId: 1, excerciseName: '20K Run', sets: 1, reps: 1, isFinished: false },
+      ]
+    },
+  ]
+}
+
+{
+  planName: "Trainer Template",
+  planDifficulty: 'Expert',
+  planDuration: 8,
+  planCategory: 'trainer',
+  currentProgress: 0,
+  currentDay: 1,
+  day: [
+            { day: 1, currentProgress: 100, excercise: [
+                { excerciseId: 1, excerciseName: 'Push Up', sets: 2, reps: 4, isFinished: false },
+                { excerciseId: 2, excerciseName: 'Pull Up', sets: 4, reps: 4, isFinished: false },
+                { excerciseId: 3, excerciseName: 'Sit Up', sets: 6, reps: 4, isFinished: false },
+                { excerciseId: 4, excerciseName: 'Back Up', sets: 8, reps: 4, isFinished: false },
+            ] },
+            { day: 2, currentProgress: 100, excercise: [
+                { excerciseId: 1, excerciseName: 'Push Up', sets: 2, reps: 4, isFinished: false },
+                { excerciseId: 2, excerciseName: 'Pull Up', sets: 4, reps: 4, isFinished: false },
+                { excerciseId: 3, excerciseName: 'Sit Up', sets: 6, reps: 4, isFinished: false },
+                { excerciseId: 4, excerciseName: 'Back Up', sets: 8, reps: 4, isFinished: false },
+            ] },
+            { day: 3, currentProgress: 100, excercise: [
+                { excerciseId: 1, excerciseName: 'Push Up', sets: 4, reps: 4, isFinished: false },
+                { excerciseId: 2, excerciseName: 'Pull Up', sets: 6, reps: 4, isFinished: false },
+                { excerciseId: 3, excerciseName: 'Sit Up', sets: 8, reps: 4, isFinished: false },
+                { excerciseId: 4, excerciseName: 'Back Up', sets: 10, reps: 4, isFinished: false },
+            ] },
+            { day: 4, currentProgress: 50, excercise: [
+                { excerciseId: 1, excerciseName: 'Push Up', sets: 4, reps: 4, isFinished: false },
+                { excerciseId: 2, excerciseName: 'Pull Up', sets: 6, reps: 4, isFinished: false },
+                { excerciseId: 3, excerciseName: 'Sit Up', sets: 8, reps: 4, isFinished: false },
+                { excerciseId: 4, excerciseName: 'Back Up', sets: 10, reps: 4, isFinished: false },
+            ] },
+            { day: 5, currentProgress: 0, excercise: [
+                { excerciseId: 1, excerciseName: 'Push Up', sets: 6, reps: 4, isFinished: false },
+                { excerciseId: 2, excerciseName: 'Pull Up', sets: 8, reps: 4, isFinished: false },
+                { excerciseId: 3, excerciseName: 'Sit Up', sets: 10, reps: 4, isFinished: false },
+                { excerciseId: 4, excerciseName: 'Back Up', sets: 12, reps: 4, isFinished: false },
+            ] },
+            { day: 6, currentProgress: 0, excercise: [
+                { excerciseId: 1, excerciseName: 'Push Up', sets: 6, reps: 4, isFinished: false },
+                { excerciseId: 2, excerciseName: 'Pull Up', sets: 8, reps: 4, isFinished: false },
+                { excerciseId: 3, excerciseName: 'Sit Up', sets: 10, reps: 4, isFinished: false },
+                { excerciseId: 4, excerciseName: 'Back Up', sets: 12, reps: 4, isFinished: false },
+            ] },
+            { day: 7, currentProgress: 0, excercise: [
+                { excerciseId: 1, excerciseName: 'Push Up', sets: 8, reps: 4, isDone: false },
+                { excerciseId: 2, excerciseName: 'Pull Up', sets: 10, reps: 4, isDone: false },
+                { excerciseId: 3, excerciseName: 'Sit Up', sets: 12, reps: 4, isDone: false },
+                { excerciseId: 4, excerciseName: 'Back Up', sets: 14, reps: 4, isDone: false },
+            ] },
+            { day: 8, currentProgress: 0, excercise: [
+                { excerciseId: 1, excerciseName: 'Push Up', sets: 8, reps: 4, isDone: false },
+                { excerciseId: 2, excerciseName: 'Pull Up', sets: 10, reps: 4, isDone: false },
+                { excerciseId: 3, excerciseName: 'Sit Up', sets: 12, reps: 4, isDone: false },
+                { excerciseId: 4, excerciseName: 'Back Up', sets: 14, reps: 4, isDone: false },
+            ] },
+        ] 
+    }
