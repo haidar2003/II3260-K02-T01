@@ -35,11 +35,16 @@ export default function TrainerChatList() {
               console.log(error3)
             } else {
               
+
+
               const ChatInput = await data.map( chatItem => {
                 const matchingTrainer = data2.find(trainerItem => 
                   trainerItem.trainer_id == chatItem.id_trainer
                 ) 
                 const matchingMessage = data3.filter(messageItem => messageItem.id_chat == chatItem.id_chat)
+                if (matchingMessage.length <= 0) {
+                  matchingMessage.push({id_chat : chatItem.id_chat, content : "Tidak ada Pesan", date : new Date(), messageType : "Trainer"})
+                }
                 const latestMessage = matchingMessage.reduce((latest, current) => {
                   const latestDate = new Date(latest.date);
                   const currentDate = new Date(current.date);
@@ -93,7 +98,7 @@ export default function TrainerChatList() {
 
   const renderChat = ({ item }) => {
     let displayedTime;
-  
+    
     if (item.lastMessage !== null) {
       const lastMessage = item.lastMessage;
       

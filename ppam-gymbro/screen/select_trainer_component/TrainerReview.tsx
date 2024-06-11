@@ -1,3 +1,5 @@
+import { useAuth } from '@/provider/AuthProvider';
+import { supabase } from '@/utils/supabase';
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, Image, TextInput, StyleSheet, Dimensions } from 'react-native';
 
@@ -13,7 +15,7 @@ interface TrainerReviewProps {
 const TrainerReview: React.FC<TrainerReviewProps> = ({trainerName, trainer_id,setReviewVisible, ReviewVisible }) => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
-
+  const {session,authLoading,userData,getSession,updateUserData} = useAuth()
   const handleRatingPress = (index) => {
     setRating(index + 1);
   };
@@ -44,6 +46,16 @@ const TrainerReview: React.FC<TrainerReviewProps> = ({trainerName, trainer_id,se
     }
     return stars;
   };
+
+  const handleSubmit = async () => {
+    const {data, error} = await supabase.from("Review").insert([{
+      star : rating, user_id : userData.id_user, name_user : userData.nama_user, trainer_id : trainer_id, content_review : review
+    }])
+    if (error) {
+      console.log("failed review",error)
+    }
+    setReviewVisible(false)
+  }
 
   return (
     <View style={styles.container}>
@@ -80,7 +92,7 @@ const TrainerReview: React.FC<TrainerReviewProps> = ({trainerName, trainer_id,se
             </View>
         </View>
         <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {handleSubmit()}}>
                 <View style={{ justifyContent:'center', alignItems: 'center', borderRadius: 8, backgroundColor: '#FF7D40', width: screenWidth * (110/360), height: screenWidth * (50/360)}}>
                     <Text style={{ fontWeight: 'bold', color: '#FEFEFE', fontSize: 16 }}>
                         Submit

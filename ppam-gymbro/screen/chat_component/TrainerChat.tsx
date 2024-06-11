@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-nati
 const screenWidth = Dimensions.get('window').width;
 
 interface TrainerChatProps {
-    trainerId?: number,
+    trainerId: string,
     trainerName?: string,
     lastMessage?: string,
     lastMessageTime?: string,

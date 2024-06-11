@@ -118,6 +118,10 @@ export default function Invoice() {
           break
         }
       }
+      const {data : data4, error : error4} = await supabase.from("Transaction").insert([{
+        id_user : userData.id_user, id_trainer : cart.trainerId, amount : calculateTotalPrice([cart])
+      }])
+
       const {data : data2 , error : error2}  = await supabase.from("Chat").select("*").eq("id_user", userData.id_user).eq("id_trainer", cart.trainerId)
       if (error2) {
         console.log(error2)
@@ -128,9 +132,9 @@ export default function Invoice() {
         if (error3) {
           console.log("insert chat fail", error3)
         } else if (data3 != null) {
-          const {data : data4, error : error4} = await supabase.from("Message").insert([{
-            id_chat : data3.id_chat, messageType : "Trainer", content : "Halo, terimakasih telah memesan"
-          }])
+          // const {data : data4, error : error4} = await supabase.from("Message").insert([{
+          //   id_chat : data3.id_chat, messageType : "Trainer", content : "Halo, terimakasih telah memesan"
+          // }])
         }
       }
     });

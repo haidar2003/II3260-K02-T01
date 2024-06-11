@@ -14,7 +14,7 @@ export default function TrainerChat() {
   const {session,authLoading,userData,getSession,updateUserData} = useAuth()
   const [messageList, setMessageList] = useState(null)
   const [trainerData, setTrainerData] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [userMessage, setUserMessage] = useState('')
   const [chatData, setChatData] = useState(null)
   const currentUserId = userData.id_user;
@@ -37,7 +37,10 @@ export default function TrainerChat() {
         if (error3) {
           console.log("failed fetch message trainer", error3)
         } else {
-          // console.log(data3)
+          if (data3.length <= 0) {
+            data3.push({id_chat : data.id_chat, content : "Halo, terima kasih telah melakukan pemesanan", date : new Date(), messageType : "Trainer"})
+          }
+          console.log("ASFUJG",data3)
           const earliestMessage = data3.reduce((earliest, current) => {
             const earliestDate = new Date(earliest.date);
             const currentDate = new Date(current.date);
@@ -65,12 +68,16 @@ export default function TrainerChat() {
       const {data : data2, error : error2} = await supabase.from("Trainer").select("*").eq("trainer_id", id_trainer).single()
       if (error2) {
         console.log("failed fetch message trainer", error2)
+        setLoading(false)
       } else {
         const {data : data3, error : error3} = await supabase.from("Message").select("*").eq("id_chat", data.id_chat)
         if (error3) {
           console.log("failed fetch message trainer", error3)
+          setLoading(false)
         } else {
-          // console.log(data3)
+          if (data3.length <= 0) {
+            data3.push({id_chat : data.id_chat, content : "Halo, terima kasih telah melakukan pemesanan", date : new Date(), messageType : "Trainer"})
+          }
           const earliestMessage = data3.reduce((earliest, current) => {
             const earliestDate = new Date(earliest.date);
             const currentDate = new Date(current.date);
@@ -82,11 +89,13 @@ export default function TrainerChat() {
           // console.log("B",lastDate)
           setChatData(data)
           setTrainerData(data2)
+          // console.log("ASjag",data2)
           setMessageList(data3)
+          setLoading(false)
         }
       }
     }
-    setLoading(false)
+    
   }
   
   const trainerChat = { 
@@ -151,7 +160,8 @@ export default function TrainerChat() {
             </Link>
             <View>
               <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#444444' }}>
-                {trainerChat.trainerName}
+                {trainerData["nama_trainer"]}
+                
               </Text>
             </View>
             <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360) }}/>
