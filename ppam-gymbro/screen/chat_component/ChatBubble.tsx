@@ -1,3 +1,4 @@
+import { getImageNumber } from '@/utils/getImage';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 
@@ -12,6 +13,7 @@ interface ChatBubbleProps {
   }
   
   const ChatBubble: React.FC<ChatBubbleProps> = ({ messageType, messageContent, messageTime }) => {
+    
     return (
         <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent:'flex-start' }}>
             {(messageType === 'Trainer' && (

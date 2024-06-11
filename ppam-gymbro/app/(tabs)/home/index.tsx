@@ -10,6 +10,7 @@ import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 import { useEffect, useState } from 'react';
 const screenWidth = Dimensions.get('window').width;
 import { useCurrentTrainer } from '@/provider/CurrentTrainerProvider';
+import { getImageNumber, referenceImage } from '@/utils/getImage';
 
 export default function HomeScreen() {
   const currentUser = 1;
@@ -18,6 +19,7 @@ export default function HomeScreen() {
   const [trainerPlan,setTrainerPlan ] = useState(null) 
   const [freePlan,setFreePlan ] = useState(null) 
   const {activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer,nonActiveTrainer} = useCurrentTrainer()
+  const [imageNumber, setImageNumber] = useState(1)
   const fetchIntialData = async () => {
     setLoading(true)
     if (userData != null) {
@@ -35,6 +37,7 @@ export default function HomeScreen() {
         console.log(freePlanError)
         
       } else {
+        setImageNumber(getImageNumber(currentTrainer.nama_trainer_active))
         setFreePlan(freePlanData)
         setLoading(false)
       }
@@ -91,7 +94,7 @@ export default function HomeScreen() {
             <Pressable> 
                 <Image
                     style = {{ width: screenWidth * (56/360), height: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1' }}
-                    source = {require("@/assets/Racist_Cat.webp")}
+                    source = {referenceImage[imageNumber]}
                 />
             </Pressable>
           </Link>

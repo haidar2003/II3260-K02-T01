@@ -3,17 +3,18 @@ import {numberToRupiah} from "@/utils/formatting"
 
 import React from 'react';
 import { router } from 'expo-router';
-
+import {referenceImage, getImageNumber} from '@/utils/getImage';
 const screenWidth = Dimensions.get('window').width;
 
 
 export default function Row_Comp({id ,name, rating, price}) {
+  const imagePath = getImageNumber(name)
   return (
     <TouchableOpacity onPress={ () => {console.log(("/(tabs)/find_Trainer/trainer_profile/"+id));router.navigate("/(tabs)/find_Trainer/trainer_profile/"+id)}}>
     <View style={{ width : screenWidth * (155/360), height : screenWidth * (250/360), borderRadius: 8, backgroundColor: 'grey' }}>
         <Image 
         style= {{width : screenWidth * (155/360), height : screenWidth * (155/360), borderTopRightRadius : 8, borderTopLeftRadius : 8}} 
-        source={require("@/assets/trainer_icon_placeholder.png")}/> 
+        source={referenceImage[imagePath]}/> 
 
         <View style = {{paddingVertical : 5, paddingHorizontal: 10, justifyContent: 'flex-start', gap: screenWidth * (25/360) }}>
           

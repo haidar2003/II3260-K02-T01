@@ -1,3 +1,4 @@
+import { getImageNumber, referenceImage } from '@/utils/getImage';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { Image, View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
@@ -12,12 +13,14 @@ interface TrainerChatProps {
   }
   
   const TrainerChat: React.FC<TrainerChatProps> = ({trainerId, trainerName, lastMessage, lastMessageTime }) => {
+    const imagePath = getImageNumber(trainerName)
+
     return (
     <TouchableOpacity onPress={() => {router.navigate("/(tabs)/message_trainer/"+trainerId)}}>
       <View style={styles.mainContainer}> 
         <Image
             style = {{ width: 52, height: 52, borderRadius: 36 }}
-            source = {require("@/assets/Racist_Cat.webp")}
+            source = {referenceImage[imagePath]}
         />
         <View style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', width: screenWidth * (253/360), gap: 5 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: screenWidth * (253/360) }}>

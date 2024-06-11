@@ -9,6 +9,7 @@ import TrainerPlan from '@/screen/find_trainer_component/TrainerPlan';
 import TrainerProfile from '@/screen/find_trainer_component/TrainerProfile';
 import { supabase } from '@/utils/supabase';
 import LoadingScreen from '@/screen/loading_screen/loadingScreen';
+import { getImageNumber } from '@/utils/getImage';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -24,6 +25,7 @@ export default function trainerProfile() {
     const [reviewData, setReviewData] = useState(null)
     const [pricingData, setPricingwData] = useState(null)
     const [tagData, setTagData] = useState(null)
+    const [imageNumber, setImageNumber] = useState(1)
     const handleScreenChange = (screen) => {
       setCurrentScreen(screen);
     };
@@ -37,6 +39,7 @@ export default function trainerProfile() {
       } else {
         // console.log("Get TRAINER DATA",data)
         setTrainerData(data)
+        setImageNumber(getImageNumber(data.nama_trainer))
         setLoading1(false)
       }
       

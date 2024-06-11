@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Progress from 'react-native-progress';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import { getImageNumber, referenceImage } from '@/utils/getImage';
 
 interface TrainerProfileProps {
   trainerName? : string;
@@ -10,11 +11,12 @@ interface TrainerProfileProps {
 }
 
 const TrainerProfile: React.FC<TrainerProfileProps> = ({ trainerName, trainerUsername, trainerRating, trainerCity }) => {
+  const imageNumber = getImageNumber(trainerName)
   return (
     <View style={styles.container}>
       <Image
                 style = {{ width: 140, height: 140, borderWidth: 5, borderRadius: 120, borderColor: '#FEFEFE' }}
-                source = {require("@/assets/Racist_Cat.webp")}
+                source = {referenceImage[trainerName]}
       />
 
       <View style={{ flexDirection: 'column', gap: 5, alignItems: 'center', justifyContent: 'flex-start'}}>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, Image, TouchableOpacity, Dimensions } from 'react-native';
-
+import { getImageNumber, referenceImage } from '@/utils/getImage';
 const screenWidth = Dimensions.get('window').width;
 
 interface HomeTrainerProps {
@@ -9,12 +9,13 @@ interface HomeTrainerProps {
   }
   
 const HomeTrainer: React.FC<HomeTrainerProps> = ({ trainerName, sessions }) => {
+    const imagePath = getImageNumber(trainerName)
     return (
       <View style={styles.containerStyle}>
         <View style={styles.topContainer}>
             <Image
                 style = {{ width: screenWidth * (90/360), height: screenWidth * (90/360), borderWidth: 5, borderRadius: 60, borderColor: '#FEFEFE' }}
-                source = {require("@/assets/Racist_Cat.webp")}
+                source = {referenceImage[imagePath]}
             />
 
             <View style={styles.topRightContainaer}>

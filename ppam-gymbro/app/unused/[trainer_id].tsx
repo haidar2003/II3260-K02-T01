@@ -22,23 +22,23 @@ export default function PastInvoice() {
   // const {cartList, addToCart, removeFromCart} = useCart()
   const {trainer_id} = useLocalSearchParams()
   
-  // const [invoice, setInvoice] = useState(null)
+  const [invoice, setInvoice] = useState(null)
   
-  // const fetchData = async () => {
-  //   setLoading(true)
-  //   console.log(trainer_id)
-  //   const {data, error} = await supabase.from("Transaction").select("*").eq("id_trainer", trainer_id)
-  //   if (error) {
-  //     console.log("failed to fetch invoice", error)
-  //   } else {
-  //     console.log("Hallooooo",data)
-  //     if (data.length < 1) {
-  //       console.log("KOSONG")
-  //     }
-  //     setInvoice(data[0])
-  //   }
-  //   setLoading(false)
-  // }
+  const fetchData = async () => {
+    setLoading(true)
+    console.log(trainer_id)
+    const {data, error} = await supabase.from("Transaction").select("*").eq("id_trainer", trainer_id)
+    if (error) {
+      console.log("failed to fetch invoice", error)
+    } else {
+      console.log("Hallooooo",data)
+      if (data.length < 1) {
+        console.log("KOSONG")
+      }
+      setInvoice(data[0])
+    }
+    setLoading(false)
+  }
 
   // const [cart, setCart] = useState(userCart)
   const [isSelected, setSelection] = useState(false);
@@ -79,27 +79,9 @@ export default function PastInvoice() {
     return totalPrice;
   };
 
-  const resultHash = CryptoJS.SHA256(userData.username + trainer_id).toString(CryptoJS.enc.Hex).toUpperCase()
-  let currentUserInvoice 
-  if (resultHash.length < 9) {
-    currentUserInvoice = resultHash.padEnd(9,'0')
-  } else {
-    currentUserInvoice = resultHash.slice(0,9)
-  }
-
-  function rngGen(a, min, max) {
-    const hash = CryptoJS.SHA256(a).toString(CryptoJS.enc.Hex);
-    const hashNumber = parseInt(hash.substring(0, 8), 16);
-    const range = max - min + 1;
-    const number = min + (hashNumber % range);
-    return number;
-  }
-
-  const online_bundle = rngGen(userData.username + trainer_id,1,5)
-  const offline_bundle = rngGen(trainer_id+ userData.username  ,1,5)
-  const online_price =  rngGen(userData.username +trainer_id + trainer_id,5,10)
-  const offline_price =  rngGen( trainer_id+ userData.username +trainer_id + trainer_id,8,15)
   
+  
+  useEffect(() => {fetchData(); console.log(invoice); console.log("ASFHKFSHFJE",trainer_id)}, [])
 
   const renderCart = ({item}) => {
     return (
@@ -114,11 +96,11 @@ export default function PastInvoice() {
       </View>
     )
   }
-  // if (loading || invoice == null) {
+  if (loading || invoice == null) {
 
-  //   setTimeout(()=>{router.replace("/home")}, 15000)
-  //   return <LoadingScreen/>
-  // }
+    setTimeout(()=>{router.replace("/home")}, 15000)
+    return <LoadingScreen/>
+  }
 
   return (
     <View style={styles.layout}>
@@ -161,10 +143,10 @@ export default function PastInvoice() {
             </View>
             <View style={{ gap: 15 }}>
               <Text style={{ fontWeight: 'bold' }}>
-                GB-PPAM{currentUserInvoice}
+                GB-PPAM{invoice.transaction_code}
               </Text>
               <Text>
-                Rp{(10000).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                Rp{invoice.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
               </Text>
               <Text>
                 {userData.username}
@@ -184,8 +166,8 @@ export default function PastInvoice() {
 
           <ScrollView horizontal = {true}>
             <FlatList
-              data={ [{trainerName : "Trainer", onlineBundle : online_bundle, onlineUnitPrice :online_price,
-                offlineBundle : offline_bundle, offlineUnitPrice : offline_price
+              data={ [{trainerName : invoice.trainer_name, onlineBundle : invoice.online_bundle, onlineUnitPrice : invoice.online_pnit_price,
+                offlineBundle : invoice.offline_bundle, offlineUnitPrice : invoice.offline_pnit_price 
               }] }
               renderItem={renderCart}
               keyExtractor={item => item.id}
