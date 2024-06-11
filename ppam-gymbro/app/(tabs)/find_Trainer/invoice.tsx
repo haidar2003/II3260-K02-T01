@@ -8,6 +8,8 @@ import ReserveTrainerInvoice from '@/screen/find_trainer_component/ReserveTraine
 import { useAuth } from '@/provider/AuthProvider';
 import { useCart } from '@/provider/CartProvider';
 import CryptoJS from 'crypto-js';
+import { supabase } from '@/utils/supabase';
+import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 const screenWidth = Dimensions.get('window').width;
 
 export default function Invoice() {
@@ -45,7 +47,7 @@ export default function Invoice() {
     },
   ]
 
-  const [cart, setCart] = useState(userCart)
+  // const [cart, setCart] = useState(userCart)
   const [isSelected, setSelection] = useState(false);
 
   const handlePress = () => {
@@ -94,9 +96,49 @@ export default function Invoice() {
     currentUserInvoice = resultHash.slice(0,9)
   }
 
+  const handleBuy = async () => {
+    setLoading(true)
+     cartList.forEach( async (cart) => {
+      for (let i = 0; i < cart.offlineBundle; i++) {
+        const {data, error} = await supabase.from("Session").insert([{
+          type : "Offline", id_user : userData.id_user, id_trainer : cart.trainerId
+        }])
 
+        if (error) {
+          console.log(error)
+        }
+      }
+      for (let i = 0; i < cart.onlineBundle; i++) {
+        const {data, error} = await supabase.from("Session").insert([{
+          type : "Online", id_user : userData.id_user, id_trainer : cart.trainerId
+        }])
+
+        if (error) {
+          console.log("insert session failed",error)
+          break
+        }
+      }
+      const {data : data2 , error : error2}  = await supabase.from("Chat").select("*").eq("id_user", userData.id_user).eq("id_trainer", cart.trainerId)
+      if (error2) {
+        console.log(error2)
+      } else if (data2.length <= 0) {
+        const {data : data3, error : error3} = await supabase.from("Chat").insert([{
+          id_user : userData.id_user, id_trainer : cart.trainerId
+        }]).single()
+        if (error3) {
+          console.log("insert chat fail", error3)
+        } else if (data3 != null) {
+          const {data : data4, error : error4} = await supabase.from("Message").insert([{
+            id_chat : data3.id_chat, messageType : "Trainer", content : "Halo, terimakasih telah memesan"
+          }])
+        }
+      }
+    });
+    setLoading(false)
+    
+  }
   // console.log(resultHash)
-  useEffect(() => {console.log("AAAAAAAAAA",cartList)}, [])
+  // useEffect(() => {console.log("AAAAAAAAAA",cartList)}, [])
 
   const renderCart = ({item}) => {
     return (
@@ -111,6 +153,10 @@ export default function Invoice() {
       </View>
     )
   }
+  if (loading) {
+    return <LoadingScreen/>
+  }
+
   return (
     <View style={styles.layout}>
       <ScrollView style = {{flex : 1}}>
@@ -189,7 +235,7 @@ export default function Invoice() {
           </View>
 
           <View style={{ alignItems: 'center', gap: 20, marginTop: 20, marginBottom: 80 }}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>{handleBuy()}}>
             <View style={{ width: 250, height: 250, backgroundColor: '#444444' }}/>
             </TouchableOpacity>
             <View style={{ alignItems: 'center', gap: 5  }}>
