@@ -11,7 +11,7 @@ export default function Row_Comp({id ,name, rating, price}) {
   const imagePath = getImageNumber(name)
   return (
     <TouchableOpacity onPress={ () => {console.log(("/(tabs)/find_Trainer/trainer_profile/"+id));router.navigate("/(tabs)/find_Trainer/trainer_profile/"+id)}}>
-    <View style={{ width : screenWidth * (155/360), height : screenWidth * (250/360), borderRadius: 8, backgroundColor: 'grey' }}>
+    <View style={{ width : screenWidth * (155/360), height : screenWidth * (250/360), borderRadius: 8, backgroundColor: '#F7F7F7', shadowColor: '#000000', shadowOffset: { width: 1, height: 2 } , shadowOpacity: 1, shadowRadius : 4 }}>
         <Image 
         style= {{width : screenWidth * (155/360), height : screenWidth * (155/360), borderTopRightRadius : 8, borderTopLeftRadius : 8}} 
         source={referenceImage[imagePath]}/> 

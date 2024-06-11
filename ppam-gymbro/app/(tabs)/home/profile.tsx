@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import { Link } from 'expo-router';
 import { useAuth } from '@/provider/AuthProvider';
 import { supabase } from '@/utils/supabase';
+import { getImageNumber, referenceUserImage } from '@/utils/getImage';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -23,7 +24,7 @@ export default function Profile() {
     const [phone, setPhone] = useState("")
     const [password, setPassword] = useState("")
     const [hidePassword, setHidePassword] = useState(true)
-    
+    const imageNumber = getImageNumber(userData.nama_user)
     const changeEmail = async () => {
         const { data, error } = await supabase.auth.updateUser({
             email: email
@@ -91,7 +92,7 @@ export default function Profile() {
                     <View style={{ width: screenWidth * (120/360), height: screenWidth * (120/360), paddingTop: 119, justifyContent:'center', alignItems: 'center' }}>
                         <Image
                             style = {{ marginVertical: -120,width: screenWidth * (120/360), height: screenWidth * (120/360), borderRadius: 120 }}
-                            source = {require("@/assets/Racist_Cat.webp")}
+                            source = {referenceUserImage[imageNumber]}
                         />
                         <TouchableOpacity>
                             <View style={{ alignItems: 'center', justifyContent: 'center', marginTop:80, marginLeft:80, width: screenWidth * (40/360), height: screenWidth * (40/360), borderRadius: 120, borderWidth: 5, borderColor: '#FEFEFE', backgroundColor: '#FF7D40' }}>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CheckBox } from 'react-native-btr';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
+import { getImageNumber, referenceUserImage } from '@/utils/getImage';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -13,12 +14,13 @@ interface UserReviewProps {
   }
   
   const UserReview: React.FC<UserReviewProps> = ({ userFullName, rating, review }) => {
+    const imageNumber = getImageNumber(userFullName)
     return (
       <View style={styles.mainContainer}> 
-        <View style= {{marginTop: 0, marginBottom: 15, gap: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
+        <View style= {{marginTop: 0, marginBottom: 15, gap: 10, flexDirection: 'row',backgroundColor : '#F7F7F7', alignItems: 'center', justifyContent: 'flex-start'}}>
           <Image
                 style = {{ width: 50, height: 50, borderWidth: 2, borderRadius: 36, borderColor: '#FEFEFE' }}
-                source = {require("@/assets/Racist_Cat.webp")}
+                source = {referenceUserImage[imageNumber]}
           />
             <View style={{gap: 5, flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}}>
                 <Text style={{fontSize: 14, fontWeight: 'bold'}}>{userFullName}</Text>

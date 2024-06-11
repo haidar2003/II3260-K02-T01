@@ -53,31 +53,7 @@ export default function MainWorkout() {
             Workout Plan
           </Text>
         </View>
-        {/* PLACEHOLDER LINKS NANTI DIHAPUS */}
-        <View style = {{flex : 1, flexDirection : "column", justifyContent : "center", alignItems :"center", marginVertical: screenWidth * (20/360), backgroundColor: 'lightgrey'}} >
-          <Link href="/(tabs)/workout/Plan" asChild>
-              <Pressable> 
-                <View style={{ width: 150, height: 50, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Plan Template</Text>
-                </View>
-              </Pressable>
-          </Link>
-          <Link href="/(tabs)/workout/ExcerciseList" asChild>
-              <Pressable> 
-                <View style={{ width: 150, height: 50, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Plan Excercise List</Text>
-                </View>
-              </Pressable>
-          </Link>
-          <Link href="/(tabs)/workout/FreeWorkoutSelection" asChild>
-              <Pressable> 
-                <View style={{ width: 250, height: 50, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Free Excercise Selection</Text>
-                </View>
-              </Pressable>
-          </Link>
-        </View>
-        {/* PLACEHOLDER LINKS NANTI DIHAPUS */}
+
 
         <View style = {{flex : 1, flexDirection : "row", justifyContent : "space-between", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (10/360), marginBottom: screenWidth * (10/360)}} >
           <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Tailored Plan</Text>
