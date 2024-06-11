@@ -6,12 +6,12 @@ import {numberToRupiah} from "@/utils/formatting"
 import {Tag, Tag_status} from "@/utils/tag"
 import { Link } from 'expo-router';
 import Sort from '@/screen/find_trainer_component/Sort';
-
+// import Fuse from 'fuse.js';
 const screenWidth = Dimensions.get('window').width;
 
 import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 import { supabase } from '@/utils/supabase';
-
+import filter from "lodash.filter"
 
 export default function Find_Trainer() {
   const [isloading, setLoading] = useState(true)
@@ -57,10 +57,37 @@ export default function Find_Trainer() {
   }
 
   useEffect(() => {  }, [dataTrainer])
-  useEffect( () => {fetchInitialData()}, [])
+  useEffect( () => {fetchInitialData(); console.log("Fuse")}, [])
 
   const searchTrainer = async () => {
-    const{data : fetchTrainerData, error : errorTrainer} = await supabase.from("trainer").select("*").or(`nama_trainer.ilike.%${query}%,description.ilike.%${query}%,location.ilike.%${query}%`);
+    setLoading(true)
+    let location_con 
+    if (location == "") {
+      location_con = '%'
+    }
+    const max_price_con = maxPrice
+    const min_price_con = minPrice
+    const min_rating = rating
+    const{data : fetchTrainerData, error : errorTrainer} = await supabase
+    .rpc('search_trainer', { 
+      max_price_con, 
+      min_price_con, 
+      min_rating, 
+    })
+    if (errorTrainer) {
+      console.log("Search fail", errorTrainer)
+      setLoading(false)
+    } else {
+      const formattedQuery = search.toLowerCase()
+      const formattedLoc = location.toLowerCase()
+      const filteredData = filter(fetchTrainerData,(item)  => ((item.nama_trainer.toLowerCase().includes(formattedQuery)  
+      // || item.description.includes(formattedQuery) || item.username.includes(formattedQuery)  
+    )) )
+      console.log("YOOOOOOOOOOO",query)
+      console.log(filteredData)
+      setDataTrainer(filteredData)
+      setLoading(false) 
+    }
   }
 
   if (isloading) {
@@ -90,7 +117,7 @@ export default function Find_Trainer() {
     </View>
   )
 
-
+  
   return (
     <View style={styles.layout}>
       {/* <View style={{position : "absolute", top : 0, left : 0}}> */}
@@ -104,6 +131,7 @@ export default function Find_Trainer() {
                     style={{ width: screenWidth * (200 / 360), height: screenWidth * (38 / 360) }}
                     value={search}
                     onChangeText={setSearch}
+                    onBlur={() => searchTrainer()}
                     keyboardType="default"
                     placeholder='Search Trainer'
                 />
@@ -152,7 +180,7 @@ export default function Find_Trainer() {
 
         { stateScreen === 1 && ( 
         <View style = {styles.grey}>
-          <TouchableOpacity onPress={ () => setStateScreen(0)} disabled = {false} style={{flex : 1}}>
+          <TouchableOpacity onPress={ () => {setStateScreen(0) ; searchTrainer()}} disabled = {false} style={{flex : 1}}>
             <View style = {{flex : 1}}/>
           </TouchableOpacity>
         </View>)}
@@ -181,7 +209,7 @@ export default function Find_Trainer() {
 
         { stateScreen === 2 && ( 
         <View style = {styles.grey}>
-          <TouchableOpacity onPress={ () => setStateScreen(0)} disabled = {false} style={{flex : 1}}>
+          <TouchableOpacity onPress={ () => {setStateScreen(0); searchTrainer()}} disabled = {false} style={{flex : 1}}>
             <View style = {{flex : 1}}/>
           </TouchableOpacity>
         </View>)}
