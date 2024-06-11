@@ -81,10 +81,10 @@ export default function Find_Trainer() {
       const formattedQuery = search.toLowerCase()
       const formattedLoc = location.toLowerCase()
       const filteredData = filter(fetchTrainerData,(item)  => ((item.nama_trainer.toLowerCase().includes(formattedQuery)  
-      // || item.description.includes(formattedQuery) || item.username.includes(formattedQuery)  
+      || item.description.includes(formattedQuery) || item.username.includes(formattedQuery)  && (item.location.toLowerCase().includes(formattedLoc))
     )) )
-      console.log("YOOOOOOOOOOO",query)
-      console.log(filteredData)
+      // console.log("YOOOOOOOOOOO",query)
+      // console.log(filteredData)
       setDataTrainer(filteredData)
       setLoading(false) 
     }

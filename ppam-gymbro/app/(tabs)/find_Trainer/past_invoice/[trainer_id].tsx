@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import TrainerSelect  from '@/screen/select_trainer_component/TrainerSelect';
 import { SearchTrainerElement } from '@/utils/searchTrainerElement';
 import ReserveTrainerPlan from '@/screen/find_trainer_component/ReserveTrainerPlan';
-import { Link } from 'expo-router';
+import { Link, useLocalSearchParams } from 'expo-router';
 import ReserveTrainerInvoice from '@/screen/find_trainer_component/ReserveTrainerInvoice';
 import { useAuth } from '@/provider/AuthProvider';
 import { useCart } from '@/provider/CartProvider';
@@ -12,40 +12,30 @@ import { supabase } from '@/utils/supabase';
 import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 const screenWidth = Dimensions.get('window').width;
 
-export default function Invoice() {
+export default function PastInvoice() {
   const currentUserId = 1;
   const {session,authLoading,userData,getSession,updateUserData} = useAuth()
   
   const [loading, setLoading] = useState(false)
   
   const today = new Date();
-  const {cartList, addToCart, removeFromCart} = useCart()
-
+  // const {cartList, addToCart, removeFromCart} = useCart()
+  const {trainer_id} = useLocalSearchParams()
   
+  const [invoice, setInvoice] = useState(null)
   
-  
-  const userCart = [
-    { 
-      trainerId: 1, 
-      trainerName: 'Radityta Azka', 
-      trainerPlan: [
-        { planId: 1, planType: 'Online', planUnitPrice: 50000 },
-        { planId: 2, planType: 'Offline', planUnitPrice: 80000 }
-      ], 
-      onlineBundle: 3,
-      offlineBundle: 5
-    },
-    { 
-      trainerId: 2, 
-      trainerName: 'Albarda', 
-      trainerPlan: [
-        { planId: 1, planType: 'Online', planUnitPrice: 70000 },
-        { planId: 2, planType: 'Offline', planUnitPrice: 10000 }
-      ], 
-      onlineBundle: 0,
-      offlineBundle: 3
-    },
-  ]
+  const fetchData = async () => {
+    setLoading(true)
+    console.log(trainer_id)
+    const {data, error} = await supabase.from("Transaction").select("*").eq("id_trainer", trainer_id).order('date', { ascending: false })
+    if (error) {
+      console.log("failed to fetch invoice", error)
+    } else {
+      console.log("Hallooooo",data)
+      setInvoice(data[0])
+    }
+    setLoading(false)
+  }
 
   // const [cart, setCart] = useState(userCart)
   const [isSelected, setSelection] = useState(false);
@@ -88,62 +78,7 @@ export default function Invoice() {
 
   
   
-  const resultHash = CryptoJS.SHA256(userData.username + new Date() + calculateTotalPrice(cartList)).toString(CryptoJS.enc.Hex).toUpperCase()
-  let currentUserInvoice 
-  if (resultHash.length < 9) {
-    currentUserInvoice = resultHash.padEnd(9,'0')
-  } else {
-    currentUserInvoice = resultHash.slice(0,9)
-  }
-
-  const handleBuy = async () => {
-    setLoading(true)
-     cartList.forEach( async (cart) => {
-      for (let i = 0; i < cart.offlineBundle; i++) {
-        const {data, error} = await supabase.from("Session").insert([{
-          type : "Offline", id_user : userData.id_user, id_trainer : cart.trainerId
-        }])
-
-        if (error) {
-          console.log(error)
-        }
-      }
-      for (let i = 0; i < cart.onlineBundle; i++) {
-        const {data, error} = await supabase.from("Session").insert([{
-          type : "Online", id_user : userData.id_user, id_trainer : cart.trainerId
-        }])
-
-        if (error) {
-          console.log("insert session failed",error)
-          break
-        }
-      }
-      const {data : data4, error : error4} = await supabase.from("Transaction").insert([{
-        id_user : userData.id_user, id_trainer : cart.trainerId, amount : calculateTotalPrice([cart]), offline_bundle : cart.offlineBundle, 
-        offline_unit_price : cart.offlineUnitPrice , online_bundle : cart.onlineBundle , online_unit_price : cart.onlineUnitPrice, trainer_name : cart.trainerName,
-        transaction_code : currentUserInvoice
-      }])
-      if (error4) {
-        console.log("insert transaction failed", error4)
-      }
-      const {data : data2 , error : error2}  = await supabase.from("Chat").select("*").eq("id_user", userData.id_user).eq("id_trainer", cart.trainerId)
-      if (error2) {
-        console.log(error2)
-      } else if (data2.length <= 0) {
-        const user_id_input = userData.id_user
-        const trainer_id_input = cart.trainerId
-        const {data : data3, error : error3} = await supabase
-        .rpc('create_chat_and_message', {
-          trainer_id_input, 
-          user_id_input
-        })
-      }
-    });
-    setLoading(false)
-    
-  }
-  // console.log(resultHash)
-  // useEffect(() => {console.log("AAAAAAAAAA",cartList)}, [])
+  useEffect(() => {fetchData(); console.log(invoice)}, [])
 
   const renderCart = ({item}) => {
     return (
@@ -161,7 +96,6 @@ export default function Invoice() {
   if (loading) {
     return <LoadingScreen/>
   }
-  useEffect(() => {console.log("i be like",cartList)},[])
 
   return (
     <View style={styles.layout}>
@@ -204,16 +138,16 @@ export default function Invoice() {
             </View>
             <View style={{ gap: 15 }}>
               <Text style={{ fontWeight: 'bold' }}>
-                GB-PPAM{currentUserInvoice}
+                GB-PPAM{invoice.transaction_code}
               </Text>
               <Text>
-                Rp{calculateTotalPrice(cartList).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                Rp{invoice.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
               </Text>
               <Text>
                 {userData.username}
               </Text>
               <Text style={{ fontWeight: 'bold' }}>
-                Unpaid
+                Paid
               </Text>
             </View>
           </View>
@@ -227,7 +161,9 @@ export default function Invoice() {
 
           <ScrollView horizontal = {true}>
             <FlatList
-              data={cartList}
+              data={ [{trainerName : invoice.trainer_name, onlineBundle : invoice.online_bundle, onlineUnitPrice : invoice.online_pnit_price,
+                offlineBundle : invoice.offline_bundle, offlineUnitPrice : invoice.offline_pnit_price 
+              }] }
               renderItem={renderCart}
               keyExtractor={item => item.id}
             />
@@ -241,9 +177,9 @@ export default function Invoice() {
           </View>
 
           <View style={{ alignItems: 'center', gap: 20, marginTop: 20, marginBottom: 80 }}>
-            <TouchableOpacity onPress={()=>{handleBuy()}}>
+            
             <View style={{ width: 250, height: 250, backgroundColor: '#444444' }}/>
-            </TouchableOpacity>
+            
             <View style={{ alignItems: 'center', gap: 5  }}>
               <Text style={{ fontWeight: 'bold' }}>
                 Available Until

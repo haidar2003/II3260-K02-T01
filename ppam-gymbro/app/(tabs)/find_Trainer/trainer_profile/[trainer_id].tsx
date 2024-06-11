@@ -76,25 +76,6 @@ export default function trainerProfile() {
 
 
 
-    const trainer = {
-      trainerId: 1,
-      trainerName: 'Radityta Azka',
-      trainerUsername: 'iyaq',
-      trainerRating: 4,
-      trainerCity: 'Bandung',
-      trainerReview: [
-        { reviewId: 1, userFullName: 'Rafi Haidar', rating: 4, review: 'Lorem Ipsum Dolor Sit Amet Wakakakakakkakakakakak' },
-        { reviewId: 2, userFullName: 'Kean Santang', rating: 4, review: 'Lorem Ipsum Dolor Sit Amet Wakakakakakkakakakakak' },
-        { reviewId: 3, userFullName: 'X', rating: 4, review: 'Lorem Ipsum Dolor Sit Amet Wakakakakakkakakakakak' },
-      ],
-      trainerPlan: [
-        { planId: 1, planType: 'Online', planUnitPrice: 50000 },
-        { planId: 2, planType: 'Offline', planUnitPrice: 80000 }
-      ],
-      trainerDescription: 'Saya adalah seorang personal trainer dengan 5 tahun lebih pengalaman melatih binaragawan lokal di daerah Bandung.',
-      trainerTags: ['tag 1', 'asdtag 2', 'taasdasdasdasg 3', 'taasdasdg 4', 'taasdg 4', 'tag 4', 'taasdasdasdasdg 4']
-    }
-
   const renderPlan = ({ item }) => {
       return (
         <View style = {{marginVertical : 10}}>
@@ -144,7 +125,7 @@ export default function trainerProfile() {
     <View style={styles.layout}>
       <ScrollView style = {{flex : 1}}>
         <View style={{ marginTop: screenWidth * (35/360), paddingVertical: screenWidth * (20/360), paddingHorizontal: screenWidth * (25/360), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start'}}>
-          <Link href="/(tabs)/workout" asChild>
+          <Link href="/(tabs)/find_Trainer/" asChild>
             <TouchableOpacity>
                 <View style={{ alignItems: 'center', justifyContent:'center', height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
                     <Image
@@ -155,7 +136,7 @@ export default function trainerProfile() {
             </TouchableOpacity>
           </Link>
             <TrainerProfile trainerName={trainerData.nama_trainer} trainerUsername={trainerData.username} trainerRating={trainerData.rating} trainerCity={trainerData.location}/>
-            <Link href="/(tabs)/workout" asChild>
+            <Link href="/(tabs)/find_Trainer/invoice" asChild>
             <TouchableOpacity>
                 <View style={{ alignItems: 'center', justifyContent:'center', height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
                     <Image
@@ -220,7 +201,7 @@ export default function trainerProfile() {
               <View style={{ width: screenWidth * (310/360), flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', gap: 30 }}>
                <View style={{ width: screenWidth * (310/360), flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 15 }}>
                  <Text style={{ color: '#444444', fontSize: 20, fontWeight: 'bold' }}>
-                   {trainer.trainerName}'s Plan
+                   {trainerData.nama_trainer}'s Plan
                  </Text>
                  <ScrollView horizontal = {true}>
                    <View style={{ width: screenWidth * (310/360), gap: 10 }}>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, TouchableOpacity, Dimensions, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { SearchTrainerElement } from '@/utils/searchTrainerElement';
+import { router } from 'expo-router';
 
 interface TrainerSelectProps {
     trainerId : number;
@@ -71,7 +72,7 @@ const TrainerSelect: React.FC<TrainerSelectProps> = ({ trainerId, isSelected, is
               <Text style={{fontSize: 12, fontWeight: offlineSessions === 0 ? 'normal' : 'bold', color: offlineSessions === 0 ? '#8F8F8F' : '#444444'}}>• {offlineSessions} Offline Sessions Left</Text>
             </View>
             <View style={{marginLeft: 18, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', gap: 10}}>
-              <TouchableOpacity style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: '#FF7D40', height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 8, justifyContent: 'center' , alignItems: 'center'}}>
+              <TouchableOpacity onPress={() => {router.navigate("/(tabs)/find_Trainer/past_invoice/"+trainerId)}} style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: '#FF7D40', height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 8, justifyContent: 'center' , alignItems: 'center'}}>
               <Text style={{color: "#FEFEFE", fontWeight: 'bold'}}>Invoice</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={ () => {setReviewVisible(true)}} style={{ borderWidth: 2.5, borderColor: '#FF7D40', backgroundColor: '#FF7D40', height: screenWidth * (40/360), width: screenWidth * (135/360), borderRadius: 8, justifyContent: 'center' , alignItems: 'center'}}>
