@@ -18,9 +18,9 @@ export default function Profile() {
 
     const {session,authLoading,userData,getSession,updateUserData} = useAuth()
     const [name, setName] = useState(userData.nama_user)
-    const [email, setEmail] = useState("")
-    const [phone, setPhone] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState(user.userEmail)
+    const [phone, setPhone] = useState(user.userPhone)
+    const [password, setPassword] = useState(user.userPassword)
     const [hidePassword, setHidePassword] = useState(true)
     
     return (
@@ -112,12 +112,23 @@ export default function Profile() {
                         </Text>
                     </TouchableOpacity>
                 </View>
-                <TextInput
-                    style={{ width: screenWidth * (314 / 360), height: screenWidth * (56 / 360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12, paddingHorizontal: 10 }}
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry={hidePassword}
-                />
+                <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12 }}>
+                    <TextInput
+                        style={{ flex: 1, height: screenWidth * (56 / 360), paddingHorizontal: 10 }}
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry={hidePassword}
+                    />
+                    <TouchableOpacity
+                        style={{ marginRight: 10, padding: 5 }}
+                        onPress={() => setHidePassword(!hidePassword)}
+                    >
+                        <Image
+                            source={hidePassword ? require('@/assets/icons/eye.png') : require('@/assets/icons/eye-off.png')}
+                            style={{ width: 24, height: 24 }}
+                        />
+                    </TouchableOpacity>
+                </View>
             </View>
 
                 <TouchableOpacity>

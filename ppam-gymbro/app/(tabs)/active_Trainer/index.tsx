@@ -24,6 +24,9 @@ export default function ActiveTrainer() {
   const [pastTrainerList, setPastTrainerList] = useState(null)
   const [reviewVisible , setReviewVisible] = useState<boolean>(false)
 
+  const [search, setSearch] = useState("")
+
+
   useEffect(() => { 
     console.log("aaa",currentTrainer)
     if  ( activeTrainer != null &&   activeTrainer.length > 0 ) {
@@ -134,12 +137,14 @@ export default function ActiveTrainer() {
           <View style = {{flex : 1}}></View>
           <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
             <View style={styles.searchBar}>  
-              <Image source={require("@/assets/icons/search.png")} style = {{height: 25, width: 25,margin : 20}}>
-                {/* Icon Kaca Pembesar */}
-              </Image>
-              <TextInput>
-                {/* Search Bar */}
-              </TextInput>
+              <Image source={require("@/assets/icons/search.png")} style = {{height: 25, width: 25,margin : 5}} />
+              <TextInput
+                    style={{ width: screenWidth * (240 / 360), height: screenWidth * (38 / 360) }}
+                    value={search}
+                    onChangeText={setSearch}
+                    keyboardType="default"
+                    placeholder='Search Trainer'
+                />
             </View>
             
           </View>
@@ -193,14 +198,14 @@ const styles = StyleSheet.create({
     justifyContent : "flex-start",
     alignItems : "center",
     flexDirection : "row",
-    borderRadius : 30,
-    width : screenWidth * (318/360),
+    borderRadius : 16,
+    width : screenWidth * (320/360),
     height : screenWidth * (38/360),
     maxHeight : 40,
-    padding : 5,
+    paddingHorizontal: 10,
+    gap: 5,
     borderWidth: 2,
-    borderColor: '#EEEEEE',
-    marginTop: 5
+    borderColor: '#EEEEEE'
   },
   layout: {
     flex: 1,

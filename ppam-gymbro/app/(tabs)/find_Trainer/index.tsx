@@ -9,9 +9,10 @@ import Sort from '@/screen/find_trainer_component/Sort';
 
 const screenWidth = Dimensions.get('window').width;
 
-
 import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 import { supabase } from '@/utils/supabase';
+
+
 export default function Find_Trainer() {
   const [isloading, setLoading] = useState(true)
   const [referenceTags, setReferenceTags] = useState([])
@@ -30,6 +31,8 @@ export default function Find_Trainer() {
   const [sortPrice, setSortPrice] = useState(0)
   const [sortRating, setSortRating] = useState(0)
   const [sortName, setSortName] = useState(0)
+
+  const [search, setSearch] = useState("")
 
   const fetchInitialData = async () => {
     try {
@@ -51,21 +54,17 @@ export default function Find_Trainer() {
     }
   }
 
-  
-
   useEffect(() => {  }, [dataTrainer])
   useEffect( () => {fetchInitialData()}, [])
+
   const searchTrainer = async () => {
     const{data : fetchTrainerData, error : errorTrainer} = await supabase.from("trainer").select("*").or(`nama_trainer.ilike.%${query}%,description.ilike.%${query}%,location.ilike.%${query}%`);
   }
+
   if (isloading) {
     return <LoadingScreen/>
   }
 
-
-
-
-  
   
   const toggleTags = (id : number) => {
     setTags((prevItems) => {
@@ -78,11 +77,6 @@ export default function Find_Trainer() {
     })
   }
 
-
-
-
-
-
   const renderTrainer = ({ item }) => (
     <View style = {{ marginHorizontal: 5, marginVertical: 7.5}}>
       <RowComp id = {item.trainer_id} name={item.nama_trainer} rating={item.rating} price={item.min_price} />
@@ -93,6 +87,8 @@ export default function Find_Trainer() {
       <Text style = {{fontSize : 12}}> {item.name} </Text>
     </View>
   )
+
+
   return (
     <View style={styles.layout}>
       {/* <View style={{position : "absolute", top : 0, left : 0}}> */}
@@ -101,12 +97,14 @@ export default function Find_Trainer() {
           <View style = {{flex : 1}}></View>
           <View style = {{flex : 4, alignItems : "center", justifyContent : "flex-start", marginTop : 5, flexDirection : "row"}}>  
             <View style={styles.searchBar}>  
-            <Image source={require("@/assets/icons/search.png")} style = {{height: 25, width: 25,margin : 5}}>
-                {/* Icon Kaca Pembesar */}
-              </Image>
-              <TextInput>
-                {/* Search Bar */}
-              </TextInput>
+              <Image source={require("@/assets/icons/search.png")} style = {{height: 25, width: 25,margin : 5}} />
+              <TextInput
+                    style={{ width: screenWidth * (200 / 360), height: screenWidth * (38 / 360) }}
+                    value={search}
+                    onChangeText={setSearch}
+                    keyboardType="default"
+                    placeholder='Search Trainer'
+                />
             </View>
             <Image source={require("@/assets/icons/cart.png")} style={{height: 25, width: 25,marginLeft : 10}} />
           </View>
@@ -114,8 +112,8 @@ export default function Find_Trainer() {
 
         <View style = {styles.filter_sort}>
           <View style = {{flex : 1, margin : 5, padding : 5, flexDirection : "row", alignItems : "center",justifyContent : "center" }}>
-            <View style = {{flex : 3, backgroundColor : "#FFEAD9", borderRadius : 20, marginRight : 20, alignItems : "center",justifyContent : "center", padding : 5 }}>
-              <Text style={{fontFamily : "System"}}> Rp{numberToRupiah(minPrice)} - Rp{numberToRupiah(maxPrice)} </Text>
+            <View style = {{height: screenWidth * (32/360), width: screenWidth * (220/360), backgroundColor : "#FFEAD9", borderRadius : 20, marginRight : 20, alignItems : "center",justifyContent : "center", padding : 5 }}>
+              <Text style={{fontFamily : "System", color: '#444444', fontSize: 12, fontWeight: 'bold'}}> Rp{numberToRupiah(minPrice)} - Rp{numberToRupiah(maxPrice)} </Text>
             </View>
             <Pressable onPress = {() => setStateScreen(1)}>
               <View style={{ height: screenWidth * (32/360), width: screenWidth * (40/360), marginHorizontal : 5, justifyContent: 'center', alignItems: 'center', backgroundColor: '#FF7D40', borderRadius: 12 }}>
@@ -209,11 +207,14 @@ const styles = StyleSheet.create({
     justifyContent : "flex-start",
     alignItems : "center",
     flexDirection : "row",
-    borderRadius : 30,
-    width : "80%",
-    height : "50%",
+    borderRadius : 16,
+    width : screenWidth * (270/360),
+    height : screenWidth * (38/360),
     maxHeight : 40,
-    padding : 5
+    paddingHorizontal: 10,
+    gap: 5,
+    borderWidth: 2,
+    borderColor: '#EEEEEE'
   },
   layout: {
     flex: 1,
