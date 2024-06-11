@@ -11,7 +11,7 @@ import { Modal } from 'react-native-paper';
 import LoadingScreen from '@/screen/loading_screen/loadingScreen';
 export default function ActiveTrainer() {
   const currentTrainerId = 0;
-  const {activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer,nonActiveTrainer} = useCurrentTrainer()
+  const {activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer,nonActiveTrainer, selectedTrainer, setSelectedTrainer} = useCurrentTrainer()
   const [pastTrainerSelected, setPastTrainerSelected ] = useState(null)
 
 
@@ -68,6 +68,7 @@ export default function ActiveTrainer() {
     setActiveTrainerList(prevData => prevData.map(item => {
       if (item.id_trainer_active === id) {
         setCurrentTrainer(item)
+        setSelectedTrainer({name : item.nama_trainer_active, id : item.id_trainer_active})
         return { ...item, isSelected: true };
       } else {
         return { ...item, isSelected: false };
@@ -76,11 +77,12 @@ export default function ActiveTrainer() {
   };
 
   const renderActiveTrainer = ({item}) => {
+    // console.log(item.id_trainer_active)
     return (
       <View style = {{marginVertical: screenWidth * (5/360)}} >
         <TrainerSelect
         trainerId = {item.id_trainer_active}
-        isActive = {item.isActive}
+        isActive = {true}
         trainerName= {item.nama_trainer_active}
         onlineSessions={item.onlinecount }
         offlineSessions={item.offlinecount}
@@ -97,6 +99,8 @@ export default function ActiveTrainer() {
     // console.log(pastTrainerList)
     setPastTrainerList(prevData => prevData.map(item => {
       if (item.id_trainer_non_active === id) {
+        setSelectedTrainer({name : item.nama_trainer_non_active, id : item.id_trainer_non_active  })
+        
         return { ...item, isSelected: true };
       } else {
         return { ...item, isSelected: false };
@@ -109,7 +113,7 @@ export default function ActiveTrainer() {
       <View style = {{marginVertical: screenWidth * (5/360)}} >
         <TrainerSelect
         trainerId = {item.id_trainer_non_active}
-        isActive = {item.isActive}
+        isActive = {false}
         trainerName= {item.nama_trainer_non_active}
         onlineSessions={item.onlinecount }
         offlineSessions={item.offlinecount}
@@ -122,7 +126,7 @@ export default function ActiveTrainer() {
     )
   }
 
-  useEffect(() => {console.log(reviewVisible), "ASSAF"}, [reviewVisible])
+  // useEffect(() => {console.log(reviewVisible), "ASSAF"}, [reviewVisible])
 
   if (currentTrainerLoading) {
     
@@ -153,7 +157,7 @@ export default function ActiveTrainer() {
         <View style = {{zIndex : 10, alignItems : "center", justifyContent : "center", position : "absolute"}}>
       <Modal visible = {reviewVisible} >
         <View style = {{alignItems : "center", justifyContent : "flex-start", }}>
-        <TrainerReview  trainerName = {currentTrainer.nama_trainer_active} trainer_id = {currentTrainer.id_trainer_active}  ReviewVisible = {reviewVisible}
+        <TrainerReview  trainerName = {selectedTrainer.name} trainer_id = {selectedTrainer.id}  ReviewVisible = {reviewVisible}
         setReviewVisible={setReviewVisible}></TrainerReview>
         </View>
         

@@ -27,11 +27,14 @@ export default function PastInvoice() {
   const fetchData = async () => {
     setLoading(true)
     console.log(trainer_id)
-    const {data, error} = await supabase.from("Transaction").select("*").eq("id_trainer", trainer_id).order('date', { ascending: false })
+    const {data, error} = await supabase.from("Transaction").select("*").eq("id_trainer", trainer_id)
     if (error) {
       console.log("failed to fetch invoice", error)
     } else {
       console.log("Hallooooo",data)
+      if (data.length < 1) {
+        console.log("KOSONG")
+      }
       setInvoice(data[0])
     }
     setLoading(false)
@@ -78,17 +81,17 @@ export default function PastInvoice() {
 
   
   
-  useEffect(() => {fetchData(); console.log(invoice)}, [])
+  useEffect(() => {fetchData(); console.log(invoice); console.log("ASFHKFSHFJE",trainer_id)}, [])
 
   const renderCart = ({item}) => {
     return (
       <View style={{ marginVertical: screenWidth * (10/360) }}>
         <ReserveTrainerInvoice 
-          trainerName={item.trainerName}
-          onlineBundle={item.onlineBundle}
-          offlineBundle={item.offlineBundle}
-          onlineUnitPrice={item.onlineUnitPrice}
-          offlineUnitPrice={item.offlineUnitPrice}
+          trainerName={item.trainer_name}
+          onlineBundle={item.onlin_bundle}
+          offlineBundle={item.offline_bundle}
+          onlineUnitPrice={item.online_unit_price}
+          offlineUnitPrice={item.offline_unit_price}
         />
       </View>
     )

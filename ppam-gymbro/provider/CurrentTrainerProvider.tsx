@@ -10,6 +10,7 @@ const CurrentTrainerProvider = ({ children }) => {
   const [activeTrainer, setActiveTrainer] = useState(null)
   const [nonActiveTrainer, setNonActiveTrainer] = useState(null)
   const [currentTrainer, setCurrentTrainer] = useState(null)
+  const [selectedTrainer, setSelectedTrainer] = useState(null)
   const {session,authLoading,userData,getSession,updateUserData}  = useAuth()
 
   const updateActiveTrainer = async () => {
@@ -26,23 +27,24 @@ const CurrentTrainerProvider = ({ children }) => {
         } else {
           setActiveTrainer(dataActiveTrainer)
           setCurrentTrainer(dataActiveTrainer[0])
+          setSelectedTrainer(dataActiveTrainer[0])
           console.log(dataActiveTrainer)
         }
         const {data : dataNonActiveTrainer , error : errorNonActiveTrainer } = await supabase
-        .rpc('get_non_active_trainer', {id_user_input})
+        .rpc('get_non_active_trainers', {id_user_input})
         if (errorNonActiveTrainer) {
           console.log("failed to fetch non-active trainer", errorNonActiveTrainer)
           console.log(userData.id_user)
         } else {
           setNonActiveTrainer(dataNonActiveTrainer)
-          console.log(dataNonActiveTrainer)
+          console.log("Non ACtive",dataNonActiveTrainer)
         }
         setCurrentTrainerLoading(false)
       }
     }
     
     const value = {
-      activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer,nonActiveTrainer
+      activeTrainer, currentTrainer, currentTrainerLoading, updateActiveTrainer, setCurrentTrainer,nonActiveTrainer,selectedTrainer, setSelectedTrainer
     }
     
     useEffect(() => {updateActiveTrainer()}, [userData])
