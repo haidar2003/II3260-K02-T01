@@ -16,3 +16,5 @@ Repostiori ini berisi kode sumber aplikasi GymBro yang dibuat dengan mengunakan 
 5. Jika belum menggunakan expo go, tekan s.
 6. Jika menggunakan aplikasi expo go yang diunduh pada hp, gunakan aplikasi untuk memfoto QR, pastikan hp dan komputer yang digunakan berapa pada jaringan yang sama
 7. Jika menggunakan emulator, tekan tombol a pada terminal.
+
+Link dokumentasi expo : https://docs.expo.dev/
