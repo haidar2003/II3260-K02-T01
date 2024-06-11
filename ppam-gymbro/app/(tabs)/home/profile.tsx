@@ -2,11 +2,12 @@ import { StyleSheet, Text, TextInput, View, Image, ScrollView, Dimensions, Press
 import React, {useState} from 'react';
 import { Link } from 'expo-router';
 import { useAuth } from '@/provider/AuthProvider';
+import { supabase } from '@/utils/supabase';
 
 const screenWidth = Dimensions.get('window').width;
 
 export default function Profile() {
-
+    
     const user = {
         userFullName: 'Arnold S.',
         username: 'terminator',
@@ -16,13 +17,45 @@ export default function Profile() {
         userBirthdate: '17th August 2003'
         }
 
-    const {session,authLoading,userData,getSession,updateUserData} = useAuth()
+    const {session,authLoading,userData,getSession,updateUserData,logOut} = useAuth()
     const [name, setName] = useState(userData.nama_user)
-    const [email, setEmail] = useState(user.userEmail)
-    const [phone, setPhone] = useState(user.userPhone)
-    const [password, setPassword] = useState(user.userPassword)
+    const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
+    const [password, setPassword] = useState("")
     const [hidePassword, setHidePassword] = useState(true)
     
+    const changeEmail = async () => {
+        const { data, error } = await supabase.auth.updateUser({
+            email: email
+          })
+          if (error) {
+            console.log("GAGAL GANTI",error)
+        }
+    }
+    
+    const changePassword = async () => {
+        const { data, error } = await supabase.auth.updateUser({
+            password: password
+          })
+          if (error) {
+            console.log("GAGAL GANTI",error)
+        }
+    }
+    const changePhone = async () => {
+        const { data, error } = await supabase.auth.updateUser({
+            phone: phone
+          })
+          if (error) {
+            console.log("GAGAL GANTI",error)
+        }
+    }
+    const changeName = async () => {
+        const { data, error } = await supabase.from("User").update({nama_user : name }).eq("id_user", userData.id_user)
+        if (error) {
+            console.log("GAGAL GANTI",error)
+        }
+    }
+
     return (
         <View style={styles.layout}>
             <ScrollView style = {{flex : 1}}>
@@ -141,7 +174,7 @@ export default function Profile() {
                 </View>
             </View>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=> {logOut()}}>
                     <View style={{ width: screenWidth * (300/360), height: screenWidth * (56/360), alignItems: 'center', borderWidth: 2, justifyContent: 'center', borderColor: '#FF7D40', borderRadius: 12, marginTop: 150, marginBottom: 30 }}>
                         <Text style={{ color: '#FF7D40', fontWeight: 'bold', fontSize: 16 }}>
                             Logout

@@ -105,91 +105,11 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {currentTrainer ?  <HomeTrainer trainerName={currentTrainer.nama_trainer} sessions={currentTrainer.offlinecount + currentTrainer.onlinecount }></HomeTrainer> : 
+        {currentTrainer ?  <HomeTrainer trainerName={currentTrainer.nama_trainer_active} sessions={currentTrainer.offlinecount + currentTrainer.onlinecount }></HomeTrainer> : 
         <Text>Tidak ada Trainer yang aktif </Text>
         }
         
-        {/* PLACEHOLDER LINKS NANTI DIHAPUS */}
-        <View style = {{flex : 1, flexDirection : "column", justifyContent : "center", alignItems :"center", paddingVertical: screenWidth * (20/360), backgroundColor: 'lightgrey'}} >
-          <Link href="/(tabs)/workout/Plan" asChild>
-              <Pressable> 
-                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Plan Template</Text>
-                </View>
-              </Pressable>
-          </Link>
-          <Link href="/(tabs)/workout/ExcerciseList" asChild>
-              <Pressable> 
-                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Plan Excercise List</Text>
-                </View>
-              </Pressable>
-          </Link>
-          <Link href="/(tabs)/workout/FreeWorkoutSelection" asChild>
-              <Pressable> 
-                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Free Excercise Selection</Text>
-                </View>
-              </Pressable>
-          </Link>
-          <Link href="/(tabs)/find_Trainer/[trainerProfile]" asChild>
-              <Pressable> 
-                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Trainer</Text>
-                </View>
-              </Pressable>
-          </Link>
-          <Link href="/(tabs)/find_Trainer/TrainerReserve" asChild>
-              <Pressable> 
-                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Trainer Reserve</Text>
-                </View>
-              </Pressable>
-          </Link>
-          <Link href="/(tabs)/find_Trainer/cart" asChild>
-              <Pressable> 
-                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Cart</Text>
-                </View>
-              </Pressable>
-          </Link>
-          <Link href="/(tabs)/find_Trainer/Invoice" asChild>
-              <Pressable> 
-                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Invoice</Text>
-                </View>
-              </Pressable>
-          </Link>
-          <Link href="/(tabs)/message_trainer" asChild>
-              <Pressable> 
-                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Chat List</Text>
-                </View>
-              </Pressable>
-          </Link>
-          <Link href="(tabs)/message_trainer/TrainerChat" asChild>
-              <Pressable> 
-                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Chat</Text>
-                </View>
-              </Pressable>
-          </Link>
-          <Link href="(tabs)/home/profile" asChild>
-              <Pressable> 
-                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Profile</Text>
-                </View>
-              </Pressable>
-          </Link>
-          <Link href="unused/test_page" asChild>
-              <Pressable> 
-                <View style={{ width: 230, height: 30, backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                  <Text style = {{color: '#EFEFEF', fontSize : 16, fontWeight:"bold", }}>Test</Text>
-                </View>
-              </Pressable>
-          </Link>
-        </View>
-        {/* PLACEHOLDER LINKS NANTI DIHAPUS */}
+
 
         <View style = {{ flexDirection : "row", justifyContent : "flex-start", alignItems :"center", width: screenWidth * (320/360), paddingHorizontal: screenWidth * (15/360), marginBottom: screenWidth * (10/360), marginTop: screenWidth * (20/360)}} >
           <Text style = {{color: '#444444', fontSize : 16, fontWeight : "bold"}}>Trainer's Plan</Text>
