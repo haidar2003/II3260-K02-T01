@@ -37,12 +37,14 @@ export default function Find_Trainer() {
   const fetchInitialData = async () => {
     try {
       const {data: fetchTagData, error : errorTag} = await supabase.from("Tag").select("*");
-      const {data : fetchTrainerData, error :  errorTrainer} = await supabase.from("Trainer").select("*")
+      const {data : fetchTrainerData, error :  errorTrainer} = await supabase.rpc('get_trainer_details')
       if (errorTag){
           console.error("error, fetching tag", errorTag)
         } else {
           setReferenceTags(fetchTagData)
           setDataTrainer(fetchTrainerData)
+
+
        }
      }   finally { 
         setLoading(false)
@@ -79,7 +81,7 @@ export default function Find_Trainer() {
 
   const renderTrainer = ({ item }) => (
     <View style = {{ marginHorizontal: 5, marginVertical: 7.5}}>
-      <RowComp id = {item.trainer_id} name={item.nama_trainer} rating={item.rating} price={item.min_price} />
+      <RowComp id = {item.trainer_id} name={item.nama_trainer} rating={( item.average_star? item.average_star.toFixed(1) : null)} price={item.min_price} />
     </View>
   );
   const renderTags = ({item}) => (

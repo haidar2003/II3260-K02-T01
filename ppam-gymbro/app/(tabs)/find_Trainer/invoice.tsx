@@ -121,7 +121,9 @@ export default function Invoice() {
       const {data : data4, error : error4} = await supabase.from("Transaction").insert([{
         id_user : userData.id_user, id_trainer : cart.trainerId, amount : calculateTotalPrice([cart])
       }])
-
+      if (error4) {
+        console.log("insert transaction failed", error4)
+      }
       const {data : data2 , error : error2}  = await supabase.from("Chat").select("*").eq("id_user", userData.id_user).eq("id_trainer", cart.trainerId)
       if (error2) {
         console.log(error2)
