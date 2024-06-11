@@ -71,7 +71,7 @@ const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({id, onlineBundle
                 {onlineBundle != 0 && (
                     <View style={{marginBottom: 10, marginHorizontal: 15,width: screenWidth * (280/360), flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between'}}>
                         <View style={{gap: 15, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-                            <TouchableOpacity onPress={handlePressOnline} style={{ width: 20, height: 20, borderRadius: 4, justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
+                            {/* <TouchableOpacity onPress={handlePressOnline} style={{ width: 20, height: 20, borderRadius: 4, justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
                                 {onlineSelected ? (
                                     <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: '#FF7D40' , backgroundColor: '#FF7D40', justifyContent: 'center', alignItems: 'center' }} >
                                     <Image
@@ -82,7 +82,7 @@ const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({id, onlineBundle
                                 ) : (
                                     <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: '#FF7D40' }} />
                                 )}
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
                             <View style={{flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 10 }}>
                                 <Text style={{fontSize: 16 }}>{onlineBundle}x Online Sessions</Text>
                                 <Text style={{fontSize: 12, fontWeight: 'bold'}}>Rp{finalOnlinePrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}</Text>
@@ -90,7 +90,7 @@ const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({id, onlineBundle
                         </View>
                         <TouchableOpacity onPress={() => {removeFromCart(id, "Online")}}>
                         <View>
-                            <Text>X</Text>
+                        <Image style= {{width : screenWidth * (24/360), height : screenWidth * (24/360), }} source={require("@/assets/icons/x.png")}/> 
                         </View>
                         </TouchableOpacity>
                     </View>
@@ -98,7 +98,7 @@ const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({id, onlineBundle
                 {offlineBundle != 0 && (
                     <View style={{marginHorizontal: 15,width: screenWidth * (280/360), flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between'}}>
                         <View style={{gap: 15, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-                            <TouchableOpacity onPress={handlePressOffline} style={{ width: 20, height: 20, borderRadius: 4, justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
+                            {/* <TouchableOpacity onPress={handlePressOffline} style={{ width: 20, height: 20, borderRadius: 4, justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
                                 {offlineSelected ? (
                                     <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: '#FF7D40' , backgroundColor: '#FF7D40', justifyContent: 'center', alignItems: 'center' }} >
                                     <Image
@@ -109,7 +109,7 @@ const ReserveTrainerCart: React.FC<ReserveTrainerCartProps> = ({id, onlineBundle
                                 ) : (
                                     <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 2, borderColor: '#FF7D40' }} />
                                 )}
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
                             <View style={{flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 10 }}>
                                 <Text style={{fontSize: 16 }}>{offlineBundle}x Offline Sessions</Text>
                                 <Text style={{fontSize: 12, fontWeight: 'bold'}}>Rp{finalOfflinePrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}</Text>

@@ -36,7 +36,7 @@ export default function Cart() {
     },
   ]
 
-  const [cart, setCart] = useState(userCart)
+  // const [cart, setCart] = useState(userCart)
   const [isSelected, setSelection] = useState(false);
 
   const handlePress = () => {

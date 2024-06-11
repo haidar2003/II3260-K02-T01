@@ -7,73 +7,20 @@ import { Link } from 'expo-router';
 import ReserveTrainerInvoice from '@/screen/find_trainer_component/ReserveTrainerInvoice';
 import { useAuth } from '@/provider/AuthProvider';
 import { useCart } from '@/provider/CartProvider';
-
+import CryptoJS from 'crypto-js';
 const screenWidth = Dimensions.get('window').width;
 
 export default function Invoice() {
   const currentUserId = 1;
   const {session,authLoading,userData,getSession,updateUserData} = useAuth()
-  const currentUserInvoice = 123123123;
+  
+  const [loading, setLoading] = useState(false)
+  
   const today = new Date();
   const {cartList, addToCart, removeFromCart} = useCart()
-  const user = {
-    userId: 1,
-    username: 'rahihaidar',
-    userInvoice: [
-      {
-        invoiceId: 123123123,
-        invoiceStatus: 'Paid',
-        userCart: [
-          { 
-            trainerId: 1, 
-            trainerName: 'Radityta Azka', 
-            trainerPlan: [
-              { planId: 1, planType: 'Online', planUnitPrice: 50000 },
-              { planId: 2, planType: 'Offline', planUnitPrice: 80000 }
-            ], 
-            onlineBundle: 3,
-            offlineBundle: 5
-          },
-          { 
-            trainerId: 2, 
-            trainerName: 'Albarda', 
-            trainerPlan: [
-              { planId: 1, planType: 'Online', planUnitPrice: 70000 },
-              { planId: 2, planType: 'Offline', planUnitPrice: 10000 }
-            ], 
-            onlineBundle: 0,
-            offlineBundle: 3
-          },
-        ]
-      },
-      {
-        invoiceId: 456456456,
-        invoiceStatus: 'Paid',
-        userCart: [
-          { 
-            trainerId: 1, 
-            trainerName: 'Radityta Azka', 
-            trainerPlan: [
-              { planId: 1, planType: 'Online', planUnitPrice: 50000 },
-              { planId: 2, planType: 'Offline', planUnitPrice: 80000 }
-            ], 
-            onlineBundle: 3,
-            offlineBundle: 5
-          },
-          { 
-            trainerId: 2, 
-            trainerName: 'Albarda', 
-            trainerPlan: [
-              { planId: 1, planType: 'Online', planUnitPrice: 70000 },
-              { planId: 2, planType: 'Offline', planUnitPrice: 10000 }
-            ], 
-            onlineBundle: 0,
-            offlineBundle: 3
-          },
-        ]
-      },
-    ]
-  }
+
+  
+  
   
   const userCart = [
     { 
@@ -110,32 +57,26 @@ export default function Invoice() {
     let totalPrice = 0;
   
     for (const item of cart) {
-      const { trainerPlan, onlineBundle, offlineBundle } = item;
+      const { onlineUnitPrice,offlineUnitPrice, onlineBundle, offlineBundle } = item;
   
       let finalOnlinePrice = 0;
       let finalOfflinePrice = 0;
   
-      for (const plan of trainerPlan) {
-        const { planType, planUnitPrice } = plan;
-  
-        if (planType === 'Online') {
-          let onlineDiscount = 0;
-          if (onlineBundle === 5) {
-            onlineDiscount = 0.05;
-          } else if (onlineBundle === 10) {
-            onlineDiscount = 0.1;
-          }
-          finalOnlinePrice = planUnitPrice * onlineBundle * (1 - onlineDiscount);
-        } else if (planType === 'Offline') {
-          let offlineDiscount = 0;
-          if (offlineBundle === 5) {
-            offlineDiscount = 0.05;
-          } else if (offlineBundle === 10) {
-            offlineDiscount = 0.1;
-          }
-          finalOfflinePrice = planUnitPrice * offlineBundle * (1 - offlineDiscount);
-        }
+      let onlineDiscount = 0;
+      if (onlineBundle === 5) {
+        onlineDiscount = 0.05;
+      } else if (onlineBundle === 10) {
+        onlineDiscount = 0.1;
       }
+      finalOnlinePrice = onlineUnitPrice * onlineBundle * (1 - onlineDiscount);
+
+      let offlineDiscount = 0;
+      if (offlineBundle === 5) {
+        offlineDiscount = 0.05;
+      } else if (offlineBundle === 10) {
+        offlineDiscount = 0.1;
+      }
+      finalOfflinePrice = offlineUnitPrice * offlineBundle * (1 - offlineDiscount);
   
       totalPrice += finalOnlinePrice + finalOfflinePrice;
     }
@@ -143,7 +84,18 @@ export default function Invoice() {
     return totalPrice;
   };
 
+  
+  
+  const resultHash = CryptoJS.SHA256(userData.username + new Date() + calculateTotalPrice(cartList)).toString(CryptoJS.enc.Hex).toUpperCase()
+  let currentUserInvoice 
+  if (resultHash.length < 9) {
+    currentUserInvoice = resultHash.padEnd(9,'0')
+  } else {
+    currentUserInvoice = resultHash.slice(0,9)
+  }
 
+
+  // console.log(resultHash)
   useEffect(() => {console.log("AAAAAAAAAA",cartList)}, [])
 
   const renderCart = ({item}) => {
@@ -153,8 +105,8 @@ export default function Invoice() {
           trainerName={item.trainerName}
           onlineBundle={item.onlineBundle}
           offlineBundle={item.offlineBundle}
-          onlineUnitPrice={item.trainerPlan.find(plan => plan.planType === 'Online').planUnitPrice}
-          offlineUnitPrice={item.trainerPlan.find(plan => plan.planType === 'Offline').planUnitPrice}
+          onlineUnitPrice={item.onlineUnitPrice}
+          offlineUnitPrice={item.offlineUnitPrice}
         />
       </View>
     )
@@ -200,16 +152,16 @@ export default function Invoice() {
             </View>
             <View style={{ gap: 15 }}>
               <Text style={{ fontWeight: 'bold' }}>
-                GB-PPAM{user.userInvoice.find(invoice => invoice.invoiceId === currentUserInvoice).invoiceId}
+                GB-PPAM{currentUserInvoice}
               </Text>
               <Text>
-                Rp{calculateTotalPrice(user.userInvoice.find(invoice => invoice.invoiceId === currentUserInvoice).userCart).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                Rp{calculateTotalPrice(cartList).toLocaleString('en-US', { minimumFractionDigits: 2 })}
               </Text>
               <Text>
-                {user.username}
+                {userData.username}
               </Text>
               <Text style={{ fontWeight: 'bold' }}>
-                {user.userInvoice.find(invoice => invoice.invoiceId === currentUserInvoice).invoiceStatus}
+                Unpaid
               </Text>
             </View>
           </View>
@@ -223,9 +175,9 @@ export default function Invoice() {
 
           <ScrollView horizontal = {true}>
             <FlatList
-              data={user.userInvoice.find(invoice => invoice.invoiceId === currentUserInvoice).userCart}
+              data={cartList}
               renderItem={renderCart}
-              keyExtractor={item => item.trainerId}
+              keyExtractor={item => item.id}
             />
           </ScrollView>
 
@@ -237,7 +189,9 @@ export default function Invoice() {
           </View>
 
           <View style={{ alignItems: 'center', gap: 20, marginTop: 20, marginBottom: 80 }}>
+            <TouchableOpacity>
             <View style={{ width: 250, height: 250, backgroundColor: '#444444' }}/>
+            </TouchableOpacity>
             <View style={{ alignItems: 'center', gap: 5  }}>
               <Text style={{ fontWeight: 'bold' }}>
                 Available Until
