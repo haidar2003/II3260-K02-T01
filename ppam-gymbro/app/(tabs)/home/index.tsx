@@ -56,6 +56,20 @@ export default function HomeScreen() {
       }
   }
 
+  const getCurrentDate = () => {
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  
+    const currentDate = new Date();
+    const dayOfWeek = daysOfWeek[currentDate.getDay()];
+    const day = currentDate.getDate();
+    const month = months[currentDate.getMonth()];
+    const year = currentDate.getFullYear();
+  
+    return `${dayOfWeek}, ${day} ${month} ${year}`;
+  };
+  
+
   const renderWorkout = ({ item }) => {
       return (
         <View style = {{marginVertical: 5}}>
@@ -75,17 +89,18 @@ export default function HomeScreen() {
         <View style={{ marginTop: screenWidth * (35/360), paddingVertical: screenWidth * (20/360), paddingHorizontal: screenWidth * (5/360), flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', gap: 20}}>
           <Link href="/(tabs)/home/profile" asChild>
             <Pressable> 
-              <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
-                {/* <Image source={{   }}></Image> */}
-              </View>
+                <Image
+                    style = {{ width: screenWidth * (56/360), height: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1' }}
+                    source = {require("@/assets/Racist_Cat.webp")}
+                />
             </Pressable>
           </Link>
           <View style={{ gap: 5 }}>
             <Text style={{ fontSize: 16, fontWeight: 'normal', color: '#8F8F8F' }}>
-              {userData.nama_user}
+              Hello, {userData.nama_user}
             </Text>
             <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#444444' }}>
-              Thursday, 08 July
+              {getCurrentDate()}
             </Text>
           </View>
         </View>

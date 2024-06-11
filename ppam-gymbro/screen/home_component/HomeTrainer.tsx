@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Button, Image, TouchableOpacity, Dimensions } from 'react-native';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -12,9 +12,11 @@ const HomeTrainer: React.FC<HomeTrainerProps> = ({ trainerName, sessions }) => {
     return (
       <View style={styles.containerStyle}>
         <View style={styles.topContainer}>
-            <View style={styles.circle}>
+            <Image
+                style = {{ width: screenWidth * (90/360), height: screenWidth * (90/360), borderWidth: 5, borderRadius: 60, borderColor: '#FEFEFE' }}
+                source = {require("@/assets/Racist_Cat.webp")}
+            />
 
-            </View>
             <View style={styles.topRightContainaer}>
                 <Text style={{color: '#FEFEFE', fontSize: 12}}>Current Trainer</Text>
                 <Text style={{color: '#FEFEFE', fontWeight: 'bold', fontSize: 16}}>{trainerName}</Text>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CheckBox } from 'react-native-btr';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
 
 const screenWidth = Dimensions.get('window').width;
@@ -16,9 +16,10 @@ interface UserReviewProps {
     return (
       <View style={styles.mainContainer}> 
         <View style= {{marginTop: 0, marginBottom: 15, gap: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
-            <View style={styles.circle}>
-
-            </View>
+          <Image
+                style = {{ width: 50, height: 50, borderWidth: 2, borderRadius: 36, borderColor: '#FEFEFE' }}
+                source = {require("@/assets/Racist_Cat.webp")}
+          />
             <View style={{gap: 5, flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}}>
                 <Text style={{fontSize: 14, fontWeight: 'bold'}}>{userFullName}</Text>
                 <Text style={{fontSize: 12, fontWeight: 'bold'}}>⭐ {rating}</Text>

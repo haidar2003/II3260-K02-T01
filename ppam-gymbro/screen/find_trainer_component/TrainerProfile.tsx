@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Progress from 'react-native-progress';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
 interface TrainerProfileProps {
   trainerName? : string;
@@ -12,21 +12,29 @@ interface TrainerProfileProps {
 const TrainerProfile: React.FC<TrainerProfileProps> = ({ trainerName, trainerUsername, trainerRating, trainerCity }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.circle}>
+      <Image
+                style = {{ width: 140, height: 140, borderWidth: 5, borderRadius: 120, borderColor: '#FEFEFE' }}
+                source = {require("@/assets/Racist_Cat.webp")}
+      />
 
-      </View>
       <View style={{ flexDirection: 'column', gap: 5, alignItems: 'center', justifyContent: 'flex-start'}}>
         <Text style={{fontWeight: 'bold', fontSize: 24, color: 'white'}}>{trainerName}</Text>
         <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center', justifyContent: 'center'}}>
             <Text style={{color: 'white'}}>@{trainerUsername}</Text>
             <Text style={{color: 'white'}}>•</Text>
             <View style={{ flexDirection: 'row', gap: 5, alignItems: 'center', justifyContent: 'center' }}>
-                <View style={{backgroundColor: 'white', width: 10, height: 10}}></View>
+            <Image
+                style = {{ width: 16, height: 16 }}
+                source = {require("@/assets/icons/star_white.png")}
+            />
                 <Text style={{color: 'white'}}>{trainerRating}</Text>
             </View>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8}}>
-            <View style={{backgroundColor: 'white', width: 10, height: 10}}></View>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 3}}>
+          <Image
+                style = {{ width: 16, height: 16 }}
+                source = {require("@/assets/icons/location_white.png")}
+            />
             <Text style={{color: 'white'}}>{trainerCity}</Text>
         </View>
       </View>
