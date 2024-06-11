@@ -29,8 +29,8 @@ export default function ExcerciseList() {
       // return 0
       const thisDay = array.filter(item => item.day == day)
       let done = 0
-      console.log(thisDay)
-      console.log("Ada berapa ",thisDay.length)
+      // console.log(thisDay)
+      // console.log("Ada berapa ",thisDay.length)
       for (const item of thisDay){
         console.log(item.isDone)
         if (item.isDone) {
@@ -105,7 +105,7 @@ export default function ExcerciseList() {
   const renderExcercise = ({ item }) => {
       return (
         <View style = {{margin : 0}}>
-          <Excercise excerciseId={item.excerciseId} excerciseName={item.excerciseName} sets={item.sets} reps={item.reps} isFinished={item.isDone}/>
+          <Excercise excerciseId={item.id_workout} excerciseName={item.name_workout} sets={item.sets} reps={item.reps} isFinished={item.isDone}/>
         </View>
       )
   };

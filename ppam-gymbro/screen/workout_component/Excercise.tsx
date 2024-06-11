@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { CheckBox } from 'react-native-btr';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
+import { supabase } from '@/utils/supabase';
 
 interface ExcerciseProps {
-    excerciseId?: number;
+    excerciseId: number;
     excerciseName?: string;
     isFinished?: boolean;
     sets?: number;
@@ -16,9 +17,15 @@ const screenWidth = Dimensions.get('window').width;
   const Excercise: React.FC<ExcerciseProps> = ({ sets, reps, excerciseName, isFinished, excerciseId }) => {
     const [isSelected, setSelection] = useState(isFinished);
 
-    const handlePress = () => {
+    const handlePress = async () => {
         console.log('test')
         setSelection(!isSelected);
+        const {data, error} = await supabase.from("Workout").update([{
+            isDone : (!isSelected)
+        }]).eq("id_workout", excerciseId)
+        if (error){
+            console.log("change exercise failed",error)
+        }
     };
 
     return (
