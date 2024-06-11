@@ -55,9 +55,19 @@ export default function Profile() {
                 </View>
 
                 <View style={{ alignItems: 'center', gap: 10, marginBottom: screenWidth * (20/360) }}>
-                    <View style={{ width: screenWidth * (120/360), height: screenWidth * (120/360), borderRadius: 120, backgroundColor: 'grey', justifyContent:'center', alignItems: 'center' }}>
-                        
-                        <View style={{ marginTop:80, marginLeft:80,width: screenWidth * (40/360), height: screenWidth * (40/360), borderRadius: 120, borderWidth: 5, borderColor: '#FEFEFE', backgroundColor: '#FF7D40' }}/>
+                    <View style={{ width: screenWidth * (120/360), height: screenWidth * (120/360), paddingTop: 119, justifyContent:'center', alignItems: 'center' }}>
+                        <Image
+                            style = {{ marginVertical: -120,width: screenWidth * (120/360), height: screenWidth * (120/360), borderRadius: 120 }}
+                            source = {require("@/assets/Racist_Cat.webp")}
+                        />
+                        <TouchableOpacity>
+                            <View style={{ alignItems: 'center', justifyContent: 'center', marginTop:80, marginLeft:80, width: screenWidth * (40/360), height: screenWidth * (40/360), borderRadius: 120, borderWidth: 5, borderColor: '#FEFEFE', backgroundColor: '#FF7D40' }}>
+                                <Image
+                                    style = {{ height: 18, width: 18}}
+                                    source = {require("@/assets/icons/edit.png")}
+                                />
+                            </View>
+                        </TouchableOpacity>
                     </View>
                     <View style={{ alignItems: 'center', gap: 0 }}>
                         <Text style={{ fontSize: 24, fontWeight: 'bold'}}>{user.userFullName}</Text>
@@ -71,7 +81,7 @@ export default function Profile() {
                     Full Name
                 </Text>
                 <TextInput
-                    style={{ width: screenWidth * (314 / 360), height: screenWidth * (56 / 360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12, paddingHorizontal: 10 }}
+                    style={{ width: screenWidth * (314 / 360), height: screenWidth * (56 / 360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12, paddingHorizontal: 20 }}
                     value={name}
                     onChangeText={setName}
                 />
@@ -82,7 +92,7 @@ export default function Profile() {
                     Email
                 </Text>
                 <TextInput
-                    style={{ width: screenWidth * (314 / 360), height: screenWidth * (56 / 360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12, paddingHorizontal: 10 }}
+                    style={{ width: screenWidth * (314 / 360), height: screenWidth * (56 / 360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12, paddingHorizontal: 20 }}
                     value={email}
                     onChangeText={setEmail}
                     keyboardType="email-address"
@@ -94,7 +104,7 @@ export default function Profile() {
                     Phone
                 </Text>
                 <TextInput
-                    style={{ width: screenWidth * (314 / 360), height: screenWidth * (56 / 360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12, paddingHorizontal: 10 }}
+                    style={{ width: screenWidth * (314 / 360), height: screenWidth * (56 / 360), borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12, paddingHorizontal: 20 }}
                     value={phone}
                     onChangeText={setPhone}
                     keyboardType="phone-pad"
@@ -114,7 +124,7 @@ export default function Profile() {
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 2, borderColor: '#E1E1E1', borderRadius: 12 }}>
                     <TextInput
-                        style={{ flex: 1, height: screenWidth * (56 / 360), paddingHorizontal: 10 }}
+                        style={{ flex: 1, height: screenWidth * (56 / 360), paddingHorizontal: 20 }}
                         value={password}
                         onChangeText={setPassword}
                         secureTextEntry={hidePassword}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableOpacity, Dimensions, Image } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { SearchTrainerElement } from '@/utils/searchTrainerElement';
 
@@ -49,9 +49,10 @@ const TrainerSelect: React.FC<TrainerSelectProps> = ({ trainerId, isSelected, is
       <View style={containerStyle}>
         <TouchableOpacity onPress={() => {setSelected(trainerId)}} disabled={isSelected}>
         <View style={{backgroundColor: topContainerColor, width: screenWidth * (317/360), height: screenWidth * (66/360), paddingVertical: 10, paddingHorizontal: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 15, borderTopLeftRadius: 12,borderTopRightRadius: 12, borderBottomStartRadius: roundingBottom, borderBottomEndRadius: roundingBottom}}>
-            <View style={styles.circle}>
-
-            </View>
+            <Image
+                style = {{ width: 50, height: 50, borderWidth: 2, borderRadius: 36, borderColor: '#FEFEFE' }}
+                source = {require("@/assets/Racist_Cat.webp")}
+            />
             <View style={{flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', gap: 5}}>
                 <Text style={{fontSize: 16, fontWeight: 'bold', color: fontColor}}>{trainerName}</Text>
                 {(isActive && isSelected) && (<Text style={{fontSize: 12, fontWeight: 'bold', color: fontColor}}>Current Trainer</Text>)}

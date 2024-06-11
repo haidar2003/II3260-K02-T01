@@ -149,18 +149,22 @@ export default function trainerProfile() {
                 <View style={{ alignItems: 'center', justifyContent:'center', height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
                     <Image
                     style = {{ height: 25, width: 25, marginRight: 5 }}
-                    source = {require("@/assets/icons/back.png")}
+                    source = {require("@/assets/icons/back_white.png")}
                     />
                 </View>
             </TouchableOpacity>
           </Link>
             <TrainerProfile trainerName={trainerData.nama_trainer} trainerUsername={trainerData.username} trainerRating={trainerData.rating} trainerCity={trainerData.location}/>
             <Link href="/(tabs)/workout" asChild>
-              <Pressable> 
-                <View style={{ height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
+            <TouchableOpacity>
+                <View style={{ alignItems: 'center', justifyContent:'center', height: screenWidth * (56/360), width: screenWidth * (56/360), borderWidth: 2, borderRadius: 50, borderColor: '#E1E1E1'}}>
+                    <Image
+                    style = {{ height: 25, width: 25 }}
+                    source = {require("@/assets/icons/cart.png")}
+                    />
                 </View>
-              </Pressable>
-            </Link>
+            </TouchableOpacity>
+          </Link>
         </View>
 
         <View style={{ width: screenWidth, height: screenWidth * (650/360), borderTopLeftRadius: 32, borderTopRightRadius: 32, backgroundColor:'#FEFEFE', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 30, paddingTop: 30 }}>
@@ -281,7 +285,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height ,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FFEAD9',
+    backgroundColor: '#FF7D40',
     position : "relative"
   },
   buttonContainer: { 

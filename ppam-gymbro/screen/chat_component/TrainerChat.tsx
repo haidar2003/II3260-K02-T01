@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { Image, View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -15,9 +15,10 @@ interface TrainerChatProps {
     return (
     <TouchableOpacity onPress={() => {router.navigate("/(tabs)/message_trainer/"+trainerId)}}>
       <View style={styles.mainContainer}> 
-        <View style={styles.circle}>
-            {/* Gambar */}
-        </View>
+        <Image
+            style = {{ width: 52, height: 52, borderRadius: 36 }}
+            source = {require("@/assets/Racist_Cat.webp")}
+        />
         <View style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', width: screenWidth * (253/360), gap: 5 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: screenWidth * (253/360) }}>
                 <Text style={{ color: '#444444', fontSize: 16, fontWeight: 'bold' }}>
